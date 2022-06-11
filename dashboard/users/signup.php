@@ -27,19 +27,19 @@ include("components/top.php");
                                 <label for="fullname" class="form-label">What should we call you?</label>
                                 <input type="text" class="form-control" id="fname" name="fname"
                                     placeholder="Firstname Lastname" autofocus />
-                                <h6 style="font-size: 10px" class="text-danger mt-3" id="fmsg"></h6>
+                                <h6 style="font-size: 11px" class="text-danger mt-1" id="fmsg"></h6>
                             </div>
                             <div class="mb-3">
                                 <label for="username" class="form-label">Create a username</label>
                                 <input type="text" class="form-control" id="usname" name="usname"
                                     placeholder="Create a unique username" autofocus />
-                                <h6 style="font-size: 10px" class="text-danger mt-3" id="usmsg"></h6>
+                                <h6 style="font-size: 10px" class="text-danger mt-1" id="usmsg"></h6>
                             </div>
                             <div class="mb-3">
                                 <label for="email" class="form-label">Can we have your email address?</label>
                                 <input type="email" class="form-control" id="email" name="email"
                                     placeholder="Enter your email" />
-                                <h6 style="font-size: 10px" class="text-danger mt-3" id="emmsg"></h6>
+                                <h6 style="font-size: 10px" class="text-danger mt-1" id="emmsg"></h6>
                             </div>
                             <div class="mb-3 form-password-toggle">
                                 <label class="form-label" for="password">Create a strong password</label>
@@ -49,7 +49,7 @@ include("components/top.php");
                                         aria-describedby="password" />
                                     <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                                 </div>
-                                <h6 style="font-size: 10px" class="text-danger mt-3" id="pwmsg"></h6>
+                                <h6 style="font-size: 10px" class="text-danger mt-1" id="pwmsg"></h6>
                             </div>
 
                             <div class="mb-3 form-password-toggle">
@@ -60,9 +60,13 @@ include("components/top.php");
                                         aria-describedby="password" />
                                     <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                                 </div>
-                                <h6 style="font-size: 10px" class="text-danger mt-3" id="cpwmsg"></h6>
+                                <h6 style="font-size: 10px" class="text-danger mt-1" id="cpwmsg"></h6>
                             </div>
-
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Who told you about us?</label>
+                                <input type="text" class="form-control" id="ref" name="ref"
+                                    placeholder="Input a referral code if you have one." autofocus />
+                            </div>
                             <!--<div class="mb-3">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" id="terms-conditions"
@@ -73,7 +77,7 @@ include("components/top.php");
                                     </label>
                                 </div>
                             </div>-->
-                            <button type="button" class="btn btn-primary d-grid w-100">Sign up</button>
+                            <button type="button" id="sub" class="btn btn-primary d-grid w-100">Sign up</button>
                         </form>
 
                         <p class="text-center">
