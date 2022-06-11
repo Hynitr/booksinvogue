@@ -30,12 +30,6 @@ include("components/top.php");
                                 <h6 style="font-size: 12px" class="text-danger mt-1" id="fmsg"></h6>
                             </div>
                             <div class="mb-3">
-                                <label for="username" class="form-label">Create a username</label>
-                                <input type="text" class="form-control" id="usname" name="usname"
-                                    placeholder="Create a unique username" autofocus />
-                                <h6 style="font-size: 12px" class="text-danger mt-1" id="usmsg"></h6>
-                            </div>
-                            <div class="mb-3">
                                 <label for="email" class="form-label">Can we have your email address?</label>
                                 <input type="email" class="form-control" id="email" name="email"
                                     placeholder="Enter your email" />

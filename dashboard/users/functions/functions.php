@@ -155,7 +155,7 @@ function register($fname, $tel, $email, $uname, $pword, $ref) {
 	$unam = escape($uname);
 	$pwor = md5($pword);
 
-	$datereg = date("Y-m-d");
+	$datereg = date("Y-m-d h:i:s");
 
 	$_SESSION['usermail'] = $emai;
 		
