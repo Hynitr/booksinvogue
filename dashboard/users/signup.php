@@ -27,35 +27,40 @@ include("components/top.php");
                                 <label for="fullname" class="form-label">What should we call you?</label>
                                 <input type="text" class="form-control" id="fname" name="fname"
                                     placeholder="Firstname Lastname" autofocus />
+                                <h6 style="font-size: 10px" class="text-danger mt-3" id="fmsg"></h6>
                             </div>
                             <div class="mb-3">
                                 <label for="username" class="form-label">Create a username</label>
-                                <input type="text" class="form-control" id="username" name="username"
+                                <input type="text" class="form-control" id="usname" name="usname"
                                     placeholder="Create a unique username" autofocus />
+                                <h6 style="font-size: 10px" class="text-danger mt-3" id="usmsg"></h6>
                             </div>
                             <div class="mb-3">
                                 <label for="email" class="form-label">Can we have your email address?</label>
                                 <input type="email" class="form-control" id="email" name="email"
                                     placeholder="Enter your email" />
+                                <h6 style="font-size: 10px" class="text-danger mt-3" id="emmsg"></h6>
                             </div>
                             <div class="mb-3 form-password-toggle">
                                 <label class="form-label" for="password">Create a strong password</label>
                                 <div class="input-group input-group-merge">
-                                    <input type="password" id="password" class="form-control" name="password"
+                                    <input type="password" id="pword" class="form-control" name="pword"
                                         placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                                         aria-describedby="password" />
                                     <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                                 </div>
+                                <h6 style="font-size: 10px" class="text-danger mt-3" id="pwmsg"></h6>
                             </div>
 
                             <div class="mb-3 form-password-toggle">
-                                <label class="form-label" for="password">Please, repeat your password</label>
+                                <label class="form-label" for="confirmpassword">Please, repeat your password</label>
                                 <div class="input-group input-group-merge">
-                                    <input type="password" id="password" class="form-control" name="password"
+                                    <input type="password" id="cpword" class="form-control" name="cpword"
                                         placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                                         aria-describedby="password" />
                                     <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                                 </div>
+                                <h6 style="font-size: 10px" class="text-danger mt-3" id="cpwmsg"></h6>
                             </div>
 
                             <!--<div class="mb-3">
@@ -68,7 +73,7 @@ include("components/top.php");
                                     </label>
                                 </div>
                             </div>-->
-                            <button class="btn btn-primary d-grid w-100">Sign up</button>
+                            <button type="button" class="btn btn-primary d-grid w-100">Sign up</button>
                         </form>
 
                         <p class="text-center">
@@ -94,6 +99,9 @@ include("components/top.php");
     <script src="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 
     <script src="assets/vendor/js/menu.js"></script>
+
+    <!--- AJAX JS -->
+    <script src="ajax.js"></script>
 
     <!-- Main JS -->
     <script src="assets/js/main.js"></script>
