@@ -12,7 +12,6 @@ function redirect($location) {
 	return header("Location: {$location}");
 }
 
-
 function set_message($message) {
 
 	if(!empty($message)) {
@@ -26,13 +25,6 @@ function set_message($message) {
 }
 
 
-function token_generator() {
-
-	$token = $_SESSION['token'] = md5(uniqid(mt_rand(), true));
-
-	return $token; 
-}
-
 
 function display_message() {
 
@@ -43,955 +35,1316 @@ function display_message() {
 	}
 }
 
+function token_generator() {
+
+	$token = $_SESSION['token'] = md5(uniqid(mt_rand(), true));
+
+	return $token; 
+}
+
+function otp() {
+
+	$otp = $_SESSION['otp'] = mt_rand(0, 99999);
+
+	return $otp; 
+}
 
 function validation_errors($error_message) {
 
-	$error_message = <<<DELIMITER
+$error_message = <<<DELIMITER
 
-	<div style="background: #000000; color: white;" class="col-md-12 alert alert-danger alert-mg-b alert-success-style6 alert-st-bg3 alert-st-bg14">
-		<button type="button" style="color: white;" class="col-md-12 close sucess-op" data-dismiss="modal" aria-label="Close">
-			<span class="icon-sc-cl" aria-hidden="true">&times;</span>
-										</button>
-					<p style="color: white;"><strong>$error_message </strong></p>
-								</div>
-	DELIMITER;
+<div class="col-md-12 alert alert-danger alert-mg-b alert-success-style6 alert-st-bg3 alert-st-bg14">
+    <button type="button" class="col-md-12 close sucess-op" data-dismiss="alert" aria-label="Close">
+		<span class="icon-sc-cl" aria-hidden="true">&times;</span>
+									</button>
+                 <p><strong>$error_message </strong></p>
+                            </div>
+DELIMITER;
 
-	return $error_message;     
+   return $error_message;     
 
 }
-
-
 
 function validator($error_message) {
 
-	$error_message = <<<DELIMITER
-	<div style="background: #000000; color: white;" class="col-md-12 alert alert-danger alert-mg-b alert-success-style6 alert-st-bg3 alert-st-bg14">
-		<button type="button" style="color: white;" class="col-md-12 close sucess-op" data-dismiss="modal" aria-label="Close">
-			<span class="icon-sc-cl" aria-hidden="true">&times;</span>
-										</button>
-					<p style="color: white;"><strong>$error_message </strong></p>
-								</div>
-	DELIMITER;
+$error_message = <<<DELIMITER
+<div style="background: #FFE9E6; color: #ff0000;" class="col-md-12 alert alert-danger alert-mg-b alert-success-style6 alert-st-bg3 alert-st-bg14">
+    <button type="button" style="color: white;" class="col-md-12 close sucess-op" data-dismiss="modal" aria-label="Close">
+		<span class="icon-sc-cl" aria-hidden="true">&times;</span>
+									</button>
+                 <p><strong>$error_message </strong></p>
+                            </div>
+DELIMITER;
 
-	return $error_message;     
+   return $error_message;     
 
 }
 
 
-/********** validate user functions *******/
 
-//check if custom fee table exits
-function table_exist($cusfee) {
-	$sql = "SHOW TABLES LIKE '%$cusfee'";
-	$result = query($sql);
-	while ($row = mysqli_fetch_row($result)) {
-		if($row[0] == $cusfee) {
-		return true;
-	} else {
-	
-		return false;
-	}
-	}
-	mysqli_free_result($result);
-	
-}
+									/****** Helper Functions********/
 
-//check if admission number exit
-function adid_exist($adid) {
+function email_exist($email) {
 
-	$sql = "SELECT * FROM `student` WHERE `adid` = '$adid'";
+	$sql = "SELECT * FROM users WHERE `email` = '$email'";
 	$result = query($sql);
 
 	if(row_count($result) == 1) {
+
 		return true;
-		
+
 	}else {
+
 		return false;
-		
+	} 
+}
+
+function username_exist($usname) {
+
+	$sql = "SELECT * FROM users WHERE `username` = '$usname'";
+	$result = query($sql);
+
+	if(row_count($result) == 1) {
+
+		return true;
+
+	}else {
+
+		return false;
 	} 
 }
 
 
-//---------------  admin dashboard functions ---------//
-if (isset($_POST['password'])) {
-	
-		$admission       = escape(clean("admin"));
-		$password   	 = escape(clean(md5($_POST['password'])));
-
-		$sql 	= "SELECT `password` FROM `admin` WHERE `username` = '$admission'";
-		$result = query($sql);
-
-		if(row_count($result) == 1) {
-			$row = mysqli_fetch_array($result);
-
-			$user_password = $row['password'];
-
-			if($password == $user_password) {
-
-				$_SESSION['admin'] = $admission;
-
-				 echo 'Loading.. Please wait';	
-				 echo '<script>window.location.href ="./"</script>';
-
-			} else {
-
-		echo "Incorrect Password";
-	}
-	} else {
-
-		echo "Wrongly typed password";
-	}
-}
 
 
 
+/** VALIDATE USER REGISTRATION **/
 
-//--------------- register --------//
-if(isset($_POST['pname']) && isset($_POST['clss']) && isset($_POST['fst']) && isset($_POST['snd']) && isset($_POST['trd']) && isset($_POST['adid'])) {
+if(isset($_POST['fname']) && isset($_POST['email']) && isset($_POST['pword']) && isset($_POST['cpword']) && isset($_POST['ref'])) {
 
-	$pname = clean(escape($_POST['pname']));
-	$clss  = clean(escape($_POST['clss']));
-	$fst   = clean(escape($_POST['fst']));
-	$snd   = clean(escape($_POST['snd']));
-	$trd   = clean(escape($_POST['trd']));
-	$adid  = clean(escape($_POST['adid']));
-	$trm   = $_SESSION['trm'];
+$fname 			= clean(escape($_POST['fname']));
+$email	 		= clean(escape($_POST['email']));
+$uname	 		= clean(escape($_POST['user']));
+$pword    		= clean(escape($_POST['pword']));
+$cpword 		= clean(escape($_POST['cpword']));
+$ref            = clean(escape($_POST['ref']));
 
-	if($fst == '' || $fst == '0' && $trm == '1st Term') {
+if(email_exist($email)) {
 
-		echo "1st Term fee cannot be empty";
-	} else {
+			echo "Sorry! The email inputted already has an account";
+		} else {
 
-	if ($snd == '' || $snd == '0' && $trm == '2nd Term') {
-			
-		echo "2nd Term fee cannot be empty";
-	} else {
+if(username_exist($uname)) {
 
-	if ($trd == '' || $trd == '0' && $trm == '3rd Term') {
-				
-		echo "3rd Term fee cannot be empty";
-	} else {
+			echo "That username is unavailable!";
+		} else {
 
-	if(adid_exist($adid)) {
-
-		echo "The admission number already exist in the database";
-
-	} else {
-
-
-	$fid = 'cjs/'.rand(0, 9999);
-	$der = $_SESSION['aca'];
-
-	//get first name
-	$string = $pname;
-	$fname = strtok($string,  ' ');
-
-	
-		
-		$sqll = "INSERT INTO student(`name`, `fname`, `class` , `fst`, `snd`, `trd`, `stid`, `session`, `adid`)";
-		$sqll.= " VALUES('$pname', '$fname', '$clss' , '$fst', '$snd', '$trd', '$fid', '$der', '$adid')";
-		$resullt = query($sqll);
-		confirm($resullt);
-
-		echo "Loading...Please wait!";												
-		echo '<script>window.location.href ="./input?id='.$clss.'"</script>';
+			register($fname, $tel, $email, $uname, $pword, $ref);
 		}
 	}
-		}
-	}
-}
+	} // post request
 
-
-
-//------------ update intake record ------//
-if(isset($_POST['uplpname']) && isset($_POST['uplclss']) && isset($_POST['uplfst']) && isset($_POST['uplsnd']) && isset($_POST['upltrd']) && isset($_POST['upladid']) && isset($_POST['stid'])) {
-
-	$uplpname = clean(escape($_POST['uplpname']));
-	$uplclss  = clean(escape($_POST['uplclss']));
-	$uplfst   = clean(escape($_POST['uplfst']));
-	$uplsnd   = clean(escape($_POST['uplsnd']));
-	$upltrd   = clean(escape($_POST['upltrd']));
-	$upladid  = clean(escape($_POST['upladid']));
-	$stid     = clean(escape($_POST['stid']));
-	$adid     = $upladid;
-	$trm   = $_SESSION['trm'];
-
-	if($uplfst == '' || $uplfst == '0' && $trm == '1st Term') {
-
-		echo "1st Term fee cannot be empty";
-	} else {
-
-	if ($uplsnd == '' || $uplsnd == '0' && $trm == '2nd Term') {
-			
-		echo "2nd Term fee cannot be empty";
-	} else {
-
-	if ($upltrd == '' || $upltrd == '0' && $trm == '3rd Term') {
-				
-		echo "3rd Term fee cannot be empty";
-	} else {
 
 	
 
-	$der = $_SESSION['aca'];
+/** REGISTER USER **/
+function register($fname, $tel, $email, $uname, $pword, $ref) {
 
+	$fnam = escape($fname);
+	$emai = escape($email);
+	$unam = escape($uname);
+	$pwor = md5($pword);
 
-		//get first name
-		$string = $pname;
-		$fname = strtok($string,  ' ');
-	
+	$datereg = date("Y-m-d");
 
-	
-		//update db
-		$sqll = "UPDATE student SET `name` = '$uplpname', `fname` = '$fname', `class` = '$uplclss', `fst` = '$uplfst', `snd` = '$uplsnd', `trd` = '$upltrd', `adid` = '$adid' WHERE `session` = '$der' AND `stid` = '$stid'";
-		$resullt = query($sqll);
-		confirm($resullt);
-
-		echo "Loading...Please wait!";
-
-		//create notification
-		$_SESSION['notify'] = "Student/Pupil Updated Sucessfully";
-		echo '<script>window.location.href ="./pintake"</script>';
-	}
-		}
-	}
-}
-
-
-
-//---------- update session -----------//
-if (isset($_POST['ursfr'])) {
-
-	$ses  = $_SESSION['aca'];
-	$data = "1st Term";
-	
-
-	//get classes
-	$ssl  = "SELECT * FROM student WHERE `session` = '$ses'";
-	$rls  = query($ssl);
-	while($row  = mysqli_fetch_array($rls)) {
-
-	//get class
-	$cs = $row['class'];
-	
-	//calculate next session values
-	$a = str_split($ses,4);
-	$b = $a[0] + 1;
-	$c = str_split($ses,5);
-	$d = $c[1] + 1;
-
-	$aca = $b."/".$d;	
-	
-
-	//export previous data into csv file for excel
-	//export a database backup
-
-
-	//update admin table
-	$aql = "UPDATE admin SET `session` = '$aca', `term` = '1st Term'";
-	$asl = query($aql);
-
+	$_SESSION['usermail'] = $emai;
 		
-	//update classes
-	if($cs == "Reception"){
-
-		$cls = "Transition";
-
-		$sql = "UPDATE student SET `session` = '$aca', `class` = '$cls', `fst` = '0', `snd` = '0', `trd` = '0'";
-		$res = query($sql);
-		
-	} else {
-		
-	if($cs == "Transition"){
-
-		$cls = "Kindergarten";
-
-		$sql = "UPDATE student SET `session` = '$aca', `class` = '$cls', `fst` = '0', `snd` = '0', `trd` = '0'";
-		$res = query($sql);
-		
-	} else {
-
-	if($cs == "Kindergarten"){
-
-			$cls = "Nursery 1";
+	$activator = otp();
 	
-			$sql = "UPDATE student SET `session` = '$aca', `class` = '$cls', `fst` = '0', `snd` = '0', `trd` = '0'";
-			$res = query($sql);
-			
-	} else {
-	
-	if($cs == "Nursery 1"){
-
-		$cls = "Nursery 2";
-
-		$sql = "UPDATE student SET `session` = '$aca', `class` = '$cls', `fst` = '0', `snd` = '0', `trd` = '0'";
-		$res = query($sql);
-		
-	} else  {
-	
-
-	if($cs == "Nursery 2"){
-
-		$cls = "Grade 1";
-
-		$sql = "UPDATE student SET `session` = '$aca', `class` = '$cls', `fst` = '0', `snd` = '0', `trd` = '0'";
-		$res = query($sql);
-		
-	} else {
-
-	if($cs == "Grade 1"){
-
-		$cls = "Grade 2";
-
-		$sql = "UPDATE student SET `session` = '$aca', `class` = '$cls', `fst` = '0', `snd` = '0', `trd` = '0'";
-		$res = query($sql);
-		
-	} else {
-
-	if($cs == "Grade 2"){
-
-		$cls = "Grade 3";
-
-		$sql = "UPDATE student SET `session` = '$aca', `class` = '$cls', `fst` = '0', `snd` = '0', `trd` = '0'";
-		$res = query($sql);
-		
-	} else {
-
-	if($cs == "Grade 3"){
-
-		$cls = "Grade 4";
-
-		$sql = "UPDATE student SET `session` = '$aca', `class` = '$cls', `fst` = '0', `snd` = '0', `trd` = '0'";
-		$res = query($sql);
-		
-	} else {
-
-	if($cs == "Grade 4"){
-
-		$cls = "Grade 5";
-
-		$sql = "UPDATE student SET `session` = '$aca', `class` = '$cls', `fst` = '0', `snd` = '0', `trd` = '0'";
-		$res = query($sql);
-		
-	} else {
-
-	if($cs == "Grade 5"){
-
-		$cls = "JSS 1";
-
-		$sql = "UPDATE student SET `session` = '$aca', `class` = '$cls', `fst` = '0', `snd` = '0', `trd` = '0'";
-		$res = query($sql);
-		
-	} else {
-
-	if($cs == "JSS 1"){
-
-		$cls = "JSS 2";
-
-		$sql = "UPDATE student SET `session` = '$aca', `class` = '$cls', `fst` = '0', `snd` = '0', `trd` = '0'";
-		$res = query($sql);
-		
-	} else {
-
-	if($cs == "JSS 2"){
-
-		$cls = "JSS 3";
-
-		$sql = "UPDATE student SET `session` = '$aca', `class` = '$cls', `fst` = '0', `snd` = '0', `trd` = '0'";
-		$res = query($sql);
-		
-	} else {
-
-	if($cs == "JSS 3"){
-
-		$cls = "SSS 1";
-
-		$sql = "UPDATE student SET `session` = '$aca', `class` = '$cls', `fst` = '0', `snd` = '0', `trd` = '0'";
-		$res = query($sql);
-		
-	} else {
-
-	if($cs == "SSS 1"){
-
-		$cls = "SSS 2";
-
-		$sql = "UPDATE student SET `session` = '$aca', `class` = '$cls', `fst` = '0', `snd` = '0', `trd` = '0'";
-		$res = query($sql);
-		
-	} else {
-
-	if($cs == "SSS 2"){
-
-		$cls = "SSS 3";
-
-		$sql = "UPDATE student SET `session` = '$aca', `class` = '$cls', `fst` = '0', `snd` = '0', `trd` = '0'";
-		$res = query($sql);
-		
-	} else {
-
-	if($cs == "SSS 3"){
-
-		//do nothing
-		
-	}
-	}
-	}
-	}
-	}
-	}
-	}
-	}
-	}
-	}
-	}
-	}
-	}
-	}
-	}
-	}
-	}
-
-	//update balance brought forward
-	outstanding($ses, $data);	
-	echo '<script>window.location.href ="./"</script>';	
-}	
-
-
-
-
-
-function outstanding($ses, $data) {
-
-	/*$ses  = "2021/2022";
-	$data = "1st Term";*/
-
-
- $sql = "SELECT *, sum(`amount`) AS TOTAL FROM `feercrd` WHERE `term` = '$data' AND `session` = '$ses' GROUP BY `name` asc";
- $result_set=query($sql);
-
- while($row= mysqli_fetch_array($result_set)) {
-
-   
-    $name = $row['name'];
-
-
-    if($data == '1st Term') {
-          
-      $ssl ="SELECT *, sum(fst) as totas from `student` WHERE `session` = '$ses' AND `name` = '$name'";
-      $result = query($ssl);
-      $vfh = mysqli_fetch_array($result);
-    
-    } else {
-    
-    if($data == '2nd Term'){
-    
-      $ssl ="SELECT *, sum(snd) as totas from `student` WHERE `session` = '$ses' AND `name` = '$name'";
-      $result = query($ssl);
-      $vfh = mysqli_fetch_array($result);
-    
-    }else {
-    
-    if($data == '3rd Term') {
-    
-    
-      $ssl = "SELECT *, sum(trd) as totas from `student` WHERE `session` = '$ses' AND `name` = '$name'";
-      $result = query($ssl);
-      $vfh = mysqli_fetch_array($result);
-    
-    }
-    }
-    }
-
-	$a = $vfh['totas'] - $row['TOTAL'];
-
-	if($a == 0) {
-
-		//do nothing
-
-	} else {
-		
-		$spillid = 'cjsspill/'.rand(0, 9999);
-		
-		//get student/pupil details
-		$adid 	= $vfh['adid'];
-		$name 	= $vfh['name'];
-		$class 	= $vfh['class'];
-		$ses    = $_SESSION['aca'];
-		$term   = $_SESSION['trm'];
-		$date   = date("Y-m-d");
-
-		//insert spill over 
-		$ins = "INSERT INTO spillover(`spillid`, `adid` , `amount`, `name`, `class`, `session`, `term`, `datespill`)";
-		$ins.= " VALUES('$spillid', '$adid' , '$a', '$name', '$class', '$ses', '$term', '$date')";
-		$int = query($ins);
-		
-	}
-	
-	
-}
-}
-
-
-
-
-//------ update session term ------//
-if (isset($_POST['trm']) && isset($_POST['ursf'])) {
-	
-	$data  = $_POST['trm'];
-	$ptrm = $_SESSION['trm']; 
-	$ses  = $_SESSION['aca'];
-
-
-
-	//check if term is same as current term
-	if($ptrm ==  $data) {
-
-		echo "The term selected is same as current term";
-
-	}else {
-
-
-	//update admin table
-	$sql = "UPDATE admin SET `term` = '$data' WHERE `session` = '$ses'";
-	$rsl = query($sql);
-
-	//get outstanding last term payment and add to current term
-	outstanding($ses, $data);
-
-	echo "Please wait";
-	echo  '<script>$("#ModalCenter").modal("show")</script>';
-	echo '<script>window.location.href ="./"</script>';
-
-	}
-}
-
-
-
-
-//-------------- input fee paid ---------------//
-if (isset($_POST['std']) && isset($_POST['trm']) && isset($_POST['fee']) && isset($_POST['cls']) && isset($_POST['mdd']) && isset($_POST['descr']) && isset($_POST['pde']) && isset($_POST['pdat'])) {
-
-	$std  = $_POST['std'];
-	$trm  = $_POST['trm'];
-	$fee  = $_POST['fee'];
-	$cls  = $_POST['cls'];
-	$mdd  = $_POST['mdd'];
-	$desc = $_POST['descr'];
-	$pdet = $_POST['pde'];
-	$pdat = $_POST['pdat'];
-
-	$red  = $_SESSION['aca'];
-
-	$fid = 'cjstran/'.rand(0, 9999);
-
-	if($pdat == null || $pdat == "") {
-
-		$date = date("Y-m-d");
-
-	} else {
-
-		$date = $pdat;
-	}
-	
-	
-
-	//check if the term fee
-	$sql = "SELECT * FROM student WHERE `session` = '$red' AND `adid` = '$std'";
-	$rsl = query($sql);
-	$row = mysqli_fetch_array($rsl);
-
-	$name = $row['name'];
-
-	if($trm == '1st Term') {
-		
-		$a = $row['fst'];
-	} else {
-
-	if($trm == '2nd Term'){
-
-		$a = $row['snd'];
-	}else {
-
-	if($trm == '3rd Term') {
-		
-		$a = $row['trd'];
-	}
-	}
-	}
-
-	
-
-	//validate amount given
-	$ssl = "SELECT SUM(`amount`) AS total FROM feercrd WHERE `adid` = '$std' AND `session` = '$red' AND `term` = '$trm'";
-	$res = query($ssl);
-	$rwf = mysqli_fetch_array($res);
-
-	if($rwf['total'] == '') {
-		$tot = 0;
-	} else {
-
-		$tot = $rwf['total'];
-	}
-
-	//deduct term fee from total paid and get balance
-	$new = $a - $tot;
-
-	//get first name
-	$string = $name;
-    $fname = strtok($string,  ' ');
-	
-
-	//check amount paid
-	if($fee > $new) {
-
-		echo "The fee inputted is greater than the fee stated for this term";
-	} else {
-
-		//insert new record to fee history
-		$sqlls = "INSERT INTO feercrd(`feeid`, `adid`, `amount` , `name`, `fname`, `class`, `session`, `term`, `datepaid`, `mode`, `descr`, `moredecr`)";
-		$sqlls.= " VALUES('$fid', '$std', '$fee' , '$name', '$fname', '$cls', '$red', '$trm', '$date', '$mdd', '$desc', '$pdet')";
-		$resullt = query($sqlls);
-		confirm($resullt);
-
-		echo "Loading...Please wait!";												
-		echo '<script>window.location.href ="./history?id='.$std.'&cls='.$cls.'&trm='.$trm.'"</script>';
-
-
-	}
-	
-	
-}
-
-
-
-
-//-------------- Edit input fee paid ---------------//
-if (isset($_POST['edstd']) && isset($_POST['edtrm']) && isset($_POST['edfee']) && isset($_POST['edcls']) && isset($_POST['edmdd']) && isset($_POST['eddescr']) && isset($_POST['edpde']) && isset($_POST['edfst']) && isset($_POST['edpdate'])) {
-
-	$edstd  = $_POST['edstd'];
-	$edtrm  = $_POST['edtrm'];
-	$edfee  = $_POST['edfee'];
-	$edcls  = $_POST['edcls'];
-	$edmdd  = $_POST['edmdd'];
-	$eddesc = $_POST['eddescr'];
-	$edpdet = $_POST['edpde'];
-	$edfst  = $_POST['edfst'];
-	$edpdate = $_POST['edpdate'];
-
-	if($edpdate == null || $edpdate == "") {
-
-		$date = date("Y-m-d");
-		
-	} else {
-
-		$date = $edpdate;
-	}
-
-	
-	//check if the term fee
-	$sql = "SELECT * FROM student WHERE `session` = '$edfst' AND `adid` = '$edstd'";
-	$rsl = query($sql);
-	$row = mysqli_fetch_array($rsl);
-
-	$name = $row['name'];
-	$class = $row['class'];
-
-	if($edtrm == '1st Term') {
-		
-		$a = $row['fst'];
-	} else {
-
-	if($edtrm == '2nd Term'){
-
-		$a = $row['snd'];
-	}else {
-
-	if($edtrm == '3rd Term') {
-		
-		$a = $row['trd'];
-	}
-	}
-	}
-
-	
-
-	//validate amount given
-	$ssl = "SELECT SUM(`amount`) AS total FROM feercrd WHERE `adid` = '$edstd' AND `session` = '$edfst' AND `term` = '$edtrm'";
-	$res = query($ssl);
-	$rwf = mysqli_fetch_array($res);
-
-	if($rwf['total'] == '') {
-		$tot = 0;
-	} else {
-
-		$tot = $rwf['total'];
-	}
-
-	//deduct term fee from total paid and get balance
-	$new = $a - $tot;
-	
-
-	//check amount paid
-	if($edfee > $new) {
-
-		echo "The fee inputted is greater than the fee stated for this term";
-	} else {
-
-		//insert new record to fee history
-		$sqlls = "UPDATE feercrd SET `amount` = '$edfee' , `term` = '$edtrm', `mode` = '$edmdd', `descr` = '$eddesc', `moredecr` = '$edpdet', `datepaid` = '$date' WHERE `feeid` = '$edcls'";
-		$resullt = query($sqlls);
-		confirm($resullt);
-
-		echo "Loading...Please wait!";		
-		//create notification
-		$_SESSION['notify'] = "Fee Updated Sucessfully";
-		echo '<script>window.location.href ="./history?id='.$edstd.'&cls='.$class.'&trm='.$edtrm.'"</script>';
-
-
-	}
-	
-	
-}
-
-
-
-
-//----- Pay Spillover ------//
-if(isset($_POST['std']) && isset($_POST['fee']) && isset($_POST['mdd']) && isset($_POST['pdet'])) {
-	
-	$std 	= $_POST['std'];
-	$fee 	= clean(escape($_POST['fee']));
-	$mdd 	= $_POST['mdd'];
-	$pdet	= $_POST['pdet'];
-	$desc   = "SpillOver Payment";
-
-	$fid = 'cjstran/'.rand(0, 9999);
-	$date = date("Y-m-d");
-
-	
-	//get student details
-	$sql = "SELECT * FROM student WHERE `adid` = '$std'";
-	$rsl = query($sql);
-	$rtf = mysqli_fetch_array($rsl);
-	
-	$name = $rtf['name'];
-	
-
-	//get student spillover fee
-	$spill = "SELECT sum(`amount`) as spilltot FROM spillover WHERE `adid` = '$std'";
-    $spls  = query($spill);
-    $sph   = mysqli_fetch_array($spls);
-	
-
-	$spiamt = $sph['spilltot'];
-	
-
-	//validate current paid with spillover fee
-	if($fee > $spiamt) {
-
-		echo "The fee inputted is greater than the sum of spillover for this pupil/student";
-	} else {
-
-	
-		//save details to fee record
-		$sqlls = "INSERT INTO feercrd(`feeid`, `amount` , `adid`, `name`, `datepaid`, `mode`, `descr`, `moredecr`)";
-		$sqlls.= " VALUES('$fid', '$fee' , '$std', '$name', '$date', '$mdd', '$desc', '$pdet')";
-		$resullt = query($sqlls);
-		confirm($resullt);
-
-		echo "Loading...Please wait!";												
-		echo '<script>window.location.href ="./spillpayhis?id='.$std.'"</script>';
-	}
-	
-
-	
-}
-
-
-
-//--- create custom fee ---//
-if(isset($_POST['cusfee']) && isset($_POST['cusamt']) && isset($_POST['cuspedt'])){
-
-	$cusfee  = clean(escape($_POST['cusfee']));
-	$cusamt  = $_POST['cusamt'];
-	$cuspedt = $_POST['cuspedt'];
-	$term    = $_SESSION['trm'];
-	$ses     = $_SESSION['aca'];
-
-	if(table_exist($cusfee)) {
-
-		echo "This Fee already exit in the database.";
-		
-	} else {
-
-		createcustom($cusfee);
-		
-		//insert records into fee
-		$sql = "INSERT INTO fee(`fee`, `amt`, `term`, `ses`)";
-		$sql .= "VALUES('$cusfee', '$cusamt', '$term', '$ses')";
-		$rsl  = query($sql);
-		echo '<script>window.location.href ="./custom?id='.$cusfee.'"</script>';
-
-	}
-}
-
-
-//create table custom fee
-function createcustom($cusfee) {
-	// sql to create table
-	$sql = "CREATE TABLE `".$cusfee."`
-	(
-	id INT(255) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	cusid text(255),
-	admno text(255),
-	name text(255),
-	class text(255),
-	term text(255),
-	ses text(255),
-	amt text(255),
-	datepaid date,
-	mode text(255),
-	type text(255)
-	)";
+	$sql = "INSERT INTO users(`sn`, `fname`, `usname`, `email`, `pword`, `datereg`, `active`, `tel`, `activator`, `ref`)";
+	$sql.= " VALUES('1', '$fnam', '$unam', '$emai', '$pwor', '$datereg', '0', '$tel', '$activator', '$ref')";
 	$result = query($sql);
-	confirm($result);	
-	if(!$result) {
 
-		die("This Fee already exit in the database.");
-	}
+	//redirect to verify function
+	$subj = "VERIFY YOUR EMAIL";
+	$msg  = "Hi there! <br /><br />Kindly use the otp below to activate your account;";
+
+	mail_mailer($email, $activator, $subj, $msg);
+
+	//open otp page
+	echo 'Loading... Please Wait!';
+	echo'<script>otpVerify(); signupClose();</script>';
+	 }
+
+
+
+/* MAIL VERIFICATIONS */
+function mail_mailer($email, $activator, $subj, $msg) {
+
+$to = $email;
+$from = "noreply@savearns.com";
+
+$headers = "From: " . $from . "\r\n";
+$headers .= "Reply-To: ". $from . "\r\n";
+$headers .= "MIME-Version: 1.0\r\n";
+$headers .= "Content-Type: text/html; charset=\"iso-8859-1\"\n";
+$headers .= "X-Priority: 1 (Highest)\n";
+$headers .= "X-MSMail-Priority: High\n";
+$headers .= "Importance: High\n";
+
+$subject = $subj;
+
+$logo = 'https://savearns.com/assets/3.png';
+$url = 'https://savearns.com/';
+
+$body = "
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+<meta charset='UTF-8'>
+<title>Savearns</title>
+</head>
+<link rel='stylesheet' href='https://savearns.com/assets/css/bootstrap.min.css'>
+<body style='text-align: center;'>";
+$body .= "<section style='margin: 30px; margin-top: 50px ; background: #34459C; color: #fff;'>";
+$body .= "<img style='margin-top: 35px; width: 460px; height: 105px;' src='{$logo}' alt='Savearns'>";
+$body .= "<h1 style='margin-top: 45px; color: #fff'>{$subj}</h1>
+<br />";
+$body .= "<h3 style='margin-left: 45px; margin-top: 34px; text-align: left; font-size: 17px;'>{$msg}</h3>
+<br />";
+$body .= "<h1 style='margin-left: 45px; text-align: center;'><b>{$activator}</b></h1>
+<br />";
+$body .= "<p style='margin-left: 45px; padding-bottom: 80px; text-align: left;'>Do not bother replying this
+email. This is a virtual email</p>";
+$body .= "<p text-align: center;'><a href='https://savearns.com/contact'><img style='width:150px;heght:150px'
+		src='https://savearns.com/assets/footer.png'></a>";
+$body .= "
+<h4 style='text-align: center;'>Email.: <span style='color: #fff'>savings@savearns.com</span></h4>";
+$body .= "<h4 style='text-align: center;'>Call/Chat.: <span style='color: #fff'>+234(0) 810 317 1902</span>
+</h4>";
+$body .= "<h4 style='text-align: center; padding-bottom: 80px; padding-top: 40px;'>Team Savearns</h4>";    
+$body .= "<script src='https://avearns.com/assets/js/bootstrap.min.js'></script>";
+$body .= "</section>";
+$body .= "</body></html>";
+$send = mail($to, $subject, $body, $headers);
 }
 
 
-//input custom fee
-if(isset($_POST['cinmdd']) && isset($_POST['cinfee']) && isset($_POST['cinstd']) && isset($_POST['cfee']) && isset($_POST['mddr']) && isset($_POST['cusdate'])) {
+/** RESEND OTP */
+if(isset($_POST['otpp'])) {
 
-	$mdd = $_POST['cinmdd'];
-	$fee = $_POST['cinfee'];
-	$std = $_POST['cinstd'];
-	$cfe = $_POST['cfee'];
-	$mddr = $_POST['mddr'];
-	$term    = $_SESSION['trm'];
-	$ses     = $_SESSION['aca'];
-	$cusdate = $_POST['cusdate'];
-
-	if($cusdate == null || $cusdate == "") {
-
-		$dat = date("Y-m-d");
-
-	} else{
-
-		$dat = $cusdate;
-	}	
-
-	$cusid = 'cjstran/'.rand(0, 9999);
-
-	//get student record
-	$sql = "SELECT * FROM student WHERE `adid` = '$std'";
-	$rsl = query($sql);
-	$row = mysqli_fetch_array($rsl);
-
-	$name = $row['name'];
-	$clas = $row['class'];
-
-
-	//check if the fee is greater than specified fee
-	$ssl = "SELECT * FROM fee WHERE `fee` = '$cfe' AND `term` = '$term' AND `ses` = '$ses'";
-	$rll = query($ssl);
-	$rws = mysqli_fetch_array($rll);
-
-	$spfee = $rws['amt'];
-
-	if($fee > $spfee) {
-
-		echo "The fee inputted is greater than the fee specified for this custom fee";
-	} else {
-
-	//check if user balance equals  (do this later)
+	$otpp = clean(escape($_POST['otpp']));
 	
+	$email = $_SESSION['usermail'];
 	
-	//insert record
-	$ins = "INSERT INTO `".$cfe."`(`cusid`, `admno`, `name`, `class`, `term`, `ses`, `amt`, `datepaid`, `mode`, `type`)";
-	$ins .= "VALUES('$cusid', '$std', '$name', '$clas', '$term', '$ses', '$fee', '$dat', '$mddr', '$mdd')";
-	$isl = query($ins);
+	$activator = otp();	
 
-	echo '<script>window.location.href ="./cusprin?id='.$cusid.'&data='.$cfe.'"</script>';
-	}
-}
-
-
-
-//--- INSERT EXPENSES TRACKER -----------//
-if(isset($_POST['exname']) && isset($_POST['examt']) && isset($_POST['extype']) && isset($_POST['expay']) && isset($_POST['exdesc']) && isset($_POST['qty'])){
-
-	$exname = clean(escape($_POST['exname']));
-	$examt  = clean(escape($_POST['examt']));
-	$extype = clean(escape($_POST['extype']));
-	$expay  = clean(escape($_POST['expay']));
-	$exdesc = clean(escape($_POST['exdesc']));
-	$qty    = clean(escape($_POST['qty']));
-
-	$tot  = $examt * $qty;
-	
-	$date   = date("Y-m-d h:i:sa");
-	$ses    = $_SESSION['aca'];
-	$trm    = $_SESSION['trm'];
-	$expid = 'cjsexp/'.rand(0, 9999);
-
-	$sql = "INSERT INTO tracker(`trackid`, `name`, `date`, `session`, `term`, `descrip`, `type`, `mode`, `amount`, `qty` , `total`)";
-	$sql .= "VALUES('$expid', '$exname', '$date', '$ses', '$trm', '$exdesc', '$extype', '$expay', '$examt', '$qty', '$tot')";
+	$sql = "UPDATE users SET `activator` = '$activator'  WHERE `email` = '$email'";
 	$res = query($sql);
 
-	echo "Loading...Please wait!";	
-	echo '<script>window.location.href ="./tracker"</script>';
+	if($otpp == 100) {
+
+	$subj = "VERIFY YOUR EMAIL";
+	$msg  = "Hi there! <br /><br />Kindly use the otp below to activate your account;";	
+	} else{
+	
+		$subj = "RESET YOUR PASSWORD";
+		$msg  = "Hi there! <br /><br />Kindly use the otp below to restore your password;";		
+
+	}
+
+	mail_mailer($email, $activator, $subj, $msg);
+	echo "New OTP Code sent to your email";
+}
+
+
+/**Activate OTP ACCOUNT */
+if(isset($_POST['votp'])) {
+
+	$email = $_SESSION['usermail'];
+	$veotp = clean(escape($_POST['votp']));
+
+	$otp   = $_SESSION['otp'];
+
+	//select otp from db and confirm with session
+	if($veotp != $otp) {
+
+		echo "Invalid OTP Code!";
+		
+	} else {
+
+	//update database and login
+	$sql = "UPDATE users SET `activator` = '', `active` = '1' WHERE `email` = '$email'";
+	$res = query($sql);
+
+	//get username and redirect to dashboard
+	$ssl = "SELECT * FROM users WHERE `email` =  '$email'";
+	$rsl = query($ssl);
+	if(row_count($rsl) == '') {
+		
+		echo 'Loading... Please Wait';
+		echo '<script>window.location.href ="./signin"</script>';
+		
+	} else {
+
+		$row  = mysqli_fetch_array($rsl);
+		$user = $row['usname'];
+
+		$_SESSION['login'] = $user;
+		
+		
+		echo 'Loading... Please Wait';
+
+		if(!isset($_SESSION['vnext'])) {
+		echo '<script>window.location.href ="./"</script>';
+		} else {
+			$data = $_SESSION['vnext'];
+			echo '<script>'.$data.'</script>';
+		}
+	}
+	}
+
+}
+
+/** SIGN IN USER **/
+ 	if(isset($_POST['username']) && isset($_POST['password'])) {
+
+			$username        = clean(escape($_POST['username']));
+			$password   	 = md5($_POST['password']);
+
+			$sql = "SELECT * FROM `users` WHERE `usname` = '$username' AND `pword` = '$password'";
+			$result = query($sql);
+			if(row_count($result) == 1) {
+
+				$row 	    = mysqli_fetch_array($result);
+				
+				$user 		= $row['usname'];
+				$active 	= $row['active'];
+				$email 		= $row['email'];
+				$activate 	= $row['activator'];
+
+				if ($active == 0 || $activate != '') {
+
+					$activator = otp();
+
+					$_SESSION['usermail'] = $email;
+
+					//update activation link
+					$ups = "UPDATE users SET `activator` = '$activate' WHERE `usname` = '$username'";
+					$ues = query($ups);
+
+					$subj = "VERIFY YOUR EMAIL";
+					$msg  = "Hi there! <br /><br />Kindly use the otp below to activate your account;";
+
+					mail_mailer($email, $activator, $subj, $msg);
+
+					//open otp page
+					echo 'Loading... Please Wait!';
+					echo '<script>otpVerify(); signupClose();</script>';
+	
+					
+				}  else {
+
+					if($username == $user) {
+						
+						$_SESSION['login'] = $username;
+
+						echo 'Loading... Please Wait';	
+
+						echo '<script>window.location.href ="./"</script>';	
+					} else {
+
+						echo "This username doesn't have an account.";
+					}
+
+			} 
+
+		}  else {
+			
+			echo '<script>window.location.href ="./forgot"</script>';
+		}
+	}
+
+
+/** FORGOT PASSWORD **/
+if(isset($_POST['fgeml'])) {
+	
+	$email  = clean(escape($_POST['fgeml']));
+
+	$_SESSION['usermail'] = $email;
+
+	if(!email_exist($email)) {
+
+		echo "Sorry! This email doesn't have an account";
+		
+	} else {
+
+	$activator = otp();
+
+	$ssl = "UPDATE users SET `activator` = '$activator' WHERE `email` = '$email'";
+	$rsl = query($ssl);
+
+	//redirect to verify function
+	$subj = "RESET YOUR PASSWORD";
+	$msg  = "Hi there! <br /><br />Kindly use the otp below to restore your password;";
+
+	mail_mailer($email, $activator, $subj, $msg);
+
+	//open otp page
+	echo 'Loading... Please Wait!';
+	$_SESSION['vnext'] = "updatePword();";
+	echo '<script>otpVerify(); signupClose();</script>';
+
+	}
 }
 
 
 
-function termlyspillover() {
+/** RESET PASSWORD **/
+if(isset($_POST['fgpword']) && isset($_POST['fgcpword'])) {
 
-	if($_SESSION['trm'] == '2nd Term') {
+	    $fgpword = md5($_POST['fgpword']);
+        $eml = $_SESSION['usermail'];
 
-		//get all payement record
-		$sql = "SELECT *, sum(`fst`) as fee FROM student";
-		$res = query($sql);
-		$row = mysqli_fetch_array($res);
+	$sql = "UPDATE users SET `pword` = '$fgpword', `activator` = '' WHERE `email` = '$eml'";
+	$rsl = query($sql);
+	
+	//get username and redirect to dashboard
+	$ssl = "SELECT * FROM users WHERE `email` =  '$eml'";
+	$rsl = query($ssl);
+	if(row_count($rsl) == '') {
 		
-		$fstfee = $row['fee'];
-	
-		$dql = "SELECT *, sum(`amount`) as total FROM feercrd WHERE `term` = '1st Term'";
-		$des = query($dql);
-		$dow = mysqli_fetch_array($des);
-	
-		$fstunpaid = $dow['total'];
-	
-		$spillover = $fstfee - $fstunpaid;
-	
-		echo number_format($spillover);
-	
+		echo 'Loading... Please Wait';
+		echo '<script>window.location.href ="./signin"</script>';
+		
 	} else {
-	
-	   
-		if($_SESSION['trm'] == '3rd Term') {
-	
-		//get all payement record
-		$sql = "SELECT *, sum(`fst`) as fee, sum(`snd`) as trdd FROM student";
-		$res = query($sql);
-		$row = mysqli_fetch_array($res);
+
+		$row  = mysqli_fetch_array($rsl);
+		$user = $row['usname'];
+
+		$_SESSION['login'] = $user;
 		
-		$fstfee = $row['fee'] + $row['trdd'];
-	
-		$dql = "SELECT *, sum(`amount`) as total FROM feercrd WHERE `term` = '1st Term' AND `term` = '2nd Term'";
-		$des = query($dql);
-		$dow = mysqli_fetch_array($des);
-	
-		$fstunpaid = $dow['total'];
-	
-		$spillover = $fstfee - $fstunpaid;
-	
-		echo number_format($spillover);
-			
-		}
+		
+		echo 'Loading... Please Wait';
+
+		echo '<script>window.location.href ="./"</script>';
 		
 	}
 }
+
+
+
+
+// DASHBOARD FUNCTIONS FOR USER
+function user_details() {
+	
+	$data = $_SESSION['login'];
+
+
+	//users details
+	$sql = "SELECT * FROM users WHERE `usname` = '$data'";
+	$rsl = query($sql);
+
+	//check if user details is valid
+	if(row_count($rsl) == '') {
+
+		redirect(".././logout");
+		
+	} else {
+
+    $GLOBALS['t_users'] = mysqli_fetch_array($rsl);
+
+	}
+
+	//referal details
+	$rss = "SELECT sum(`active`) AS `earn` FROM `users` WHERE `ref` = '$data'";
+	$res = query($rss);
+    $GLOBALS['t_ref'] = mysqli_fetch_array($res);
+
+	$GLOBALS['t_ref_earn'] = $GLOBALS['t_ref']['earn'] * 100;
+
+
+	//classic savings plan
+	$clsvs = "SELECT * FROM `savings` WHERE `usname` = '$data' AND `plan` = 'Classic Savings Plan' AND `status` = 'Active'";
+	$clsvl = query($clsvs);
+	if(row_count($clsvl) != null) {
+		
+		$GLOBALS['clcsvs'] = mysqli_fetch_array($clsvl);
+
+		//get savings duration
+		$dur = $GLOBALS['clcsvs']['duration'];
+		$GLOBALS['campdura'] = date('Y-m-d h:i:s', strtotime($GLOBALS['clcsvs']['datepaid']. ' +'.$dur));
+	} 
+	
+
+	//flex target
+	$flsvs = "SELECT * FROM `flex` WHERE `usname` = '$data' AND `status` = 'Active'";
+	$flsvl = query($flsvs);
+	if(row_count($flsvl) != null) {
+	
+		$GLOBALS['flsvs'] = mysqli_fetch_array($flsvl);
+		
+	}
+
+
+	//flex savings
+	$lsvlr = "SELECT * FROM `savings` WHERE `usname` = '$data' AND `plan` = 'Flex Savings Plan' AND `status` = 'Active'";
+	$lsvrl = query($lsvlr);
+	if(row_count($lsvrl) != null) {
+	
+		$GLOBALS['lsrs'] = mysqli_fetch_array($lsvrl);
+	}
+
+	//campus saving plan
+	$cmsvs = "SELECT * FROM `savings` WHERE `usname` = '$data' AND `plan` = 'Campus Savings Plan' AND `status` = 'Active'";
+	$cmsvl = query($cmsvs);
+	if(row_count($cmsvl) != null) {
+
+	
+	$GLOBALS['cmsvs'] = mysqli_fetch_array($cmsvl);
+
+	}
+
+
+}
+
+
+
+//get account name
+if(isset($_POST['bank']) && isset($_POST['acctn']) && isset($_POST['trd'])) {
+
+	$bank  = clean(escape($_POST['bank']));
+	$acctn = clean(escape($_POST['acctn']));
+
+
+	//get bank code first
+    $banks = array(
+		array('id' => '1','name' => 'Access Bank','code'=>'044'),
+		array('id' => '2','name' => 'Citibank','code'=>'023'),
+		array('id' => '3','name' => 'Diamond Bank','code'=>'063'),
+		array('id' => '4','name' => 'Dynamic Standard Bank','code'=>''),
+		array('id' => '5','name' => 'Ecobank Nigeria','code'=>'050'),
+		array('id' => '6','name' => 'Fidelity Bank Nigeria','code'=>'070'),
+		array('id' => '7','name' => 'First Bank of Nigeria','code'=>'011'),
+		array('id' => '8','name' => 'First City Monument Bank','code'=>'214'),
+		array('id' => '9','name' => 'Guaranty Trust Bank','code'=>'058'),
+		array('id' => '10','name' => 'Heritage Bank Plc','code'=>'030'),
+		array('id' => '11','name' => 'Jaiz Bank','code'=>'301'),
+		array('id' => '12','name' => 'Keystone Bank Limited','code'=>'082'),
+		array('id' => '13','name' => 'Providus Bank Plc','code'=>'101'),
+		array('id' => '14','name' => 'Polaris Bank','code'=>'076'),
+		array('id' => '15','name' => 'Stanbic IBTC Bank Nigeria Limited','code'=>'221'),
+		array('id' => '16','name' => 'Standard Chartered Bank','code'=>'068'),
+		array('id' => '17','name' => 'Sterling Bank','code'=>'232'),
+		array('id' => '18','name' => 'Suntrust Bank Nigeria Limited','code'=>'100'),
+		array('id' => '19','name' => 'Union Bank of Nigeria','code'=>'032'),
+		array('id' => '20','name' => 'United Bank for Africa','code'=>'033'),
+		array('id' => '21','name' => 'Unity Bank Plc','code'=>'215'),
+		array('id' => '22','name' => 'Wema Bank','code'=>'035'),
+		array('id' => '23','name' => 'Zenith Bank','code'=>'057'),
+		array('id' => '24','name' => 'HighStreet MFB bank','code'=>'090175'),
+		array('id' => '25','name' => 'TCF MFB','code' => '90115'),
+	  array(
+		  'id' => 132,
+		  'code' => '560',
+		  'name' => 'Page MFBank'
+	  ),
+	  array(
+		  'id' => 133,
+		  'code' => '304',
+		  'name' => 'Stanbic Mobile Money'
+	  ),
+	  array(
+		  'id' => 134,
+		  'code' => '308',
+		  'name' => 'FortisMobile'
+	  ),
+	  array(
+		  'id' => 135,
+		  'code' => '328',
+		  'name' => 'TagPay'
+	  ),
+	  array(
+		  'id' => 136,
+		  'code' => '309',
+		  'name' => 'FBNMobile'
+	  ),
+	  array(
+		  'id' => 137,
+		  'code' => '011',
+		  'name' => 'First Bank of Nigeria'
+	  ),
+	  array(
+		  'id' => 138,
+		  'code' => '326',
+		  'name' => 'Sterling Mobile'
+	  ),
+	  array(
+		  'id' => 139,
+		  'code' => '990',
+		  'name' => 'Omoluabi Mortgage Bank'
+	  ),
+	  array(
+		  'id' => 140,
+		  'code' => '311',
+		  'name' => 'ReadyCash (Parkway)'
+	  ),
+	  array(
+		  'id' => 143,
+		  'code' => '306',
+		  'name' => 'eTranzact'
+	  ),
+	  array(
+		  'id' => 145,
+		  'code' => '023',
+		  'name' => 'CitiBank'
+	  ),
+	  array(
+		  'id' => 147,
+		  'code' => '323',
+		  'name' => 'Access Money'
+	  ),
+	  array(
+		  'id' => 148,
+		  'code' => '302',
+		  'name' => 'Eartholeum'
+	  ),
+	  array(
+		  'id' => 149,
+		  'code' => '324',
+		  'name' => 'Hedonmark'
+	  ),
+	  array(
+		  'id' => 150,
+		  'code' => '325',
+		  'name' => 'MoneyBox'
+	  ),
+	  array(
+		  'id' => 151,
+		  'code' => '301',
+		  'name' => 'JAIZ Bank'
+	  ),
+		array(
+		  'id' => 153,
+		  'code' => '307',
+		  'name' => 'EcoMobile'
+	  ),
+	  array(
+		  'id' => 154,
+		  'code' => '318',
+		  'name' => 'Fidelity Mobile'
+	  ),
+	  array(
+		  'id' => 155,
+		  'code' => '319',
+		  'name' => 'TeasyMobile'
+	  ),
+	  array(
+		  'id' => 156,
+		  'code' => '999',
+		  'name' => 'NIP Virtual Bank'
+	  ),
+	  array(
+		  'id' => 157,
+		  'code' => '320',
+		  'name' => 'VTNetworks'
+	  ),
+		array(
+		  'id' => 159,
+		  'code' => '501',
+		  'name' => 'Fortis Microfinance Bank'
+	  ),
+	  array(
+		  'id' => 160,
+		  'code' => '329',
+		  'name' => 'PayAttitude Online'
+	  ),
+	  array(
+		  'id' => 161,
+		  'code' => '322',
+		  'name' => 'ZenithMobile'
+	  ),
+	  array(
+		  'id' => 162,
+		  'code' => '303',
+		  'name' => 'ChamsMobile'
+	  ),
+	  array(
+		  'id' => 163,
+		  'code' => '403',
+		  'name' => 'SafeTrust Mortgage Bank'
+	  ),
+	  array(
+		  'id' => 164,
+		  'code' => '551',
+		  'name' => 'Covenant Microfinance Bank'
+	  ),
+	  array(
+		  'id' => 165,
+		  'code' => '415',
+		  'name' => 'Imperial Homes Mortgage Bank'
+	  ),
+	  array(
+		  'id' => 166,
+		  'code' => '552',
+		  'name' => 'NPF MicroFinance Bank'
+	  ),
+	  array(
+		  'id' => 167,
+		  'code' => '526',
+		  'name' => 'Parralex'
+	  ),
+	  array(
+		  'id' => 169,
+		  'code' => '084',
+		  'name' => 'Enterprise Bank'
+	  ),
+		array(
+		  'id' => 187,
+		  'code' => '314',
+		  'name' => 'FET'
+	  ),
+	  array(
+		  'id' => 188,
+		  'code' => '523',
+		  'name' => 'Trustbond'
+	  ),
+	  array(
+		  'id' => 189,
+		  'code' => '315',
+		  'name' => 'GTMobile'
+	  ),
+		array(
+		  'id' => 182,
+		  'code' => '327',
+		  'name' => 'Pagatech'
+	  ),
+	  array(
+		  'id' => 183,
+		  'code' => '559',
+		  'name' => 'Coronation Merchant Bank'
+	  ),
+	  array(
+		  'id' => 184,
+		  'code' => '601',
+		  'name' => 'FSDH'
+	  ),
+	  array(
+		  'id' => 185,
+		  'code' => '313',
+		  'name' => 'Mkudi'
+	  ),
+	   array(
+		  'id' => 171,
+		  'code' => '305',
+		  'name' => 'Paycom'
+	  ),
+	  array(
+		  'id' => 172,
+		  'code' => '100',
+		  'name' => 'SunTrust Bank'
+	  ),
+	  array(
+		  'id' => 173,
+		  'code' => '317',
+		  'name' => 'Cellulant'
+	  ),
+	  array(
+		  'id' => 174,
+		  'code' => '401',
+		  'name' => 'ASO Savings and & Loans'
+	  ),
+	  array(
+		  'id' => 176,
+		  'code' => '402',
+		  'name' => 'Jubilee Life Mortgage Bank'
+	  ),
+	);
+
+	$row = 0; 
+	
+	while($row < 68) {
+        
+        if($banks[$row]['name'] == $bank){
+    
+        $bankcode = $banks[$row]['code'];
+        }
+		
+		$row++;
+    }
+	
+	//echo $bank;
+
+	$request = [
+
+		'account_number' => $acctn,
+		'account_bank' => $bankcode
+	];
+	
+	$curl = curl_init();
+	
+		curl_setopt_array($curl, array(
+		CURLOPT_URL => 'https://api.flutterwave.com/v3/accounts/resolve',
+		CURLOPT_RETURNTRANSFER => true,
+		CURLOPT_ENCODING => '',
+		CURLOPT_MAXREDIRS => 10,
+		CURLOPT_TIMEOUT => 0,
+		CURLOPT_FOLLOWLOCATION => true,
+		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		CURLOPT_CUSTOMREQUEST => 'POST',
+		CURLOPT_POSTFIELDS => json_encode($request),
+		CURLOPT_HTTPHEADER => array(
+			'Authorization: Bearer FLWSECK-1109e7cb4c9e1871e91a90f1d91c8479-X',
+			'Content-Type: application/json'
+		),
+		));
+	
+	    $response = curl_exec($curl);
+		$err = curl_error($curl);
+
+		if($err){
+		// there was an error contacting the rave API
+		die('Error Retrieving Your Account Name');
+		}
+		
+		curl_close($curl);
+
+		
+		$res = json_decode($response);
+
+        if($res->status == "success") {
+		echo $res->data->account_name;
+        } else {
+
+            echo "Error Retrieving Your Account Name";
+        }
+	
+}
+
+
+if(isset($_POST['gend']) && isset($_POST['inst']) && isset($_POST['dept']) && isset($_POST['level']) && isset($_POST['matric']) && isset($_POST['bank']) && isset($_POST['acctn']) && isset($_POST['actn']) && isset($_POST['pword'])) {
+
+	$gend 	 = clean(escape($_POST['gend']));
+	$inst 	 = clean(escape($_POST['inst']));
+	$dept 	 = clean(escape($_POST['dept']));
+	$level	 = clean(escape($_POST['level']));
+	$matric  = clean(escape($_POST['matric']));
+	$bank    = clean(escape($_POST['bank']));
+	$acctn   = clean(escape($_POST['acctn']));
+	$actn    = clean(escape($_POST['actn']));
+	$pword   = md5($_POST['pword']);
+
+	$user = $_SESSION['login'];
+
+	$sql = "UPDATE users SET `gend` = '$gend', `inst` = '$inst', `tpin` = '$pword', `dept` = '$dept', `level` = '$level', `matric` = '$matric', `bname` = '$bank', `bact` = '$acctn', `actname` = '$actn' WHERE `usname` = '$user'";
+	$res = query($sql);
+
+	echo "Loading... Please wait";
+	echo '<script>window.location.href ="./"</script>';
+}
+
+
+
+//transfer function
+function transfer($usus) {
+
+	$sql = "SELECT * FROM users WHERE `usname` = '$usus'";
+	$res = query($sql);
+
+	if(row_count($res) == null) {
+		
+		echo "Username is invalid";
+		die();
+	} else {
+
+		$GLOBALS['t_trans'] = mysqli_fetch_array($res);
+		
+	}
+}
+
+
+
+//sending money to a savearn user
+if(isset($_POST['amt']) && isset($_POST['usus'])) {
+
+$amt = clean(escape($_POST['amt']));
+$usus = clean(escape($_POST['usus']));
+
+//get current user details
+user_details();
+
+$mainuser = ucwords($t_users['usname']);
+
+//check if user is crediting self
+if($mainuser == ucwords($usus)) {
+	
+	echo "You can't send money to yourself";
+	
+} else {
+
+	//check if user exist
+	transfer($usus);
+
+	//chcek if user has enough funds
+	$bal = ($t_users['wallet'] + $t_ref_earn) - 100;
+	if($bal < $amt) {
+
+		echo "A minimum of NGN100 should be left on your account";
+		
+	} else {
+
+		//deduct current user wallet
+		$newbal = $bal - $amt;
+		
+		//get beneficiary user wallet and add amt
+		$tbal = $t_trans['wallet'] + $amt;
+		
+		//update user wallet
+		$sql = "UPDATE users SET `wallet` = '$newbal' WHERE `usname` = '$mainuser'";
+		$res = query($sql);
+
+		//credit beneficiary
+		$bsql = "UPDATE users SET `wallet` = '$tbal' WHERE `usname` = '$usus'";
+		$bres = query($bsql);
+
+		//notify user transaction history
+		$date = date("Y-m-d h:i:sa");
+		$ref = "tpay".rand(0, 999);
+		$msg  = "Your transfer of NGN".number_format($newbal)." to ". $usus ." was successful";
+		$sbj  = "Debit Alert";
+
+		$msql = "INSERT INTO msgs(`usname`, `status`, `sn`, `msg`, `date`, `ticket`, `sbj`)";
+		$msql .="VALUES('$mainuser', 'unread', '1', '$msg', '$date', '$ref', '$sbj')";
+		$mes = query($msql);
+
+		//notify beneficiary
+		$bref  = "tpay".rand(0, 999);
+		$bmsg  = "You have been credited NGN".number_format($newbal)." from ". $usus;
+		$bsbj  = "Credit Alert";
+
+		$bmsql = "INSERT INTO msgs(`usname`, `status`, `sn`, `msg`, `date`, `ticket`, `sbj`)";
+		$bmsql .="VALUES('$mainuser', 'unread', '1', '$msg', '$date', '$ref', '$sbj')";
+		$bmes = query($bmsql);
+
+
+		//create an alert message
+		$_SESSION['transfered'] = "Success";
+		echo "Loading... Please wait";
+		echo '<script>window.location.href ="./"</script>';
+		
+	}
+	
+}
+}
+
+
+/*** SAVING PLANS FUNCTIOn */
+
+//campus plan
+if(isset($_POST['campan']) && isset($_POST['rrcampan'])) {
+
+	$ammt  =  clean($_POST['campan']);
+	$det   =  clean($_POST['rrcampan']);
+
+	//get user wallet balance
+	user_details();
+
+	$user = $t_users['usname'];
+
+	//chcek if user has enough funds
+	$bal = ($t_users['wallet'] + $t_ref_earn) - 100;
+
+	if($bal < $ammt) {
+
+		echo "<script>
+        iziToast.error({
+          title: 'Error!',
+          message: 'You do not have enough funds in your wallet. Kindly fund your wallet and try again',
+          position: 'topCenter'
+        });</script>";
+		
+	} else {
+
+		//deduct current user wallet
+		$newbal = $bal - $ammt + 100;
+
+		//notify user transaction history
+		$date = date("Y-m-d h:i:sa");
+		$ref = "tpay".rand(0, 999);
+		$msg  = "Your ". $det ." of NGN".number_format($ammt)." was successful";
+		$tref = "tpay".rand(0, 999);
+		$sbj  = "Savings Alert";
+
+		$nsql = "INSERT INTO msgs(`usname`, `status`, `sn`, `msg`, `date`, `ticket`, `sbj`)";
+		$nsql .="VALUES('$user', 'unread', '1', '$msg', '$date', '$ref', '$sbj')";
+		$nes = query($nsql);
+
+		//update user wallet
+		$sql = "UPDATE users SET `wallet` = '$newbal' WHERE `usname` = '$user'";
+		$res = query($sql);
+
+		//credit savings wallet
+		$vsql = "INSERT INTO savings(`usname`, `datepaid`, `plan`, `duration`, `amt`, `status`, `mode`, `descrip`)";
+		$vsql .="VALUES('$user', '$date', '$det', 'A week before exam', '$ammt', 'Active', 'Wallet', 'Campus Savings')";
+		$ves = query($vsql);
+
+		//insert transaction history
+		$tsql = "INSERT INTO t_his(`t_ref`, `amt`, `datepaid`, `username`, `sn`, `status`, `paynote`)";
+		$tsql .= "VALUES('$tref', '$ammt', '$date', '$user', '1', 'debit', '$msg')";
+		$tes = query($tsql);
+
+		//create an alert message
+		$_SESSION['campusplan'] = "Success";
+		echo "Loading... Please wait";
+		echo '<script>window.location.href ="./plans"</script>';
+	}
+
+	
+}
+
+//fund campus wallet
+if(isset($_POST['fndcampan']) && isset($_POST['fndrrcampan'])) {
+
+	$fndammt  =  clean($_POST['fndcampan']);
+	$fnddet   =  clean($_POST['fndrrcampan']);
+
+	//get user wallet balance
+	user_details();
+
+	$user = $t_users['usname'];
+
+	//chcek if user has enough funds
+	$bal = ($t_users['wallet'] + $t_ref_earn) - 100;
+
+	if($bal < $fndammt) {
+
+		echo "<script>
+        iziToast.error({
+          title: 'Error!',
+          message: 'You do not have enough funds in your wallet. Kindly fund your wallet and try again',
+          position: 'topCenter'
+        });</script>";
+		
+	} else {
+
+		
+		//deduct current user wallet
+		$newbal = $bal - $fndammt + 100;
+
+		//get previous campus saving and add with new campus savings
+		$cmbal = $cmsvs['amt'] + $fndammt;
+
+		//notify user transaction history
+		$date = date("Y-m-d h:i:sa");
+		$ref = "tpay".rand(0, 999);
+		$msg  = "Your ". $det ." of NGN".number_format($fndammt)." was successful";
+		$tref = "tpay".rand(0, 999);
+		$sbj  = "Savings Alert";
+
+		$nsql = "INSERT INTO msgs(`usname`, `status`, `sn`, `msg`, `date`, `ticket`, `sbj`)";
+		$nsql .="VALUES('$user', 'unread', '1', '$msg', '$date', '$ref', '$sbj')";
+		$nes = query($nsql);
+
+		//update user wallet
+		$sql = "UPDATE users SET `wallet` = '$newbal' WHERE `usname` = '$user'";
+		$res = query($sql);
+
+		//update credit savings wallet
+		$vsql = "UPDATE savings SET `amt` = '$cmbal' WHERE `usname` = '$user' AND `plan` = 'Campus Savings Plan' AND `status` = 'Active'";
+		$ves = query($vsql);
+
+		//insert transaction history
+		$tsql = "INSERT INTO t_his(`t_ref`, `amt`, `datepaid`, `username`, `sn`, `status`, `paynote`)";
+		$tsql .= "VALUES('$tref', '$fndammt', '$date', '$user', '1', 'debit', '$msg')";
+		$tes = query($tsql);
+
+		//create an alert message
+		$_SESSION['campusplan'] = "Success";
+		echo "Loading... Please wait";
+		echo '<script>window.location.href ="./plans"</script>';
+		
+	} 
+
+	
+}
+
+
+//flex plan
+if(isset($_POST['flxamt']) && isset($_POST['dest']) && isset($_POST['plann']) && isset($_POST['saflxamt'])) {
+
+	$flxamt     =  clean($_POST['flxamt']);
+	$saflxamt   =  clean($_POST['saflxamt']);
+	$dest       =  clean($_POST['dest']);
+	$plann      =  clean($_POST['plann']);
+	$date 		=  date("Y-m-d h:i:sa");
+
+	//get user wallet balance
+	user_details();
+
+	$user = $t_users['usname'];
+
+	//chcek if user has enough funds
+	$bal = ($t_users['wallet'] + $t_ref_earn) - 100;
+
+	if($bal < $saflxamt) {
+
+		echo "<script>
+        iziToast.error({
+          title: 'Error!',
+          message: 'You do not have enough funds in your wallet. Kindly fund your wallet and try again',
+          position: 'topCenter'
+        });</script>";
+		
+	} else {
+
+	if($saflxamt > $flxamt) {
+		
+		echo "<script>
+        iziToast.error({
+          title: 'Error!',
+          message: 'You current deposit is greater than your targeted saving',
+          position: 'topCenter'
+        });</script>";
+		
+	} else {
+
+		//deduct current user wallet
+		$newbal = $bal - $saflxamt + 100;
+
+		//notify user transaction history
+		$ref = "tpay".rand(0, 999);
+		$tref = "tpay".rand(0, 999);
+		$msg  = "Your ". $plann ." of NGN".number_format($saflxamt)." was successful";
+		$sbj  = "Savings Alert";
+
+		$nsql = "INSERT INTO msgs(`usname`, `status`, `sn`, `msg`, `date`, `ticket`, `sbj`)";
+		$nsql .="VALUES('$user', 'unread', '1', '$msg', '$date', '$ref', '$sbj')";
+		$nes = query($nsql);
+
+		//insert transaction history
+		$tsql = "INSERT INTO t_his(`t_ref`, `amt`, `datepaid`, `username`, `sn`, `status`, `paynote`)";
+		$tsql .= "VALUES('$tref', '$saflxamt', '$date', '$user', '1', 'debit', '$msg')";
+		$tes = query($tsql);
+
+		//update user wallet
+		$sql = "UPDATE users SET `wallet` = '$newbal' WHERE `usname` = '$user'";
+		$res = query($sql);
+
+		//credit flex wallet
+		$vsql = "INSERT INTO flex(`usname`, `date`, `amt`, `status`, `mode`, `descrip`)";
+		$vsql .="VALUES('$user', '$date', '$flxamt', 'Active', 'Wallet', '$dest')";
+		$ves = query($vsql);
+
+		//credit savings wallet
+		$ssql = "INSERT INTO savings(`usname`, `datepaid`, `plan`, `amt`, `status`, `mode`, `descrip`)";
+		$ssql .="VALUES('$user', '$date', 'Flex Savings Plan', '$saflxamt', 'Active', 'Wallet', 'Flex Saving')";
+		$fes = query($ssql);
+
+		//create an alert message
+		$_SESSION['flexplan'] = "Success";
+		echo "Loading... Please wait";
+		echo '<script>window.location.href ="./plans"</script>';
+	}
+	}
+}
+
+//fund flex plan
+if(isset($_POST['fnddsaflxamt'])) {
+
+	$fnddsaflxamt   =  clean($_POST['fnddsaflxamt']);
+	$date 		    =  date("Y-m-d h:i:sa");
+	
+
+	//get user wallet balance
+	user_details();
+
+	$flxamt         =  $flsvs['amt'];
+	$user 			=  $t_users['usname'];
+
+	//chcek if user has enough funds
+	$bal = ($t_users['wallet'] + $t_ref_earn) - 100;
+
+	//add previous saving
+	$flnwmt = $lsrs['amt'] + $fnddsaflxamt;
+
+	if($bal < $fnddsaflxamt) {
+
+		echo "<script>
+        iziToast.error({
+          title: 'Error!',
+          message: 'You do not have enough funds in your wallet. Kindly fund your wallet and try again',
+          position: 'topCenter'
+        });</script>";
+		
+	} else {
+
+	if($flnwmt > $flxamt) {
+		
+		echo "<script>
+        iziToast.error({
+          title: 'Error!',
+          message: 'You current deposit is greater than your targeted saving',
+          position: 'topCenter'
+        });</script>";
+		
+	} else {
+
+		//deduct current user wallet
+		$newbal = $bal - $fnddsaflxamt + 100;
+
+		//notify user transaction history
+		$ref = "tpay".rand(0, 999);
+		$tref = "tpay".rand(0, 999);
+		$msg  = "Your Flex Savings Plan of NGN".number_format($fnddsaflxamt)." was successful";
+		$sbj  = "Savings Alert";
+
+		$nsql = "INSERT INTO msgs(`usname`, `status`, `sn`, `msg`, `date`, `ticket`, `sbj`)";
+		$nsql .="VALUES('$user', 'unread', '1', '$msg', '$date', '$ref', '$sbj')";
+		$nes = query($nsql);
+
+		//insert transaction history
+		$tsql = "INSERT INTO t_his(`t_ref`, `amt`, `datepaid`, `username`, `sn`, `status`, `paynote`)";
+		$tsql .= "VALUES('$tref', '$fnddsaflxamt', '$date', '$user', '1', 'debit', '$msg')";
+		$tes = query($tsql);
+
+		//update user wallet
+		$sql = "UPDATE users SET `wallet` = '$newbal' WHERE `usname` = '$user'";
+		$res = query($sql);
+
+		//update credit savings wallet
+		$vsql = "UPDATE savings SET `amt` = '$flnwmt' WHERE `usname` = '$user' AND `plan` = 'Flex Savings Plan' AND `status` = 'Active'";
+		$ves = query($vsql);
+		
+		//create an alert message
+		$_SESSION['flexplan'] = "Success";
+		echo "Loading... Please wait";
+		echo '<script>window.location.href ="./plans"</script>';
+	}
+	}
+}
+
+
+//classic plan
+if(isset($_POST['classic']) && isset($_POST['cldd']) && isset($_POST['clplan'])) {
+
+	$classic    =  clean($_POST['classic']);
+	$cldd       =  clean($_POST['cldd']);
+	$clplan     =  clean($_POST['clplan']);
+
+	//get user wallet balance
+	user_details();
+
+	$user = $t_users['usname'];
+
+	//chcek if user has enough funds
+	$bal = ($t_users['wallet'] + $t_ref_earn) - 100;
+
+	if($bal < $classic) {
+
+		echo "<script>
+        iziToast.error({
+          title: 'Error!',
+          message: 'You do not have enough funds in your wallet. Kindly fund your wallet and try again',
+          position: 'topCenter'
+        });</script>";
+		
+	} else {
+
+		//deduct current user wallet
+		$newbal = $bal - $classic + 100;
+
+		//notify user transaction history
+		$date = date("Y-m-d h:i:sa");
+		$ref = "tpay".rand(0, 999);
+		$tref = "tpay".rand(0, 999);
+		$msg  = "Your ". $clplan ." of NGN".number_format($classic)." was successful";
+		$sbj  = "Savings Alert";
+
+		$nsql = "INSERT INTO msgs(`usname`, `status`, `sn`, `msg`, `date`, `ticket`, `sbj`)";
+		$nsql .="VALUES('$user', 'unread', '1', '$msg', '$date', '$ref', '$sbj')";
+		$nes = query($nsql);
+
+		//update user wallet
+		$sql = "UPDATE users SET `wallet` = '$newbal' WHERE `usname` = '$user'";
+		$res = query($sql);
+
+		//credit savings wallet
+		$vsql = "INSERT INTO savings(`usname`, `datepaid`, `plan`, `duration`, `amt`, `status`, `mode`, `descrip`)";
+		$vsql .="VALUES('$user', '$date', '$clplan', '$cldd', '$classic', 'Active', 'Wallet', 'Classic Saving')";
+		$ves = query($vsql);
+
+		//insert transaction history
+		 $tsql = "INSERT INTO t_his(`t_ref`, `amt`, `datepaid`, `username`, `sn`, `status`, `paynote`)";
+		 $tsql .= "VALUES('$tref', '$classic', '$date', '$user', '1', 'debit', '$msg')";
+		 $tes = query($tsql);
+
+		//create an alert message
+		$_SESSION['classicplan'] = "Success";
+		echo "Loading... Please wait";
+		echo '<script>window.location.href ="./plans"</script>';
+	}
+}
+
+//fund classic plan
+if(isset($_POST['fndclassic']) && isset($_POST['fndclplan'])) {
+
+	$fndclassic    =  clean($_POST['fndclassic']);
+	$fndclplan     =  clean($_POST['fndclplan']);
+
+	//get user wallet balance
+	user_details();
+
+	$user = $t_users['usname'];
+
+	//chcek if user has enough funds
+	$bal = ($t_users['wallet'] + $t_ref_earn) - 100;
+
+	if($bal < $fndclassic) {
+
+    echo "<script>
+    iziToast.error({
+      title: 'Error!',
+      message: 'You do not have enough funds in your wallet. Kindly fund your wallet and try again',
+      position: 'topCenter'
+    });</script>";
+} else {
+
+	 //deduct current user wallet
+	$newbal = $bal - $fndclassic + 100;
+
+	 //notify user transaction history
+	 $date = date("Y-m-d h:i:sa");
+	 $ref = "tpay".rand(0, 999);
+	 $msg  = "Your ". $fndclplan ." of NGN".number_format($fndclassic)." was successful";
+	 $sbj  = "Savings Alert";
+	 $tref = "tpay".rand(0, 999);
+
+	 $nsql = "INSERT INTO msgs(`usname`, `status`, `sn`, `msg`, `date`, `ticket`, `sbj`)";
+     $nsql .="VALUES('$user', 'unread', '1', '$msg', '$date', '$ref', '$sbj')";
+     $nes = query($nsql);
+
+	//update savings wallet
+	$clsvbal = $clcsvs['amt'] + $fndclassic;
+	
+    $svup = "UPDATE savings SET `amt` = '$clsvbal' WHERE `usname` = '$user' AND `plan` = 'Classic Savings Plan' AND `status` = 'Active'";
+    $svql = query($svup);
+    
+
+    //update user wallet
+    $sql = "UPDATE users SET `wallet` = '$newbal' WHERE `usname` = '$user'";
+    $res = query($sql);
+
+	//insert transaction history
+	$tsql = "INSERT INTO t_his(`t_ref`, `amt`, `datepaid`, `username`, `sn`, `status`, `paynote`)";
+	$tsql .= "VALUES('$tref', '$fndclassic', '$date', '$user', '1', 'debit', '$msg')";
+	$tes = query($tsql);
+
+    //create an alert message
+    $_SESSION['classicplan'] = "Success";
+    echo "Loading... Please wait";
+    echo '<script>window.location.href ="./plans"</script>';
+}
+    
+} 
 ?>

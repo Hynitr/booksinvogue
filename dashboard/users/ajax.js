@@ -12,25 +12,22 @@ $(document).ready(function () {
     if (fname == "" || fname == null) {
       $("#fmsg").html("Kindly input your full name.");
     } else {
-      if (tel == "" || tel == null) {
-        $("#msg").html("Telephone number cannot be empty");
-      } else {
-        if (email == "" || email == null) {
-          $("#msg").html("Invalid email address");
+      if (user == "" || user == null) {
+        $("#usmsg").html("Please create a username");
         } else {
-           if (user == "" || user == null) {
-              $("#msg").html("Create a username");
+          if (email == "" || email == null) {
+            $("#emmsg").html("Invalid email address");
             } else {
               if (pword == "" || pword == null) {
-                $("#msg").html("Create a secured password");
+                $("#pwmsg").html("Please create a secured password");
               } else {
                 if (cpword == "" || cpword == null) {
-                  $("#msg").html("Confirm your password");
+                  $("#cpwmsg").html("Confirm your password");
                 } else {
                   if (pword != cpword) {
-                    $("#msg").html("Password does not match");
+                    $("#cpwmsg").html("Password does not match");
                   } else {
-                    $("#msg").html("Loading...Please Wait");
+                    $("#msg").html("Loading... Please Wait");
 
                     $.ajax({
                       type: "post",
@@ -54,7 +51,6 @@ $(document).ready(function () {
             }
           }
         }
-      }
   });
 
 
