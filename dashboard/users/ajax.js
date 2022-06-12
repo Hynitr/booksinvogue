@@ -3,6 +3,7 @@ $(document).ready(function () {
   //signup
   $("#sub").click(function () {
     var fname = $("#fname").val();
+    var usname = $("#usname").val();
     var email = $("#email").val();
     var pword = $("#pword").val();
     var cpword = $("#cpword").val();
@@ -11,6 +12,9 @@ $(document).ready(function () {
     if (fname == "" || fname == null) {
       $("#fmsg").html("Kindly input your full name.");
     } else {
+      if (usname == "" || usname == null) {
+        $("#usmsg").html("Please create a username");
+      }else {
           if (email == "" || email == null) {
             $("#emmsg").html("Invalid email address");
             } else {
@@ -30,6 +34,7 @@ $(document).ready(function () {
                       url: "functions/init.php",
                       data: {
                         fname: fname,
+                        usname: usname,
                         email: email,
                         pword: pword,
                         cpword: cpword,
@@ -40,6 +45,7 @@ $(document).ready(function () {
                       },
                     });
                   }
+                }
                 }
               }
             }

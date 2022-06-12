@@ -102,9 +102,10 @@ function email_exist($email) {
 
 /** VALIDATE USER REGISTRATION **/
 
-if(isset($_POST['fname']) && isset($_POST['email']) && isset($_POST['pword']) && isset($_POST['cpword']) && isset($_POST['ref'])) {
+if(isset($_POST['fname']) && isset($_POST['usname']) && isset($_POST['email']) && isset($_POST['pword']) && isset($_POST['cpword']) && isset($_POST['ref'])) {
 
 	$fname 			= clean(escape($_POST['fname']));
+	$usname			= clean(escape($_POST['usname']));
 	$email	 		= clean(escape($_POST['email']));
 	$pword    		= clean(escape($_POST['pword']));
 	$cpword 		= clean(escape($_POST['cpword']));
@@ -115,7 +116,7 @@ if(isset($_POST['fname']) && isset($_POST['email']) && isset($_POST['pword']) &&
 			echo "Sorry! The email inputted already has an account";
 		} else {
 
-			register($fname, $email, $pword, $ref);
+			register($fname, $usname, $email, $pword, $ref);
 		}
 
 }
@@ -123,9 +124,10 @@ if(isset($_POST['fname']) && isset($_POST['email']) && isset($_POST['pword']) &&
 	
 
 /** REGISTER USER **/
-function register($fname, $email, $pword, $ref) {
+function register($fname, $usname, $email, $pword, $ref) {
 
 	$fnam = escape($fname);
+	$usname = escape($usname);
 	$emai = escape($email);
 	$pwor = md5($pword);
 	$ref  = escape($ref);
@@ -136,8 +138,8 @@ function register($fname, $email, $pword, $ref) {
 		
 	$activator = otp();
 	
-	$sql = "INSERT INTO users(`idd`, `fullname`, `email`, `password`, `role`, `date_reg`, `status`, `active`, `lastseen`, `ref`)";
-	$sql.= " VALUES('1', '$fnam', '$emai', '$pwor', 'user', '$datereg', '$activator', '0', '$datereg', '$ref')";
+	$sql = "INSERT INTO users(`idd`, `fullname`, `usname`, `email`, `password`, `role`, `date_reg`, `status`, `active`, `lastseen`, `ref`)";
+	$sql.= " VALUES('1', '$fnam', '$usname', '$emai', '$pwor', 'user', '$datereg', '$activator', '0', '$datereg', '$ref')";
 	$result = query($sql);
 
 	//redirect to verify function
@@ -267,7 +269,7 @@ if(isset($_POST['votp'])) {
 
 			echo 'Loading... Please Wait';
 
-			$user = $row['usname'];
+			$user = $row['email'];
 			$_SESSION['login'] = $user;
 			
 			echo '<script>window.location.href ="./"</script>';
