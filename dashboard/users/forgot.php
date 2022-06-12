@@ -43,8 +43,8 @@ input[type=number] {
 
     <div class="container-xxl">
         <div class="authentication-wrapper authentication-basic container-p-y">
-            <div class="authentication-inner">
-                <!-- Register Card -->
+            <div class="authentication-inner py-4">
+                <!-- Forgot Password -->
                 <div class="card">
                     <div class="card-body">
                         <!-- Logo -->
@@ -57,80 +57,26 @@ input[type=number] {
                         </div>
                         <!-- /Logo -->
 
-
-                        <div id="signup">
-                            <form id="formAuthentication" class="mb-3" method="POST" autocomplete="off">
-                                <h4 class="mb-4">Let's get started 🚀</h4>
-                                <div class="mb-3">
-                                    <label for="fullname" class="form-label">What should we call you?</label>
-                                    <input type="text" class="form-control" id="fname" name="fname"
-                                        placeholder="Firstname Lastname" autofocus />
-                                    <h6 style="font-size: 12px" class="text-danger mt-1" id="fmsg"></h6>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="username" class="form-label">What do you want others to call
-                                        you?</label>
-                                    <input type="text" class="form-control" id="usname" name="usname"
-                                        placeholder="Create a username" />
-                                    <h6 style="font-size: 12px" class="text-danger mt-1" id="usmsg"></h6>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="email" class="form-label">Can we have your email address?</label>
-                                    <input type="email" class="form-control" id="email" name="email"
-                                        placeholder="Enter your email" />
-                                    <h6 style="font-size: 12px" class="text-danger mt-1" id="emmsg"></h6>
-                                </div>
-                                <div class="mb-3 form-password-toggle">
-                                    <label class="form-label" for="password">Create a strong password</label>
-                                    <div class="input-group input-group-merge">
-                                        <input type="password" id="pword" class="form-control" name="pword"
-                                            placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                                            aria-describedby="password" />
-                                        <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
-                                    </div>
-                                    <h6 style="font-size: 12px" class="text-danger mt-1" id="pwmsg"></h6>
-                                </div>
-
-                                <div class="mb-3 form-password-toggle">
-                                    <label class="form-label" for="confirmpassword">Please, repeat your password</label>
-                                    <div class="input-group input-group-merge">
-                                        <input type="password" id="cpword" class="form-control" name="cpword"
-                                            placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                                            aria-describedby="password" />
-                                        <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
-                                    </div>
-                                    <h6 style="font-size: 12px" class="text-danger mt-1" id="cpwmsg"></h6>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="username" class="form-label">Who told you about us?</label>
-                                    <input type="text" class="form-control" id="ref" name="ref"
-                                        placeholder="Input a referral code if you have one." autofocus />
-                                </div>
-                                <!--<div class="mb-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="terms-conditions"
-                                        name="terms" />
-                                    <label class="form-check-label" for="terms-conditions">
-                                        I agree to
-                                        <a href="javascript:void(0);">privacy policy & terms</a>
-                                    </label>
-                                </div>
-                                </div>-->
-                                <h6 style="font-size: 13px" class="text-danger  text-center mt-1" id="msg"></h6>
-                                <button type="button" id="sub" class="mb-3 btn btn-primary d-grid w-100">Sign
-                                    up</button>
-
-
-                                <p class="text-center">
-                                    <span>Already have an account?</span>
-                                    <a href="./signin">
-                                        <span>Sign in instead</span>
-                                    </a>
+                        <div id="forgot">
+                            <form id="formAuthentication" class="mb-3" action="index.html" method="POST">
+                                <h4 class="mb-2">Forgot your password? 🔒</h4>
+                                <p class="mb-4">Enter your email and we'll send you instructions to reset your password
                                 </p>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="fsub" name="fsub"
+                                        placeholder="Enter your email" autofocus />
+                                </div>
+                                <button class="btn btn-primary d-grid w-100">Send Reset Link</button>
+
+                                <div class="text-center">
+                                    <a href="./signin" class="d-flex align-items-center justify-content-center mt-2">
+                                        <i class="bx bx-chevron-left scaleX-n1-rtl bx-sm"></i>
+                                        Back to Sign-in
+                                    </a>
+                                </div>
                             </form>
                         </div>
-
-
 
                         <div style="display:none" id="verify">
                             <form method="get" class="digit-group" data-group-name="digits" data-autosubmit="false"
@@ -163,30 +109,32 @@ input[type=number] {
                             </form>
                         </div>
 
-
                     </div>
                 </div>
-                <!-- Register Card -->
+                <!-- /Forgot Password -->
             </div>
         </div>
     </div>
 
     <!-- / Content -->
 
-
     <!-- Core JS -->
+    <!-- build:js assets/vendor/js/core.js -->
     <script src="assets/vendor/libs/jquery/jquery.js"></script>
     <script src="assets/vendor/libs/popper/popper.js"></script>
     <script src="assets/vendor/js/bootstrap.js"></script>
     <script src="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 
     <script src="assets/vendor/js/menu.js"></script>
+    <!-- endbuild -->
 
-    <!--- AJAX JS -->
-    <script src="ajax.js"></script>
+    <!-- Vendors JS -->
 
     <!-- Main JS -->
     <script src="assets/js/main.js"></script>
+
+
+    <script src="ajax.js"></script>
 
     <script>
     $('.digit-group').find('input').each(function() {
@@ -216,6 +164,7 @@ input[type=number] {
     });
     </script>
 
+    <!-- Page JS -->
     <script>
     //open verify page by default
     function otpVerify() {
@@ -224,7 +173,7 @@ input[type=number] {
 
     //close signup page
     function signupClose() {
-        document.getElementById('signup').style.display = 'none';
+        document.getElementById('signin').style.display = 'none';
     }
     </script>
 

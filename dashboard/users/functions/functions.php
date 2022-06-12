@@ -311,7 +311,7 @@ if(isset($_POST['votp'])) {
 			$username        = clean(escape($_POST['username']));
 			$password   	 = md5($_POST['password']);
 
-			$sql = "SELECT * FROM `users` WHERE `usname` = '$username' AND `pword` = '$password'";
+			$sql = "SELECT * FROM `users` WHERE `usname` = '$username' AND `password` = '$password'";
 			$result = query($sql);
 			if(row_count($result) == 1) {
 
@@ -320,16 +320,16 @@ if(isset($_POST['votp'])) {
 				$user 		= $row['usname'];
 				$active 	= $row['active'];
 				$email 		= $row['email'];
-				$activate 	= $row['activator'];
+				$activate 	= $row['status'];
 
-				if ($active == 0 || $activate != '') {
+				if ($activate != '1' || $activate != '1') {
 
 					$activator = otp();
 
 					$_SESSION['usermail'] = $email;
 
 					//update activation link
-					$ups = "UPDATE users SET `activator` = '$activate' WHERE `usname` = '$username'";
+					$ups = "UPDATE users SET `status` = '$activator' WHERE `usname` = '$username'";
 					$ues = query($ups);
 
 					$subj = "VERIFY YOUR EMAIL";
@@ -360,7 +360,7 @@ if(isset($_POST['votp'])) {
 
 		}  else {
 			
-			echo '<script>window.location.href ="./forgot"</script>';
+			echo 'Wrong username or password.';
 		}
 	}
 

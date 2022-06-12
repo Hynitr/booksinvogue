@@ -155,10 +155,10 @@ $("#vsub").click(function () {
     var password = $("#lpword").val();
 
     if (username == "" || username == null) {
-      $("#lmsg").html("Kindly insert your username");
+      $("#lumsg").html("Kindly insert your username");
     } else {
       if (password == "" || password == null) {
-        $("#lmsg").html("Invalid password inputted");
+        $("#lupmsg").html("Invalid password inputted");
       } else {
         $("#lmsg").html("Loading... Please wait");
         $.ajax({
