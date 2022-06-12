@@ -100,6 +100,23 @@ function email_exist($email) {
 
 
 
+function usname_exist($usname) {
+
+	$sql = "SELECT * FROM users WHERE `usname` = '$usname'";
+	$result = query($sql);
+
+	if(row_count($result) == 1) {
+
+		return true;
+
+	}else {
+
+		return false;
+	} 
+}
+
+
+
 /** VALIDATE USER REGISTRATION **/
 
 if(isset($_POST['fname']) && isset($_POST['usname']) && isset($_POST['email']) && isset($_POST['pword']) && isset($_POST['cpword']) && isset($_POST['ref'])) {
@@ -113,11 +130,19 @@ if(isset($_POST['fname']) && isset($_POST['usname']) && isset($_POST['email']) &
 
 		if(email_exist($email)) {
 
-			echo "Sorry! The email inputted already has an account";
-		} else {
+			echo "Sorry! That email has an account already.";
+		}else {
 
-			register($fname, $usname, $email, $pword, $ref);
-		}
+			if (usname_exist($usname)) {
+
+				echo "Someone has already chosen that username.";
+	
+			} else {
+
+				register($fname, $usname, $email, $pword, $ref);
+			}
+
+		}  
 
 }
 
@@ -217,12 +242,12 @@ if(isset($_POST['otpp'])) {
 	
 	$activator = otp();	
 
-	$sql = "UPDATE users SET `activator` = '$activator'  WHERE `email` = '$email'";
+	$sql = "UPDATE users SET `status` = '$activator'  WHERE `email` = '$email'";
 	$res = query($sql);
 
-	if($otpp == 100) {
+	if($otpp == "dummy") {
 
-	$subj = "VERIFY YOUR EMAIL";
+	$subj = "NEW OTP PASSWORD";
 	$msg  = "Hi there! <br /><br />Kindly use the otp below to activate your account;";	
 	} else{
 	

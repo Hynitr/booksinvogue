@@ -136,7 +136,7 @@ input[type=number] {
                             <form method="get" class="digit-group" data-group-name="digits" data-autosubmit="false"
                                 autocomplete="off">
 
-                                <h4 class="mb-1">We've sent you an OTP ✅ </h4>
+                                <h4 class="mb-1" id="otptitle">We've sent you an OTP ✅ </h4>
                                 <p class="mb-5">Please check your mail inbox and spam folders.</p>
 
                                 <div class="row justify-content-center mb-5">
@@ -156,7 +156,7 @@ input[type=number] {
 
                                 <p class="text-center">
                                     <span>Didin't get an OTP?</span>
-                                    <a href="./signin">
+                                    <a href="#" id="rotp">
                                         <span>Resend OTP</span>
                                     </a>
                                 </p>
@@ -229,8 +229,9 @@ input[type=number] {
     </script>
 
     <?php
+    
     //declare the verification tab active
-    if(isset($_SESSION['usermail'])) {
+    if(isset($_SESSION['usermail']) && !isset($_SESSION['login'])) {
 
         echo'<script>otpVerify(); signupClose();</script>';
     }

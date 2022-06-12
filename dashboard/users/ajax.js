@@ -57,27 +57,21 @@ $(document).ready(function () {
 //resend otp
 $("#rotp").click(function () {
 
-  document.getElementById("rvmsg").style.display = 'block';
-  document.getElementById("vmsg").style.display = 'none';
+  $("#otptitle").html("We've sent you another OTP ✅");
 
   //I left this code so as to give a dummy text to the function validator
-  var otpp  = $("#otpp").val();
+  var otpp  = "dummy";
 
-  if (otpp == "" || otpp == null) {
-    $("#rvmsg").html("Invalid OTP!");
-  } else {
-
-    $("#rvmsg").html("Loading... Please wait");
+    $("#vmsg").html("Loading... Please wait");
 
     $.ajax({
       type: "post",
       url: "functions/init.php",
       data: {otpp: otpp},
       success: function (data) {
-        $("#rvmsg").html(data);
+        $("#vmsg").html(data);
       },
     });
-  }
 })
 
 
