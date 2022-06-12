@@ -3,7 +3,7 @@ $(document).ready(function () {
   //signup
   $("#sub").click(function () {
     var fname = $("#fname").val();
-    var user = $("#usname").val();
+    var email = $("#email").val();
     var pword = $("#pword").val();
     var cpword = $("#cpword").val();
     var ref = $("#ref").val();
@@ -30,9 +30,7 @@ $(document).ready(function () {
                       url: "functions/init.php",
                       data: {
                         fname: fname,
-                        tel: tel,
                         email: email,
-                        user: user,
                         pword: pword,
                         cpword: cpword,
                         ref: ref,
@@ -80,6 +78,56 @@ $("#rotp").click(function () {
 //verify otp
 $("#vsub").click(function () {
 
+   var digit1   = $("#digit-1").val();
+   var digit2   = $("#digit-2").val();
+   var digit3   = $("#digit-3").val();
+   var digit4   = $("#digit-4").val();
+
+   if(digit1 == "" || digit1 == null) {
+
+    $("#vmsg").html("Invalid OTP!");
+
+   } else {
+
+    if(digit2 == "" || digit2 == null) {
+
+      $("#vmsg").html("Invalid OTP!");
+
+    } else {
+
+    if(digit3 == "" || digit3 == null) {
+
+      $("#vmsg").html("Invalid OTP!");
+
+    } else {
+
+    if(digit4 == "" || digit4 == null) {
+
+      $("#vmsg").html("Invalid OTP!");
+
+    } else {
+
+      var votp = digit1 + digit2 + digit3 + digit4;
+
+      $("#vmsg").html("Loading... Please Wait");
+
+      $.ajax({
+      type: "post",
+      url: "functions/init.php",
+      data: {votp: votp},
+      success: function (data) {
+        $("#vmsg").html(data);
+      },
+    });
+    }
+    }
+    }
+   }
+
+  
+   alert(allotp);
+  /* var votp   = $("#otpper").val();
+   var votp   = $("#otpper").val();
    var votp   = $("#otpper").val();
 
   document.getElementById("rvmsg").style.display = 'none';
@@ -97,7 +145,7 @@ $("#vsub").click(function () {
         $("#vmsg").html(data);
       },
     });
-  }
+  }*/
 })
 
 

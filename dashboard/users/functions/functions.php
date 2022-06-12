@@ -44,45 +44,44 @@ function token_generator() {
 
 function otp() {
 
-	$otp = $_SESSION['otp'] = mt_rand(0, 99999);
+	$otp = $_SESSION['otp'] = mt_rand(0, 9999);
 
 	return $otp; 
 }
 
 function validation_errors($error_message) {
 
-$error_message = <<<DELIMITER
+	$error_message = <<<DELIMITER
 
-<div class="col-md-12 alert alert-danger alert-mg-b alert-success-style6 alert-st-bg3 alert-st-bg14">
-    <button type="button" class="col-md-12 close sucess-op" data-dismiss="alert" aria-label="Close">
-		<span class="icon-sc-cl" aria-hidden="true">&times;</span>
-									</button>
-                 <p><strong>$error_message </strong></p>
-                            </div>
-DELIMITER;
+	<div class="col-md-12 alert alert-danger alert-mg-b alert-success-style6 alert-st-bg3 alert-st-bg14">
+		<button type="button" class="col-md-12 close sucess-op" data-dismiss="alert" aria-label="Close">
+			<span class="icon-sc-cl" aria-hidden="true">&times;</span>
+										</button>
+					<p><strong>$error_message </strong></p>
+								</div>
+	DELIMITER;
 
-   return $error_message;     
+	return $error_message;     
 
 }
 
 function validator($error_message) {
 
-$error_message = <<<DELIMITER
-<div style="background: #FFE9E6; color: #ff0000;" class="col-md-12 alert alert-danger alert-mg-b alert-success-style6 alert-st-bg3 alert-st-bg14">
-    <button type="button" style="color: white;" class="col-md-12 close sucess-op" data-dismiss="modal" aria-label="Close">
-		<span class="icon-sc-cl" aria-hidden="true">&times;</span>
-									</button>
-                 <p><strong>$error_message </strong></p>
-                            </div>
-DELIMITER;
+	$error_message = <<<DELIMITER
+	<div style="background: #FFE9E6; color: #ff0000;" class="col-md-12 alert alert-danger alert-mg-b alert-success-style6 alert-st-bg3 alert-st-bg14">
+		<button type="button" style="color: white;" class="col-md-12 close sucess-op" data-dismiss="modal" aria-label="Close">
+			<span class="icon-sc-cl" aria-hidden="true">&times;</span>
+										</button>
+					<p><strong>$error_message </strong></p>
+								</div>
+	DELIMITER;
 
-   return $error_message;     
+	return $error_message;     
 
 }
 
 
-
-									/****** Helper Functions********/
+/****** Helper Functions********/
 
 function email_exist($email) {
 
@@ -99,61 +98,37 @@ function email_exist($email) {
 	} 
 }
 
-function username_exist($usname) {
-
-	$sql = "SELECT * FROM users WHERE `username` = '$usname'";
-	$result = query($sql);
-
-	if(row_count($result) == 1) {
-
-		return true;
-
-	}else {
-
-		return false;
-	} 
-}
-
-
-
 
 
 /** VALIDATE USER REGISTRATION **/
 
 if(isset($_POST['fname']) && isset($_POST['email']) && isset($_POST['pword']) && isset($_POST['cpword']) && isset($_POST['ref'])) {
 
-$fname 			= clean(escape($_POST['fname']));
-$email	 		= clean(escape($_POST['email']));
-$uname	 		= clean(escape($_POST['user']));
-$pword    		= clean(escape($_POST['pword']));
-$cpword 		= clean(escape($_POST['cpword']));
-$ref            = clean(escape($_POST['ref']));
+	$fname 			= clean(escape($_POST['fname']));
+	$email	 		= clean(escape($_POST['email']));
+	$pword    		= clean(escape($_POST['pword']));
+	$cpword 		= clean(escape($_POST['cpword']));
+	$ref            = clean(escape($_POST['ref']));
 
-if(email_exist($email)) {
+		if(email_exist($email)) {
 
 			echo "Sorry! The email inputted already has an account";
 		} else {
 
-if(username_exist($uname)) {
-
-			echo "That username is unavailable!";
-		} else {
-
-			register($fname, $tel, $email, $uname, $pword, $ref);
+			register($fname, $email, $pword, $ref);
 		}
-	}
-	} // post request
 
+}
 
 	
 
 /** REGISTER USER **/
-function register($fname, $tel, $email, $uname, $pword, $ref) {
+function register($fname, $email, $pword, $ref) {
 
 	$fnam = escape($fname);
 	$emai = escape($email);
-	$unam = escape($uname);
 	$pwor = md5($pword);
+	$ref  = escape($ref);
 
 	$datereg = date("Y-m-d h:i:s");
 
@@ -161,8 +136,8 @@ function register($fname, $tel, $email, $uname, $pword, $ref) {
 		
 	$activator = otp();
 	
-	$sql = "INSERT INTO users(`sn`, `fname`, `usname`, `email`, `pword`, `datereg`, `active`, `tel`, `activator`, `ref`)";
-	$sql.= " VALUES('1', '$fnam', '$unam', '$emai', '$pwor', '$datereg', '0', '$tel', '$activator', '$ref')";
+	$sql = "INSERT INTO users(`idd`, `fullname`, `email`, `password`, `role`, `date_reg`, `status`, `active`, `lastseen`, `ref`)";
+	$sql.= " VALUES('1', '$fnam', '$emai', '$pwor', 'user', '$datereg', '$activator', '0', '$datereg', '$ref')";
 	$result = query($sql);
 
 	//redirect to verify function
@@ -174,60 +149,60 @@ function register($fname, $tel, $email, $uname, $pword, $ref) {
 	//open otp page
 	echo 'Loading... Please Wait!';
 	echo'<script>otpVerify(); signupClose();</script>';
-	 }
+}
 
 
 
 /* MAIL VERIFICATIONS */
 function mail_mailer($email, $activator, $subj, $msg) {
 
-$to = $email;
-$from = "noreply@savearns.com";
+	$to = $email;
+	$from = "noreply@savearns.com";
 
-$headers = "From: " . $from . "\r\n";
-$headers .= "Reply-To: ". $from . "\r\n";
-$headers .= "MIME-Version: 1.0\r\n";
-$headers .= "Content-Type: text/html; charset=\"iso-8859-1\"\n";
-$headers .= "X-Priority: 1 (Highest)\n";
-$headers .= "X-MSMail-Priority: High\n";
-$headers .= "Importance: High\n";
+	$headers = "From: " . $from . "\r\n";
+	$headers .= "Reply-To: ". $from . "\r\n";
+	$headers .= "MIME-Version: 1.0\r\n";
+	$headers .= "Content-Type: text/html; charset=\"iso-8859-1\"\n";
+	$headers .= "X-Priority: 1 (Highest)\n";
+	$headers .= "X-MSMail-Priority: High\n";
+	$headers .= "Importance: High\n";
 
-$subject = $subj;
+	$subject = $subj;
 
-$logo = 'https://savearns.com/assets/3.png';
-$url = 'https://savearns.com/';
+	$logo = 'https://savearns.com/assets/3.png';
+	$url = 'https://savearns.com/';
 
-$body = "
-<!DOCTYPE html>
-<html lang='en'>
+	$body = "
+	<!DOCTYPE html>
+	<html lang='en'>
 
-<head>
-<meta charset='UTF-8'>
-<title>Savearns</title>
-</head>
-<link rel='stylesheet' href='https://savearns.com/assets/css/bootstrap.min.css'>
-<body style='text-align: center;'>";
-$body .= "<section style='margin: 30px; margin-top: 50px ; background: #34459C; color: #fff;'>";
-$body .= "<img style='margin-top: 35px; width: 460px; height: 105px;' src='{$logo}' alt='Savearns'>";
-$body .= "<h1 style='margin-top: 45px; color: #fff'>{$subj}</h1>
-<br />";
-$body .= "<h3 style='margin-left: 45px; margin-top: 34px; text-align: left; font-size: 17px;'>{$msg}</h3>
-<br />";
-$body .= "<h1 style='margin-left: 45px; text-align: center;'><b>{$activator}</b></h1>
-<br />";
-$body .= "<p style='margin-left: 45px; padding-bottom: 80px; text-align: left;'>Do not bother replying this
-email. This is a virtual email</p>";
-$body .= "<p text-align: center;'><a href='https://savearns.com/contact'><img style='width:150px;heght:150px'
-		src='https://savearns.com/assets/footer.png'></a>";
-$body .= "
-<h4 style='text-align: center;'>Email.: <span style='color: #fff'>savings@savearns.com</span></h4>";
-$body .= "<h4 style='text-align: center;'>Call/Chat.: <span style='color: #fff'>+234(0) 810 317 1902</span>
-</h4>";
-$body .= "<h4 style='text-align: center; padding-bottom: 80px; padding-top: 40px;'>Team Savearns</h4>";    
-$body .= "<script src='https://avearns.com/assets/js/bootstrap.min.js'></script>";
-$body .= "</section>";
-$body .= "</body></html>";
-$send = mail($to, $subject, $body, $headers);
+	<head>
+	<meta charset='UTF-8'>
+	<title>Savearns</title>
+	</head>
+	<link rel='stylesheet' href='https://savearns.com/assets/css/bootstrap.min.css'>
+	<body style='text-align: center;'>";
+	$body .= "<section style='margin: 30px; margin-top: 50px ; background: #34459C; color: #fff;'>";
+	$body .= "<img style='margin-top: 35px; width: 460px; height: 105px;' src='{$logo}' alt='Savearns'>";
+	$body .= "<h1 style='margin-top: 45px; color: #fff'>{$subj}</h1>
+	<br />";
+	$body .= "<h3 style='margin-left: 45px; margin-top: 34px; text-align: left; font-size: 17px;'>{$msg}</h3>
+	<br />";
+	$body .= "<h1 style='margin-left: 45px; text-align: center;'><b>{$activator}</b></h1>
+	<br />";
+	$body .= "<p style='margin-left: 45px; padding-bottom: 80px; text-align: left;'>Do not bother replying this
+	email. This is a virtual email</p>";
+	$body .= "<p text-align: center;'><a href='https://savearns.com/contact'><img style='width:150px;heght:150px'
+			src='https://savearns.com/assets/footer.png'></a>";
+	$body .= "
+	<h4 style='text-align: center;'>Email.: <span style='color: #fff'>savings@savearns.com</span></h4>";
+	$body .= "<h4 style='text-align: center;'>Call/Chat.: <span style='color: #fff'>+234(0) 810 317 1902</span>
+	</h4>";
+	$body .= "<h4 style='text-align: center; padding-bottom: 80px; padding-top: 40px;'>Team Savearns</h4>";    
+	$body .= "<script src='https://avearns.com/assets/js/bootstrap.min.js'></script>";
+	$body .= "</section>";
+	$body .= "</body></html>";
+	$send = mail($to, $subject, $body, $headers);
 }
 
 
@@ -265,47 +240,43 @@ if(isset($_POST['votp'])) {
 	$email = $_SESSION['usermail'];
 	$veotp = clean(escape($_POST['votp']));
 
-	$otp   = $_SESSION['otp'];
 
-	//select otp from db and confirm with session
-	if($veotp != $otp) {
+	//select the otp stored in the user database
+	$ssl = "SELECT * from users WHERE `email` = '$email'";
+	$res = query($ssl);
 
-		echo "Invalid OTP Code!";
+	if(row_count($res) == null) {
 		
+		echo "There was an error validating your OTP. <br/> Please try again later.";
+
 	} else {
 
-	//update database and login
-	$sql = "UPDATE users SET `activator` = '', `active` = '1' WHERE `email` = '$email'";
-	$res = query($sql);
+		$row = mysqli_fetch_array($res);
 
-	//get username and redirect to dashboard
-	$ssl = "SELECT * FROM users WHERE `email` =  '$email'";
-	$rsl = query($ssl);
-	if(row_count($rsl) == '') {
-		
-		echo 'Loading... Please Wait';
-		echo '<script>window.location.href ="./signin"</script>';
-		
-	} else {
+		$votp = $row['status'];
 
-		$row  = mysqli_fetch_array($rsl);
-		$user = $row['usname'];
+		if($veotp != $votp) {
 
-		$_SESSION['login'] = $user;
-		
-		
-		echo 'Loading... Please Wait';
-
-		if(!isset($_SESSION['vnext'])) {
-		echo '<script>window.location.href ="./"</script>';
+			echo "Invalid OTP Code!";
+			
 		} else {
-			$data = $_SESSION['vnext'];
-			echo '<script>'.$data.'</script>';
+
+			//update database and auto-login
+			$sql = "UPDATE users SET `status` = '1' WHERE `email` = '$email'";
+			$rsl = query($sql);
+
+			echo 'Loading... Please Wait';
+
+			$user = $row['usname'];
+			$_SESSION['login'] = $user;
+			
+			echo '<script>window.location.href ="./"</script>';
 		}
 	}
-	}
-
 }
+
+
+	
 
 /** SIGN IN USER **/
  	if(isset($_POST['username']) && isset($_POST['password'])) {
