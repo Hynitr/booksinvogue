@@ -1,5 +1,6 @@
 <?php
 include("components/top.php");
+user_details();
 ?>
 
 <body>
@@ -35,12 +36,10 @@ include("components/top.php");
                                     <div class="d-flex align-items-end row">
                                         <div class="col-sm-7">
                                             <div class="card-body">
-                                                <h5 class="card-title text-primary">Congratulations John! 🎉</h5>
+                                                <h5 class="card-title text-primary">Welcome
+                                                    <?php echo $t_users['usname'] ?> 😇 </h5>
                                                 <p class="mb-4">
-                                                    You have done <span class="fw-bold">72%</span> more sales today.
-                                                    Check your new badge in
-                                                    your profile.
-                                                </p>
+                                                    Here is an overview of your activities on Books In Vogue </p>
 
                                                 <a href="javascript:;" class="btn btn-sm btn-outline-primary">View
                                                     Badges</a>
@@ -640,9 +639,12 @@ include("components/top.php");
         });
 
     }
-
-    shout();
     </script>
+    <?php
+    if($t_users['status'] == 2) {
+      echo '<script>shout();</script>';
+    }
+    ?>
 </body>
 
 </html>

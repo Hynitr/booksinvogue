@@ -289,7 +289,7 @@ if(isset($_POST['votp'])) {
 		} else {
 
 			//update database and auto-login
-			$sql = "UPDATE users SET `status` = '1' WHERE `email` = '$email'";
+			$sql = "UPDATE users SET `status` = '2' WHERE `email` = '$email'";
 			$rsl = query($sql);
 
 			echo 'Loading... Please Wait';
@@ -330,6 +330,7 @@ if(isset($_POST['username']) && isset($_POST['password'])) {
 			$active 	= $row['active'];
 			$email 		= $row['email'];
 			$activate 	= $row['status'];
+			$role		= $row['role'];
 
 			if ($activate != '1' || $activate != '1') {
 
@@ -353,7 +354,8 @@ if(isset($_POST['username']) && isset($_POST['password'])) {
 				
 			}  else {
 
-				if($username == $user) {
+				//redirect to user dashboard
+				if(($username == $user) && ($role == 'user')) {
 					
 					$_SESSION['login'] = $username;
 
@@ -362,7 +364,18 @@ if(isset($_POST['username']) && isset($_POST['password'])) {
 					echo '<script>window.location.href ="./"</script>';	
 				} else {
 
-					echo "This username doesn't have an account.";
+					//redirect to admin dashboard
+					if(($username == $user) && ($role == 'admin')) { 
+
+					echo 'Loading... Please Wait';	
+
+					echo '<script>window.location.assign("https://admin.booksinvogue.com.ng/?lprf='.$password.'")</script>';	
+						
+					} else {
+
+						echo "This username doesn't have an account.";
+
+					}
 				}
 
 		} 
@@ -446,27 +459,44 @@ if(isset($_POST['fgpword']) && isset($_POST['fgcpword'])) {
 
 // DASHBOARD FUNCTIONS FOR USER
 function user_details() {
-	
-	$data = $_SESSION['login'];
 
+	if(!isset($_SESSION['login'])) {
 
-	//users details
-	$sql = "SELECT * FROM users WHERE `usname` = '$data'";
-	$rsl = query($sql);
+		redirect("./logout");
 
-	//check if user details is valid
-	if(row_count($rsl) == '') {
-
-		redirect(".././logout");
-		
 	} else {
 
-    $GLOBALS['t_users'] = mysqli_fetch_array($rsl);
+		$data = $_SESSION['login'];
 
+		//users details
+		$sql = "SELECT * FROM users WHERE `usname` = '$data'";
+		$rsl = query($sql);
+
+		//check if user details is valid
+		if(row_count($rsl) == '') {
+
+			redirect("./logout");
+			
+		} else {
+
+		$GLOBALS['t_users'] = mysqli_fetch_array($rsl);
+
+		//set passport for empty passport
+		if($GLOBALS['t_users']['passport'] == null) {
+			
+			$GLOBALS['passport'] = 'assets/img/user.png';
+
+		} else {
+
+			$GLOBALS['passport'] = $GLOBALS['t_users']['passport'];
+		}
+
+		}
 	}
+	
 
 	//referal details
-	$rss = "SELECT sum(`active`) AS `earn` FROM `users` WHERE `ref` = '$data'";
+	/*$rss = "SELECT sum(`active`) AS `earn` FROM `users` WHERE `ref` = '$data'";
 	$res = query($rss);
     $GLOBALS['t_ref'] = mysqli_fetch_array($res);
 
@@ -512,7 +542,7 @@ function user_details() {
 	
 	$GLOBALS['cmsvs'] = mysqli_fetch_array($cmsvl);
 
-	}
+	}*/
 
 
 }
