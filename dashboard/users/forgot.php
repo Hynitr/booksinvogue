@@ -58,16 +58,19 @@ input[type=number] {
                         <!-- /Logo -->
 
                         <div id="forgot">
-                            <form id="formAuthentication" class="mb-3" action="index.html" method="POST">
+                            <form id="formAuthentication" class="mb-3" method="POST">
                                 <h4 class="mb-2">Forgot your password? 🔒</h4>
                                 <p class="mb-4">Enter your email and we'll send you instructions to reset your password
                                 </p>
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="fsub" name="fsub"
+                                    <input type="email" class="form-control" id="femail" name="femail"
                                         placeholder="Enter your email" autofocus />
                                 </div>
-                                <button class="btn btn-primary d-grid w-100">Send Reset Link</button>
+
+                                <h6 style="font-size: 15px" class="text-danger  text-center mt-1" id="fmsg"></h6>
+                                <button type="button" id="fsub" class="btn btn-primary d-grid w-100">Send Reset
+                                    Link</button>
 
                                 <div class="text-center">
                                     <a href="./signin" class="d-flex align-items-center justify-content-center mt-2">
@@ -97,8 +100,8 @@ input[type=number] {
                                 </div>
 
                                 <h6 style="font-size: 15px" class="text-danger  text-center mt-1" id="vmsg"></h6>
-                                <button type="button" id="vsub" class="mb-3 btn btn-primary d-grid w-100">Activate
-                                    Account </button>
+                                <button type="button" id="vsub" class="mb-3 btn btn-primary d-grid w-100">Recover my
+                                    account </button>
 
                                 <p class="text-center">
                                     <span>Didn't get an OTP?</span>
@@ -106,6 +109,35 @@ input[type=number] {
                                         <span>Resend OTP</span>
                                     </a>
                                 </p>
+                            </form>
+                        </div>
+
+
+                        <div style="display:none" id="updatepword">
+                            <form id="formAuthentication" class="mb-3" method="POST">
+                                <h4 class="mb-2">Update your password</h4>
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Create new password</label>
+                                    <input type="password" class="form-control" id="pword" name="pword"
+                                        placeholder="create a new password" autofocus />
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Re-type the new password here</label>
+                                    <input type="password" class="form-control" id="cpword" name="cpword"
+                                        placeholder="re-type your password" autofocus />
+                                </div>
+
+                                <h6 style="font-size: 15px" class="text-danger  text-center mt-1" id="umsg"></h6>
+                                <button type="button" id="updf" class="btn btn-primary d-grid w-100">Update
+                                    Password</button>
+
+                                <div class="text-center">
+                                    <a href="./signin" class="d-flex align-items-center justify-content-center mt-2">
+                                        <i class="bx bx-chevron-left scaleX-n1-rtl bx-sm"></i>
+                                        Back to Sign-in
+                                    </a>
+                                </div>
                             </form>
                         </div>
 
@@ -171,9 +203,16 @@ input[type=number] {
         document.getElementById('verify').style.display = 'block';
     }
 
+    //open update pword page
+    function updatePword() {
+        document.getElementById('updatepword').style.display = 'block';
+        document.getElementById('verify').style.display = 'none';
+        document.getElementById('forgot').style.display = 'none';
+    }
+
     //close signup page
     function signupClose() {
-        document.getElementById('signin').style.display = 'none';
+        document.getElementById('forgot').style.display = 'none';
     }
     </script>
 
@@ -183,6 +222,11 @@ input[type=number] {
     if(isset($_SESSION['usermail']) && !isset($_SESSION['login'])) {
 
         echo'<script>otpVerify(); signupClose();</script>';
+    }
+
+    if(isset($_SESSION['vnext']) && !isset($_SESSION['login'])) {
+
+        echo'<script>updatePword();</script>';
     }
     ?>
 </body>

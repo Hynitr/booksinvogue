@@ -295,9 +295,18 @@ if(isset($_POST['votp'])) {
 			echo 'Loading... Please Wait';
 
 			$user = $row['email'];
-			$_SESSION['login'] = $user;
-			
-			echo '<script>window.location.href ="./"</script>';
+
+			//forgot password recovery page
+			if(!isset($_SESSION['vnext'])) {
+
+				$_SESSION['login'] = $user;
+				echo '<script>window.location.href ="./"</script>';
+
+				} else {
+					
+					$data = $_SESSION['vnext'];
+					echo '<script>'.$data.'</script>';
+				}
 		}
 	}
 }
@@ -306,63 +315,63 @@ if(isset($_POST['votp'])) {
 	
 
 /** SIGN IN USER **/
- 	if(isset($_POST['username']) && isset($_POST['password'])) {
+if(isset($_POST['username']) && isset($_POST['password'])) {
 
-			$username        = clean(escape($_POST['username']));
-			$password   	 = md5($_POST['password']);
+		$username        = clean(escape($_POST['username']));
+		$password   	 = md5($_POST['password']);
 
-			$sql = "SELECT * FROM `users` WHERE `usname` = '$username' AND `password` = '$password'";
-			$result = query($sql);
-			if(row_count($result) == 1) {
+		$sql = "SELECT * FROM `users` WHERE `usname` = '$username' AND `password` = '$password'";
+		$result = query($sql);
+		if(row_count($result) == 1) {
 
-				$row 	    = mysqli_fetch_array($result);
-				
-				$user 		= $row['usname'];
-				$active 	= $row['active'];
-				$email 		= $row['email'];
-				$activate 	= $row['status'];
-
-				if ($activate != '1' || $activate != '1') {
-
-					$activator = otp();
-
-					$_SESSION['usermail'] = $email;
-
-					//update activation link
-					$ups = "UPDATE users SET `status` = '$activator' WHERE `usname` = '$username'";
-					$ues = query($ups);
-
-					$subj = "VERIFY YOUR EMAIL";
-					$msg  = "Hi there! <br /><br />Kindly use the otp below to activate your account;";
-
-					mail_mailer($email, $activator, $subj, $msg);
-
-					//open otp page
-					echo 'Loading... Please Wait!';
-					echo '<script>otpVerify(); signupClose();</script>';
-	
-					
-				}  else {
-
-					if($username == $user) {
-						
-						$_SESSION['login'] = $username;
-
-						echo 'Loading... Please Wait';	
-
-						echo '<script>window.location.href ="./"</script>';	
-					} else {
-
-						echo "This username doesn't have an account.";
-					}
-
-			} 
-
-		}  else {
+			$row 	    = mysqli_fetch_array($result);
 			
-			echo 'Wrong username or password.';
-		}
+			$user 		= $row['usname'];
+			$active 	= $row['active'];
+			$email 		= $row['email'];
+			$activate 	= $row['status'];
+
+			if ($activate != '1' || $activate != '1') {
+
+				$activator = otp();
+
+				$_SESSION['usermail'] = $email;
+
+				//update activation link
+				$ups = "UPDATE users SET `status` = '$activator' WHERE `usname` = '$username'";
+				$ues = query($ups);
+
+				$subj = "VERIFY YOUR EMAIL";
+				$msg  = "Hi there! <br /><br />Kindly use the otp below to activate your account;";
+
+				mail_mailer($email, $activator, $subj, $msg);
+
+				//open otp page
+				echo 'Loading... Please Wait!';
+				echo '<script>otpVerify(); signupClose();</script>';
+
+				
+			}  else {
+
+				if($username == $user) {
+					
+					$_SESSION['login'] = $username;
+
+					echo 'Loading... Please Wait';	
+
+					echo '<script>window.location.href ="./"</script>';	
+				} else {
+
+					echo "This username doesn't have an account.";
+				}
+
+		} 
+
+	}  else {
+		
+		echo 'Wrong username or password.';
 	}
+}
 
 
 /** FORGOT PASSWORD **/
@@ -380,7 +389,7 @@ if(isset($_POST['fgeml'])) {
 
 	$activator = otp();
 
-	$ssl = "UPDATE users SET `activator` = '$activator' WHERE `email` = '$email'";
+	$ssl = "UPDATE users SET `status` = '$activator' WHERE `email` = '$email'";
 	$rsl = query($ssl);
 
 	//redirect to verify function
@@ -405,12 +414,13 @@ if(isset($_POST['fgpword']) && isset($_POST['fgcpword'])) {
 	    $fgpword = md5($_POST['fgpword']);
         $eml = $_SESSION['usermail'];
 
-	$sql = "UPDATE users SET `pword` = '$fgpword', `activator` = '' WHERE `email` = '$eml'";
+	$sql = "UPDATE users SET `password` = '$fgpword', `status` = '1' WHERE `email` = '$eml'";
 	$rsl = query($sql);
 	
 	//get username and redirect to dashboard
 	$ssl = "SELECT * FROM users WHERE `email` =  '$eml'";
 	$rsl = query($ssl);
+	
 	if(row_count($rsl) == '') {
 		
 		echo 'Loading... Please Wait';
