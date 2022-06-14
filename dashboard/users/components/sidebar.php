@@ -29,7 +29,7 @@
         </li>
 
         <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link">
+            <a href="./bookshelf" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
                 <div data-i18n="book">My Bookshelf</div>
             </a>
@@ -37,13 +37,13 @@
 
 
         <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link">
+            <a href="./books" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-book"></i>
                 <div data-i18n="book">Buy a new book</div>
             </a>
         </li>
         <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link">
+            <a href="./cart" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-star"></i>
                 <div data-i18n="Authentications">My Wishlist</div>
             </a>
@@ -54,7 +54,7 @@
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Transactions</span></li>
         <!-- Cards -->
         <li class="menu-item">
-            <a href="cards-basic.html" class="menu-link">
+            <a href="./transactions" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-dollar"></i>
                 <div data-i18n="Basic">My Transactions</div>
             </a>
@@ -86,7 +86,7 @@
         </li>
 
         <li class="menu-item">
-            <a href="tables-basic.html" class="menu-link">
+            <a href="./logout" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-lock"></i>
                 <div data-i18n="Tables">Logout</div>
             </a>

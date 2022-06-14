@@ -243,9 +243,17 @@ user_details();
     }
     </script>
     <?php
+
+    //welcome new users
     if($t_users['status'] == 2) {
       echo '<script>shout();</script>';
     }
+
+    //dont welcome them again
+    $user = $t_users['usname'];
+    
+    $sql = "UPDATE `users` SET `status` = '1' WHERE `usname` = '$user'";
+    $rsl = query($sql);
     ?>
 </body>
 

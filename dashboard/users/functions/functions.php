@@ -294,7 +294,7 @@ if(isset($_POST['votp'])) {
 
 			echo 'Loading... Please Wait';
 
-			$user = $row['email'];
+			$user = $row['usname'];
 
 			//forgot password recovery page
 			if(!isset($_SESSION['vnext'])) {
