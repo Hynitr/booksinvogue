@@ -5429,7 +5429,6 @@ textarea.form-control-lg {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.5rem 1.5rem;
 }
 .offcanvas-header .btn-close {
   padding: 0.75rem 0.75rem;

@@ -228,6 +228,44 @@ $("#vsub").click(function () {
 
   /******** USER PROFILE SECTION */
 
+  //getting books details
+  $(".offcanvasr").click(function () {
+
+    var dataid  = $(this).attr('data-id');
+
+    $.ajax({
+      type: "post",
+      url: "functions/init.php",
+      data: {dataid: dataid},
+      success: function (data) {
+        $(".canvastale").html(data);
+      },
+    });
+  });
+
+
+  //search for books
+  $("#searcher").keyup(function() {
+    var searchword  = $("#searcher").val();
+
+    //display content if words are empty
+      $("#allbook").hide();
+
+      if(searchword == null || searchword == "") {
+
+        $("#allbook").show();
+
+      } else {
+
+        $("#searchresult").show(1000);
+        $("#resnsg").html(searchword);
+
+      }
+
+  });
+
+
+
   /** USER PROFILE PICTURE */
   $("#pupl").click(function () {
     var fd = new FormData();

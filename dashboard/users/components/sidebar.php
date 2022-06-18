@@ -44,7 +44,7 @@
         </li>
         <li class="menu-item">
             <a href="./cart" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-star"></i>
+                <i class="menu-icon tf-icons bx bx-cart"></i>
                 <div data-i18n="Authentications">My Wishlist</div>
             </a>
 

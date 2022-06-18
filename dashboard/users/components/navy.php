@@ -10,7 +10,9 @@
         <!-- Search -->
         <div class="navbar-nav align-items-center">
             <div class="nav-item d-flex align-items-center">
-                <a href="https://bookinvogue.com">MAIN WEBSITE</a>
+                <i class="bx bx-search fs-4 lh-0"></i>
+                <input type="search" class="form-control w-100 border-0 shadow-none" id="searcher"
+                    placeholder="Search for a book..." aria-label="Search for a book.." />
             </div>
         </div>
         <!-- /Search -->
