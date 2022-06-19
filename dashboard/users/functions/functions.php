@@ -91,11 +91,11 @@ function email_exist($email) {
 
 	if(row_count($result) == 1) {
 
-		return true;
+		return true
 
 	}else {
 
-		return false;
+		return false
 	} 
 }
 
@@ -108,18 +108,18 @@ function usname_exist($usname) {
 
 	if(row_count($result) == 1) {
 
-		return true;
+		return true
 
 	}else {
 
-		return false;
+		return false
 	} 
 }
 
 
 
 /** VALIDATE USER REGISTRATION **/
-if(isset($_POST['fname'])) {
+if(isset($_POST['fname']) && isset($_POST['usname']) && isset($_POST['email']) && isset($_POST['pword']) && isset($_POST['cpword']) && isset($_POST['ref'])) {
 
 	$fname 			= clean(escape($_POST['fname']));
 	$usname			= clean(escape($_POST['usname']));
