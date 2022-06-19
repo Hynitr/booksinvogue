@@ -43,7 +43,7 @@
             </a>
         </li>
         <li class="menu-item">
-            <a href="./cart" class="menu-link">
+            <a href="./wishlist" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-cart"></i>
                 <div data-i18n="Authentications">My Wishlist</div>
             </a>
@@ -65,7 +65,7 @@
                 Settings</span></li>
         <!-- Forms -->
         <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link">
+            <a href="./profile" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-detail"></i>
                 <div data-i18n="Form Elements">My Profile</div>
             </a>
