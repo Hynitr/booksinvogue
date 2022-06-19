@@ -119,32 +119,7 @@ function usname_exist($usname) {
 
 
 /** VALIDATE USER REGISTRATION **/
-if(isset($_POST['fname']) && isset($_POST['usname']) && isset($_POST['email']) && isset($_POST['pword']) && isset($_POST['cpword']) && isset($_POST['ref'])) {
 
-	$fname 			= clean(escape($_POST['fname']));
-	$usname			= clean(escape($_POST['usname']));
-	$email	 		= clean(escape($_POST['email']));
-	$pword    		= clean(escape($_POST['pword']));
-	$cpword 		= clean(escape($_POST['cpword']));
-	$ref            = clean(escape($_POST['ref']));
-
-		if(email_exist($email)) {
-
-			echo "Sorry! That email has an account already.";
-		}else {
-
-			if (usname_exist($usname)) {
-
-				echo "Someone has already chosen that username.";
-	
-			} else {
-
-				register($fname, $usname, $email, $pword, $ref);
-			}
-
-		}  
-
-}
 
 	
 
