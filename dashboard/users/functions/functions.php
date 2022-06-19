@@ -119,7 +119,7 @@ function usname_exist($usname) {
 
 
 /** VALIDATE USER REGISTRATION **/
-if(isset($_POST["fname"]) && isset($_POST["usname"]) && isset($_POST["email"]) && isset($_POST["pword"]) && isset($_POST["cpword"]) && isset($_POST["ref"])) {
+if(isset($_POST['fname'])) {
 
 	$fname 			= clean(escape($_POST['fname']));
 	$usname			= clean(escape($_POST['usname']));
