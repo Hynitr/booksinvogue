@@ -86,7 +86,7 @@ function validator($error_message) {
 
 function email_exist($email) {
 
-	$sql = "SELECT * FROM users WHERE `email` = '$email'";
+	$sql = "SELECT * FROM `users` WHERE `email` = '$email'";
 	$result = query($sql);
 
 	if(row_count($result) == 1) {
@@ -103,7 +103,7 @@ function email_exist($email) {
 
 function usname_exist($usname) {
 
-	$sql = "SELECT * FROM users WHERE `usname` = '$usname'";
+	$sql = "SELECT * FROM `users` WHERE `usname` = '$usname'";
 	$result = query($sql);
 
 	if(row_count($result) == 1) {
