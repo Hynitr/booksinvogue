@@ -275,7 +275,7 @@ $("#vsub").click(function () {
   //add to wishlist
   $("#btwsh").click(function() {
 
-    var wishid  = $("#srchid").val();
+    var wishid  = $(".srchid").val();
 
     $('#btwsh').on('shown.bs.popover', function () {
         
@@ -299,6 +299,29 @@ $("#vsub").click(function () {
 
       }
     });
+
+  });
+
+
+  //added to wishlist
+  $("#lksd").click(function() {
+
+
+    $('#lksd').on('shown.bs.popover', function () {
+        
+      setTimeout(function() {
+          $('.popover').fadeOut('slow',function() {}); 
+      },800);
+      
+  });
+
+  });
+
+
+  //cancel payment
+  $("#cnc").click(function() {
+
+      $("#clss").popover('hide');
 
   });
 

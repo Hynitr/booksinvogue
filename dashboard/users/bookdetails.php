@@ -128,7 +128,7 @@ if(!isset($_GET['id'])) {
 
                                     $nks = <<<DELIMITER
 
-                                    <a class="btn btn-primary me-1" data-bs-toggle="popover"
+                                    <a class="btn btn-primary me-1" id="lksd" data-bs-toggle="popover"
                                     data-bs-offset="0,14" data-bs-placement="top"
                                     data-bs-html="true"
                                     data-bs-content="<p>This Book has been added to your wishlist</p>"
@@ -153,7 +153,7 @@ if(!isset($_GET['id'])) {
                                                 <div class="card-text">
                                                     <div class="d-grid d-sm-flex p-3 ">
                                                         <img src="<?php echo $imager ?>"
-                                                            alt="<?php echo $row['book_title'] ?>" height="405"
+                                                            alt="<?php echo $row['book_title'] ?>" height="205"
                                                             class="me-4 mb-sm-0 mb-4 text-center justify-content-center" />
 
                                                         <span>
@@ -180,9 +180,17 @@ if(!isset($_GET['id'])) {
 
 
 
-                                                                <a href="./bookdetails?id=<?php echo $row['books_id'] ?>"
-                                                                    class="btn btn-primary me-1" type="button">Buy
-                                                                    this book </a>
+                                                                <button class="btn btn-primary text-nowrap" id="clss"
+                                                                    data-bs-toggle="popover" data-bs-offset="0,14"
+                                                                    data-bs-placement="top" data-bs-html="true"
+                                                                    data-bs-content="<p>You will be charged <b>₦<?php echo number_format($row['selling_price']) ?></b> for this book</p>
+                                                                    <div class='d-flex justify-content-between'><button
+                                                                            type='button'
+                                                                            class='btn btn-sm btn-primary'>Proceed</button></div>"
+                                                                    title="Are you sure you want to buy this book?"
+                                                                    type="button">Buy
+                                                                    this book
+                                                                </button>
 
                                                                 <?php  echo $nks ?>
 

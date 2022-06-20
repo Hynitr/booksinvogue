@@ -99,8 +99,7 @@ echo '
         } else {
 
             $nks = <<<DELIMITER
-
-            <a class="btn btn-primary me-1" data-bs-toggle="popover"
+            <a class="btn btn-primary me-1" id="lksd" data-bs-toggle="popover"
             data-bs-offset="0,14" data-bs-placement="top"
             data-bs-html="true"
             data-bs-content="<p>This Book has been added to your wishlist</p>"

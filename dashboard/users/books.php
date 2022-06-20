@@ -114,7 +114,7 @@ user_details();
                                    
                                      </a>
 
-                                     <input type="text" value='$id' id='srchid' hidden>
+                                     <input type="text" value='$id' class='srchid' hidden>
 
                                     DELIMITER;
 
@@ -124,7 +124,7 @@ user_details();
 
                                     $nks = <<<DELIMITER
 
-                                    <a class="btn btn-primary me-1" data-bs-toggle="popover"
+                                    <a class="btn btn-primary me-1" id="lksd" data-bs-toggle="popover"
                                     data-bs-offset="0,14" data-bs-placement="top"
                                     data-bs-html="true"
                                     data-bs-content="<p>This Book has been added to your wishlist</p>"
