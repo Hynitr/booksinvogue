@@ -257,10 +257,38 @@ $("#vsub").click(function () {
 
       } else {
 
-        $("#searchresult").show(1000);
-        $("#resnsg").html(searchword);
+        //$("#searchresult").show(1000);
+
+        $.ajax({
+        type: "post",
+        url: "srchres.php",
+        data: {searchword: searchword},
+        success: function (data) {
+          $("#searchresult").html(data).show(1000);
+        }
+      });
+    }
+  });
+
+
+
+  //add to wishlist
+  $("#btwsh").click(function() {
+
+    var wishid  = $("#srchid").val();
+
+    $("#btwsh").hide();
+
+    $.ajax({
+      type: "post",
+      url: "functions/init.php",
+      data: {wishid: wishid},
+      success: function (data) {     
+        
+      $("#addtwh").show();
 
       }
+    });
 
   });
 

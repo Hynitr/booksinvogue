@@ -84,7 +84,8 @@ user_details();
 
                                                 </div>
                                                 <span class="fw-semibold d-block mb-1">Wallet Balance</span>
-                                                <h3 class="card-title mb-3">₦12,628</h3>
+                                                <h3 class="card-title mb-3">
+                                                    ₦<?php echo number_format($t_users['wallet']) ?></h3>
                                                 <a href="javascript:;" class="btn btn-sm btn-outline-primary">Fund
                                                     Wallet</a>
                                             </div>

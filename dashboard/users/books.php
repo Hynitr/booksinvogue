@@ -9,6 +9,7 @@ user_details();
     height: 30vh;
 }
 
+
 #custom {
 
     position: fixed;
@@ -59,7 +60,7 @@ user_details();
                 </div>
 
                 <!-- Content wrapper -->
-                <div class="content-wrapper py-5 mt-5">
+                <div class="content-wrapper py-5 mt-3">
                     <!-- Content -->
 
                     <div id="allbook" class="container-xxl flex-grow-1 container-p-y">
@@ -72,9 +73,13 @@ user_details();
 
                             while($row = mysqli_fetch_array($res)) {
 
+                                $category = "&nbsp;".$row['category_1']."&nbsp; &nbsp;| &nbsp; &nbsp;".$row['category_2'];
+
                                 $det = strip_tags($row['description']);
                                 $frv = wordwrap($det, 70, "\n", TRUE); 
-                                $y = substr($frv, 0, 120).'... ';
+                                $y = substr($frv, 0, 120).'... <a href="./bookdetails?id='.$row['books_id'].'">Read More</a>';
+
+                                $descrp = ucfirst($y);
                                 
 
                                 $image = "assets/bookscover/".$row['book_cover'];
@@ -88,85 +93,112 @@ user_details();
                                     $imager = "assets/img/cover.jpg";
                                 }
 
+                                $id = $row['books_id'];
+
+
+                                $ssl = "SELECT * FROM wishlist WHERE `bookid` = '$id'";
+                                $rss = query($ssl);
+
+                                if(row_count($rss) == '' || row_count($rss) == null) {
+
+                                    $nks = <<<DELIMITER
+
+                                    <a id="btwsh" class="btn btn-primary me-1" data-bs-toggle="popover"
+                                    data-bs-offset="0,14" data-bs-placement="top"
+                                    data-bs-html="true"
+                                    data-bs-content="<p>We just added this book to your wishlist</p>"
+                                    title="Add to Wishlist">
+
+                                    <i class="bx bx-star text-white"></i>
+                                     </a>
+
+                                     <input type="text" value='$id' id='srchid' hidden>
+
+                                    DELIMITER;
+
+                                    
+                                    
+                                } else {
+
+                                    $nks = <<<DELIMITER
+
+                                    <a class="btn btn-primary me-1" data-bs-toggle="popover"
+                                    data-bs-offset="0,14" data-bs-placement="top"
+                                    data-bs-html="true"
+                                    data-bs-content="<p>This Book has been added to your wishlist</p>"
+                                    title="Added to wishlist already">
+
+                                    <i class="bx bx-check text-white"></i>
+                                     </a>
+
+                                    DELIMITER;
+                                    
+                                }
+
                         ?>
 
-                            <div class="col-lg-4 col-md-4 col-sm-12 order-0">
+                            <div class="container-xxl flex-grow-1 container-p-y">
                                 <div class="row">
-                                    <div class="col-lg-12 col-md-12 col-sm-12 mb-4 text-md-left text-lg-left">
-                                        <div class="card">
+                                    <div class="col-12">
+                                        <div class="card mb-3">
+
                                             <div class="card-body">
-                                                <div
-                                                    class="card-title d-flex align-items-center justify-content-center">
-                                                    <div class="flex-shrink-0">
-                                                        <img style="width: 200px; height: 200px;"
-                                                            src="<?php  echo $imager ?>"
-                                                            alt="<?php  echo $row['book_title'] ?>"
-                                                            class="img-fluid justify-content-between align-items-center d-block mx-auto mx-md-0"
-                                                            width="100px" />
-                                                    </div>
 
-                                                </div>
+                                                <div class="card-text">
+                                                    <div class="d-grid d-sm-flex p-3 ">
+                                                        <img src="<?php echo $imager ?>" alt="collapse-image"
+                                                            height="205"
+                                                            class="me-4 mb-sm-0 mb-4 text-center justify-content-center" />
 
-                                                <div class="booksec col-lg-12 col-md-12 col-sm-12 text-center">
-                                                    <h4 class="fw-bold text-primary d-block mt-4 mb-3">
-                                                        <?php  echo ucwords($row['book_title']) ?>
-                                                    </h4>
+                                                        <span>
+                                                            <b><?php echo escape($row['book_title']) ?></b>
+                                                            <br />
+                                                            by: <b><small><?php echo $row['author'] ?></small></b>
+                                                            <br /><br />
+                                                            <?php echo $descrp ?>
 
-                                                    <p style="font-size: 13px;" class="fw-semibold d-block mb-4">
-                                                        By: <span
-                                                            class="text-dark fw-bold"><?php  echo ucwords($row['author']) ?></span>
-                                                    </p>
+                                                            <br /><br />
 
-                                                    <p style="font-size: 13px; text-align: left;"
-                                                        class="fw-semibold text-align-left d-block mb-4">
-                                                        <?php  echo $y ?>
-                                                    </p>
+                                                            <b>₦<?php echo number_format($row['selling_price']) ?></b>
 
-                                                </div>
+                                                            <br /><br />
+                                                            <?php echo $row['language'] ?> &nbsp;|&nbsp;
+                                                            <?php echo $category ?>
+
+                                                            <p class="demo-inline-spacing">
+
+                                                                <?php  echo $nks ?>
+
+                                                                <a style="display: none;" id="addtwh"
+                                                                    class="btn btn-primary me-1"
+                                                                    data-bs-toggle="popover" data-bs-offset="0,14"
+                                                                    data-bs-placement="top" data-bs-html="true"
+                                                                    data-bs-content="<p>This Book has been added to your wishlist</p>"
+                                                                    title="Added to Wishlist">
+
+                                                                    <i class="bx bx-check text-white"></i>
+                                                                </a>
 
 
-                                                <div
-                                                    class="mt-0 p-0 justify-content-center text-center align-item-center">
+                                                                <a href="./bookdetails?id=<?php echo $row['books_id'] ?>"
+                                                                    class="btn btn-primary me-1" type="button">Buy
+                                                                    this book </a>
 
-                                                    <h4 class="fw-semibold d-block">
-                                                        Price: <span
-                                                            class="text-dark fw-bold">₦<?php  echo number_format($row['selling_price']) ?></span>
-                                                    </h4>
+                                                                <a class="btn btn-primary me-1">
+                                                                    <i class="bx bx-share-alt text-white"></i>
+                                                                </a>
+                                                            </p>
 
-                                                    <div
-                                                        class="row text-center justify-content-center align-item-center">
-
-                                                        <span class="mx-2 badge bg-label-primary col-2 p-1"
-                                                            data-bs-toggle="popover" data-bs-offset="0,14"
-                                                            data-bs-placement="left" data-bs-html="true"
-                                                            data-bs-content="<p>This is a very beautiful popover, show some love.</p> <div class='d-flex justify-content-between'><button type='button' class='btn btn-sm btn-outline-secondary'>Skip</button><button type='button' class='btn btn-sm btn-primary'>Read More</button></div>"
-                                                            title="Popover Title"><i class="bx bx-star"></i></a>
                                                         </span>
-
-                                                        <button
-                                                            class="btn col-6 btn-primary justify-content-center align-item-center offcanvasr"
-                                                            type="button" data-bs-toggle="offcanvas"
-                                                            data-bs-target="#offcanvasBackdrop"
-                                                            data-id="<?php echo $row['books_id'] ?>"
-                                                            aria-controls="offcanvasBackdrop">
-                                                            More
-                                                            Details
-                                                        </button>
-
-                                                        <span class="mx-2 badge bg-label-primary col-2 p-1"><i
-                                                                class="bx bx-share-alt"></i></a>
-                                                        </span>
-
                                                     </div>
-
                                                 </div>
+
                                             </div>
                                         </div>
                                     </div>
 
                                 </div>
                             </div>
-
                             <?php
                             }
                             ?>
@@ -178,99 +210,13 @@ user_details();
 
                     </div>
 
-                    <div style="display: none;" id="searchresult">
-                        <div id="bookres" class="container-xxl flex-grow-1 container-p-y">
 
 
-                            <div class="row">
 
-                                <?php
+                    <div style="display: none;" id="searchresult" class="container-xxl flex-grow-1 container-p-y">
 
-                                $bookk = '<p id="resnsg"></p>';
-
-
-                            $sql = "SELECT * FROM `books` WHERE `book_title` = '$bookk'";
-                            $res = query($sql);
-
-                            echo $bookk."<br/> hshs"; 
-                            
-                            $my_array = [];
-                            
-                            while($row = mysqli_fetch_array($res)) {
-
-                                $my_array[] = $myvar;
-                            }
-
-                            $js_array = json_encode($my_array);
-
-
-                            //echo $js_array;
-
-                        ?>
-
-                                <div class="col-lg-4 col-md-4 col-sm-12 order-0">
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 mb-4 text-md-left text-lg-left">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <div
-                                                        class="card-title d-flex align-items-center justify-content-center">
-                                                        <div class="flex-shrink-0">
-                                                            <img style="width: 200px; height: 200px;"
-                                                                src="<?php  echo $imager ?>"
-                                                                alt="<?php  echo $$js_array['book_title'] ?>"
-                                                                class="img-fluid justify-content-between align-items-center d-block mx-auto mx-md-0"
-                                                                width="100px" />
-                                                        </div>
-
-                                                    </div>
-
-                                                    <div class="booksec col-lg-12 col-md-12 col-sm-12 text-center">
-                                                        <h4 class="fw-bold text-primary d-block mt-4 mb-3">
-                                                            <?php  echo ucwords($row['book_title']) ?>
-                                                        </h4>
-
-                                                        <p style="font-size: 13px;" class="fw-semibold d-block mb-4">
-                                                            By: <span
-                                                                class="text-dark fw-bold"><?php  echo ucwords($row['author']) ?></span>
-                                                        </p>
-
-                                                        <p style="font-size: 13px;" class="fw-semibold d-block mb-3">
-                                                            <?php  echo "&#8226; &nbsp;".ucwords($row['category_1'])."&nbsp; &#8226; &nbsp;".ucwords($row['category_2']) ?>
-                                                        </p>
-
-                                                    </div>
-
-
-                                                    <div
-                                                        class="mt-0 p-0 justify-content-center text-center align-item-center">
-
-                                                        <h4 class="fw-semibold d-block">
-                                                            Price: <span
-                                                                class="text-dark fw-bold">₦<?php  echo number_format($row['selling_price']) ?></span>
-                                                        </h4>
-
-                                                        <button
-                                                            class="btn btn-primary justify-content-center align-item-center offcanvasr"
-                                                            type="button" data-bs-toggle="offcanvas"
-                                                            data-bs-target="#offcanvasBackdrop"
-                                                            data-id="<?php echo $row['books_id'] ?>"
-                                                            aria-controls="offcanvasBackdrop">View
-                                                            More
-                                                            Details
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                            </div>
-
-                        </div>
                     </div>
+
 
                 </div>
                 <!-- / Content -->
@@ -318,7 +264,7 @@ user_details();
     <script src="assets/js/main.js"></script>
 
     <!-- Page JS -->
-    <script src="assets/js/dashboards-analytics.js"></script>
+    <script src="assets/js/ui-popover.js"></script>
 
     <script src="ajax.js"></script>
 </body>

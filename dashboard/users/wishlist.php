@@ -38,7 +38,7 @@ user_details();
             <!-- Menu -->
 
             <?php
-            include("components/sidded.php");            
+            include("components/sidebar.php");            
             ?>
 
             <!-- / Menu -->
@@ -51,7 +51,7 @@ user_details();
                     <!-- Navbar -->
 
                     <?php 
-                    include("components/navy.php");
+                    include("components/navabr.php");
                     ?>
 
                     <!-- / Navbar -->
