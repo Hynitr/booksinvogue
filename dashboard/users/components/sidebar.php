@@ -54,7 +54,7 @@
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Transactions</span></li>
         <!-- Cards -->
         <li class="menu-item">
-            <a href="./transactions" class="menu-link">
+            <a href="#" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-dollar"></i>
                 <div data-i18n="Basic">My Transactions</div>
             </a>
@@ -65,7 +65,7 @@
                 Settings</span></li>
         <!-- Forms -->
         <li class="menu-item">
-            <a href="./profile" class="menu-link">
+            <a href="#" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-detail"></i>
                 <div data-i18n="Form Elements">My Profile</div>
             </a>
@@ -79,7 +79,7 @@
         </li>
         <!-- Tables -->
         <li class="menu-item">
-            <a href="tables-basic.html" class="menu-link">
+            <a href="#" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div data-i18n="Tables">Support</div>
             </a>
