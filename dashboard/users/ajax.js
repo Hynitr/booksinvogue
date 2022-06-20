@@ -4,6 +4,7 @@ $(document).ready(function () {
   $("#sub").click(function () {
     var fname = $("#fname").val();
     var usname = $("#usname").val();
+    var catgy  = $("#catgy").val();
     var email = $("#email").val();
     var pword = $("#pword").val();
     var cpword = $("#cpword").val();
@@ -38,6 +39,7 @@ $(document).ready(function () {
                         email: email,
                         pword: pword,
                         cpword: cpword,
+                        catgy, catgy,
                         ref: ref,
                       },
                       success: function (data) {
@@ -226,6 +228,9 @@ $("#vsub").click(function () {
     }
   });
 
+
+
+
   /******** USER PROFILE SECTION */
 
   //getting books details
@@ -324,229 +329,5 @@ $("#vsub").click(function () {
       $("#clss").popover('hide');
 
   });
-
-
-
-  /** USER PROFILE PICTURE */
-  $("#pupl").click(function () {
-    var fd = new FormData();
-    var files = $("#psfile").prop("files")[0];
-    fd.append("fle", files);
-
-    if (files == null || files == "") {
-      $("#msg").text("Kindly select a picture");
-    } else {
-      $("#msg").text(
-        "Loading.. Make sure you have a strong internet connection"
-      );
-
-      $.ajax({
-        type: "post",
-        url: "functions/init.php",
-        data: fd,
-        contentType: false,
-        processData: false,
-        success: function (data) {
-          $("#msg").html(data);
-        },
-      });
-    }
-  });
-
-  /** COPY REFERRAL LINK TO CLIPBOARD */
-  $("#copy").click(function () {
-    $("#copy").text("Copied!");
-
-    $("#refLink").on("hidden.bs.modal", function () {
-      $("#copy").text("Copy Referral Link");
-    });
-  });
-
-  /** DONATE PDFs **/
-  $("#donatenow").click(function () {
-    var inst = $("#inst").val();
-    var typ = $("#typ").val();
-    var title = $("#title").val();
-    var fcg = $("#fcg").val();
-    var dept = $("#dept").val();
-    var level = $("#level").val();
-
-    if (inst == "" || inst == null) {
-      $("#dntmsg").html("Please input your institution name");
-    } else {
-      if (title == "" || title == null) {
-        $("#dntmsg").html("Your PDF title cannot be empty");
-      } else {
-        if (fcg == "" || fcg == null) {
-          $("#dntmsg").html("Kindly input the PDF Faculty or College");
-        } else {
-          if (dept == "" || dept == null) {
-            $("#dntmsg").html("Kindly input the PDF Department");
-          } else {
-            $("#dntmsg").html(
-              "Loading.. Make sure you have a strong internet connection"
-            );
-
-            $.ajax({
-              type: "post",
-              url: "functions/init.php",
-              data: {
-                inst: inst,
-                typ: typ,
-                title: title,
-                fcg: fcg,
-                dept: dept,
-                level: level,
-              },
-              success: function (data) {
-                $("#dntmsg").html(data);
-              },
-            });
-          }
-        }
-      }
-    }
-
-    $("#donateModalCenter").modal();
-  });
-
-  /** UPLOAD PDF FILE
-  $("#donatnow").click(function () {
-
-
-      $.ajax({
-        type: "post",
-        url: "functions/init.php",
-        data: fd,
-        contentType: false,
-        processData: false,
-        success: function (data) {
-          $("#dntmsg").html(data);
-        },
-      });
-    }
-    $("#donateModalCenter").modal();
-  });**/
-
-  /** SEARCH FILTER */
-  $("#filter").click(function () {
-    var inst = $("#inst").val();
-    var fcg = $("#fcg").val();
-    var dept = $("#dept").val();
-    var level = $("#level").val();
-    var srctxt = $("#srctxt").val();
-
-    window.location.href =
-      "./search?txt=" +
-      srctxt +
-      "&inst=" +
-      inst +
-      "&fcg=" +
-      fcg +
-      "&dept=" +
-      dept +
-      "&level=" +
-      level;
-  });
-
-  /** SEARCH FILTER ADVANCED */
-  $("#pqfilterr").click(function () {
-    var inst = $("#inst").val();
-    var fcg = $("#fcg").val();
-    var dept = $("#dept").val();
-    var level = $("#level").val();
-    var srctxt = $("#srctxt").val();
-
-    //window.location.href = "./search?txt=" + srctxt + "&inst=" + inst + "&fcg=" + fcg + "&dept=" + dept + "&level=" + level;
-
-    var xhr = new XMLHttpRequest();
-    document.getElementById("resl").innerHTML =
-      "<span style='color: #ff0000; text-align: center;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Loading.. Please wait!</span>";
-
-    xhr.open(
-      "GET",
-      "./pqsearchresult?txt=" +
-        srctxt +
-        "&inst=" +
-        inst +
-        "&fcg=" +
-        fcg +
-        "&dept=" +
-        dept +
-        "&level=" +
-        level,
-      true
-    );
-
-    xhr.onload = function () {
-      if (xhr.status == 200) {
-        //document.write(this.responseText);
-        document.getElementById("resl").innerHTML = xhr.responseText;
-      } else {
-        document.getElementById("resl").innerHTML =
-          "<span style='color: #ff0000'>Error loading document. <br/> Kindly try again later!</span>";
-      }
-    };
-
-    xhr.send();
-  });
-
-  /** SEARCH FILTER ADVANCED */
-  $("#filterr").click(function () {
-    var inst = $("#inst").val();
-    var fcg = $("#fcg").val();
-    var dept = $("#dept").val();
-    var level = $("#level").val();
-    var srctxt = $("#srctxt").val();
-
-    //window.location.href = "./search?txt=" + srctxt + "&inst=" + inst + "&fcg=" + fcg + "&dept=" + dept + "&level=" + level;
-
-    var xhr = new XMLHttpRequest();
-    document.getElementById("resl").innerHTML =
-      "<span style='color: #ff0000; text-align: center;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Loading.. Please wait!</span>";
-
-    xhr.open(
-      "GET",
-      "./searchresult?txt=" +
-        srctxt +
-        "&inst=" +
-        inst +
-        "&fcg=" +
-        fcg +
-        "&dept=" +
-        dept +
-        "&level=" +
-        level,
-      true
-    );
-
-    xhr.onload = function () {
-      if (xhr.status == 200) {
-        //document.write(this.responseText);
-        document.getElementById("resl").innerHTML = xhr.responseText;
-      } else {
-        document.getElementById("resl").innerHTML =
-          "<span style='color: #ff0000'>Error loading document. <br/> Kindly try again later!</span>";
-      }
-    };
-
-    xhr.send();
-  });
-
-/**WITHDRAW FUNDS */
-$("#withdraw").click(function () {
-var point = $("#vall").text();
-
-if(point <= 99){
-  alert("The minimum withdrawal is NGN1,000");
-
-} else {
-
-alert("You have been scheduled for withdrawal");
-}
-});
-
-
-/**BUY PEDIA CREDIT */
 
 });

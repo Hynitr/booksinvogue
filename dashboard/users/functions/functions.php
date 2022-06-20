@@ -119,10 +119,11 @@ function usname_exist($usname) {
 
 
 /** VALIDATE USER REGISTRATION **/
-if(isset($_POST['fname']) && isset($_POST['usname']) && isset($_POST['email']) && isset($_POST['pword']) && isset($_POST['cpword']) && isset($_POST['ref'])) {
+if(isset($_POST['fname']) && isset($_POST['usname']) && isset($_POST['catgy']) && isset($_POST['email']) && isset($_POST['pword']) && isset($_POST['cpword']) && isset($_POST['ref'])) {
 
 	$fname 			= clean(escape($_POST['fname']));
 	$usname			= clean(escape($_POST['usname']));
+	$catgy          = clean(escape($_POST['catgy']));
 	$email	 		= clean(escape($_POST['email']));
 	$pword    		= clean(escape($_POST['pword']));
 	$cpword 		= clean(escape($_POST['cpword']));
@@ -139,7 +140,7 @@ if(isset($_POST['fname']) && isset($_POST['usname']) && isset($_POST['email']) &
 	
 			} else {
 
-				register($fname, $usname, $email, $pword, $ref);
+				register($fname, $usname, $email, $pword, $ref, $catgy);
 			}
 
 		}  
@@ -149,7 +150,7 @@ if(isset($_POST['fname']) && isset($_POST['usname']) && isset($_POST['email']) &
 	
 
 /** REGISTER USER **/
-function register($fname, $usname, $email, $pword, $ref) {
+function register($fname, $usname, $email, $pword, $ref, $catgy) {
 
 	$fnam = escape($fname);
 	$usname = escape($usname);
@@ -164,7 +165,7 @@ function register($fname, $usname, $email, $pword, $ref) {
 	$activator = otp();
 	
 	$sql = "INSERT INTO users(`idd`, `fullname`, `usname`, `email`, `password`, `role`, `date_reg`, `status`, `active`, `lastseen`, `ref`, `wallet`)";
-	$sql.= " VALUES('1', '$fnam', '$usname', '$emai', '$pwor', 'user', '$datereg', '$activator', '0', '$datereg', '$ref', '0')";
+	$sql.= " VALUES('1', '$fnam', '$usname', '$emai', '$pwor', '$catgy', '$datereg', '$activator', '0', '$datereg', '$ref', '0')";
 	$result = query($sql);
 
 	//redirect to verify function

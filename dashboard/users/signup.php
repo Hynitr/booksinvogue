@@ -74,6 +74,18 @@ input[type=number] {
                                         placeholder="Create a username" />
                                     <h6 style="font-size: 12px" class="text-danger mt-1" id="usmsg"></h6>
                                 </div>
+
+                                <div class="mb-3">
+                                    <label for="category" class="form-label">Choose a category</label>
+                                    <select id="catgy" class="form-select color-dropdown">
+                                        <option id="catgy" selected>user</option>
+                                        <option id="catgy">author</option>
+                                        <option id="catgy">publisher</option>
+                                    </select>
+                                    <h6 style="font-size: 12px" class="text-danger mt-1" id="catsmsg"></h6>
+                                </div>
+
+
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Can we have your email address?</label>
                                     <input type="email" class="form-control" id="email" name="email"
@@ -103,8 +115,14 @@ input[type=number] {
                                 </div>
                                 <div class="mb-3">
                                     <label for="username" class="form-label">Who told you about us?</label>
-                                    <input type="text" class="form-control" id="ref" name="ref"
-                                        placeholder="Input a referral code if you have one." autofocus />
+                                    <select id="ref" class="form-select color-dropdown">
+                                        <option id="ref"></option>
+                                        <option id="ref">instagram</option>
+                                        <option id="ref">Facebook</option>
+                                        <option id="ref">Google</option>
+                                        <option id="ref">A friend</option>
+                                        <option id="ref">Adverts</option>
+                                    </select>
                                 </div>
                                 <!--<div class="mb-3">
                                 <div class="form-check">
