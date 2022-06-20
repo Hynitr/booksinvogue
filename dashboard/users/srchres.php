@@ -49,36 +49,75 @@ echo '
    //Fetching result from database.
    while ($row = MySQLi_fetch_array($ExecQuery)) {
 
+        $category = "&nbsp;".$row['category_1']."&nbsp; &nbsp;| &nbsp; &nbsp;".$row['category_2'];
 
-    $det = strip_tags($row['description']);
-    $frv = wordwrap($det, 70, "\n", TRUE); 
-    $y = substr($frv, 0, 90).'... <a>Read More</a>';
+        $det = strip_tags($row['description']);
+        $frv = wordwrap($det, 70, "\n", TRUE); 
+        $y = substr($frv, 0, 120).'... <a href="./bookdetails?id='.$row['books_id'].'">Read More</a>';
 
-    $category = "&nbsp;".$row['category_1']."&nbsp; &nbsp;| &nbsp; &nbsp;".$row['category_2'];
-
-    $det = strip_tags($row['description']);
-    $frv = wordwrap($det, 70, "\n", TRUE); 
-    $y = substr($frv, 0, 120).'<a href="./bookdetails?id='.$row['books_id'].'">Read More</a>';
-
-    $descrp = ucfirst($y);
-    
-
-    $image = "assets/bookscover/".$row['book_cover'];
-
-    if(file_exists($image)){
-
-        $imager = "assets/bookscover/".$row['book_cover'];
+        $descrp = ucfirst($y);
         
-    } else {
 
-        $imager = "assets/img/cover.jpg";
-    }
+        $image = "assets/bookscover/".$row['book_cover'];
+
+        if(file_exists($image)){
+
+            $imager = "assets/bookscover/".$row['book_cover'];
+            
+        } else {
+
+            $imager = "assets/img/cover.jpg";
+        }
+
+        $id = $row['books_id'];
+
+
+        $ssl = "SELECT * FROM boughtbook WHERE `bookid` = '$id' AND `reading` = 'wishlist'";
+        $rss = query($ssl);
+
+        if(row_count($rss) == '' || row_count($rss) == null) {
+
+            $nks = <<<DELIMITER
+
+            <a class="btn btn-primary me-1" id="btwsh" data-bs-toggle="popover"
+            data-bs-offset="0,14" data-bs-placement="top"
+            data-bs-html="true"
+            data-bs-content="<p>We just added this book to your wishlist</p>"
+            title="Add to Wishlist">
+
+             <i class="bx bx-star text-white"></i>
+
+           
+             </a>
+
+             <input type="text" value='$id' id='srchid' hidden>
+
+            DELIMITER;
+
+            
+            
+        } else {
+
+            $nks = <<<DELIMITER
+
+            <a class="btn btn-primary me-1" data-bs-toggle="popover"
+            data-bs-offset="0,14" data-bs-placement="top"
+            data-bs-html="true"
+            data-bs-content="<p>This Book has been added to your wishlist</p>"
+            title="Added to wishlist already">
+
+            <i class="bx bx-check text-white"></i>
+             </a>
+
+            DELIMITER;
+            
+        }
+
 
        ?>
  <!-- Creating unordered list items.
         Calling javascript function named as "fill" found in "script.js" file.
         By passing fetched result as parameter. -->
-
  <div class="container-xxl flex-grow-1 container-p-y">
      <div class="row">
          <div class="col-12">
@@ -108,9 +147,12 @@ echo '
 
                                  <p class="demo-inline-spacing">
 
-                                     <a class="btn btn-primary me-1">
-                                         <i class="bx bx-star text-white"></i>
+                                     <?php  echo $nks ?>
+
+                                     <a style="display: none;" class="btn btn-primary me-1" id="addtwh">
+                                         <i class="bx bx-check text-white"></i>
                                      </a>
+
 
                                      <a href="./bookdetails?id=<?php echo $row['books_id'] ?>"
                                          class="btn btn-primary me-1" type="button">Buy
@@ -139,3 +181,5 @@ echo '
  </div>
 
  <script src="ajax.js"></script>
+ <!-- Page JS -->
+ <script src="assets/js/ui-popover.js"></script>

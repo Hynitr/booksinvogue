@@ -96,20 +96,22 @@ user_details();
                                 $id = $row['books_id'];
 
 
-                                $ssl = "SELECT * FROM wishlist WHERE `bookid` = '$id'";
+                                $ssl = "SELECT * FROM boughtbook WHERE `bookid` = '$id' AND `reading` = 'wishlist'";
                                 $rss = query($ssl);
 
                                 if(row_count($rss) == '' || row_count($rss) == null) {
 
                                     $nks = <<<DELIMITER
 
-                                    <a id="btwsh" class="btn btn-primary me-1" data-bs-toggle="popover"
+                                    <a class="btn btn-primary me-1" id="btwsh" data-bs-toggle="popover"
                                     data-bs-offset="0,14" data-bs-placement="top"
                                     data-bs-html="true"
                                     data-bs-content="<p>We just added this book to your wishlist</p>"
                                     title="Add to Wishlist">
 
-                                    <i class="bx bx-star text-white"></i>
+                                     <i class="bx bx-star text-white"></i>
+
+                                   
                                      </a>
 
                                      <input type="text" value='$id' id='srchid' hidden>
@@ -169,13 +171,8 @@ user_details();
 
                                                                 <?php  echo $nks ?>
 
-                                                                <a style="display: none;" id="addtwh"
-                                                                    class="btn btn-primary me-1"
-                                                                    data-bs-toggle="popover" data-bs-offset="0,14"
-                                                                    data-bs-placement="top" data-bs-html="true"
-                                                                    data-bs-content="<p>This Book has been added to your wishlist</p>"
-                                                                    title="Added to Wishlist">
-
+                                                                <a style="display: none;" class="btn btn-primary me-1"
+                                                                    id="addtwh">
                                                                     <i class="bx bx-check text-white"></i>
                                                                 </a>
 

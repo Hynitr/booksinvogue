@@ -277,14 +277,24 @@ $("#vsub").click(function () {
 
     var wishid  = $("#srchid").val();
 
-    $("#btwsh").hide();
+    $('#btwsh').on('shown.bs.popover', function () {
+        
+      setTimeout(function() {
+          $('.popover').fadeOut('slow',function() {}); 
+      },800);
+      
+  });
+
 
     $.ajax({
       type: "post",
       url: "functions/init.php",
       data: {wishid: wishid},
-      success: function (data) {     
-        
+      success: function (data) {
+
+      //display content if words are empty
+      $("#btwsh").hide();
+
       $("#addtwh").show();
 
       }

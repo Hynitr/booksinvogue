@@ -700,9 +700,17 @@ if(isset($_POST['wishid'])) {
 	$user  = $_SESSION['login'];
 	$wid = "biv/wsh/".rand(0,999);
 
-	$sql ="INSERT into wishlist(`sn`, `wid`, `bookid`, `userid`)";
-	$sql.="VALUES('1', '$wid', '$bookid', '$user')";
+	$sql ="INSERT into boughtbook(`id`, `wid`, `bookid`, `userid`, `reading`)";
+	$sql.="VALUES('1', '$wid', '$bookid', '$user', 'wishlist')";
 	$res = query($sql);
+
+	/*$chck = <<<DELIMITER
+	
+	<i class="bx bx-check text-white"></i>
+	
+	DELIMITER;
+
+	echo $chck;*/
 	
 }
 

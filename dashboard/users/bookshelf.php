@@ -51,7 +51,7 @@ user_details();
                     <!-- Navbar -->
 
                     <?php 
-                    include("components/navy.php");
+                    include("components/navabr.php");
                     ?>
 
                     <!-- / Navbar -->
@@ -69,10 +69,10 @@ user_details();
 
                             $user =  $_SESSION['login'];
 
-                            $sql = "SELECT * FROM `boughtbook` WHERE `userid` = '$user' AND `reading` = 'YES' OR `reading` = 'NO'";
-                            $res = query($sql);
+                                $ssl = "SELECT * FROM boughtbook WHERE `userid` = '$user' AND `reading` = 'Yes'";
+                                $rss = query($ssl);
 
-                            if(row_count($res) == null) {
+                                if(row_count($rss) == '' || row_count($rss) == null) {
 
                                 $details = <<<DELIMITER
 
@@ -81,7 +81,7 @@ user_details();
                                   <div class="misc-wrapper">
                                     <h2 class="mb-2 mx-2">Uh Oh 😢 </h2>
                                     <p class="mb-4 mx-2">You've not added any book to your bookshelf yet. </p>
-                                    <a href="./books" class="btn btn-primary">Get some book(s) to my bookshelf</a>
+                                    <a href="./books" class="btn btn-primary">Get some book(s) to your bookshelf</a>
                                     <div class="mt-4">
                                       <img
                                         src="assets/img/illustrations/girl-doing-yoga-light.png"
@@ -102,13 +102,24 @@ user_details();
                                 echo $details;
 
 
-                            }
+                            } else {
 
-                            while($row = mysqli_fetch_array($res)) {
+                            while($rws = mysqli_fetch_array($rss)) {
+
+                                $bkid = $rws['bookid'];
+
+                                $sql = "SELECT * FROM books WHERE `books_id` = '$bkid'";
+                                $res = query($sql);
+
+                                $row = mysqli_fetch_array($res);
+
+                                $category = "&nbsp;".$row['category_1']."&nbsp; &nbsp;| &nbsp; &nbsp;".$row['category_2'];
 
                                 $det = strip_tags($row['description']);
                                 $frv = wordwrap($det, 70, "\n", TRUE); 
-                                $y = substr($frv, 0, 120).'... ';
+                                $y = substr($frv, 0, 120).'... <a href="./read?id='.$row['books_id'].'">Read More</a>';
+
+                                $descrp = ucfirst($y);
                                 
 
                                 $image = "assets/bookscover/".$row['book_cover'];
@@ -123,74 +134,57 @@ user_details();
                                 }
 
                         ?>
-
-                            <div class="col-lg-4 col-md-4 col-sm-12 order-0">
+                            <div class="container-xxl flex-grow-1 container-p-y">
                                 <div class="row">
-                                    <div class="col-lg-12 col-md-12 col-sm-12 mb-4 text-md-left text-lg-left">
-                                        <div class="card">
+                                    <div class="col-12">
+                                        <div class="card mb-3">
+
                                             <div class="card-body">
-                                                <div
-                                                    class="card-title d-flex align-items-center justify-content-center">
-                                                    <div class="flex-shrink-0">
-                                                        <img style="width: 200px; height: 200px;"
-                                                            src="<?php  echo $imager ?>"
-                                                            alt="<?php  echo $row['book_title'] ?>"
-                                                            class="img-fluid justify-content-between align-items-center d-block mx-auto mx-md-0"
-                                                            width="100px" />
+
+                                                <div class="card-text">
+                                                    <div class="d-grid d-sm-flex p-3 ">
+                                                        <img src="<?php echo $imager ?>" alt="collapse-image"
+                                                            height="205"
+                                                            class="me-4 mb-sm-0 mb-4 text-center justify-content-center" />
+
+                                                        <span>
+                                                            <b><?php echo escape($row['book_title']) ?></b>
+                                                            <br />
+                                                            by: <b><small><?php echo $row['author'] ?></small></b>
+                                                            <br /><br />
+                                                            <?php echo $descrp ?>
+
+                                                            <br /><br />
+
+                                                            <b>₦<?php echo number_format($row['selling_price']) ?></b>
+
+                                                            <br /><br />
+                                                            <?php echo $row['language'] ?> &nbsp;|&nbsp;
+                                                            <?php echo $category ?>
+
+                                                            <p class="demo-inline-spacing">
+
+                                                                <a href="./read?id=<?php echo $row['books_id'] ?>"
+                                                                    class="btn btn-primary me-1" type="button">Start
+                                                                    Reading </a>
+
+                                                                <a class="btn btn-primary me-1">
+                                                                    <i class="bx bx-share-alt text-white"></i>
+                                                                </a>
+                                                            </p>
+
+                                                        </span>
                                                     </div>
-
                                                 </div>
 
-                                                <div class="booksec col-lg-12 col-md-12 col-sm-12 text-center">
-                                                    <h4 class="fw-bold text-primary d-block mt-4 mb-3">
-                                                        <?php  echo ucwords($row['book_title']) ?>
-                                                    </h4>
-
-                                                    <p style="font-size: 13px;" class="fw-semibold d-block mb-4">
-                                                        By: <span
-                                                            class="text-dark fw-bold"><?php  echo ucwords($row['author']) ?></span>
-                                                    </p>
-
-                                                    <p style="font-size: 13px; text-align: left;"
-                                                        class="fw-semibold text-align-left d-block mb-4">
-                                                        <?php  echo $y ?>
-                                                    </p>
-
-                                                </div>
-
-
-                                                <div
-                                                    class="mt-0 p-0 justify-content-center text-center align-item-center">
-
-                                                    <h4 class="fw-semibold d-block">
-                                                        Price: <span
-                                                            class="text-dark fw-bold">₦<?php  echo number_format($row['selling_price']) ?></span>
-                                                    </h4>
-
-                                                    <div
-                                                        class="row text-center justify-content-center align-item-center">
-
-                                                        <button
-                                                            class="btn col-6 btn-primary justify-content-center align-item-center offcanvasr"
-                                                            type="button" data-bs-toggle="offcanvas"
-                                                            data-bs-target="#offcanvasBackdrop"
-                                                            data-id="<?php echo $row['books_id'] ?>"
-                                                            aria-controls="offcanvasBackdrop">
-                                                            Read Now
-                                                        </button>
-
-
-                                                    </div>
-
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
 
                                 </div>
                             </div>
-
                             <?php
+                            }
                             }
                             ?>
 
