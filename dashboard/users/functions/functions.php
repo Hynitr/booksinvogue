@@ -197,7 +197,7 @@ function mail_mailer($email, $activator, $subj, $msg) {
 
 	$subject = $subj;
 
-	$logo = 'https://booksinvogue.com.ng/assets/logo.png';
+	$logo = 'https://booksinvogue.com.ng/assests/logo.png';
 	$url = 'https://booksinvogue.com.ng/';
 
 	$body = "
@@ -221,7 +221,7 @@ function mail_mailer($email, $activator, $subj, $msg) {
 	$body .= "<p style='margin-left: 45px; padding-bottom: 80px; text-align: left;'>Do not bother replying this
 	email. This is a virtual email</p>";
 	$body .= "<p text-align: center;'><a href='https://booksinvogue.com.ng/contact'><img style='width:150px;heght:150px'
-			src='https://booksinvogue.com.ng/dashboard/users/assets/footer.png'></a>";
+			src='https://booksinvogue.com.ng/assests/footer.png'></a>";
 	$body .= "
 	<h4 style='text-align: center;'>Email.: <span style='color: #fff'>hello@booksinvogue.com</span></h4>";
 	$body .= "<h4 style='text-align: center;'>Call/Chat.: <span style='color: #fff'>+234(0) 809 481 4575</span>
