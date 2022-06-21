@@ -197,8 +197,8 @@ function mail_mailer($email, $activator, $subj, $msg) {
 
 	$subject = $subj;
 
-	$logo = 'https://savearns.com/assets/3.png';
-	$url = 'https://savearns.com/';
+	$logo = 'https://booksinvogue.com.ng/assets/logo.png';
+	$url = 'https://booksinvogue.com.ng/';
 
 	$body = "
 	<!DOCTYPE html>
@@ -206,12 +206,12 @@ function mail_mailer($email, $activator, $subj, $msg) {
 
 	<head>
 	<meta charset='UTF-8'>
-	<title>Savearns</title>
+	<title>Booksinvogue</title>
 	</head>
-	<link rel='stylesheet' href='https://savearns.com/assets/css/bootstrap.min.css'>
+	<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css'>
 	<body style='text-align: center;'>";
 	$body .= "<section style='margin: 30px; margin-top: 50px ; background: #34459C; color: #fff;'>";
-	$body .= "<img style='margin-top: 35px; width: 460px; height: 105px;' src='{$logo}' alt='Savearns'>";
+	$body .= "<img style='margin-top: 35px; width: 460px; height: 105px;' src='{$logo}' alt='Booksinvogue'>";
 	$body .= "<h1 style='margin-top: 45px; color: #fff'>{$subj}</h1>
 	<br />";
 	$body .= "<h3 style='margin-left: 45px; margin-top: 34px; text-align: left; font-size: 17px;'>{$msg}</h3>
@@ -220,14 +220,13 @@ function mail_mailer($email, $activator, $subj, $msg) {
 	<br />";
 	$body .= "<p style='margin-left: 45px; padding-bottom: 80px; text-align: left;'>Do not bother replying this
 	email. This is a virtual email</p>";
-	$body .= "<p text-align: center;'><a href='https://savearns.com/contact'><img style='width:150px;heght:150px'
-			src='https://savearns.com/assets/footer.png'></a>";
+	$body .= "<p text-align: center;'><a href='https://booksinvogue.com.ng/contact'><img style='width:150px;heght:150px'
+			src='https://booksinvogue.com.ng/dashboard/users/assets/footer.png'></a>";
 	$body .= "
-	<h4 style='text-align: center;'>Email.: <span style='color: #fff'>savings@savearns.com</span></h4>";
-	$body .= "<h4 style='text-align: center;'>Call/Chat.: <span style='color: #fff'>+234(0) 810 317 1902</span>
+	<h4 style='text-align: center;'>Email.: <span style='color: #fff'>hello@booksinvogue.com</span></h4>";
+	$body .= "<h4 style='text-align: center;'>Call/Chat.: <span style='color: #fff'>+234(0) 809 481 4575</span>
 	</h4>";
-	$body .= "<h4 style='text-align: center; padding-bottom: 80px; padding-top: 40px;'>Team Savearns</h4>";    
-	$body .= "<script src='https://avearns.com/assets/js/bootstrap.min.js'></script>";
+	$body .= "<script src=https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js'></script>";
 	$body .= "</section>";
 	$body .= "</body></html>";
 	$send = mail($to, $subject, $body, $headers);
