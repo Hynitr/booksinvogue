@@ -28,6 +28,14 @@
             <span class="menu-header-text">Books Corner</span>
         </li>
 
+
+        <li class="menu-item">
+            <a href="#" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-upload"></i>
+                <div data-i18n="book">Upload new book</div>
+            </a>
+        </li>
+
         <li class="menu-item">
             <a href="./bookshelf" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
@@ -50,13 +58,21 @@
 
         </li>
 
+
         <!-- Components -->
-        <li class="menu-header small text-uppercase"><span class="menu-header-text">Transactions</span></li>
+        <li class="menu-header small text-uppercase"><span class="menu-header-text">Advert & Transactions</span></li>
         <!-- Cards -->
         <li class="menu-item">
             <a href="#" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-dollar"></i>
-                <div data-i18n="Basic">My Transactions</div>
+                <div data-i18n="Basic">Advert Center</div>
+            </a>
+        </li>
+
+        <li class="menu-item">
+            <a href="#" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-credit-card"></i>
+                <div data-i18n="Basic">Royalties & Earning(s)</div>
             </a>
         </li>
 
