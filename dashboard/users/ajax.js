@@ -28,7 +28,7 @@ $(document).ready(function () {
                   if (pword != cpword) {
                     $("#cpwmsg").html("Password does not match");
                   } else {
-                    $("#msg").html("Loading... Please Wait");
+                    $("#msg").html('<img style="width: 100px; height: 100px" src="assets/img/loading.gif">');
 
                     $.ajax({
                       type: "post",
@@ -64,7 +64,7 @@ $("#rotp").click(function () {
   //I left this code so as to give a dummy text to the function validator
   var otpp  = "dummy";
 
-    $("#vmsg").html("Loading... Please wait");
+    $("#vmsg").html('<img style="width: 100px; height: 100px" src="assets/img/loading.gif">');
 
     $.ajax({
       type: "post",
@@ -111,7 +111,7 @@ $("#vsub").click(function () {
 
       var votp = digit1 + digit2 + digit3 + digit4;
 
-      $("#vmsg").html("Loading... Please Wait");
+      $("#vmsg").html('<img style="width: 100px; height: 100px" src="assets/img/loading.gif">');
 
       $.ajax({
       type: "post",
@@ -162,7 +162,7 @@ $("#vsub").click(function () {
       if (password == "" || password == null) {
         $("#lupmsg").html("Invalid password inputted");
       } else {
-        $("#lmsg").html("Loading... Please wait");
+        $("#lmsg").html('<img style="width: 100px; height: 100px" src="assets/img/loading.gif">');
         $.ajax({
           type: "post",
           url: "functions/init.php",
@@ -183,7 +183,7 @@ $("#vsub").click(function () {
     if (fgeml == "" || fgeml == null) {
       $("#fmsg").html("Please insert your email");
     } else {
-      $("#fmsg").html("Loading...Please Wait!");
+      $("#fmsg").html('<img style="width: 100px; height: 100px" src="assets/img/loading.gif">');
 
       $.ajax({
         type: "post",
@@ -213,7 +213,7 @@ $("#vsub").click(function () {
         if (fgpword != fgcpword) {
           $("#umsg").html("Password does not match!");
         } else {
-          $("#umsg").html("Loading... Please Wait!");
+          $("#umsg").html('<img style="width: 100px; height: 100px" src="assets/img/loading.gif">');
 
           $.ajax({
             type: "post",
