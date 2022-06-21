@@ -1,13 +1,18 @@
 <?php
 include('functions/init.php');
 
-$data = $_SESSION['login'];
+if(isset($_SESSION['login'])) {
 
-//get last seen
-$lastseen = date('Y-m-d h:i:s');
+    $data = $_SESSION['login'];
 
-$sql = "UPDATE users SET `lastseen` = '$lastseen', `status` = '1', `active` = '0' WHERE `usname` = '$data'";
-$res = query($sql);
+    //get last seen
+    $lastseen = date('Y-m-d h:i:s');
+    
+    $sql = "UPDATE users SET `lastseen` = '$lastseen', `status` = '1', `active` = '0' WHERE `usname` = '$data'";
+    $res = query($sql);
+
+}
+
 
 //destroy session
 session_destroy();
