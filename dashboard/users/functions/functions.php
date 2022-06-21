@@ -185,7 +185,7 @@ function register($fname, $usname, $email, $pword, $ref, $catgy) {
 function mail_mailer($email, $activator, $subj, $msg) {
 
 	$to = $email;
-	$from = "noreply@savearns.com";
+	$from = "hello@booksinvogue.com.ng";
 
 	$headers = "From: " . $from . "\r\n";
 	$headers .= "Reply-To: ". $from . "\r\n";
@@ -245,17 +245,10 @@ if(isset($_POST['otpp'])) {
 	$sql = "UPDATE users SET `status` = '$activator', `verified` = 'No' WHERE `email` = '$email'";
 	$res = query($sql);
 
-	if($otpp == "dummy") {
-
 	$subj = "NEW OTP PASSWORD";
 	$msg  = "Hi there! <br /><br />Kindly use the otp below to activate your account;";	
-	} else{
 	
-		$subj = "RESET YOUR PASSWORD";
-		$msg  = "Hi there! <br /><br />Kindly use the otp below to restore your password;";		
-
-	}
-
+	
 	mail_mailer($email, $activator, $subj, $msg);
 	echo "New OTP Code sent to your email";
 }
