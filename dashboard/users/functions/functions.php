@@ -359,9 +359,11 @@ if(isset($_POST['username']) && isset($_POST['password'])) {
 					//redirect to author dashbaord
 					if($role == 'author') {
 
+						$_SESSION['login'] = $username;
+
 					echo 'Loading... Please Wait';	
 
-					echo '<script>window.location.href ="../author/./"</script>';	
+					echo '<script>window.location.href ="author/./"</script>';	
 
 
 					}else {
@@ -370,10 +372,11 @@ if(isset($_POST['username']) && isset($_POST['password'])) {
 					//redirect to publisher dashboard
 					if($role == 'publisher') {
 
+					$_SESSION['login'] = $username;
 
 					echo 'Loading... Please Wait';	
 
-					echo '<script>window.location.href ="../author/./"</script>';	
+					echo '<script>window.location.href ="publisher/./"</script>';	
 
 
 					} else {
