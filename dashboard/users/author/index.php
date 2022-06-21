@@ -32,47 +32,10 @@ user_details();
                     <div class="container-xxl flex-grow-1 container-p-y">
                         <div class="row">
 
-                            <div class="col-lg-8 mb-4 order-0">
-                                <div class="card">
-                                    <div class="d-flex align-items-end row">
-                                        <div class="col-sm-7">
-                                            <div class="card-body">
-                                                <h5 class="card-title text-primary">Welcome
-                                                    <?php echo $t_users['usname'] ?> 😇 </h5>
-                                                <?php 
-
-                                                  //greet new users
-                                                  if($t_users['status'] == '2') {
-
-                                                    echo '<p class="mb-5">Here is an overview of your activities on Books In Vogue</p>';
-
-                                                  } else {
-
-                                                    echo '<p class="mb-4">Pick from where you left off... <br> Continue reading <span class="fw-bold">hsdhdh</span></p>';
-
-                                                    echo ' <a href="javascript:;" class="btn btn-sm btn-outline-primary">Continue Reading...</a>';
-                                                  }
-                                                ?>
-                                                </p>
-
-
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-5 text-center text-sm-left">
-                                            <div class="card-body pb-0 px-0 px-md-4">
-                                                <img src="assets/img/illustrations/man-with-laptop-light.png"
-                                                    height="140" alt="View Badge User"
-                                                    data-app-dark-img="illustrations/man-with-laptop-dark.png"
-                                                    data-app-light-img="illustrations/man-with-laptop-light.png" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-4 col-md-4 col-sm-6 order-0">
+                            <div class="col-lg-12 col-md-12 col-sm-12 order-0">
                                 <div class="row">
-                                    <div class="col-lg-12 col-md-12 col-sm-6 mb-4">
+
+                                    <div class="col-lg-4 col-md-4 col-sm-6 mb-4">
                                         <div class="card">
                                             <div class="card-body">
                                                 <div
@@ -83,7 +46,47 @@ user_details();
                                                     </div>
 
                                                 </div>
-                                                <span class="fw-semibold d-block mb-1">Wallet Balance</span>
+                                                <span class="fw-semibold d-block mb-1">Total Books Sold</span>
+                                                <h3 class="card-title mb-3">
+                                                    <?php echo number_format($t_users['wallet']) ?></h3>
+                                                <a href="javascript:;" class="btn btn-sm btn-outline-primary">View
+                                                    Details</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-4 col-sm-6 mb-4">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div
+                                                    class="card-title d-flex align-items-start justify-content-between">
+                                                    <div class="avatar flex-shrink-0">
+                                                        <img src="assets/img/icons/unicons/wallet-info.png"
+                                                            alt="chart success" class="rounded" />
+                                                    </div>
+
+                                                </div>
+                                                <span class="fw-semibold d-block mb-1">Available Balance</span>
+                                                <h3 class="card-title mb-3">
+                                                    ₦<?php echo number_format($t_users['wallet']) ?></h3>
+                                                <a href="javascript:;"
+                                                    class="btn btn-sm btn-outline-primary">Withdraw</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-4 col-sm-6 mb-4">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div
+                                                    class="card-title d-flex align-items-start justify-content-between">
+                                                    <div class="avatar flex-shrink-0">
+                                                        <img src="assets/img/icons/unicons/wallet-info.png"
+                                                            alt="chart success" class="rounded" />
+                                                    </div>
+
+                                                </div>
+                                                <span class="fw-semibold d-block mb-1">Active Advert(s)</span>
                                                 <h3 class="card-title mb-3">
                                                     ₦<?php echo number_format($t_users['wallet']) ?></h3>
                                                 <a href="javascript:;" class="btn btn-sm btn-outline-primary">Fund
