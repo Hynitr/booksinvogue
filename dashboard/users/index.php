@@ -236,10 +236,14 @@ input[type=number] {
                                                     $sl = "SELECT * FROM boughtbook WHERE `userid` = '$data' AND `reading` = 'Yes'";
                                                     $rs = query($sl);
                                                 
-                                                    while($rw = mysqli_fetch_array($rs)) {
+                                                    while($rrw = mysqli_fetch_array($rs)) {
 
-                                                        $nkid = 
-                                                        $bl = ""
+                                                        $nkid = $rrw['bookid'];
+
+                                                        $bl = "SELECT * FROM books WHERE `books_id` = '$nkid'";
+                                                        $lb = query($bl);
+
+                                                        while($rw = mysqli_fetch_array($lb)) {
 
                                                     ?>
 
@@ -257,6 +261,7 @@ input[type=number] {
                                                     </tr>
 
                                                     <?php
+                                                        }
                                                     }
                                                     ?>
 
