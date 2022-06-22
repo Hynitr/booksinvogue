@@ -779,7 +779,27 @@ if(isset($_POST['amt']) && isset($_POST['bkid'])) {
 		$bskl.="VALUES('1', '$bbid', '$bkid', '$data', '$tref', 'Yes')";
 		$rkl = query($bskl);
 
+
+		//check if book is in wishlist and delete from wishlist
+		$whsl = "SELECT * FROM boughtbook WHERE `userid` = '$data' AND `reading` = 'wishlist' AND `bookid` = '$bkid'";
+		$whls = query($whsl);
+
+		if(row_count($whls) == null || row_count($whls) == '') {
+
+			//do nothing
+
+		} else {
+
+			//if a matching record is found, delete the matching record
+			$wdl = "DELETE FROM boughtbook WHERE `userid` = '$data' AND `reading` = 'wishlist' AND `bookid` = '$bkid'";
+			$wrl = query($wdl);
+		}
+
 		//redirect to bookshelf
+		$_SESSION['bookmsg'] = "Your Wallet has been funded successfully";
+		
+		echo 'Loading... Please Wait';
+		echo '<script>window.location.href ="./bookshelf"</script>';
 
 	} else {
 

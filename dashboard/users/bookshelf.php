@@ -35,6 +35,19 @@ user_details();
         <div class="layout-container">
 
 
+            <div style="display: none" id="pybst">
+                <div class="bs-toast toast show bg-primary toast-placement-ex m-2" role="alert" aria-live="assertive"
+                    aria-atomic="true" data-delay="20">
+                    <div class="toast-header">
+                        <i class="bx bx-bell me-2"></i>
+                        <div class="me-auto fw-semibold">You've got a new book</div>
+                        <small>Just now</small>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">A new book has just been added to your bookshelf
+                    </div>
+                </div>
+            </div>
             <!-- Menu -->
 
             <?php
@@ -238,6 +251,22 @@ user_details();
     <script src="assets/js/dashboards-analytics.js"></script>
 
     <script src="ajax.js"></script>
+    <?php
+    if(isset($_SESSION['bookmsg'])) {
+        
+        if(isset($_SESSION['bookmsg']) == 'Your Wallet has been funded successfully') {
+        
+        echo "
+        
+        <script>
+        $('#pybst').show();
+        </script>
+        ";
+        } 
+
+        unset($_SESSION['bookmsg']);
+    }
+    ?>
 </body>
 
 </html>
