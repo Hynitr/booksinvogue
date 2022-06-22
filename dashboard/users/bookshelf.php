@@ -69,7 +69,7 @@ user_details();
 
                             $user =  $_SESSION['login'];
 
-                                $ssl = "SELECT * FROM boughtbook WHERE `userid` = '$user' AND `reading` = 'Yes'";
+                                $ssl = "SELECT * FROM boughtbook WHERE `userid` = '$user' AND `reading` = 'Yes' ORDER BY `sn` desc";
                                 $rss = query($ssl);
 
                                 if(row_count($rss) == '' || row_count($rss) == null) {

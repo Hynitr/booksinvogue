@@ -330,4 +330,79 @@ $("#vsub").click(function () {
 
   });
 
+
+  //fund wallet
+  $("#paybtn").click(function() {
+
+    var amt  = $("#amrp").val();
+
+    if(amt == "" || amt == null) {
+
+      $("#pymsg").html('Please input an amount');
+
+    } else {
+
+    if(amt < 100) {
+
+      $("#pymsg").html('The minimum amount you can fund is ₦100');
+
+
+    } else {
+    
+      $("#pymsg").html('<img style="width: 100px; height: 100px" src="assets/img/loading.gif">');
+
+      var txt  = $("#txt").text();
+      var email  = $("#email").text();
+      var fname  = $("#fname").text();
+  
+  
+      FlutterwaveCheckout({
+        public_key: "FLWPUBK_TEST-583986bf78101b92c8ea9becde1795b8-X",
+        tx_ref: txt,
+        amount: amt,
+        currency: "NGN",
+        country: "NG",
+        payment_options: " ",
+        method: "POST",
+        redirect_url: // specified redirect URL
+            "./pay",
+        customer: {
+            email: email,
+            name: fname,
+        },
+        callback: function(data) {
+  
+            // specified callback function
+            console.log(data);
+        },
+        customizations: {
+            title: "Books in Vogue",
+            description: "Fund Wallet",
+            logo: "https://booksinvogue.com.ng/assests/logo.png",
+        },
+    });
+  
+    }
+    }
+});
+
+
+
+//buy book
+$("#bkkpaybtn").click(function() {
+
+    $("#pymsg").html('<img style="width: 100px; height: 100px" src="assets/img/loading.gif">');
+
+    var amt  = $("#bkamt").text();
+    var bkid  = $("#bkid").text();
+
+    $.ajax({
+      type: "post",
+      url: "functions/init.php",
+      data: {amt: amt, bkid: bkid},
+      success: function (data) {
+        $("#bkpymsg").html(data);
+      }
+    });
+});
 });

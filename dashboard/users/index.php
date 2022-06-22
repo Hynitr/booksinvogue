@@ -3,10 +3,55 @@ include("components/top.php");
 user_details();
 ?>
 
+<style>
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+</style>
+
 <body>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
+
+            <div style="display: none" id="pybst">
+                <div class="bs-toast toast show bg-primary toast-placement-ex m-2" role="alert" aria-live="assertive"
+                    aria-atomic="true" data-delay="20">
+                    <div class="toast-header">
+                        <i class="bx bx-bell me-2"></i>
+                        <div class="me-auto fw-semibold">Credit Alert</div>
+                        <small>Just now</small>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">Your Wallet has been funded successfully
+                    </div>
+                </div>
+            </div>
+
+            <div style="display: none" id="pybstdd">
+                <div class="bs-toast toast show bg-danger toast-placement-ex m-2" role="alert" aria-live="assertive"
+                    aria-atomic="true" data-delay="20">
+                    <div class="toast-header">
+                        <i class="bx bx-bell me-2"></i>
+                        <div class="me-auto fw-semibold">Payment Error</div>
+                        <small>Just now</small>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">There was an error processing your payment
+                    </div>
+                </div>
+            </div>
+
+
+
             <!-- Menu -->
 
             <?php
@@ -86,8 +131,9 @@ user_details();
                                                 <span class="fw-semibold d-block mb-1">Wallet Balance</span>
                                                 <h3 class="card-title mb-3">
                                                     ₦<?php echo number_format($t_users['wallet']) ?></h3>
-                                                <a href="javascript:;" class="btn btn-sm btn-outline-primary">Fund
-                                                    Wallet</a>
+                                                <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
+                                                    data-bs-target="#modalCenter">Fund
+                                                    Wallet</button>
                                             </div>
                                         </div>
                                     </div>
@@ -97,6 +143,55 @@ user_details();
                         </div>
 
 
+                        <!-- Modal -->
+                        <div class="modal fade" id="modalCenter" data-bs-backdrop="static" tabindex="-1"
+                            aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modalCenterTitle">Fund your wallet</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col mb-3">
+                                                <label for="amount" class="form-label">Enter an amount</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text">₦</span>
+                                                    <input type="number" class="form-control"
+                                                        placeholder="Minimum of ₦100" id="amrp" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <p id="pymsg" class="text-danger"></p>
+
+
+                                        <p id="txt" hidden><?php  echo md5(rand(0, 9999)); ?></p>
+                                        <p id="email" hidden><?php echo $t_users['email'] ?></p>
+                                        <p id="fname" hidden><?php echo $t_users['fullname'] ?></p>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                            Cancel
+                                        </button>
+                                        <button type="button" id="paybtn" class="btn btn-primary">Fund Wallet</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <?php 
+                        $data = $_SESSION['login'];
+                        $sql = "SELECT sum(`id`) AS booktoal FROM boughtbook WHERE `userid` = '$data' AND `reading` = 'Yes'";
+                        $res = query($sql);
+                       
+                        $row = mysqli_fetch_array($res);
+
+                        ?>
 
 
                         <!-- Total Revenue -->
@@ -110,7 +205,8 @@ user_details();
                                                     class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
                                                     <div class="card-title">
                                                         <h5 class="text-nowrap mb-5">Total Books Bought</h5>
-                                                        <h2 class="mb-4">8,258</h2>
+                                                        <h2 class="mb-4"><?php echo number_format($row['booktoal']) ?>
+                                                        </h2>
                                                         <a href="javascript:;"
                                                             class="btn btn-sm btn-outline-primary">Buy New Book</a>
                                                     </div>
@@ -134,17 +230,35 @@ user_details();
                                                     </tr>
                                                 </thead>
                                                 <tbody class="table-border-bottom-0">
+
+                                                    <?php 
+                                                    
+                                                    $sl = "SELECT * FROM boughtbook WHERE `userid` = '$data' AND `reading` = 'Yes'";
+                                                    $rs = query($sl);
+                                                
+                                                    while($rw = mysqli_fetch_array($rs)) {
+
+                                                        $nkid = 
+                                                        $bl = ""
+
+                                                    ?>
+
+
+
                                                     <tr>
                                                         <td><i class="fab fa-angular fa-lg text-danger me-3"></i>
-                                                            <strong>Angular Project</strong>
+                                                            <strong><?php echo ucfirst($rw['book_title']) ?></strong>
                                                         </td>
-                                                        <td>Albert Cook</td>
+                                                        <td><?php echo ucfirst($rw['author']) ?></td>
                                                         <td>39848 </td>
                                                         <td><span class="badge bg-label-primary me-1">Tap to Read</span>
                                                         </td>
 
                                                     </tr>
 
+                                                    <?php
+                                                    }
+                                                    ?>
 
                                                 </tbody>
                                             </table>
@@ -160,6 +274,10 @@ user_details();
 
                 </div>
                 <!-- / Content -->
+
+
+
+
 
                 <!-- Footer -->
                 <?php
@@ -196,9 +314,12 @@ user_details();
 
     <!-- Main JS -->
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/ui-toasts.js"></script>
 
-    <!-- Page JS -->
-    <script src="assets/js/dashboards-analytics.js"></script>
+    <script src="https://checkout.flutterwave.com/v3.js"></script>
+
+    <script src="ajax.js"></script>
+
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script src="node_modules/canvas-confetti/dist/confetti.browser.js"></script>
@@ -255,6 +376,31 @@ user_details();
     
     $sql = "UPDATE `users` SET `status` = '1' WHERE `usname` = '$user'";
     $rsl = query($sql);
+
+
+    if(isset($_SESSION['paymsg'])) {
+        
+        if(isset($_SESSION['paymsg']) == 'Your Wallet has been funded successfully') {
+        
+        echo "
+        
+        <script>
+        $('#pybst').show();
+        </script>
+        ";
+        } else {
+
+            echo  "
+          
+            <script>
+            $('#pybstdd').show();
+            </script>
+            ";
+        
+        }
+
+        unset($_SESSION['paymsg']);
+    }
     ?>
 </body>
 

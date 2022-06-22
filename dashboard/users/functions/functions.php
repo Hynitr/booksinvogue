@@ -739,6 +739,60 @@ if(isset($_POST['wishid'])) {
 	
 }
 
+
+//make payment for book
+if(isset($_POST['amt']) && isset($_POST['bkid'])) {
+
+	$amt = $_POST['amt'];
+	$bkid = $_POST['bkid'];
+	$tref = "bivpay".rand(0, 999);
+	$bbid = "bbid".rand(0, 999);
+	$date = date("Y-m-d h:i:sa");
+	$data = $_SESSION['login'];
+	$note = "Your wallet was debited with ₦".number_format($amt);
+
+	
+
+	//check if user has eneough money in wallet
+	user_details();
+
+	if($t_users['wallet'] > $amt) {
+
+		//get new user wallet balance
+		$newbal = $t_users['wallet'] - $amt;
+
+		
+		//insert into transaction history
+        $tsql = "INSERT INTO t_his(`t_ref`, `amt`, `datepaid`, `username`, `sn`, `status`, `paynote`)";
+        $tsql .= "VALUES('$tref', '$amt', '$date', '$data', '1', 'debit', '$note')";
+
+        $tes = query($tsql);
+
+
+		//update wallet balance
+		$upsl = "UPDATE users SET `wallet` = '$newbal' WHERE `usname` = '$data'";
+		$uel = query($upsl);
+
+
+		//add to bookshelf
+		
+		$bskl = "INSERT INTO bookbought (`id`, `bbid`, `bookid`, `userid`, `tranid`, `reading`)";
+		$bskl = "VALUES('1', '$bbid', '$bkid', '$data', '$tref', 'Yes')";
+
+		$rkl = query($bskl);
+
+		//redirect to bookshelf
+
+		echo "helo";
+
+	} else {
+
+		echo "Insufficent balance in your wallet. <a href='#' id='altpay'>click here to pay online</a>";
+
+	}
+	
+}
+
 //get account name
 if(isset($_POST['bank']) && isset($_POST['acctn']) && isset($_POST['trd'])) {
 

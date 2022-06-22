@@ -181,13 +181,7 @@ if(!isset($_GET['id'])) {
 
 
                                                                 <button class="btn btn-primary text-nowrap" id="clss"
-                                                                    data-bs-toggle="popover" data-bs-offset="0,14"
-                                                                    data-bs-placement="top" data-bs-html="true"
-                                                                    data-bs-content="<p>You will be charged <b>₦<?php echo number_format($row['selling_price']) ?></b> for this book</p>
-                                                                    <div class='d-flex justify-content-between'><button
-                                                                            type='button'
-                                                                            class='btn btn-sm btn-primary'>Proceed</button></div>"
-                                                                    title="Are you sure you want to buy this book?"
+                                                                    data-bs-toggle="modal" data-bs-target="#modalCenter"
                                                                     type="button">Buy
                                                                     this book
                                                                 </button>
@@ -201,6 +195,68 @@ if(!isset($_GET['id'])) {
                                                             </p>
 
                                                         </span>
+
+
+                                                        <!-- Modal -->
+                                                        <div class="modal fade" id="modalCenter"
+                                                            data-bs-backdrop="static" tabindex="-1" aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered"
+                                                                role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="modalCenterTitle">
+                                                                            You are about to buy <br />
+                                                                            <b><?php echo ucfirst($row['book_title']) ?></b>
+                                                                            <br />
+                                                                            by
+                                                                            <b><?php echo ucfirst($row['author']) ?></b>
+                                                                        </h5>
+
+                                                                        <button type="button" class="btn-close"
+                                                                            data-bs-dismiss="modal"
+                                                                            aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div class="row">
+                                                                            <div class="col mb-3">
+                                                                                <p>You will be charged
+                                                                                    <b>₦<?php echo number_format($row['selling_price']) ?></b>
+                                                                                    for this book
+                                                                                </p>
+
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <p id="bkpymsg" class="text-danger"></p>
+
+                                                                        <p id="bkamt" hidden>
+                                                                            <?php echo $row['selling_price']; ?></p>
+
+                                                                        <p id="bkid" hidden>
+                                                                            <?php echo $row['books_id']; ?></p>
+
+                                                                        <p id="txt" hidden>
+                                                                            <?php  echo md5(rand(0, 9999)); ?></p>
+                                                                        <p id="email" hidden>
+                                                                            <?php echo $t_users['email'] ?></p>
+                                                                        <p id="fname" hidden>
+                                                                            <?php echo $t_users['fullname'] ?></p>
+
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button"
+                                                                            class="btn btn-outline-secondary"
+                                                                            data-bs-dismiss="modal">
+                                                                            Cancel
+                                                                        </button>
+                                                                        <button type="button" id="bkkpaybtn"
+                                                                            class="btn btn-primary">Make
+                                                                            Payment</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
                                                     </div>
                                                 </div>
 
@@ -273,6 +329,9 @@ if(!isset($_GET['id'])) {
 
     <!-- Page JS -->
     <script src="assets/js/ui-popover.js"></script>
+    <script src="assets/js/ui-toasts.js"></script>
+
+    <script src="https://checkout.flutterwave.com/v3.js"></script>
 
     <script src="ajax.js"></script>
 </body>
