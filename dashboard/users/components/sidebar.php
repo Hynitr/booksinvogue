@@ -65,19 +65,13 @@
                 Settings</span></li>
         <!-- Forms -->
         <li class="menu-item">
-            <a href="#" class="menu-link">
+            <a href="./profile" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-detail"></i>
                 <div data-i18n="Form Elements">My Profile</div>
             </a>
 
         </li>
-        <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-envelope"></i>
-                <div data-i18n="Form Layouts">My Inbox</div>
-            </a>
-        </li>
-        <!-- Tables -->
+
         <li class="menu-item">
             <a href="#" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
