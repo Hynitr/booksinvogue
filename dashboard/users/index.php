@@ -255,8 +255,11 @@ input[type=number] {
                                                         </td>
                                                         <td><?php echo ucfirst($rw['author']) ?></td>
                                                         <td>39848 </td>
-                                                        <td><span class="badge bg-label-primary me-1">Tap to Read</span>
+                                                        <td> <a href="./read?id=<?php echo $nkid ?>"><span
+                                                                    class="badge bg-label-primary me-1">Tap to
+                                                                    Read</span> </a>
                                                         </td>
+
 
                                                     </tr>
 
