@@ -94,9 +94,10 @@ user_details();
                                 }
 
                                 $id = $row['books_id'];
+                                $userid = $_SESSION['login'];
 
 
-                                $ssl = "SELECT * FROM boughtbook WHERE `bookid` = '$id' AND `reading` = 'wishlist'";
+                                $ssl = "SELECT * FROM boughtbook WHERE `bookid` = '$id' AND `reading` = 'wishlist' AND `userid` = '$userid'";
                                 $rss = query($ssl);
 
                                 if(row_count($rss) == '' || row_count($rss) == null) {
@@ -137,7 +138,25 @@ user_details();
                                     
                                 }
 
-                        ?>
+
+                                $sbl = "SELECT * FROM boughtbook WHERE `bookid` = '$id' AND `reading` = 'Yes' AND `userid` = '$userid'";
+                                $rbs = query($sbl);
+
+                                if(row_count($rbs) == '' || row_count($rbs) == null) {
+
+                                    $nkbs = '<a href="./bookdetails?id='.$id.'" class="btn btn-primary me-1" type="button">
+                                    Buy this book
+                                    </a>';
+                                     
+                            } else {
+
+                                $nkbs = '<a href="./read?id='.$id.'" class="btn btn-primary me-1" type="button">
+                                Read this book
+                                </a>';
+
+                                }
+
+                                ?>
 
                             <div class="container-xxl flex-grow-1 container-p-y">
                                 <div class="row">
@@ -177,9 +196,7 @@ user_details();
                                                                 </a>
 
 
-                                                                <a href="./bookdetails?id=<?php echo $row['books_id'] ?>"
-                                                                    class="btn btn-primary me-1" type="button">Buy
-                                                                    this book </a>
+                                                                <?php echo $nkbs ?>
 
                                                                 <a class="btn btn-primary me-1">
                                                                     <i class="bx bx-share-alt text-white"></i>

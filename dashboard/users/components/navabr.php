@@ -10,7 +10,7 @@
         <!-- Search -->
         <div class="navbar-nav align-items-center">
             <div class="nav-item d-flex align-items-center">
-                <a href="https://bookinvogue.com">MAIN WEBSITE</a>
+                <a href="https://bookinvogue.com.ng">MAIN WEBSITE</a>
             </div>
         </div>
         <!-- /Search -->

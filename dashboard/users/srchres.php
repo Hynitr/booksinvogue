@@ -19,7 +19,7 @@ if(row_count($ExecQuery) == '' || row_count($ExecQuery) == null) {
     <div class="container-xxl container-p-y text-center">
       <div class="misc-wrapper">
         <h2 class="mb-2 mx-2">Uh Oh 😢 </h2>
-        <p class="mb-4 mx-2">We could not this book </p>
+        <p class="mb-4 mx-2">We could not find this book </p>
         <a href="./books" class="btn btn-primary">Get some book(s) from our library</a>
         <div class="mt-4">
           <img
@@ -70,9 +70,10 @@ echo '
         }
 
         $id = $row['books_id'];
+        $userid = $_SESSION['login'];
 
 
-        $ssl = "SELECT * FROM boughtbook WHERE `bookid` = '$id' AND `reading` = 'wishlist'";
+        $ssl = "SELECT * FROM boughtbook WHERE `bookid` = '$id' AND `reading` = 'wishlist' AND `userid` = '$userid'";
         $rss = query($ssl);
 
         if(row_count($rss) == '' || row_count($rss) == null) {
@@ -112,7 +113,22 @@ echo '
             
         }
 
+        $sbl = "SELECT * FROM boughtbook WHERE `bookid` = '$id' AND `reading` = 'Yes' AND `userid` = '$userid'";
+        $rbs = query($sbl);
 
+        if(row_count($rbs) == '' || row_count($rbs) == null) {
+
+            $nkbs = '<a href="./bookdetails?id='.$id.'" class="btn btn-primary me-1" type="button">
+            Buy this book
+            </a>';
+             
+    } else {
+
+        $nkbs = '<a href="./read?id='.$id.'" class="btn btn-primary me-1" type="button">
+        Read this book
+        </a>';
+
+        }
        ?>
  <!-- Creating unordered list items.
         Calling javascript function named as "fill" found in "script.js" file.
@@ -153,9 +169,7 @@ echo '
                                      </a>
 
 
-                                     <a href="./bookdetails?id=<?php echo $row['books_id'] ?>"
-                                         class="btn btn-primary me-1" type="button">Buy
-                                         this book </a>
+                                     <?php echo $nkbs ?>
 
                                      <a class="btn btn-primary me-1">
                                          <i class="bx bx-share-alt text-white"></i>

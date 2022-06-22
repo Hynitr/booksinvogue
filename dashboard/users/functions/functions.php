@@ -743,30 +743,28 @@ if(isset($_POST['wishid'])) {
 //make payment for book
 if(isset($_POST['amt']) && isset($_POST['bkid'])) {
 
-	$amter = $_POST['amt'];
-	$bkid = $_POST['bkid'];
-	
-	$tref = "bivpay".rand(0, 999);
-	$bbid = "bbid".rand(0, 999);
-	$date = date("Y-m-d h:i:sa");
-	$data = $_SESSION['login'];
-	$note = "Your wallet was debited with ₦".number_format($amter);
-
-	
+	$amter = $_POST['amt'] - 0;
 
 	//check if user has eneough money in wallet
 	user_details();
 
 	if($t_users['wallet'] > $amter) {
 
+		$bkid = $_POST['bkid'] - 0;
+	
+		$tref = "bivpay".rand(0, 999);
+		$bbid = "bbid".rand(0, 999);
+		$date = date("Y-m-d h:i:sa");
+		$data = $_SESSION['login'];
+		$note = "Your wallet was debited with ₦".number_format($amter);
+
+
 		//get new user wallet balance
 		$newbal = $t_users['wallet'] - $amter;
-
 		
 		//insert into transaction history
-        $tsql = "INSERT INTO t_his(`t_ref`, `amt`, `datepaid`, `username`, `sn`, `status`, `paynote`)";
-        $tsql .= "VALUES('$tref', '$amter', '$date', '$data', '1', 'credit', '$note')";
-
+        $tsql="INSERT INTO t_his(`t_ref`, `amt`, `datepaid`, `username`, `sn`, `status`, `paynote`)";
+        $tsql.="VALUES('$tref', '$amter', '$date', '$data', '1', 'credit', '$note')";
         $tes = query($tsql);
 
 
@@ -779,12 +777,9 @@ if(isset($_POST['amt']) && isset($_POST['bkid'])) {
 		
 		$bskl="INSERT INTO boughtbook(`id`, `bbid`, `bookid`, `userid`, `tranid`, `reading`)";
 		$bskl.="VALUES('1', '$bbid', '$bkid', '$data', '$tref', 'Yes')";
-
 		$rkl = query($bskl);
 
 		//redirect to bookshelf
-
-		echo "helo";
 
 	} else {
 
