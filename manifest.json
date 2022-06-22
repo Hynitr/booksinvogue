@@ -1,0 +1,23 @@
+{
+  "short_name": "BooksinVogue",
+  "name": "BooksinVogue",
+  "description": "Read books you love",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "pwa.png",
+      "type": "image/png",
+      "sizes": "144x144"
+    }
+  ],
+  "start_url": "./?v3&utm_source=web_app_manifest",
+  "background_color": "#34459C",
+  "theme_color": "#34459C",
+  "color": "#fff",
+  "display": "minimal-ui",
+  "related_applications": [{
+    "platform": "web",
+    "orientation": "portrait",
+    "url": "https://booksinvogue.com.ng"
+  }]
+}
