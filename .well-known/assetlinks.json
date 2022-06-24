@@ -1,0 +1,6 @@
+[{
+        "relation": ["delegate_permission/common.handle_all_urls"],
+        "target" : { "namespace": "android_app", "package_name": "ng.com.booksinvogue.twa",
+                     "sha256_cert_fingerprints": ["3C:5E:31:FE:11:3E:4A:B4:9E:AC:69:ED:B7:64:68:CF:13:6A:02:41:A6:CE:82:A8:74:08:35:FE:96:38:F8:7E"] }
+      }
+]
