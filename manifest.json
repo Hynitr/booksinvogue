@@ -10,6 +10,13 @@
       "sizes": "144x144"
     }
   ],
+  "icons": [
+    {
+      "src": "images/512x512.png",
+      "type": "image/png",
+      "sizes": "512x1512"
+    }
+  ],
   "start_url": "./",
   "background_color": "#34459C",
   "theme_color": "#34459C",
