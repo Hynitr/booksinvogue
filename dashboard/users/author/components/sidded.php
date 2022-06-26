@@ -87,7 +87,7 @@
             </li>
 
             <li class="menu-item">
-                <a href="./logout" class="menu-link">
+                <a href=".././logout" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-lock"></i>
                     <div data-i18n="Tables">Logout</div>
                 </a>

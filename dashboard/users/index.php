@@ -207,8 +207,8 @@ input[type=number] {
                                                         <h5 class="text-nowrap mb-5">Total Books Bought</h5>
                                                         <h2 class="mb-4"><?php echo number_format($row['booktoal']) ?>
                                                         </h2>
-                                                        <a href="javascript:;"
-                                                            class="btn btn-sm btn-outline-primary">Buy New Book</a>
+                                                        <a href="./books" class="btn btn-sm btn-outline-primary">Buy New
+                                                            Book</a>
                                                     </div>
 
                                                 </div>
@@ -254,8 +254,8 @@ input[type=number] {
                                                             <strong><?php echo ucfirst($rw['book_title']) ?></strong>
                                                         </td>
                                                         <td><?php echo ucfirst($rw['author']) ?></td>
-                                                        <td>39848 </td>
-                                                        <td> <a href="./read?id=<?php echo $nkid ?>"><span
+                                                        <td>₦<?php echo number_format($rw['selling_price']) ?></td>
+                                                        <td> <a href="./read?id=<?php echo $rw['books_id'] ?>"><span
                                                                     class="badge bg-label-primary me-1">Tap to
                                                                     Read</span> </a>
                                                         </td>
