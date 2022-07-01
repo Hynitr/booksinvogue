@@ -33,6 +33,20 @@ See https://github.com/adobe-type-tools/cmap-resources
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>PDF.js viewer</title>
 
+    <style>
+    /* We are stopping user from
+         printing our webpage */
+    @media print {
+
+        html,
+        body {
+
+            /* Hide the whole page */
+            display: none;
+        }
+    }
+    </style>
+
 
     <link rel="stylesheet" href="viewer.css">
 
@@ -356,7 +370,7 @@ See https://github.com/adobe-type-tools/cmap-resources
                 </div>
             </div>
 
-            <div id="viewerContainer" tabindex="0">
+            <div style="background: #f5f5f9;" id="viewerContainer" tabindex="0">
                 <div id="viewer" class="pdfViewer"></div>
             </div>
 
@@ -464,26 +478,16 @@ See https://github.com/adobe-type-tools/cmap-resources
                     </div>
                 </div>
             </div>
-            <div id="printServiceOverlay" class="container hidden">
-                <div class="dialog">
-                    <div class="row">
-                        <span data-l10n-id="print_progress_message">Preparing document for printing…</span>
-                    </div>
-                    <div class="row">
-                        <progress value="0" max="100"></progress>
-                        <span data-l10n-id="print_progress_percent" data-l10n-args='{ "progress": 0 }'
-                            class="relative-progress">0%</span>
-                    </div>
-                    <div class="buttonRow">
-                        <button id="printCancel" class="overlayButton"><span
-                                data-l10n-id="print_progress_close">Cancel</span></button>
-                    </div>
-                </div>
-            </div>
         </div> <!-- overlayContainer -->
 
     </div> <!-- outerContainer -->
-    <div id="printContainer"></div>
+    <div id="printContainer" hidden></div>
 </body>
+<script src="../assets/vendor/libs/jquery/jquery.js"></script>
+<script>
+$(document).bind("contextmenu", function(e) {
+    return false;
+});
+</script>
 
 </html>

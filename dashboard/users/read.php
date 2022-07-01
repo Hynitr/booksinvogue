@@ -19,24 +19,21 @@ $row = mysqli_fetch_array($res);
 $_SESSION['file'] = $row['book_file'];
 ?>
 
-<style>
-#read {
-
-    position: fixed;
-    z-index: 999;
-    height: 100vh;
-    width: 77%;
-}
-
-/* smart phone screen */
-@media only screen and (max-width:600px) {
-    #read {
-        width: 93%;
-    }
-}
-</style>
 
 <body>
+    <style>
+    /* We are stopping user from
+         printing our webpage */
+    @media print {
+
+        html,
+        body {
+
+            /* Hide the whole page */
+            display: none;
+        }
+    }
+    </style>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
@@ -65,32 +62,9 @@ $_SESSION['file'] = $row['book_file'];
                     <div class="container-xxl flex-grow-1 container-p-y">
                         <div class="row">
 
-                            <div style="position: fixed;" class="col-lg-8 mb-4 order-0 w-100">
-                                <div class="card" id="read">
-                                    <div class="d-flex align-items-end row">
-                                        <div class="col-sm-7">
-                                            <div class="card-body">
-                                                <h5 class="card-title text-primary">You are currently reading
-                                                    <br />
-                                                    <span class="mt-5"><b
-                                                            class="text-dark"><?php echo $row['book_title'] ?></b></span>
-                                                </h5>
-                                                <div class="">
-                                                    <div class="container">
-                                                        <div style="height: 80vh;" class=" block-quick-info-2-inner">
-                                                            <div class="row">
-
-                                                                <iframe src="softbooks/viewer.php"
-                                                                    style="width: 100%; height: 75vh; z-index: 9999"></iframe>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="col-lg-12 mb-4 order-0 h-100">
+                                <iframe src="softbooks/viewer.php"
+                                    style="width: 100%; height: 80vh; z-index: 9999; border: none"></iframe>
                             </div>
 
 
@@ -143,6 +117,11 @@ $_SESSION['file'] = $row['book_file'];
     <script src="assets/js/main.js"></script>
     <script src="assets/js/ui-toasts.js"></script>
     <script src="ajax.js"></script>
+    <script>
+    $(document).bind("contextmenu", function(e) {
+        return false;
+    });
+    </script>
 </body>
 
 </html>

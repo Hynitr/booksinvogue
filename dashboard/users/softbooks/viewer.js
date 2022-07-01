@@ -1517,7 +1517,7 @@ const PDFViewerApplication = {
     let triggerAutoPrint = false;
 
     if (openAction?.action === "Print") {
-      triggerAutoPrint = true;
+      triggerAutoPrint = false;
     }
 
     if (javaScript) {
@@ -1534,7 +1534,7 @@ const PDFViewerApplication = {
       if (!triggerAutoPrint) {
         for (const js of javaScript) {
           if (js && _ui_utils.AutoPrintRegExp.test(js)) {
-            triggerAutoPrint = true;
+            triggerAutoPrint = false;
             break;
           }
         }
