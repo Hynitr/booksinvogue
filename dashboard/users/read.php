@@ -16,6 +16,7 @@ $sql = "SELECT * FROM books WHERE `books_id` = '$data'";
 $res = query($sql);
 $row = mysqli_fetch_array($res);
 
+$_SESSION['file'] = $row['book_file'];
 ?>
 
 <style>
@@ -30,7 +31,6 @@ $row = mysqli_fetch_array($res);
 /* smart phone screen */
 @media only screen and (max-width:600px) {
     #read {
-
         width: 93%;
     }
 }
@@ -75,16 +75,18 @@ $row = mysqli_fetch_array($res);
                                                     <span class="mt-5"><b
                                                             class="text-dark"><?php echo $row['book_title'] ?></b></span>
                                                 </h5>
-                                                <object data="mypdf.pdf" type="application/pdf" frameborder="0"
-                                                    width="100%" height="600px" style="padding: 20px;">
-                                                    <embed
-                                                        src="https://drive.google.com/file/d/1CRFdbp6uBDE-YKJFaqRm4uy9Z4wgMS7H/preview?usp=sharing"
-                                                        width="100%" height="600px" />
-                                                </object>
-                                                <!--<iframe
-                                                    src="assets/softbooks/<?php echo $row['book_file'] ?>#toolbar=0">
+                                                <div class="block-quick-info-2">
+                                                    <div class="container">
+                                                        <div style="height: 80vh;" class=" block-quick-info-2-inner">
+                                                            <div class="row">
 
-                                                </iframe>-->
+                                                                <iframe src="softbooks/viewer.php"
+                                                                    style="width: 100%; height: 75vh; z-index: 9999"></iframe>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -140,15 +142,7 @@ $row = mysqli_fetch_array($res);
     <!-- Main JS -->
     <script src="assets/js/main.js"></script>
     <script src="assets/js/ui-toasts.js"></script>
-
-    <script src="https://checkout.flutterwave.com/v3.js"></script>
-
     <script src="ajax.js"></script>
-
-
-    <!-- Place this tag in your head or just before your close body tag. -->
-    <script src="node_modules/canvas-confetti/dist/confetti.browser.js"></script>
-
 </body>
 
 </html>
