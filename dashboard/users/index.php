@@ -93,9 +93,9 @@ input[type=number] {
 
                                                   } else {
 
-                                                    echo '<p class="mb-4">Pick from where you left off... <br> Continue reading <span class="fw-bold">hsdhdh</span></p>';
+                                                    echo '<p class="mb-4">Pick from where you left off...</p>';
 
-                                                    echo ' <a href="javascript:;" class="btn btn-sm btn-outline-primary">Continue Reading...</a>';
+                                                    echo ' <a href="./bookshelf" class="btn btn-sm btn-outline-primary">View Your Books</a>';
                                                   }
                                                 ?>
                                                 </p>
