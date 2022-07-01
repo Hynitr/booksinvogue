@@ -30,7 +30,7 @@
 
 
         <li class="menu-item">
-            <a href="#" class="menu-link">
+            <a href="./upload" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-upload"></i>
                 <div data-i18n="book">Upload new book</div>
             </a>

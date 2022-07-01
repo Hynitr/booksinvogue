@@ -54,7 +54,7 @@
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Transactions</span></li>
         <!-- Cards -->
         <li class="menu-item">
-            <a href="#" class="menu-link">
+            <a href="./transactions" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-dollar"></i>
                 <div data-i18n="Basic">My Transactions</div>
             </a>
