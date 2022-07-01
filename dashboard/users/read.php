@@ -75,7 +75,7 @@ $_SESSION['file'] = $row['book_file'];
                                                     <span class="mt-5"><b
                                                             class="text-dark"><?php echo $row['book_title'] ?></b></span>
                                                 </h5>
-                                                <div class="block-quick-info-2">
+                                                <div class="">
                                                     <div class="container">
                                                         <div style="height: 80vh;" class=" block-quick-info-2-inner">
                                                             <div class="row">

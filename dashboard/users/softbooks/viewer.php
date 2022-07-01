@@ -81,7 +81,7 @@ See https://github.com/adobe-type-tools/cmap-resources
                     <div id="outlineOptionsContainer" class="hidden">
                         <div class="verticalToolbarSeparator"></div>
 
-                        <button id="currentOutlineItem" class="toolbarButton" disabled="disabled"
+                        <button id="currentOutlineItem" class="toolbarButton hidden" disabled="disabled"
                             title="Find Current Outline Item" tabindex="6" data-l10n-id="current_outline_item">
                             <span data-l10n-id="current_outline_item_label">Current Outline Item</span>
                         </button>
@@ -148,22 +148,23 @@ See https://github.com/adobe-type-tools/cmap-resources
                         <span data-l10n-id="presentation_mode_label">Presentation Mode</span>
                     </button>
 
-                    <button id="secondaryOpenFile" class="secondaryToolbarButton openFile visibleLargeView"
+                    <button id="secondaryOpenFile" class="secondaryToolbarButton hidden openFile visibleLargeView"
                         title="Open File" tabindex="52" data-l10n-id="open_file">
                         <span data-l10n-id="open_file_label">Open</span>
                     </button>
 
-                    <button id="secondaryPrint" class="secondaryToolbarButton print visibleMediumView" title="Print"
-                        tabindex="53" data-l10n-id="print">
+                    <button id="secondaryPrint" class="secondaryToolbarButton print hidden visibleMediumView"
+                        title="Print" tabindex="53" data-l10n-id="print">
                         <span data-l10n-id="print_label">Print</span>
                     </button>
 
-                    <button id="secondaryDownload" class="secondaryToolbarButton download visibleMediumView"
+                    <button id="secondaryDownload" class="secondaryToolbarButton hidden download visibleMediumView"
                         title="Download" tabindex="54" data-l10n-id="download">
                         <span data-l10n-id="download_label">Download</span>
                     </button>
 
-                    <a href="#" id="secondaryViewBookmark" class="secondaryToolbarButton bookmark visibleSmallView"
+                    <a href="#" id="secondaryViewBookmark"
+                        class="secondaryToolbarButton hidden bookmark visibleSmallView"
                         title="Current view (copy or open in new window)" tabindex="55" data-l10n-id="bookmark">
                         <span data-l10n-id="bookmark_label">Current View</span>
                     </a>
@@ -276,18 +277,18 @@ See https://github.com/adobe-type-tools/cmap-resources
                                 <span data-l10n-id="presentation_mode_label">Presentation Mode</span>
                             </button>
 
-                            <button id="openFile" class="toolbarButton openFile hiddenLargeView" title="Open File"
-                                tabindex="32" data-l10n-id="open_file">
+                            <button id="openFile" class="toolbarButton openFile hidden hiddenLargeView"
+                                title="Open File" tabindex="32" data-l10n-id="open_file">
                                 <span data-l10n-id="open_file_label">Open</span>
                             </button>
 
-                            <button id="print" class="toolbarButton print hiddenMediumView" title="Print" tabindex="33"
-                                data-l10n-id="print">
+                            <button id="print" class="toolbarButton print hidden hiddenMediumView" title="Print"
+                                tabindex="33" data-l10n-id="print">
                                 <span data-l10n-id="print_label">Print</span>
                             </button>
 
-                            <button id="download" class="toolbarButton download hiddenMediumView" title="Download"
-                                tabindex="34" data-l10n-id="download">
+                            <button id="download" class="toolbarButton download hidden hiddenMediumView"
+                                title="Download" tabindex="34" data-l10n-id="download">
                                 <span data-l10n-id="download_label">Download</span>
                             </button>
                             <a href="#" id="viewBookmark" class="toolbarButton bookmark hiddenSmallView"
