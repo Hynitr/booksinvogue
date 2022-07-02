@@ -340,7 +340,7 @@ user_details();
                                                 <div
                                                     class="card-title d-flex align-items-start justify-content-between">
                                                     <div class="avatar flex-shrink-0">
-                                                        <img src="assets/img/icons/unicons/wallet-info.png"
+                                                        <img src="../assets/img/icons/unicons/wallet-info.png"
                                                             alt="chart success" class="rounded" />
                                                     </div>
 
@@ -361,7 +361,7 @@ user_details();
                                                 <div
                                                     class="card-title d-flex align-items-start justify-content-between">
                                                     <div class="avatar flex-shrink-0">
-                                                        <img src="assets/img/icons/unicons/wallet-info.png"
+                                                        <img src="../assets/img/icons/unicons/wallet-info.png"
                                                             alt="chart success" class="rounded" />
                                                     </div>
 
@@ -381,7 +381,7 @@ user_details();
                                                 <div
                                                     class="card-title d-flex align-items-start justify-content-between">
                                                     <div class="avatar flex-shrink-0">
-                                                        <img src="assets/img/icons/unicons/wallet-info.png"
+                                                        <img src="../assets/img/icons/unicons/wallet-info.png"
                                                             alt="chart success" class="rounded" />
                                                     </div>
 
@@ -401,7 +401,7 @@ user_details();
                                                 <div
                                                     class="card-title d-flex align-items-start justify-content-between">
                                                     <div class="avatar flex-shrink-0">
-                                                        <img src="assets/img/icons/unicons/wallet-info.png"
+                                                        <img src="../assets/img/icons/unicons/wallet-info.png"
                                                             alt="chart success" class="rounded" />
                                                     </div>
 
@@ -511,26 +511,26 @@ user_details();
 
 
     <!-- Core JS -->
-    <!-- build:js assets/vendor/js/core.js -->
-    <script src="assets/vendor/libs/jquery/jquery.js"></script>
-    <script src="assets/vendor/libs/popper/popper.js"></script>
-    <script src="assets/vendor/js/bootstrap.js"></script>
-    <script src="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <!-- build:js ../assets/vendor/js/core.js -->
+    <script src="../assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="../assets/vendor/libs/popper/popper.js"></script>
+    <script src="../assets/vendor/js/bootstrap.js"></script>
+    <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 
-    <script src="assets/vendor/js/menu.js"></script>
+    <script src="../assets/vendor/js/menu.js"></script>
     <!-- endbuild -->
 
     <!-- Vendors JS -->
-    <script src="assets/vendor/libs/apex-charts/apexcharts.js"></script>
+    <script src="../assets/vendor/libs/apex-charts/apexcharts.js"></script>
 
     <!-- Main JS -->
-    <script src="assets/js/main.js"></script>
+    <script src="../assets/js/main.js"></script>
 
     <!-- Page JS -->
     <script src="ajax.js"></script>
 
     <!-- Place this tag in your head or just before your close body tag. -->
-    <script src="node_modules/canvas-confetti/dist/confetti.browser.js"></script>
+    <script src="../node_modules/canvas-confetti/dist/confetti.browser.js"></script>
     <script>
     function shout() {
 

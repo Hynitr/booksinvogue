@@ -37,6 +37,13 @@
         </li>
 
         <li class="menu-item">
+            <a href="./drafts" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-edit"></i>
+                <div data-i18n="book">My Drafts</div>
+            </a>
+        </li>
+
+        <li class="menu-item">
             <a href="./bookshelf" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
                 <div data-i18n="book">My Bookshelf</div>

@@ -506,69 +506,24 @@ function user_details() {
 		$GLOBALS['t_users'] = mysqli_fetch_array($rsl);
 
 		//set passport for empty passport
-		if($GLOBALS['t_users']['passport'] == null) {
+		if($GLOBALS['t_users']['passport'] == null && $GLOBALS['t_users']['role'] == 'user') {
 			
 			$GLOBALS['passport'] = 'assets/img/user.png';
 
 		} else {
 
-			$GLOBALS['passport'] = $GLOBALS['t_users']['passport'];
-		}
+			if($GLOBALS['t_users']['passport'] == null && $GLOBALS['t_users']['role'] == 'author') {
+				
+				$GLOBALS['passport'] = '../assets/img/user.png';
+			} else {
+
+				$GLOBALS['passport'] = $GLOBALS['t_users']['passport'];
+			}
 
 		}
 	}
-	
 
-	//referal details
-	/*$rss = "SELECT sum(`active`) AS `earn` FROM `users` WHERE `ref` = '$data'";
-	$res = query($rss);
-    $GLOBALS['t_ref'] = mysqli_fetch_array($res);
-
-	$GLOBALS['t_ref_earn'] = $GLOBALS['t_ref']['earn'] * 100;
-
-
-	//classic savings plan
-	$clsvs = "SELECT * FROM `savings` WHERE `usname` = '$data' AND `plan` = 'Classic Savings Plan' AND `status` = 'Active'";
-	$clsvl = query($clsvs);
-	if(row_count($clsvl) != null) {
-		
-		$GLOBALS['clcsvs'] = mysqli_fetch_array($clsvl);
-
-		//get savings duration
-		$dur = $GLOBALS['clcsvs']['duration'];
-		$GLOBALS['campdura'] = date('Y-m-d h:i:s', strtotime($GLOBALS['clcsvs']['datepaid']. ' +'.$dur));
-	} 
-	
-
-	//flex target
-	$flsvs = "SELECT * FROM `flex` WHERE `usname` = '$data' AND `status` = 'Active'";
-	$flsvl = query($flsvs);
-	if(row_count($flsvl) != null) {
-	
-		$GLOBALS['flsvs'] = mysqli_fetch_array($flsvl);
-		
-	}
-
-
-	//flex savings
-	$lsvlr = "SELECT * FROM `savings` WHERE `usname` = '$data' AND `plan` = 'Flex Savings Plan' AND `status` = 'Active'";
-	$lsvrl = query($lsvlr);
-	if(row_count($lsvrl) != null) {
-	
-		$GLOBALS['lsrs'] = mysqli_fetch_array($lsvrl);
-	}
-
-	//campus saving plan
-	$cmsvs = "SELECT * FROM `savings` WHERE `usname` = '$data' AND `plan` = 'Campus Savings Plan' AND `status` = 'Active'";
-	$cmsvl = query($cmsvs);
-	if(row_count($cmsvl) != null) {
-
-	
-	$GLOBALS['cmsvs'] = mysqli_fetch_array($cmsvl);
-
-	}*/
-
-
+}
 }
 
 
