@@ -1146,6 +1146,11 @@ if(isset($_POST['booktitle']) && isset($_POST['bookdescp']) && isset($_POST['ser
 		$sql.="VALUES('$email', '$lang', '$booktitle', '$series', '$author', '$otherauthor', '$copyright', '$category', '$isbn', '$price', '$bivprofit', '0', '$bookdescp', 'draft', '$date')";
 		$res = query($sql);
 
-		echo $post_url   = str_replace(' ', '-', $booktitle);
+		//create session to store current book details
+		$_SESSION['bookupl'] = $booktitle;
+
+		echo '<script>book();</script>';
+
+		//echo $post_url   = str_replace(' ', '-', $booktitle);
 	}
 }

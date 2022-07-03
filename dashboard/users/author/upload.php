@@ -197,8 +197,7 @@ user_details();
 
                                         <div class="align-right">
                                             <button class="btn btn-primary me-1" id="bkupld" type="button">Save draft
-                                                and Next
-                                                Step</button>
+                                                and Next</button>
                                         </div>
                                     </div>
                                 </div>
@@ -220,6 +219,10 @@ user_details();
                                             <label for="formFileDisabled" class="form-label">Disabled file input
                                                 example</label>
                                             <input class="form-control" type="file" id="formFileDisabled" disabled />
+                                        </div>
+                                        <div class="align-right">
+                                            <button class="btn btn-primary me-1" id="bkupld" type="button">Save draft
+                                                and Next</button>
                                         </div>
                                     </div>
                                 </div>
@@ -266,14 +269,10 @@ user_details();
     <!-- Page JS -->
     <script src="ajax.js"></script>
     <script>
-    //open verify page by default
-    function otpVerify() {
-        document.getElementById('verify').style.display = 'block';
-    }
-
-    //close signup page
-    function signupClose() {
-        document.getElementById('signup').style.display = 'none';
+    //book file
+    function book() {
+        document.getElementById('bookdet').style.display = 'none';
+        document.getElementById('bokfile').style.display = 'block';
     }
     </script>
 </body>
