@@ -117,6 +117,22 @@ function usname_exist($usname) {
 }
 
 
+function book_exist($booktitle) {
+
+	$sql = "SELECT * FROM `books` WHERE `book_title` = '$booktitle'";
+	$result = query($sql);
+
+	if(row_count($result) == 1) {
+
+		return true;
+
+	}else {
+
+		return false;
+	} 
+}
+
+
 
 /** VALIDATE USER REGISTRATION **/
 if(isset($_POST['fname']) && isset($_POST['usname']) && isset($_POST['catgy']) && isset($_POST['email']) && isset($_POST['pword']) && isset($_POST['cpword']) && isset($_POST['ref'])) {
@@ -1095,6 +1111,41 @@ if(isset($_POST['bank']) && isset($_POST['acctn']) && isset($_POST['actnm'])){
 	//refresh index page
 	echo 'Loading... Please Wait';
 	echo '<script>window.location.href ="./"</script>';
-	
+}
 
+//uplaod book and softcopies
+if(isset($_POST['booktitle']) && isset($_POST['bookdescp']) && isset($_POST['series']) && isset($_POST['author']) && isset($_POST['otherauthor']) && isset($_POST['copyright']) && isset($_POST['category']) && isset($_POST['isbn']) && isset($_POST['price']) && isset($_POST['authprofit']) && isset($_POST['bivprofit']) && isset($_POST['lang'])) {
+
+	$booktitle = clean(escape($_POST['booktitle']));
+	$bookdescp = clean(escape($_POST['bookdescp']));
+	$series = clean(escape($_POST['series']));
+	$author = clean(escape($_POST['author']));
+	$otherauthor = clean(escape($_POST['otherauthor']));
+	$copyright = clean(escape($_POST['copyright']));
+	$category = clean(escape($_POST['category']));
+	$isbn = clean(escape($_POST['isbn']));
+	$price = clean(escape($_POST['price']));
+	$authprofit = clean(escape($_POST['authprofit']));
+	$bivprofit = clean(escape($_POST['bivprofit']));
+	$lang = clean(escape($_POST['lang']));
+	$date = date("F d, Y");
+
+	user_details();
+
+	$email = $t_users['email'];
+
+
+	if(book_exist($booktitle)) {
+
+		echo "This book is already has been published previously.";
+		
+	} else {
+
+		//insert into book db
+		$sql = "INSERT INTO books(`email_address`, `language`, `book_title`, `series_volume`, `author`, `other_author`, `copyright`, `category_1`, `isbn`, `selling_price`, `royalty_price`, `sold`, `description`, `book_status`, `date_posted`)";
+		$sql.="VALUES('$email', '$lang', '$booktitle', '$series', '$author', '$otherauthor', '$copyright', '$category', '$isbn', '$price', '$bivprofit', '0', '$bookdescp', 'draft', '$date')";
+		$res = query($sql);
+
+		echo $post_url   = str_replace(' ', '-', $booktitle);
+	}
 }

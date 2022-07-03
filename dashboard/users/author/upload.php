@@ -37,7 +37,7 @@ user_details();
                             <h5 class="card-header">Upload a new book</h5>
                             <div class="col-xl-12 col-12">
                                 <!-- HTML5 Inputs -->
-                                <div class="card mb-4">
+                                <div class="card mb-4" id="bookdet">
 
                                     <div class="card-body">
                                         <div class="mb-3 row">
@@ -59,6 +59,20 @@ user_details();
                                                 <p class="mt-2">Summarized details About The Book as it appears on the
                                                     back cover of the printed book. Write as you want it to appear on
                                                     your book detail’s page</p>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label for="html5-text-input" class="col-md-2 fw-bold">Book Language<sup
+                                                    class="text-danger"> *</sup></label>
+
+                                            <div class="col-md-10">
+                                                <select class="form-select" id="lang"
+                                                    aria-label="Default select example">
+                                                    <option id="lang">English</option>
+                                                    <option id="lang">French</option>
+                                                    <option id="lang">Yoruba</option>
+                                                </select>
+                                                <p class="mt-2">Select the language your book was written in</p>
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
@@ -179,16 +193,18 @@ user_details();
                                                 </p>
                                             </div>
                                         </div>
+                                        <p class="fw-bold text-danger" id="msg"></p>
 
                                         <div class="align-right">
-                                            <button class="btn btn-primary me-1" id="bkupld" type="button">Next
+                                            <button class="btn btn-primary me-1" id="bkupld" type="button">Save draft
+                                                and Next
                                                 Step</button>
                                         </div>
                                     </div>
                                 </div>
 
                                 <!-- File input -->
-                                <div class="card" hidden>
+                                <div style="display: none" class="card" id="bokfile">
                                     <h5 class="card-header">File input</h5>
                                     <div class="card-body">
                                         <div class="mb-3">
@@ -249,6 +265,17 @@ user_details();
 
     <!-- Page JS -->
     <script src="ajax.js"></script>
+    <script>
+    //open verify page by default
+    function otpVerify() {
+        document.getElementById('verify').style.display = 'block';
+    }
+
+    //close signup page
+    function signupClose() {
+        document.getElementById('signup').style.display = 'none';
+    }
+    </script>
 </body>
 
 </html>
