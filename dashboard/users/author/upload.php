@@ -207,22 +207,28 @@ user_details();
                                     <h5 class="card-header">File input</h5>
                                     <div class="card-body">
                                         <div class="mb-3">
-                                            <label for="formFile" class="form-label">Default file input example</label>
-                                            <input class="form-control" type="file" id="formFile" />
+                                            <label for="formFile" class="form-label fw-bold">Upload Book <sup
+                                                    class="text-danger">*</sup></label>
+                                            <input class="form-control" type="file" id="bkfile" />
+                                            <p class="mt-2">Acceptable formats are ".pdf"</p>
                                         </div>
+
                                         <div class="mb-3">
-                                            <label for="formFileMultiple" class="form-label">Multiple files input
-                                                example</label>
-                                            <input class="form-control" type="file" id="formFileMultiple" multiple />
+                                            <label for="formFile" class="form-label fw-bold">Upload Book Cover <sup
+                                                    class="text-danger">*</sup></label>
+                                            <input class="form-control" type="file" id="bkcov" />
+                                            <p class="mt-2">Acceptable formats are jpeg, png, gif, jpg. Whatever size
+                                                you upload, our
+                                                system will convert your uploaded format to acceptable size.</p>
                                         </div>
-                                        <div>
-                                            <label for="formFileDisabled" class="form-label">Disabled file input
-                                                example</label>
-                                            <input class="form-control" type="file" id="formFileDisabled" disabled />
-                                        </div>
-                                        <div class="align-right">
-                                            <button class="btn btn-primary me-1" id="bkupld" type="button">Save draft
-                                                and Next</button>
+
+                                        <p class="fw-bold text-danger" id="fmsg"></p>
+
+                                        <div class="mt-4">
+                                            <button type="button" class="btn btn-primary me-2" id="publ">Publish
+                                                Book</button>
+                                            <button type="button" class="btn btn-outline-secondary" id="svdft">Save to
+                                                draft</button>
                                         </div>
                                     </div>
                                 </div>
@@ -275,6 +281,14 @@ user_details();
         document.getElementById('bokfile').style.display = 'block';
     }
     </script>
+
+    <?php 
+    if(isset($_SESSION['bookupl'])) {
+
+        echo "<script>book()</script>";
+        
+    }
+    ?>
 </body>
 
 </html>

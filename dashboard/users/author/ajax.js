@@ -71,10 +71,9 @@ $(document).ready(function () {
     $("#authprofit").val(authprof);
     $("#bivprofit").val(bivprof);
 
-
   });
 
-   //save author acct details
+   //upload book
    $("#bkupld").click(function () {
     var booktitle = $("#booktitle").val();
     var bookdescp = $("#bookdescp").val();
@@ -118,6 +117,39 @@ $(document).ready(function () {
     }
     
     
+
+  });
+
+
+  //publish book file
+  $("#publ").click(function () {
+
+    //book file
+    var fd = new FormData();
+    var files = $("#bkfile").prop("files")[0];
+    fd.append("file", files);
+
+    //book cover
+    var bkcs = $("#bkcov").prop("bkcs");
+    fd.append("file", bkcs);
+
+    if (files == null || files == "") {
+
+      $("#fmsg").html("Kindly select a book");
+
+    } else {
+
+      if(bkcs == null || bkcs == ""){
+
+        $("#fmsg").html("Kindly select a book cover");
+
+      } else {
+
+        $("#fmsg").html(files);
+
+      }
+
+    }
 
   });
 });
