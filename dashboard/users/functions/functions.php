@@ -1147,10 +1147,63 @@ if(isset($_POST['booktitle']) && isset($_POST['bookdescp']) && isset($_POST['ser
 		$res = query($sql);
 
 		//create session to store current book details
-		$_SESSION['bookupl'] = $booktitle;
+		$_SESSION['bookupl'] = str_replace(' ', '-', $booktitle);
+
+		$_SESSION['booknew'] = str_replace(' ', '-', $booktitle);
 
 		echo '<script>book();</script>';
 
 		//echo $post_url   = str_replace(' ', '-', $booktitle);
 	}
+}
+
+//publush book with book image and book cover
+if (!empty($_FILES["fil"]["name"]) && !empty($_FILES["covfile"]["name"])) {
+	
+	$target_dir1 = "../softbooks/";
+	$target_dir2 = "../assets/bookscover/";
+
+	$target_file1 =  basename($_FILES["fil"]["name"]);
+	$target_file2 =  basename($_FILES["covfile"]["name"]);
+
+	$targetFilePath1 = $target_dir1 . $target_file1;
+	$targetFilePath2 = $target_dir2 . $target_file2;
+
+	$uploadOk = 1;
+
+	$imageFileType1 = pathinfo($target_file1,PATHINFO_EXTENSION);
+	$imageFileType2 = pathinfo($target_file2,PATHINFO_EXTENSION);
+
+	
+	// Allow certain file formats
+	if($imageFileType1 != "pdf" && $imageFileType2 != "pdf") {
+		echo "Sorry, only .pdf files are allowed.";
+		$uploadOk = 0;
+	} else {
+	// Check if $uploadOk is set to 0 by an error
+	if ($uploadOk == 0) {
+	   echo "Sorry, your book was not uploaded.";
+	// if everything is ok, try to upload file
+	} else {
+	   
+	   move_uploaded_file($_FILES["fil"]["tmp_name"], $targetFilePath1);
+	   move_uploaded_file($_FILES["covfile"]["tmp_name"], $targetFilePath2);
+	   book_img($target_file1, $target_file2);
+	}	    	
+	}	
+}
+
+///sql update books image in db
+function book_img($target_file1, $target_file2) {
+
+	$cod     = $_SESSION['bookupl'];
+	$code    = str_replace('-', ' ', $cod);
+
+	$sql 	  = "UPDATE `books` SET `book_file` = '$target_file1', `book_cover` = '$target_file2' WHERE `book_title` = '$code'";
+	$res 	  = query($sql);
+
+	echo 'Loading.. Please wait';
+	echo "<script>shout(); $('#pybst').show();</script>";
+
+	unset($_SESSION['bookupl']);
 }

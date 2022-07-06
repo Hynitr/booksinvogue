@@ -1,6 +1,7 @@
 <?php
 include("components/top.php");
 user_details();
+
 ?>
 
 <body>
@@ -8,6 +9,22 @@ user_details();
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
             <!-- Menu -->
+
+            <div style="display: none" id="pybst">
+                <div class="bs-toast toast show bg-primary toast-placement-ex m-2" role="alert" aria-live="assertive"
+                    aria-atomic="true" data-delay="20">
+                    <div class="toast-header">
+                        <i class="bx bx-check me-2"></i>
+                        <div class="me-auto fw-semibold">Book Uploaded Successfully</div>
+                        <small>Just now</small>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">You just uploaded a new book. <br>Kindly check your bookshelf to view the
+                        book
+                    </div>
+                </div>
+            </div>
+
 
 
             <?php
@@ -203,7 +220,7 @@ user_details();
                                 </div>
 
                                 <!-- File input -->
-                                <div style="display: none" class="card" id="bokfile">
+                                <div style="display: none" class="card" id="bokfile" enctype="multipart/form-data">
                                     <h5 class="card-header">File input</h5>
                                     <div class="card-body">
                                         <div class="mb-3">
@@ -237,21 +254,43 @@ user_details();
                     </div>
                     <!-- / Content -->
 
-                    <!-- Footer -->
-                    <?php
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="backDropModal" data-bs-backdrop="static" tabindex="-1">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <form class="modal-content">
+                                <h2 class="modal-title text-center py-4 px-5">Your book is live!</h2>
+                                <img src="../assets/img/75_smile.gif" class="img-fluid">
+                                <div class="modal-footer">
+                                    <a href="./bookshelf"> <button type="button" class="btn btn-outline-secondary"
+                                            data-bs-dismiss="modal"></a>
+                                    Continue
+                                    </button>
+                                    <button type="button" class="btn btn-primary" onclick="statemgt();">View
+                                        Book</button>
+                                </div>
+                        </div>
+
+                        </form>
+                    </div>
+                </div>
+
+
+                <!-- Footer -->
+                <?php
                     include("components/footer.php"); 
                     ?>
-                    <!-- / Footer -->
+                <!-- / Footer -->
 
-                    <div class="content-backdrop fade"></div>
-                </div>
-                <!-- Content wrapper -->
+                <div class="content-backdrop fade"></div>
             </div>
-            <!-- / Layout page -->
+            <!-- Content wrapper -->
         </div>
+        <!-- / Layout page -->
+    </div>
 
-        <!-- Overlay -->
-        <div class="layout-overlay layout-menu-toggle"></div>
+    <!-- Overlay -->
+    <div class="layout-overlay layout-menu-toggle"></div>
     </div>
     <!-- / Layout wrapper -->
 
@@ -274,21 +313,91 @@ user_details();
 
     <!-- Page JS -->
     <script src="ajax.js"></script>
+    <script src="../assets/js/ui-toasts.js"></script>
+
     <script>
     //book file
     function book() {
         document.getElementById('bookdet').style.display = 'none';
         document.getElementById('bokfile').style.display = 'block';
     }
+
+    function regbook() {
+        document.getElementById('bookdet').style.display = 'block';
+        document.getElementById('bokfile').style.display = 'none';
+    }
     </script>
 
     <?php 
     if(isset($_SESSION['bookupl'])) {
 
-        echo "<script>book()</script>";
-        
+        echo "<script>book()</script>";          
+    } else {
+
+        echo "<script>regbook()</script>";
+    }
+
+    if (isset($_SESSION['booknew'])) {
+
+        $code = $_SESSION['booknew'];
+
+        echo '
+        <script>
+        function statemgt() {
+            window.history.pushState("https://bookinvogue.com/", "Books in Vogue", "/'.$code.'");
+        }</script>';
     }
     ?>
+
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script src="../node_modules/canvas-confetti/dist/confetti.browser.js"></script>
+    <script>
+    function shout() {
+
+        $(document).ready(function() {
+            $("#backDropModal").modal("show");
+        });
+
+        var count = 1000;
+        var defaults = {
+            origin: {
+                y: 0.7
+            }
+        };
+
+        function fire(particleRatio, opts) {
+            confetti(Object.assign({}, defaults, opts, {
+                particleCount: Math.floor(count * particleRatio)
+            }));
+        }
+
+        fire(0.25, {
+            spread: 126,
+            startVelocity: 95,
+        });
+        fire(0.2, {
+            spread: 360,
+        });
+        fire(0.35, {
+            spread: 360,
+            decay: 0.91,
+            scalar: 0.8
+        });
+        fire(0.1, {
+            spread: 360,
+            startVelocity: 25,
+            decay: 0.92,
+            scalar: 1.2
+        });
+        fire(0.1, {
+            spread: 360,
+            startVelocity: 45,
+        });
+
+    }
+    </script>
+
+
 </body>
 
 </html>

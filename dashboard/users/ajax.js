@@ -1,10 +1,9 @@
 $(document).ready(function () {
-
   //signup
   $("#sub").click(function () {
     var fname = $("#fname").val();
     var usname = $("#usname").val();
-    var catgy  = $("#catgy").val();
+    var catgy = $("#catgy").val();
     var email = $("#email").val();
     var pword = $("#pword").val();
     var cpword = $("#cpword").val();
@@ -15,120 +14,109 @@ $(document).ready(function () {
     } else {
       if (usname == "" || usname == null) {
         $("#usmsg").html("Please create a username");
-      }else {
-          if (email == "" || email == null) {
-            $("#emmsg").html("Invalid email address");
+      } else {
+        if (email == "" || email == null) {
+          $("#emmsg").html("Invalid email address");
+        } else {
+          if (pword == "" || pword == null) {
+            $("#pwmsg").html("Please create a secured password");
+          } else {
+            if (cpword == "" || cpword == null) {
+              $("#cpwmsg").html("Confirm your password");
             } else {
-              if (pword == "" || pword == null) {
-                $("#pwmsg").html("Please create a secured password");
+              if (pword != cpword) {
+                $("#cpwmsg").html("Password does not match");
               } else {
-                if (cpword == "" || cpword == null) {
-                  $("#cpwmsg").html("Confirm your password");
-                } else {
-                  if (pword != cpword) {
-                    $("#cpwmsg").html("Password does not match");
-                  } else {
-                    $("#msg").html('<img style="width: 100px; height: 100px" src="assets/img/loading.gif">');
+                $("#msg").html(
+                  '<img style="width: 100px; height: 100px" src="assets/img/loading.gif">'
+                );
 
-                    $.ajax({
-                      type: "post",
-                      url: "functions/init.php",
-                      data: {
-                        fname: fname,
-                        usname: usname,
-                        email: email,
-                        pword: pword,
-                        cpword: cpword,
-                        catgy, catgy,
-                        ref: ref,
-                      },
-                      success: function (data) {
-                        $("#msg").html(data);
-                      },
-                    });
-                  }
-                }
-                }
+                $.ajax({
+                  type: "post",
+                  url: "functions/init.php",
+                  data: {
+                    fname: fname,
+                    usname: usname,
+                    email: email,
+                    pword: pword,
+                    cpword: cpword,
+                    catgy,
+                    catgy,
+                    ref: ref,
+                  },
+                  success: function (data) {
+                    $("#msg").html(data);
+                  },
+                });
               }
             }
+          }
         }
+      }
+    }
   });
 
+  //resend otp
+  $("#rotp").click(function () {
+    $("#otptitle").html("We've sent you another OTP ✅");
 
+    //I left this code so as to give a dummy text to the function validator
+    var otpp = "dummy";
 
-//resend otp
-$("#rotp").click(function () {
-
-  $("#otptitle").html("We've sent you another OTP ✅");
-
-  //I left this code so as to give a dummy text to the function validator
-  var otpp  = "dummy";
-
-    $("#vmsg").html('<img style="width: 100px; height: 100px" src="assets/img/loading.gif">');
+    $("#vmsg").html(
+      '<img style="width: 100px; height: 100px" src="assets/img/loading.gif">'
+    );
 
     $.ajax({
       type: "post",
       url: "functions/init.php",
-      data: {otpp: otpp},
+      data: { otpp: otpp },
       success: function (data) {
         $("#vmsg").html(data);
       },
     });
-})
+  });
 
+  //verify otp
+  $("#vsub").click(function () {
+    var digit1 = $("#digit-1").val();
+    var digit2 = $("#digit-2").val();
+    var digit3 = $("#digit-3").val();
+    var digit4 = $("#digit-4").val();
 
-//verify otp
-$("#vsub").click(function () {
-
-   var digit1   = $("#digit-1").val();
-   var digit2   = $("#digit-2").val();
-   var digit3   = $("#digit-3").val();
-   var digit4   = $("#digit-4").val();
-
-   if(digit1 == "" || digit1 == null) {
-
-    $("#vmsg").html("Invalid OTP!");
-
-   } else {
-
-    if(digit2 == "" || digit2 == null) {
-
+    if (digit1 == "" || digit1 == null) {
       $("#vmsg").html("Invalid OTP!");
-
     } else {
+      if (digit2 == "" || digit2 == null) {
+        $("#vmsg").html("Invalid OTP!");
+      } else {
+        if (digit3 == "" || digit3 == null) {
+          $("#vmsg").html("Invalid OTP!");
+        } else {
+          if (digit4 == "" || digit4 == null) {
+            $("#vmsg").html("Invalid OTP!");
+          } else {
+            var votp = digit1 + digit2 + digit3 + digit4;
 
-    if(digit3 == "" || digit3 == null) {
+            $("#vmsg").html(
+              '<img style="width: 100px; height: 100px" src="assets/img/loading.gif">'
+            );
 
-      $("#vmsg").html("Invalid OTP!");
-
-    } else {
-
-    if(digit4 == "" || digit4 == null) {
-
-      $("#vmsg").html("Invalid OTP!");
-
-    } else {
-
-      var votp = digit1 + digit2 + digit3 + digit4;
-
-      $("#vmsg").html('<img style="width: 100px; height: 100px" src="assets/img/loading.gif">');
-
-      $.ajax({
-      type: "post",
-      url: "functions/init.php",
-      data: {votp: votp},
-      success: function (data) {
-        $("#vmsg").html(data);
-      },
-    });
+            $.ajax({
+              type: "post",
+              url: "functions/init.php",
+              data: { votp: votp },
+              success: function (data) {
+                $("#vmsg").html(data);
+              },
+            });
+          }
+        }
+      }
     }
-    }
-    }
-   }
 
-  
-   alert(allotp);
-  /* var votp   = $("#otpper").val();
+    alert(allotp);
+    /* var votp   = $("#otpper").val();
    var votp   = $("#otpper").val();
    var votp   = $("#otpper").val();
 
@@ -148,8 +136,7 @@ $("#vsub").click(function () {
       },
     });
   }*/
-})
-
+  });
 
   //signin
   $("#lsub").click(function () {
@@ -162,7 +149,9 @@ $("#vsub").click(function () {
       if (password == "" || password == null) {
         $("#lupmsg").html("Invalid password inputted");
       } else {
-        $("#lmsg").html('<img style="width: 100px; height: 100px" src="assets/img/loading.gif">');
+        $("#lmsg").html(
+          '<img style="width: 100px; height: 100px" src="assets/img/loading.gif">'
+        );
         $.ajax({
           type: "post",
           url: "functions/init.php",
@@ -175,7 +164,6 @@ $("#vsub").click(function () {
     }
   });
 
-
   //forgot
   $("#fsub").click(function () {
     var fgeml = $("#femail").val();
@@ -183,7 +171,9 @@ $("#vsub").click(function () {
     if (fgeml == "" || fgeml == null) {
       $("#fmsg").html("Please insert your email");
     } else {
-      $("#fmsg").html('<img style="width: 100px; height: 100px" src="assets/img/loading.gif">');
+      $("#fmsg").html(
+        '<img style="width: 100px; height: 100px" src="assets/img/loading.gif">'
+      );
 
       $.ajax({
         type: "post",
@@ -196,12 +186,9 @@ $("#vsub").click(function () {
     }
   });
 
-
-
   //reset
   $("#updf").click(function () {
-
-    var fgpword  = $("#pword").val();
+    var fgpword = $("#pword").val();
     var fgcpword = $("#cpword").val();
 
     if (fgpword == "" || fgpword == null) {
@@ -213,7 +200,9 @@ $("#vsub").click(function () {
         if (fgpword != fgcpword) {
           $("#umsg").html("Password does not match!");
         } else {
-          $("#umsg").html('<img style="width: 100px; height: 100px" src="assets/img/loading.gif">');
+          $("#umsg").html(
+            '<img style="width: 100px; height: 100px" src="assets/img/loading.gif">'
+          );
 
           $.ajax({
             type: "post",
@@ -228,181 +217,144 @@ $("#vsub").click(function () {
     }
   });
 
-
-
-
   /******** USER PROFILE SECTION */
 
   //getting books details
   $(".offcanvasr").click(function () {
-
-    var dataid  = $(this).attr('data-id');
+    var dataid = $(this).attr("data-id");
 
     $.ajax({
       type: "post",
       url: "functions/init.php",
-      data: {dataid: dataid},
+      data: { dataid: dataid },
       success: function (data) {
         $(".canvastale").html(data);
       },
     });
   });
 
-
   //search for books
-  $("#searcher").keyup(function() {
-    var searchword  = $("#searcher").val();
+  $("#searcher").keyup(function () {
+    var searchword = $("#searcher").val();
 
     //display content if words are empty
-      $("#allbook").hide();
+    $("#allbook").hide();
 
-      if(searchword == null || searchword == "") {
+    if (searchword == null || searchword == "") {
+      $("#allbook").show();
+    } else {
+      //$("#searchresult").show(1000);
 
-        $("#allbook").show();
-
-      } else {
-
-        //$("#searchresult").show(1000);
-
-        $.ajax({
+      $.ajax({
         type: "post",
         url: "srchres.php",
-        data: {searchword: searchword},
+        data: { searchword: searchword },
         success: function (data) {
           $("#searchresult").html(data).show(1000);
-        }
+        },
       });
     }
   });
 
-
-
   //add to wishlist
-  $("#btwsh").click(function() {
+  $("#btwsh").click(function () {
+    var wishid = $(".srchid").val();
 
-    var wishid  = $(".srchid").val();
-
-    $('#btwsh').on('shown.bs.popover', function () {
-        
-      setTimeout(function() {
-          $('.popover').fadeOut('slow',function() {}); 
-      },800);
-      
-  });
-
+    $("#btwsh").on("shown.bs.popover", function () {
+      setTimeout(function () {
+        $(".popover").fadeOut("slow", function () {});
+      }, 800);
+    });
 
     $.ajax({
       type: "post",
       url: "functions/init.php",
-      data: {wishid: wishid},
+      data: { wishid: wishid },
       success: function (data) {
+        //display content if words are empty
+        $("#btwsh").hide();
 
-      //display content if words are empty
-      $("#btwsh").hide();
-
-      $("#addtwh").show();
-
-      }
+        $("#addtwh").show();
+      },
     });
-
   });
-
 
   //added to wishlist
-  $("#lksd").click(function() {
-
-
-    $('#lksd').on('shown.bs.popover', function () {
-        
-      setTimeout(function() {
-          $('.popover').fadeOut('slow',function() {}); 
-      },800);
-      
+  $("#lksd").click(function () {
+    $("#lksd").on("shown.bs.popover", function () {
+      setTimeout(function () {
+        $(".popover").fadeOut("slow", function () {});
+      }, 800);
+    });
   });
-
-  });
-
 
   //cancel payment
-  $("#cnc").click(function() {
-
-      $("#clss").popover('hide');
-
+  $("#cnc").click(function () {
+    $("#clss").popover("hide");
   });
 
-
   //fund wallet
-  $("#paybtn").click(function() {
+  $("#paybtn").click(function () {
+    var amt = $("#amrp").val();
 
-    var amt  = $("#amrp").val();
-
-    if(amt == "" || amt == null) {
-
-      $("#pymsg").html('Please input an amount');
-
+    if (amt == "" || amt == null) {
+      $("#pymsg").html("Please input an amount");
     } else {
+      if (amt < 100) {
+        $("#pymsg").html("The minimum amount you can fund is ₦100");
+      } else {
+        $("#pymsg").html(
+          '<img style="width: 100px; height: 100px" src="assets/img/loading.gif">'
+        );
 
-    if(amt < 100) {
+        var txt = $("#txt").text();
+        var email = $("#email").text();
+        var fname = $("#fname").text();
 
-      $("#pymsg").html('The minimum amount you can fund is ₦100');
-
-
-    } else {
-    
-      $("#pymsg").html('<img style="width: 100px; height: 100px" src="assets/img/loading.gif">');
-
-      var txt  = $("#txt").text();
-      var email  = $("#email").text();
-      var fname  = $("#fname").text();
-  
-  
-      FlutterwaveCheckout({
-        public_key: "FLWPUBK_TEST-583986bf78101b92c8ea9becde1795b8-X",
-        tx_ref: txt,
-        amount: amt,
-        currency: "NGN",
-        country: "NG",
-        payment_options: " ",
-        method: "POST",
-        redirect_url: // specified redirect URL
-            "./pay",
-        customer: {
+        FlutterwaveCheckout({
+          public_key: "FLWPUBK_TEST-583986bf78101b92c8ea9becde1795b8-X",
+          tx_ref: txt,
+          amount: amt,
+          currency: "NGN",
+          country: "NG",
+          payment_options: " ",
+          method: "POST",
+          // specified redirect URL
+          redirect_url: "./pay",
+          customer: {
             email: email,
             name: fname,
-        },
-        callback: function(data) {
-  
+          },
+          callback: function (data) {
             // specified callback function
             console.log(data);
-        },
-        customizations: {
+          },
+          customizations: {
             title: "Books in Vogue",
             description: "Fund Wallet",
             logo: "https://booksinvogue.com.ng/assests/logo.png",
-        },
-    });
-  
+          },
+        });
+      }
     }
-    }
-});
+  });
 
+  //buy book
+  $("#bkkpaybtn").click(function () {
+    $("#pymsg").html(
+      '<img style="width: 100px; height: 100px" src="assets/img/loading.gif">'
+    );
 
-
-//buy book
-$("#bkkpaybtn").click(function() {
-
-    $("#pymsg").html('<img style="width: 100px; height: 100px" src="assets/img/loading.gif">');
-
-    var amt  = $("#bkamt").text();
-    var bkid  = $("#bkid").text();
+    var amt = $("#bkamt").text();
+    var bkid = $("#bkid").text();
 
     $.ajax({
       type: "post",
       url: "functions/init.php",
-      data: {amt: amt, bkid: bkid},
+      data: { amt: amt, bkid: bkid },
       success: function (data) {
         $("#bkpymsg").html(data);
-      }
+      },
     });
-});
+  });
 });

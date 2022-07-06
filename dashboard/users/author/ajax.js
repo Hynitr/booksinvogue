@@ -126,29 +126,40 @@ $(document).ready(function () {
 
     //book file
     var fd = new FormData();
-    var files = $("#bkfile").prop("files")[0];
-    fd.append("file", files);
+    var bkfiles  = $("#bkfile").prop("files")[0];
+    var covfiles = $("#bkcov").prop("files")[0];
+    fd.append("covfile", covfiles);
+    fd.append("fil", bkfiles);
 
-    //book cover
-    var bkcs = $("#bkcov").prop("bkcs");
-    fd.append("file", bkcs);
 
-    if (files == null || files == "") {
+    if (bkfiles == null || bkfiles == "") {
 
       $("#fmsg").html("Kindly select a book");
 
     } else {
 
-      if(bkcs == null || bkcs == ""){
+      if(covfiles == null || covfiles == "") {
 
         $("#fmsg").html("Kindly select a book cover");
 
       } else {
 
-        $("#fmsg").html(files);
+        $("#fmsg").html('<img style="width: 100px; height: 100px" src="../assets/img/loading.gif">');
 
+        $.ajax({
+          type: "post",
+          url: "../functions/init.php",
+          data: fd,
+          contentType: false,
+          processData: false,
+          success: function (data) {
+
+           $("#fmsg").html(data);
+
+          },
+        });
+      
       }
-
     }
 
   });
