@@ -244,8 +244,9 @@ user_details();
                                         <div class="mt-4">
                                             <button type="button" class="btn btn-primary me-2" id="publ">Publish
                                                 Book</button>
-                                            <button type="button" class="btn btn-outline-secondary" id="svdft">Save to
-                                                draft</button>
+                                            <a href="./mydraft"><button type="button" class="btn btn-outline-secondary"
+                                                    id="svdft">Save to
+                                                    draft</button></a>
                                         </div>
                                     </div>
                                 </div>
@@ -262,10 +263,9 @@ user_details();
                                 <h2 class="modal-title text-center py-4 px-5">Your book is live!</h2>
                                 <img src="../assets/img/75_smile.gif" class="img-fluid">
                                 <div class="modal-footer">
-                                    <a href="./bookshelf"> <button type="button" class="btn btn-outline-secondary"
-                                            data-bs-dismiss="modal"></a>
-                                    Continue
-                                    </button>
+                                    <a href="./mybooks"> <button type="button" class="btn btn-outline-secondary">
+                                            Continue
+                                        </button></a>
                                     <button type="button" class="btn btn-primary" onclick="statemgt();">View
                                         Book</button>
                                 </div>
@@ -344,7 +344,7 @@ user_details();
         echo '
         <script>
         function statemgt() {
-            window.history.pushState("https://bookinvogue.com/", "Books in Vogue", "/'.$code.'");
+            location.replace("https://bookinvogue.com/'.$code.'");
         }</script>';
     }
     ?>

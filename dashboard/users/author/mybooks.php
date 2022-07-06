@@ -67,9 +67,9 @@ user_details();
 
                             <?php
 
-                            $user =  $_SESSION['login'];
+                            $user =  $t_users['email'];
 
-                                $ssl = "SELECT * FROM boughtbook WHERE `userid` = '$user' AND `reading` = 'Yes'";
+                                $ssl = "SELECT * FROM books WHERE `email_address` = '$user' AND `book_status` = 'Show'";
                                 $rss = query($ssl);
 
                                 if(row_count($rss) == '' || row_count($rss) == null) {
@@ -106,7 +106,7 @@ user_details();
 
                             while($rws = mysqli_fetch_array($rss)) {
 
-                                $bkid = $rws['bookid'];
+                                /*$bkid = $rws['bookid'];
 
                                 $sql = "SELECT * FROM books WHERE `books_id` = '$bkid'";
                                 $res = query($sql);
@@ -131,7 +131,7 @@ user_details();
                                 } else {
 
                                     $imager = "../assets/img/cover.jpg";
-                                }
+                                }*/
 
                         ?>
                             <div class="container-xxl flex-grow-1 container-p-y">
