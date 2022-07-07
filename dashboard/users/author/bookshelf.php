@@ -128,9 +128,13 @@ user_details();
 
                                 $category = "&nbsp;".$row['category_1'];
 
+                                $book = $row['book_title'];
+
+                                $redbb = str_replace(' ', '-', $book);
+
                                 $det = strip_tags($row['description']);
                                 $frv = wordwrap($det, 70, "\n", TRUE); 
-                                $y = substr($frv, 0, 120).'... <a href="./read?id='.$row['books_id'].'">Read More</a>';
+                                $y = substr($frv, 0, 120).'... <a href="./read?book='.$redbb.'">Read More</a>';
 
                                 $descrp = ucfirst($y);
                                 
@@ -177,7 +181,7 @@ user_details();
 
                                                             <p class="demo-inline-spacing">
 
-                                                                <a href="./read?id=<?php echo $row['books_id'] ?>"
+                                                                <a href="./read?book=<?php echo $redbb ?>"
                                                                     class="btn btn-primary me-1" type="button">Start
                                                                     Reading </a>
 
