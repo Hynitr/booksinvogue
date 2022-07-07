@@ -163,10 +163,6 @@ user_details();
 
                                                             <p class="demo-inline-spacing">
 
-                                                                <a href="./read?book=<?php echo $redbb ?>"
-                                                                    class="btn btn-primary me-1" type="button"><i
-                                                                        class="bx bx-share text-white"></i></a>
-
                                                                 <a href="./draft?book=<?php echo $redbb ?>" class=" btn
                                                                     btn-primary me-1">
                                                                     <i class="bx bx-edit text-white"></i>
@@ -175,9 +171,7 @@ user_details();
                                                                     class="btn btn-primary me-1">
                                                                     <i class="bx bx-trash text-white"></i>
                                                                 </a>
-                                                                <a class="btn btn-primary me-1">
-                                                                    <i class="bx bx-share-alt text-white"></i>
-                                                                </a>
+
                                                             </p>
 
                                                         </span>

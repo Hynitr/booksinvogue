@@ -35,6 +35,19 @@ user_details();
         <div class="layout-container">
 
 
+            <div style="display: none" id="pybst">
+                <div class="bs-toast toast show bg-primary toast-placement-ex m-2" role="alert" aria-live="assertive"
+                    aria-atomic="true" data-delay="20">
+                    <div class="toast-header">
+                        <i class="bx bx-bell me-2"></i>
+                        <div class="me-auto fw-semibold">You've got a new book</div>
+                        <small>Just now</small>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">A new book has just been added to your bookshelf
+                    </div>
+                </div>
+            </div>
             <!-- Menu -->
 
             <?php
@@ -69,7 +82,7 @@ user_details();
 
                             $user =  $_SESSION['login'];
 
-                                $ssl = "SELECT * FROM boughtbook WHERE `userid` = '$user' AND `reading` = 'Yes'";
+                                $ssl = "SELECT * FROM boughtbook WHERE `userid` = '$user' AND `reading` = 'Yes' ORDER BY `sn` desc";
                                 $rss = query($ssl);
 
                                 if(row_count($rss) == '' || row_count($rss) == null) {
@@ -79,12 +92,12 @@ user_details();
                                 <!--Under Maintenance -->
                                 <div class="container-xxl container-p-y text-center">
                                   <div class="misc-wrapper">
-                                    <h2 class="mb-2 mx-2">Uh Oh 😢 </h2>
-                                    <p class="mb-1 mx-2">You've not added any book to your bookshelf yet. </p>
+                                    <h2 class="mx-2">Uh Oh 😢 </h2>
+                                    <p class=mx-2">You've not added any book to your bookshelf yet. </p>
                                     <a href="./books" class="btn btn-primary">Get some book(s) to your bookshelf</a>
-                                    <div class="mt-0">
+                                    <div class="">
                                       <img
-                                        src="../assets/img/search.gif"
+                                      src="../assets/img/search.gif"
                                         alt="girl-doing-yoga-light"
                                         width="500"
                                         class="img-fluid"
@@ -238,6 +251,22 @@ user_details();
     <script src="../assets/js/dashboards-analytics.js"></script>
 
     <script src="ajax.js"></script>
+    <?php
+    if(isset($_SESSION['bookmsg'])) {
+        
+        if(isset($_SESSION['bookmsg']) == 'Your Wallet has been funded successfully') {
+        
+        echo "
+        
+        <script>
+        $('#pybst').show();
+        </script>
+        ";
+        } 
+
+        unset($_SESSION['bookmsg']);
+    }
+    ?>
 </body>
 
 </html>
