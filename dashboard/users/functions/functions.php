@@ -1176,7 +1176,7 @@ if (!empty($_FILES["fil"]["name"]) && !empty($_FILES["covfile"]["name"])) {
 
 	
 	// Allow certain file formats
-	if($imageFileType1 != "pdf" && $imageFileType2 != ".jpg" || $imageFileType2 != ".png" || $imageFileType2 != ".jpeg") {
+	if($imageFileType1 != "pdf" && ($imageFileType2 != ".jpg" || $imageFileType2 != ".png" || $imageFileType2 != ".jpeg")) {
 		echo "Sorry, only .pdf, .jpg, .jpeg, .png files are allowed.";
 		$uploadOk = 0;
 	} else {

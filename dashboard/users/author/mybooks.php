@@ -82,7 +82,7 @@ user_details();
                                   <div class="misc-wrapper">
                                     <h2 class="mb-2 mx-2">Uh Oh 😢 </h2>
                                     <p class="mb-1 mx-2">You've not added any book to your bookshelf yet. </p>
-                                    <a href="./books" class="btn btn-primary">Get some book(s) to your bookshelf</a>
+                                    <a href="./upload" class="btn btn-primary">Upload your first book</a>
                                     <div class="mt-0">
                                       <img
                                         src="../assets/img/search.gif"
@@ -164,9 +164,15 @@ user_details();
                                                             <p class="demo-inline-spacing">
 
                                                                 <a href="./read?book=<?php echo $redbb ?>"
-                                                                    class="btn btn-primary me-1" type="button">Start
-                                                                    Reading </a>
+                                                                    class="btn btn-primary me-1" type="button"><i
+                                                                        class="bx bx- text-white"></i></a>
 
+                                                                <a class="btn btn-primary me-1">
+                                                                    <i class="bx bx-edit text-white"></i>
+                                                                </a>
+                                                                <a class="btn btn-primary me-1">
+                                                                    <i class="bx bx-trash text-white"></i>
+                                                                </a>
                                                                 <a class="btn btn-primary me-1">
                                                                     <i class="bx bx-share-alt text-white"></i>
                                                                 </a>
