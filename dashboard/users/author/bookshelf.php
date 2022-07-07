@@ -126,7 +126,7 @@ user_details();
 
                                 $row = mysqli_fetch_array($res);
 
-                                $category = "&nbsp;".$row['category_1']."&nbsp; &nbsp;| &nbsp; &nbsp;".$row['category_2'];
+                                $category = "&nbsp;".$row['category_1'];
 
                                 $det = strip_tags($row['description']);
                                 $frv = wordwrap($det, 70, "\n", TRUE); 

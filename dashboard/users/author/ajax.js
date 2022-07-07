@@ -22,7 +22,7 @@ $(document).ready(function () {
     }
     $.ajax({
       type: "post",
-      url: "../functions/init.php",
+      url: "../../functions/init.php",
       data: { bank: bank, acctn: acctn, trd: trd },
       success: function (data) {
         $("#actn").val(data);
@@ -52,7 +52,7 @@ $(document).ready(function () {
 
     $.ajax({
       type: "post",
-      url: "../functions/init.php",
+      url: "../../functions/init.php",
       data: { bank: bank, acctn: acctn, actnm: actnm },
       success: function (data) {
         $("#arpaymsg").html(data);
@@ -105,7 +105,7 @@ $(document).ready(function () {
 
           $.ajax({
             type: "post",
-            url: "../functions/init.php",
+            url: "../../functions/init.php",
             data: {booktitle: booktitle, bookdescp: bookdescp, series: series, author: author, otherauthor: otherauthor, copyright: copyright, category: category, isbn: isbn, price: price, authprofit: authprofit, bivprofit: bivprofit, lang: lang},
             success: function (data) {
               $("#msg").html(data);
@@ -148,7 +148,7 @@ $(document).ready(function () {
 
         $.ajax({
           type: "post",
-          url: "../functions/init.php",
+          url: "../../functions/init.php",
           data: fd,
           contentType: false,
           processData: false,
@@ -162,5 +162,146 @@ $(document).ready(function () {
       }
     }
 
+  });
+
+  /******** USER PROFILE SECTION */
+
+  //getting books details
+  $(".offcanvasr").click(function () {
+    var dataid = $(this).attr("data-id");
+
+    $.ajax({
+      type: "post",
+      url: "../functions/init.php",
+      data: { dataid: dataid },
+      success: function (data) {
+        $(".canvastale").html(data);
+      },
+    });
+  });
+
+  //search for books
+  $("#searcher").keyup(function () {
+    var searchword = $("#searcher").val();
+
+    //display content if words are empty
+    $("#allbook").hide();
+
+    if (searchword == null || searchword == "") {
+      $("#allbook").show();
+    } else {
+      //$("#searchresult").show(1000);
+
+      $.ajax({
+        type: "post",
+        url: "srchres.php",
+        data: { searchword: searchword },
+        success: function (data) {
+          $("#searchresult").html(data).show(1000);
+        },
+      });
+    }
+  });
+
+  //add to wishlist
+  $("#btwsh").click(function () {
+    var wishid = $(".srchid").val();
+
+    $("#btwsh").on("shown.bs.popover", function () {
+      setTimeout(function () {
+        $(".popover").fadeOut("slow", function () {});
+      }, 800);
+    });
+
+    $.ajax({
+      type: "post",
+      url: "../functions/init.php",
+      data: { wishid: wishid },
+      success: function (data) {
+        //display content if words are empty
+        $("#btwsh").hide();
+
+        $("#addtwh").show();
+      },
+    });
+  });
+
+  //added to wishlist
+  $("#lksd").click(function () {
+    $("#lksd").on("shown.bs.popover", function () {
+      setTimeout(function () {
+        $(".popover").fadeOut("slow", function () {});
+      }, 800);
+    });
+  });
+
+  //cancel payment
+  $("#cnc").click(function () {
+    $("#clss").popover("hide");
+  });
+
+  //fund wallet
+  $("#paybtn").click(function () {
+    var amt = $("#amrp").val();
+
+    if (amt == "" || amt == null) {
+      $("#pymsg").html("Please input an amount");
+    } else {
+      if (amt < 100) {
+        $("#pymsg").html("The minimum amount you can fund is ₦100");
+      } else {
+        $("#pymsg").html(
+          '<img style="width: 100px; height: 100px" src="assets/img/loading.gif">'
+        );
+
+        var txt = $("#txt").text();
+        var email = $("#email").text();
+        var fname = $("#fname").text();
+
+        FlutterwaveCheckout({
+          public_key: "FLWPUBK_TEST-583986bf78101b92c8ea9becde1795b8-X",
+          tx_ref: txt,
+          amount: amt,
+          currency: "NGN",
+          country: "NG",
+          payment_options: " ",
+          method: "POST",
+          // specified redirect URL
+          redirect_url: "./pay",
+          customer: {
+            email: email,
+            name: fname,
+          },
+          callback: function (data) {
+            // specified callback function
+            console.log(data);
+          },
+          customizations: {
+            title: "Books in Vogue",
+            description: "Fund Wallet",
+            logo: "https://booksinvogue.com.ng/assests/logo.png",
+          },
+        });
+      }
+    }
+  });
+
+  //buy book
+  $("#bkkpaybtn").click(function () {
+    $("#pymsg").html(
+      '<img style="width: 100px; height: 100px" src="assets/img/loading.gif">'
+    );
+
+    var amt = $("#bkamt").text();
+    var bkid = $("#bkid").text();
+
+    $.ajax({
+      type: "post",
+      url: "../functions/init.php",
+      data: { amt: amt, bkid: bkid },
+      success: function (data) {
+        $("#bkpymsg").html(data);
+      },
+    });
   });
 });

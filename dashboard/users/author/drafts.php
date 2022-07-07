@@ -163,7 +163,7 @@ user_details();
 
                                                             <p class="demo-inline-spacing">
 
-                                                                <a href="./draft?book=<?php echo $redbb ?>" class=" btn
+                                                                <a href="./editdrafts?book=<?php echo $redbb ?>" class=" btn
                                                                     btn-primary me-1">
                                                                     <i class="bx bx-edit text-white"></i>
                                                                 </a>

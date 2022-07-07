@@ -84,7 +84,7 @@ user_details();
                                     <a href="./books" class="btn btn-primary">Get some book(s) to my wishlist</a>
                                     <div class="mt-4">
                                       <img
-                                        src="assets/img/illustrations/girl-doing-yoga-light.png"
+                                        src="../assets/img/search.gif"
                                         alt="girl-doing-yoga-light"
                                         width="500"
                                         class="img-fluid"
@@ -113,24 +113,29 @@ user_details();
 
                                 $row = mysqli_fetch_array($res);
 
-                                $category = "&nbsp;".$row['category_1']."&nbsp; &nbsp;| &nbsp; &nbsp;".$row['category_2'];
+                                $category = "&nbsp;".$row['category_1'];
+
+                                $book = $row['book_title'];
+
+                                $redbb = str_replace(' ', '-', $book);
+
 
                                 $det = strip_tags($row['description']);
                                 $frv = wordwrap($det, 70, "\n", TRUE); 
-                                $y = substr($frv, 0, 120).'... <a href="./bookdetails?id='.$row['books_id'].'">Read More</a>';
+                                $y = substr($frv, 0, 120).'... <a href="./bookdetails?book='.$redbb.'">Read More</a>';
 
                                 $descrp = ucfirst($y);
                                 
 
-                                $image = "assets/bookscover/".$row['book_cover'];
+                                $image = "../assets/bookscover/".$row['book_cover'];
 
                                 if(file_exists($image)){
 
-                                    $imager = "assets/bookscover/".$row['book_cover'];
+                                    $imager = "../assets/bookscover/".$row['book_cover'];
                                     
                                 } else {
 
-                                    $imager = "assets/img/cover.jpg";
+                                    $imager = "../assets/img/cover.jpg";
                                 }
 
                         ?>
@@ -164,7 +169,7 @@ user_details();
 
                                                             <p class="demo-inline-spacing">
 
-                                                                <a href="./bookdetails?id=<?php echo $row['books_id'] ?>"
+                                                                <a href="./bookdetails?book=<?php echo $redbb ?>"
                                                                     class="btn btn-primary me-1" type="button">Buy
                                                                     this book </a>
 
@@ -219,23 +224,23 @@ user_details();
 
 
     <!-- Core JS -->
-    <!-- build:js assets/vendor/js/core.js -->
-    <script src="assets/vendor/libs/jquery/jquery.js"></script>
-    <script src="assets/vendor/libs/popper/popper.js"></script>
-    <script src="assets/vendor/js/bootstrap.js"></script>
-    <script src="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <!-- build:js ../assets/vendor/js/core.js -->
+    <script src="../assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="../assets/vendor/libs/popper/popper.js"></script>
+    <script src="../assets/vendor/js/bootstrap.js"></script>
+    <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 
-    <script src="assets/vendor/js/menu.js"></script>
+    <script src="../assets/vendor/js/menu.js"></script>
     <!-- endbuild -->
 
     <!-- Vendors JS -->
-    <script src="assets/vendor/libs/apex-charts/apexcharts.js"></script>
+    <script src="../assets/vendor/libs/apex-charts/apexcharts.js"></script>
 
     <!-- Main JS -->
-    <script src="assets/js/main.js"></script>
+    <script src="../assets/js/main.js"></script>
 
     <!-- Page JS -->
-    <script src="assets/js/dashboards-analytics.js"></script>
+    <script src="../assets/js/dashboards-analytics.js"></script>
 
     <script src="ajax.js"></script>
 </body>

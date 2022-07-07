@@ -1,6 +1,6 @@
  <?php
 //Including Database configuration file.
-include "functions/init.php";
+include "../functions/init.php";
 //Getting value of "search" variable from "script.js".
 if (isset($_POST['searchword'])) {
 //Search box value assigning to $Name variable.
@@ -23,7 +23,7 @@ if(row_count($ExecQuery) == '' || row_count($ExecQuery) == null) {
         <a href="./books" class="btn btn-primary">Get some book(s) from our library</a>
         <div class="mt-4">
           <img
-            src="assets/img/illustrations/girl-doing-yoga-light.png"
+            src="../../assets/img/search.gif"
             alt="girl-doing-yoga-light"
             width="500"
             class="img-fluid"
@@ -49,24 +49,29 @@ echo '
    //Fetching result from database.
    while ($row = MySQLi_fetch_array($ExecQuery)) {
 
-        $category = "&nbsp;".$row['category_1']."&nbsp; &nbsp;| &nbsp; &nbsp;".$row['category_2'];
+        $category = "&nbsp;".$row['category_1'];
+
+        $book = $row['book_title'];
+
+        $redbb = str_replace(' ', '-', $book);
+
 
         $det = strip_tags($row['description']);
         $frv = wordwrap($det, 70, "\n", TRUE); 
-        $y = substr($frv, 0, 120).'... <a href="./bookdetails?id='.$row['books_id'].'">Read More</a>';
+        $y = substr($frv, 0, 120).'... <a href="./bookdetails?book='.$redbb.'">Read More</a>';
 
         $descrp = ucfirst($y);
         
 
-        $image = "assets/bookscover/".$row['book_cover'];
+        $image = "../assets/bookscover/".$row['book_cover'];
 
         if(file_exists($image)){
 
-            $imager = "assets/bookscover/".$row['book_cover'];
+            $imager = "../assets/bookscover/".$row['book_cover'];
             
         } else {
 
-            $imager = "assets/img/cover.jpg";
+            $imager = "../assets/img/cover.jpg";
         }
 
         $id = $row['books_id'];
@@ -153,8 +158,8 @@ echo '
                                      </a>
 
 
-                                     <a href="./bookdetails?id=<?php echo $row['books_id'] ?>"
-                                         class="btn btn-primary me-1" type="button">Buy
+                                     <a href="./bookdetails?book=<?php echo $redbb ?>" class="btn btn-primary me-1"
+                                         type="button">Buy
                                          this book </a>
 
                                      <a class="btn btn-primary me-1">
@@ -181,4 +186,4 @@ echo '
 
  <script src="ajax.js"></script>
  <!-- Page JS -->
- <script src="assets/js/ui-popover.js"></script>
+ <script src="../assets/js/ui-popover.js"></script>
