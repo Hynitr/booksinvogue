@@ -712,9 +712,12 @@ if(isset($_POST['wishid'])) {
 
 
 //make payment for book
-if(isset($_POST['amt']) && isset($_POST['bkid'])) {
+if(isset($_POST['amt']) && isset($_POST['bkid']) && isset($_POST['authoremail']) && isset($_POST['bkprice']) && isset($_POST['rylty'])) {
 
 	$amter = $_POST['amt'] - 0;
+	$athmail = trim($_POST['authoremail']);
+	$bkprice = trim($_POST['bkprice']);
+	$rylty = trim($_POST['rylty']);
 
 	//check if user has eneough money in wallet
 	user_details();
@@ -745,11 +748,11 @@ if(isset($_POST['amt']) && isset($_POST['bkid'])) {
 
 
 		//add to bookshelf
-		
-		$bskl="INSERT INTO boughtbook(`id`, `bbid`, `bookid`, `userid`, `tranid`, `reading`)";
-		$bskl.="VALUES('1', '$bbid', '$bkid', '$data', '$tref', 'Yes')";
+		$bskl="INSERT INTO boughtbook(`id`, `bbid`, `bookid`, `userid`, `tranid`, `reading`, `authormail`, `price`, `royalty`)";
+		$bskl.="VALUES('1', '$bbid', '$bkid', '$data', '$tref', 'Yes', '$athmail', '$bkprice', '$rylty')";
 		$rkl = query($bskl);
 
+		echo $athmail;
 
 		//check if book is in wishlist and delete from wishlist
 		$whsl = "SELECT * FROM boughtbook WHERE `userid` = '$data' AND `reading` = 'wishlist' AND `bookid` = '$bkid'";
@@ -1142,8 +1145,8 @@ if(isset($_POST['booktitle']) && isset($_POST['bookdescp']) && isset($_POST['ser
 	} else {
 
 		//insert into book db
-		$sql = "INSERT INTO books(`email_address`, `language`, `book_title`, `series_volume`, `author`, `other_author`, `copyright`, `category_1`, `isbn`, `selling_price`, `royalty_price`, `sold`, `description`, `book_status`, `date_posted`)";
-		$sql.="VALUES('$email', '$lang', '$booktitle', '$series', '$author', '$otherauthor', '$copyright', '$category', '$isbn', '$price', '$bivprofit', '0', '$bookdescp', 'draft', '$date')";
+		$sql = "INSERT INTO books(`email_address`, `language`, `book_title`, `series_volume`, `author`, `other_author`, `copyright`, `category_1`, `isbn`, `selling_price`, `royalty_price`, `description`, `book_status`, `date_posted`)";
+		$sql.="VALUES('$email', '$lang', '$booktitle', '$series', '$author', '$otherauthor', '$copyright', '$category', '$isbn', '$price', '$authprofit', '$bookdescp', 'draft', '$date')";
 		$res = query($sql);
 
 		//create session to store current book details
@@ -1206,4 +1209,30 @@ function book_img($target_file1, $target_file2) {
 	echo "<script>shout(); $('#pybst').show();</script>";
 
 	unset($_SESSION['bookupl']);
+}
+
+
+//get books details
+function book_details($data) {
+
+	$sql = "SELECT * FROM book WHERE `book_title` = '$book'";
+	$res = query($sql);
+	if(row_count($res) == '') {
+
+		return false;
+		
+	} else {
+
+		$row = mysqli_fetch_array($res);
+		return true;
+	}
+}
+
+//get total book sold
+function book_sold() {
+
+	$email = $t_users['email'];
+	
+	$sql = "SELECT sum(`id`) AS totbook FROM boughtbook WHERE `authormail` = '$email'";
+	$res = query($sql);
 }

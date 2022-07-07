@@ -235,9 +235,14 @@ if(!isset($_GET['book'])) {
 
                                                                         <p id="bkid" hidden>
                                                                             <?php echo $row['books_id']; ?></p>
-
+                                                                        <p id="authoremail" hidden>
+                                                                            <?php echo $row['email_address'] ?></p>
                                                                         <p id="txt" hidden>
-                                                                            <?php  echo md5(rand(0, 9999)); ?></p>
+                                                                        <p id="bkprice" hidden>
+                                                                            <?php echo $row['selling_price'] ?></p>
+                                                                        <p id="rylty" hidden>
+                                                                            <?php echo $row['royalty_price'] ?></p>
+                                                                        <?php  echo md5(rand(0, 9999)); ?></p>
                                                                         <p id="email" hidden>
                                                                             <?php echo $t_users['email'] ?></p>
                                                                         <p id="fname" hidden>

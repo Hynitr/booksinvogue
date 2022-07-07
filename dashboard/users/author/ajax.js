@@ -294,11 +294,14 @@ $(document).ready(function () {
 
     var amt = $("#bkamt").text();
     var bkid = $("#bkid").text();
+    var authoremail = $("#authoremail").text();
+    var bkprice = $("#bkprice").text();
+    var rylty = $("#rylty").text();
 
     $.ajax({
       type: "post",
       url: "../functions/init.php",
-      data: { amt: amt, bkid: bkid },
+      data: { amt: amt, bkid: bkid, authoremail: authoremail, bkprice: bkprice, rylty: rylty },
       success: function (data) {
         $("#bkpymsg").html(data);
       },

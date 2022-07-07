@@ -2,6 +2,16 @@
 include("components/top.php");
 user_details();
 
+if(!isset($_GET['book'])) {
+
+    redirect("./books");
+} else {
+
+    $book = clean(escape($_GET['book']));
+    $data = str_replace('-', ' ', $book);
+
+    book_details($data);
+}
 ?>
 
 <body>
@@ -51,7 +61,7 @@ user_details();
                     <div class="container-xxl flex-grow-1 container-p-y">
 
                         <div class="row">
-                            <h5 class="card-header">Upload a new book</h5>
+                            <h5 class="card-header">Make changes to - <b><?php echo $data ?></b></h5>
                             <div class="col-xl-12 col-12">
                                 <!-- HTML5 Inputs -->
                                 <div class="card mb-4" id="bookdet">
@@ -61,7 +71,8 @@ user_details();
                                             <label for="html5-text-input" class="col-md-2 fw-bold">Book
                                                 Title<sup class="text-danger"> *</sup></label>
                                             <div class="col-md-10">
-                                                <input class="form-control" type="text" id="booktitle" />
+                                                <input class="form-control" value="<?php echo $data ?>" type="text"
+                                                    id="booktitle" />
                                                 <p class="mt-2">What name do you want this book to be publicly
                                                     identified with? Type
                                                     it here exactly as it appears on the cover. Start the first letter

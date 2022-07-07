@@ -81,7 +81,7 @@ if(!isset($_GET['id'])) {
 
                             $row = mysqli_fetch_array($res);
 
-                                $category = "&nbsp;".$row['category_1']."&nbsp; &nbsp;| &nbsp; &nbsp;".$row['category_2'];
+                                $category = "&nbsp;".$row['category_1'];
 
                                 $descrp = ucfirst($row['description']);
                                 
@@ -239,6 +239,12 @@ if(!isset($_GET['id'])) {
                                                                             <?php  echo md5(rand(0, 9999)); ?></p>
                                                                         <p id="email" hidden>
                                                                             <?php echo $t_users['email'] ?></p>
+                                                                        <p id="authoremail" hidden>
+                                                                            <?php echo $row['email_address'] ?></p>
+                                                                        <p id="bkprice" hidden>
+                                                                            <?php echo $row['selling_price'] ?></p>
+                                                                        <p id="rylty" hidden>
+                                                                            <?php echo $row['royalty_price'] ?></p>
                                                                         <p id="fname" hidden>
                                                                             <?php echo $t_users['fullname'] ?></p>
 
