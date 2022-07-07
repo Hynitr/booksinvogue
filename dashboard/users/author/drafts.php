@@ -70,7 +70,7 @@ user_details();
 
                             $user =  $t_users['email'];
 
-                                $ssl = "SELECT * FROM books WHERE `email_address` = '$user' AND `book_status` = 'Show'";
+                                $ssl = "SELECT * FROM books WHERE `email_address` = '$user' AND `book_status` = 'draft'";
                                 $rss = query($ssl);
 
                                 if(row_count($rss) == '' || row_count($rss) == null) {
@@ -81,7 +81,7 @@ user_details();
                                 <div class="container-xxl container-p-y text-center">
                                   <div class="misc-wrapper">
                                     <h2 class="mb-2 mx-2">Uh Oh 😢 </h2>
-                                    <p class="mb-1 mx-2">You've not added any book to your bookshelf yet. </p>
+                                    <p class="mb-1 mx-2">You have no draft. </p>
                                     <a href="./upload" class="btn btn-primary">Upload your first book</a>
                                     <div class="mt-0">
                                       <img
@@ -167,7 +167,7 @@ user_details();
                                                                     class="btn btn-primary me-1" type="button"><i
                                                                         class="bx bx-share text-white"></i></a>
 
-                                                                <a href="./editdraft?book=<?php echo $redbb ?>" class=" btn
+                                                                <a href="./draft?book=<?php echo $redbb ?>" class=" btn
                                                                     btn-primary me-1">
                                                                     <i class="bx bx-edit text-white"></i>
                                                                 </a>
