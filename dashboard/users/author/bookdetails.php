@@ -2,12 +2,13 @@
 include("components/top.php");
 user_details();
 
-if(!isset($_GET['id'])) {
+if(!isset($_GET['book'])) {
 
     redirect("./books");
 } else {
     
-    $data = clean(escape($_GET['id']));
+    $book = clean(escape($_GET['book']));
+    $data = str_replace('-', ' ', $book);
 }
 ?>
 
@@ -76,25 +77,25 @@ if(!isset($_GET['id'])) {
 
                             <?php
 
-                            $sql = "SELECT * FROM `books` WHERE `books_id` = '$data'";
+                            $sql = "SELECT * FROM `books` WHERE `book_title` = '$data'";
                             $res = query($sql);
 
                             $row = mysqli_fetch_array($res);
 
-                                $category = "&nbsp;".$row['category_1']."&nbsp; &nbsp;| &nbsp; &nbsp;".$row['category_2'];
+                                $category = "&nbsp;".$row['category_1'];
 
                                 $descrp = ucfirst($row['description']);
                                 
 
-                                $image = "assets/bookscover/".$row['book_cover'];
+                                $image = "../assets/bookscover/".$row['book_cover'];
 
                                 if(file_exists($image)){
 
-                                    $imager = "assets/bookscover/".$row['book_cover'];
+                                    $imager = "../assets/bookscover/".$row['book_cover'];
                                     
                                 } else {
 
-                                    $imager = "assets/img/cover.jpg";
+                                    $imager = "../assets/img/cover.jpg";
                                 }
 
                                 $id = $row['books_id'];
@@ -256,23 +257,23 @@ if(!isset($_GET['id'])) {
 
 
     <!-- Core JS -->
-    <!-- build:js assets/vendor/js/core.js -->
-    <script src="assets/vendor/libs/jquery/jquery.js"></script>
-    <script src="assets/vendor/libs/popper/popper.js"></script>
-    <script src="assets/vendor/js/bootstrap.js"></script>
-    <script src="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <!-- build:js ../assets/vendor/js/core.js -->
+    <script src="../assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="../assets/vendor/libs/popper/popper.js"></script>
+    <script src="../assets/vendor/js/bootstrap.js"></script>
+    <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 
-    <script src="assets/vendor/js/menu.js"></script>
+    <script src="../assets/vendor/js/menu.js"></script>
     <!-- endbuild -->
 
     <!-- Vendors JS -->
-    <script src="assets/vendor/libs/apex-charts/apexcharts.js"></script>
+    <script src="../assets/vendor/libs/apex-charts/apexcharts.js"></script>
 
     <!-- Main JS -->
-    <script src="assets/js/main.js"></script>
+    <script src="../assets/js/main.js"></script>
 
     <!-- Page JS -->
-    <script src="assets/js/ui-popover.js"></script>
+    <script src="../assets/js/ui-popover.js"></script>
 
     <script src="ajax.js"></script>
 </body>
