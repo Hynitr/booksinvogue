@@ -1,6 +1,7 @@
 <?php
 include("components/top.php");
 user_details();
+book_sold();
 ?>
 
 <body>
@@ -347,7 +348,7 @@ user_details();
                                                 </div>
                                                 <span class="fw-semibold d-block mb-1">Total Book(s) Sold</span>
                                                 <h3 class="card-title mb-3">
-                                                    <?php echo number_format($t_users['wallet']) ?></h3>
+                                                   <?php echo $totbook ?></h3>
                                                 <a href="./mybooks" class="btn btn-sm btn-outline-primary">View
                                                     Details</a>
                                             </div>

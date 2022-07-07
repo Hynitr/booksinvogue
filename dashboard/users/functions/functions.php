@@ -1231,8 +1231,16 @@ function book_details($data) {
 //get total book sold
 function book_sold() {
 
-	$email = $t_users['email'];
+	$email = $GLOBALS['t_users']['email'];
 	
-	$sql = "SELECT sum(`id`) AS totbook FROM boughtbook WHERE `authormail` = '$email'";
+	$sql = "SELECT *, sum(`id`) AS `totbook` FROM boughtbook WHERE `authormail` = '$email'";
 	$res = query($sql);
+	if(row_count($res) == '') {
+
+		$GLOBALS['totbook'] = 0;
+
+	} else {
+		$row = mysqli_fetch_array($res);
+		$GLOBALS['totbook'] = $row['totbook'];
+	}
 }
