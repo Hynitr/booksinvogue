@@ -38,8 +38,9 @@ user_details();
             <!-- Menu -->
 
             <?php
-            include("components/sidded.php");            
+            include("components/sidebar.php");            
             ?>
+
 
             <!-- / Menu -->
 
@@ -106,32 +107,30 @@ user_details();
 
                             while($rws = mysqli_fetch_array($rss)) {
 
-                                /*$bkid = $rws['bookid'];
 
-                                $sql = "SELECT * FROM books WHERE `books_id` = '$bkid'";
-                                $res = query($sql);
+                                $category = "&nbsp;".$rws['category_1'];
 
-                                $row = mysqli_fetch_array($res);
+                                $book = $rws['book_title'];
 
-                                $category = "&nbsp;".$row['category_1']."&nbsp; &nbsp;| &nbsp; &nbsp;".$row['category_2'];
+                                $redbb = str_replace(' ', '-', $book);
 
-                                $det = strip_tags($row['description']);
+                                $det = strip_tags($rws['description']);
                                 $frv = wordwrap($det, 70, "\n", TRUE); 
-                                $y = substr($frv, 0, 120).'... <a href="./read?id='.$row['books_id'].'">Read More</a>';
+                                $y = substr($frv, 0, 120).'... <a href="./read?book='.$redbb.'">Read More</a>';
 
                                 $descrp = ucfirst($y);
                                 
 
-                                $image = "../assets/bookscover/".$row['book_cover'];
+                                $image = "../assets/bookscover/".$rws['book_cover'];
 
                                 if(file_exists($image)){
 
-                                    $imager = "../assets/bookscover/".$row['book_cover'];
+                                    $imager = "../assets/bookscover/".$rws['book_cover'];
                                     
                                 } else {
 
                                     $imager = "../assets/img/cover.jpg";
-                                }*/
+                                }
 
                         ?>
                             <div class="container-xxl flex-grow-1 container-p-y">
@@ -143,28 +142,28 @@ user_details();
 
                                                 <div class="card-text">
                                                     <div class="d-grid d-sm-flex p-3 ">
-                                                        <img src="<?php echo $imager ?>" alt="collapse-image"
-                                                            height="205"
+                                                        <img src="<?php echo $imager ?>"
+                                                            alt="<?php echo $rws['book_title'] ?>" height="205"
                                                             class="me-4 mb-sm-0 mb-4 text-center justify-content-center" />
 
                                                         <span>
-                                                            <b><?php echo escape($row['book_title']) ?></b>
+                                                            <b><?php echo escape($rws['book_title']) ?></b>
                                                             <br />
-                                                            by: <b><small><?php echo $row['author'] ?></small></b>
+                                                            by: <b><small><?php echo $rws['author'] ?></small></b>
                                                             <br /><br />
                                                             <?php echo $descrp ?>
 
                                                             <br /><br />
 
-                                                            <b>₦<?php echo number_format($row['selling_price']) ?></b>
+                                                            <b>₦<?php echo number_format($rws['selling_price']) ?></b>
 
                                                             <br /><br />
-                                                            <?php echo $row['language'] ?> &nbsp;|&nbsp;
+                                                            <?php echo $rws['language'] ?> &nbsp;|&nbsp;
                                                             <?php echo $category ?>
 
                                                             <p class="demo-inline-spacing">
 
-                                                                <a href="./read?id=<?php echo $row['books_id'] ?>"
+                                                                <a href="./read?book=<?php echo $redbb ?>"
                                                                     class="btn btn-primary me-1" type="button">Start
                                                                     Reading </a>
 
