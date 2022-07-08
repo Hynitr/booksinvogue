@@ -22,7 +22,7 @@ $(document).ready(function () {
     }
     $.ajax({
       type: "post",
-      url: "../../functions/init.php",
+      url: "../functions/init.php",
       data: { bank: bank, acctn: acctn, trd: trd },
       success: function (data) {
         $("#actn").val(data);
@@ -47,12 +47,12 @@ $(document).ready(function () {
     }
 
     $("#arpaymsg").html(
-      '<img style="width: 100px; height: 100px" src="../../assets/img/loading.gif">'
+      '<img style="width: 100px; height: 100px" src="../assets/img/loading.gif">'
     );
 
     $.ajax({
       type: "post",
-      url: "../../functions/init.php",
+      url: "../functions/init.php",
       data: { bank: bank, acctn: acctn, actnm: actnm },
       success: function (data) {
         $("#arpaymsg").html(data);
@@ -105,7 +105,7 @@ $(document).ready(function () {
 
           $.ajax({
             type: "post",
-            url: "../../functions/init.php",
+            url: "../functions/init.php",
             data: {booktitle: booktitle, bookdescp: bookdescp, series: series, author: author, otherauthor: otherauthor, copyright: copyright, category: category, isbn: isbn, price: price, authprofit: authprofit, bivprofit: bivprofit, lang: lang},
             success: function (data) {
               $("#msg").html(data);
@@ -144,11 +144,11 @@ $(document).ready(function () {
 
       } else {
 
-        $("#fmsg").html('<img style="width: 100px; height: 100px" src="../../assets/img/loading.gif">');
+        $("#fmsg").html('<img style="width: 100px; height: 100px" src="../assets/img/loading.gif">');
 
         $.ajax({
           type: "post",
-          url: "../../functions/init.php",
+          url: "../functions/init.php",
           data: fd,
           contentType: false,
           processData: false,

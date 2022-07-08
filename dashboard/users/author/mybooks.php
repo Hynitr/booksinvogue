@@ -70,7 +70,7 @@ user_details();
 
                             $user =  $t_users['email'];
 
-                                $ssl = "SELECT * FROM books WHERE `email_address` = '$user' AND `book_status` = 'Show'";
+                                $ssl = "SELECT * FROM books WHERE `email_address` = '$user' AND `book_status` = 'Show' ORDER BY `books_id` desc";
                                 $rss = query($ssl);
 
                                 if(row_count($rss) == '' || row_count($rss) == null) {
