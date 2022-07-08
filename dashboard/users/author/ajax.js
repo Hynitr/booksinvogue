@@ -47,7 +47,7 @@ $(document).ready(function () {
     }
 
     $("#arpaymsg").html(
-      '<img style="width: 100px; height: 100px" src="../assets/img/loading.gif">'
+      '<img style="width: 100px; height: 100px" src="../../assets/img/loading.gif">'
     );
 
     $.ajax({
@@ -144,7 +144,7 @@ $(document).ready(function () {
 
       } else {
 
-        $("#fmsg").html('<img style="width: 100px; height: 100px" src="../assets/img/loading.gif">');
+        $("#fmsg").html('<img style="width: 100px; height: 100px" src="../../assets/img/loading.gif">');
 
         $.ajax({
           type: "post",
@@ -251,7 +251,7 @@ $(document).ready(function () {
         $("#pymsg").html("The minimum amount you can fund is ₦100");
       } else {
         $("#pymsg").html(
-          '<img style="width: 100px; height: 100px" src="assets/img/loading.gif">'
+          '<img style="width: 100px; height: 100px" src="../assets/img/loading.gif">'
         );
 
         var txt = $("#txt").text();
@@ -289,7 +289,7 @@ $(document).ready(function () {
   //buy book
   $("#bkkpaybtn").click(function () {
     $("#pymsg").html(
-      '<img style="width: 100px; height: 100px" src="assets/img/loading.gif">'
+      '<img style="width: 100px; height: 100px" src="../assets/img/loading.gif">'
     );
 
     var amt = $("#bkamt").text();

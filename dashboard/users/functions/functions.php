@@ -1233,7 +1233,7 @@ function book_sold() {
 
 	$email = $GLOBALS['t_users']['email'];
 	
-	$sql = "SELECT *, sum(`id`) AS `totbook` FROM boughtbook WHERE `authormail` = '$email'";
+	$sql = "SELECT *, sum(`id`) AS `totbook`, sum(`royalty`) AS `royalty`  FROM boughtbook WHERE `authormail` = '$email'";
 	$res = query($sql);
 	if(row_count($res) == '') {
 
@@ -1242,5 +1242,25 @@ function book_sold() {
 	} else {
 		$row = mysqli_fetch_array($res);
 		$GLOBALS['totbook'] = $row['totbook'];
+		$GLOBALS['royal'] = $row['royalty'];
+	}
+}
+
+//get to tal book bought
+function book_bought() {
+
+	$user = $_SESSION['login'];
+
+	$sql = "SELECT *, sum(`id`) AS `bookbought` FROM `boughtbook` WHERE `userid` = '$user' AND `reading` = 'Yes'";
+	$res = query ($sql);
+
+	if(row_count($res) == '') {
+
+		$GLOBALS['bookbought'] = 0;
+		
+	} else {
+
+		$row = mysqli_fetch_array($res);
+		$GLOBALS['bookbought'] = $row['bookbought'];
 	}
 }
