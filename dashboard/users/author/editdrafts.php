@@ -267,8 +267,23 @@ if(!isset($_GET['book'])) {
 
                                             <div class="row">
                                                 <div class="col-lg-3 col-sm-12">
-                                                    <img style="display: none;" id="previewImg" class="img-fluid"
-                                                        width="150px" src="#" alt="Book Cover">
+                                                    <?php 
+                                                    if($editdraft['book_cover'] != '') {
+
+                                                    ?>
+                                                    <img id="previewImg" class="img-fluid" width="150px"
+                                                        src="../assets/bookscover/<?php echo $editdraft['book_cover'] ?>"
+                                                        alt="Book Cover">
+                                                    <?php
+                                                    } else {
+                                                        ?>
+
+                                                    <img style="display: none" id="previewImg" class="img-fluid"
+                                                        width="150px" src="" alt="Book Cover">
+                                                    <?php
+                                                    }
+                                                    ?>
+
                                                 </div>
                                                 <div class="col-lg-9 mb-lg-5 mt-lg-5 col-sm-12">
                                                     <input class="form-control" type="file"
@@ -286,7 +301,21 @@ if(!isset($_GET['book'])) {
                                                     class="text-danger">*</sup></label>
                                             <div class="row">
                                                 <div class="col-lg-3 col-sm-12">
+                                                    <?php
+                                                    if($editdraft['book_file'] != '') {
+
+                                                      ?>
+                                                    <img id="previewImg" class="img-fluid" width="150px"
+                                                        src="../assets/img/file.png" alt="Book Cover">
+                                                    <?php
+
+                                                    } else {
+                                                    ?>
                                                     <canvas id="pdfViewer"></canvas>
+                                                    <?php
+                                                    }
+                                                    ?>
+
                                                     <div id="pload"></div>
                                                 </div>
                                                 <div class="col-lg-9 mb-lg-5 mt-lg-5 col-sm-12">
