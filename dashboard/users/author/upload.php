@@ -275,9 +275,6 @@ user_details();
                                         <div class="mt-4">
                                             <button type="button" class="btn btn-primary me-2" id="publ">Publish
                                                 Book</button>
-                                            <a href="./mydraft"><button type="button" class="btn btn-outline-secondary"
-                                                    id="svdft">Save to
-                                                    draft</button></a>
                                         </div>
                                     </div>
                                 </div>
@@ -513,8 +510,10 @@ user_details();
         echo '
         <script>
         function statemgt() {
-            location.replace("https://bookinvogue.com/'.$code.'");
+            window.open("https://bookinvogue.com/'.$code.'","_blank");
         }</script>';
+
+        //location.replace("https://bookinvogue.com/'.$code.'");
     }
     ?>
 

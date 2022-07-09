@@ -3176,7 +3176,7 @@ exports.WaitOnType = exports.VERTICAL_PADDING = exports.UNKNOWN_SCALE = exports.
 const CSS_UNITS = 96.0 / 72.0;
 exports.CSS_UNITS = CSS_UNITS;
 const DEFAULT_SCALE_VALUE = "auto";
-exports.DEFAULT_SCALE_VALUE = DEFAULT_SCALE_VALUE;
+exports.DEFAULT_SCALE_VALUE = 'page-width';
 const DEFAULT_SCALE = 1.0;
 exports.DEFAULT_SCALE = DEFAULT_SCALE;
 const MIN_SCALE = 0.1;
