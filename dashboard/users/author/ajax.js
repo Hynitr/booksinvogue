@@ -310,6 +310,50 @@ $(document).ready(function () {
 
   });
 
+
+  //update book file
+  $("#edpubl").click(function () {
+
+    //book file
+    var fd = new FormData();
+    var bkfiles  = $("#bkfile").prop("files")[0];
+    var covfiles = $("#bkcov").prop("files")[0];
+    fd.append("covfile", covfiles);
+    fd.append("fil", bkfiles);
+
+
+    if (bkfiles == null || bkfiles == "") {
+
+      $("#fmsg").html("Kindly select a book");
+
+    } else {
+
+      if(covfiles == null || covfiles == "") {
+
+        $("#fmsg").html("Kindly select a book cover");
+
+      } else {
+
+        $("#fmsg").html('<img style="width: 100px; height: 100px" src="../assets/img/loading.gif">');
+
+        $.ajax({
+          type: "post",
+          url: "../functions/init.php",
+          data: fd,
+          contentType: false,
+          processData: false,
+          success: function (data) {
+
+           $("#fmsg").html(data);
+
+          },
+        });
+      
+      }
+    }
+
+  });
+
   /******** USER PROFILE SECTION */
 
   //getting books details

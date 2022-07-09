@@ -1247,8 +1247,16 @@ if (!empty($_FILES["fil"]["name"]) && !empty($_FILES["covfile"]["name"])) {
 ///sql update books image in db
 function book_img($target_file1, $target_file2) {
 
+	if(isset($_SESSION['eddbookupl'])) {
+		
+	$cod     = $_SESSION['eddbookupl'];
+	$code    = str_replace('-', ' ', $cod);
+	} else {
+
 	$cod     = $_SESSION['bookupl'];
 	$code    = str_replace('-', ' ', $cod);
+
+	}
 
 	$sql 	  = "UPDATE `books` SET `book_file` = '$target_file1', `book_cover` = '$target_file2', `book_status` = 'Show' WHERE `book_title` = '$code'";
 	$res 	  = query($sql);

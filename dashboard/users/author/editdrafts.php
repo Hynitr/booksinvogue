@@ -301,21 +301,22 @@ if(!isset($_GET['book'])) {
                                                     class="text-danger">*</sup></label>
                                             <div class="row">
                                                 <div class="col-lg-3 col-sm-12">
+
+
                                                     <?php
                                                     if($editdraft['book_file'] != '') {
 
                                                       ?>
-                                                    <img id="previewImg" class="img-fluid" width="150px"
+                                                    <canvas style="display: none" id="pdfViewer"></canvas>
+                                                    <img id="previewr" class="img-fluid" width="150px"
                                                         src="../assets/img/file.png" alt="Book Cover">
                                                     <?php
-
                                                     } else {
                                                     ?>
-                                                    <canvas id="pdfViewer"></canvas>
+                                                    <canvas style="display: none" id="pdfViewer"></canvas>
                                                     <?php
                                                     }
                                                     ?>
-
                                                     <div id="pload"></div>
                                                 </div>
                                                 <div class="col-lg-9 mb-lg-5 mt-lg-5 col-sm-12">
@@ -331,8 +332,22 @@ if(!isset($_GET['book'])) {
                                         <p class="fw-bold text-danger" id="fmsg"></p>
 
                                         <div class="mt-4">
-                                            <button type="button" class="btn btn-primary me-2" id="publ">Publish
-                                                Book</button>
+                                            <button type="button" class="btn btn-primary me-2" id="edpubl">Save
+                                                Changes</button>
+                                            <?php
+                                                if($editdraft['book_cover'] != '' && $editdraft['book_file'] != '') {
+
+                                                  echo '<a href="./mybooks"><button type="button" class="btn btn-primary me-2" id="edpubl">Skip for now
+                                                  </button></a>';
+
+                                                } else {
+
+                                                    echo '<button type="button" class="btn btn-primary me-2" disabled>Skip for now
+                                                    </button>';
+                                                }
+
+                                                ?>
+
                                         </div>
                                     </div>
                                 </div>
@@ -409,6 +424,10 @@ if(!isset($_GET['book'])) {
     pdfjsLib.GlobalWorkerOptions.workerSrc = '../build/pdf.worker.js';
 
     $("#bkfile").on("change", function(e) {
+
+        document.getElementById('previewr').style.display = 'none';
+        document.getElementById('pdfViewer').style.display = 'block';
+
         var file = e.target.files[0]
         if (file.type == "application/pdf") {
             var fileReader = new FileReader();

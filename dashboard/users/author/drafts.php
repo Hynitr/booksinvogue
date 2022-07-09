@@ -1,6 +1,27 @@
 <?php
 include("components/top.php");
 user_details();
+
+
+if(isset($_SESSION['eddbooknew'])) {
+
+    unset($_SESSION['eddbooknew']);
+}
+
+if(isset($_SESSION['bookupl'])) {
+
+    unset($_SESSION['bookupl']);
+}
+
+if(isset($_SESSION['booknew'])) {
+
+    unset($_SESSION['booknew']);
+}
+
+if(isset($_SESSION['eddbookupl'])) {
+
+    unset($_SESSION['eddbookupl']);
+}
 ?>
 
 
