@@ -80,12 +80,12 @@ See https://github.com/adobe-type-tools/cmap-resources
                             <span data-l10n-id="document_outline_label">Document Outline</span>
                         </button>
                         <button id="viewAttachments" class="toolbarButton" title="Show Attachments" tabindex="4"
-                            data-l10n-id="attachments">
+                            data-l10n-id="attachments" hidden>
                             <span data-l10n-id="attachments_label">Attachments</span>
                         </button>
                         <button id="viewLayers" class="toolbarButton"
                             title="Show Layers (double-click to reset all layers to the default state)" tabindex="5"
-                            data-l10n-id="layers">
+                            data-l10n-id="layers" hidden>
                             <span data-l10n-id="layers_label">Layers</span>
                         </button>
                     </div>
@@ -287,7 +287,8 @@ See https://github.com/adobe-type-tools/cmap-resources
                         </div>
                         <div id="toolbarViewerRight">
                             <button id="presentationMode" class="toolbarButton presentationMode hiddenLargeView"
-                                title="Switch to Presentation Mode" tabindex="31" data-l10n-id="presentation_mode">
+                                title="Switch to Presentation Mode" tabindex="31" data-l10n-id="presentation_mode"
+                                hidden>
                                 <span data-l10n-id="presentation_mode_label">Presentation Mode</span>
                             </button>
 
@@ -306,7 +307,8 @@ See https://github.com/adobe-type-tools/cmap-resources
                                 <span data-l10n-id="download_label">Download</span>
                             </button>
                             <a href="#" id="viewBookmark" class="toolbarButton bookmark hiddenSmallView"
-                                title="Current view (copy or open in new window)" tabindex="35" data-l10n-id="bookmark">
+                                title="Current view (copy or open in new window)" tabindex="35" data-l10n-id="bookmark"
+                                hidden>
                                 <span data-l10n-id="bookmark_label">Current View</span>
                             </a>
 
