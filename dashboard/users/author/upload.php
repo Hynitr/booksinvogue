@@ -192,18 +192,18 @@ user_details();
                                             <label for="html5-text-input" class="col-md-2 fw-bold">Price(₦)<sup
                                                     class="text-danger"> *</sup></label>
                                             <div class="col-md-3">
-                                                <input class="form-control" type="text" id="price" />
+                                                <input class="form-control" type="number" id="price" />
                                                 <p class="mt-2">How much do you want to sell your book on this platform?
                                                 </p>
                                             </div>
                                             <div class="col-md-3">
-                                                <input class="form-control" type="text" value="70" id="authprofit"
+                                                <input class="form-control" type="number" value="70" id="authprofit"
                                                     disabled />
                                                 <p class="mt-2">You will be credited 70% on every book purchased
                                                 </p>
                                             </div>
                                             <div class="col-md-3">
-                                                <input class="form-control" type="text" value="30" id="bivprofit"
+                                                <input class="form-control" type="number" value="30" id="bivprofit"
                                                     disabled />
                                                 <p class="mt-2">We will charge 30% service fee on
                                                     every book purchased
@@ -212,10 +212,17 @@ user_details();
                                         </div>
                                         <p class="fw-bold text-danger" id="msg"></p>
 
-                                        <div class="align-right">
-                                            <button class="btn btn-primary me-1" id="bkupld" type="button">Save draft
-                                                and Next</button>
+                                        <div class="row mt-4 mb-4">
+                                            <div class="col-sm-6 col-lg-3">
+                                                <button class="btn btn-primary" id="bkupld" type="button">Publish
+                                                    Now</button>
+                                            </div>
+                                            <div class="col-sm-6 col-lg-3">
+                                                <button class="btn btn-outline-primary" id="dft" type="button">Save
+                                                    to draft</button>
+                                            </div>
                                         </div>
+
                                     </div>
                                 </div>
 

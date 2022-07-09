@@ -116,7 +116,7 @@ user_details();
 
                                 $det = strip_tags($rws['description']);
                                 $frv = wordwrap($det, 70, "\n", TRUE); 
-                                $y = substr($frv, 0, 120).'... <a href="./read?book='.$redbb.'">Read More</a>';
+                                $y = substr($frv, 0, 120).'... <a href="./editdrafts?book='.$redbb.'">Read More</a>';
 
                                 $descrp = ucfirst($y);
                                 
@@ -148,18 +148,12 @@ user_details();
 
                                                         <span>
                                                             <b><?php echo escape($rws['book_title']) ?></b>
-                                                            <br />
-                                                            by: <b><small><?php echo $rws['author'] ?></small></b>
                                                             <br /><br />
                                                             <?php echo $descrp ?>
 
                                                             <br /><br />
 
-                                                            <b>₦<?php echo number_format($rws['selling_price']) ?></b>
 
-                                                            <br /><br />
-                                                            <?php echo $rws['language'] ?> &nbsp;|&nbsp;
-                                                            <?php echo $category ?>
 
                                                             <p class="demo-inline-spacing">
 

@@ -1117,7 +1117,7 @@ if(isset($_POST['bank']) && isset($_POST['acctn']) && isset($_POST['actnm'])){
 }
 
 //uplaod book and softcopies
-if(isset($_POST['booktitle']) && isset($_POST['bookdescp']) && isset($_POST['series']) && isset($_POST['author']) && isset($_POST['otherauthor']) && isset($_POST['copyright']) && isset($_POST['category']) && isset($_POST['isbn']) && isset($_POST['price']) && isset($_POST['authprofit']) && isset($_POST['bivprofit']) && isset($_POST['lang'])) {
+if(isset($_POST['booktitle']) && isset($_POST['bookdescp']) && isset($_POST['series']) && isset($_POST['author']) && isset($_POST['otherauthor']) && isset($_POST['copyright']) && isset($_POST['category']) && isset($_POST['isbn']) && isset($_POST['price']) && isset($_POST['authprofit']) && isset($_POST['bivprofit']) && isset($_POST['lang']) || isset($_POST['dft'])) {
 
 	$booktitle = clean(escape($_POST['booktitle']));
 	$bookdescp = clean(escape($_POST['bookdescp']));
@@ -1149,6 +1149,15 @@ if(isset($_POST['booktitle']) && isset($_POST['bookdescp']) && isset($_POST['ser
 		$sql.="VALUES('$email', '$lang', '$booktitle', '$series', '$author', '$otherauthor', '$copyright', '$category', '$isbn', '$price', '$authprofit', '$bookdescp', 'draft', '$date')";
 		$res = query($sql);
 
+
+		//if save to draft button is used, redirect to draft page
+		if(isset($_POST['dft']) && isset($_POST) == 'draft') {
+
+		echo 'Loading... Please Wait';
+		echo '<script>window.location.href ="./drafts"</script>';
+			
+		} else {
+
 		//create session to store current book details
 		$_SESSION['bookupl'] = str_replace(' ', '-', $booktitle);
 
@@ -1157,6 +1166,7 @@ if(isset($_POST['booktitle']) && isset($_POST['bookdescp']) && isset($_POST['ser
 		echo '<script>book();</script>';
 
 		//echo $post_url   = str_replace(' ', '-', $booktitle);
+		}
 	}
 }
 

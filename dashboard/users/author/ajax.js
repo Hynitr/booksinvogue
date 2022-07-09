@@ -120,6 +120,46 @@ $(document).ready(function () {
 
   });
 
+    //save book to draft
+    $("#dft").click(function () {
+      var booktitle = $("#booktitle").val();
+      var bookdescp = $("#bookdescp").val();
+      var series    = $("#series").val();
+      var author    = $("#author").val();
+      var otherauthor = $("#otherauthor").val();
+      var copyright = $("#copyright").val();
+      var category = $("#category").val();
+      var isbn = $("#isbn").val();
+      var price = $("#price").val();
+      var authprofit = $("#authprofit").val();
+      var bivprofit = $("#bivprofit").val();
+      var lang = $("#lang").val();
+      var dft  = 'draft';
+  
+      if(booktitle == null || booktitle == '') {
+  
+        $("#msg").html('Please type in your book title');
+      } else {
+
+        if(bookdescp == null || bookdescp == '') {
+
+          $("#msg").html('Please type a description for your book');
+        } else {
+
+          $("#msg").html('Loading... Please wait');
+
+            $.ajax({
+              type: "post",
+              url: "../functions/init.php",
+              data: {booktitle: booktitle, bookdescp: bookdescp, series: series, author: author, otherauthor: otherauthor, copyright: copyright, category: category, isbn: isbn, price: price, authprofit: authprofit, bivprofit: bivprofit, lang: lang, dft: dft},
+              success: function (data) {
+                $("#msg").html(data);
+              },
+            });
+          }
+      }
+    });
+
 
   //edit book
   $("#edbkupld").click(function () {
