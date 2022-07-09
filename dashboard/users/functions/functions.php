@@ -1139,13 +1139,6 @@ if(isset($_POST['booktitle']) && isset($_POST['bookdescp']) && isset($_POST['ser
 	$email = $t_users['email'];
 
 
-	if(book_exist($booktitle)) {
-
-		echo "This book is already has been published previously.";
-		
-	} else {
-
-
 		//save to edited book to draft
 		if(isset($_POST['dft']) && isset($_POST['dft']) != null && isset($_POST['dft']) != '' && isset($_POST['dft']) == 'editdraft' && isset($_POST['bookdtta']) && isset($_POST['bookdtta']) != null && isset($_POST['bookdtta']) != '') {
 
@@ -1164,8 +1157,9 @@ if(isset($_POST['booktitle']) && isset($_POST['bookdescp']) && isset($_POST['ser
 			//save the edited book and move to file upload if neccessary
 			if(isset($_POST['bookdtta']) && isset($_POST['bookdtta']) != null && isset($_POST['bookdtta']) != '' && isset($_POST['imgnxtxt']) && isset($_POST['imgnxtxt']) == 'image are choosy') {
 
+				
 				//update the uploaded book in the db
-				$sql = "UPDATE books SET `language` = '$lang', `book_title` = '$booktitle', `series_volume` = '$series', `author` = '$author', `other_author` = '$otherauthor', `copyright` = '$copyright', `category_1` = '$category', `isbn` = '$isbn', `selling_price` = '$price', `royalty_price` = '$authprofit', `description` = '$bookdescp', `book_status` = 'draft' WHERE `books_id` = '$bookdtta'";
+				$sql = "UPDATE books SET `language` = '$lang', `book_title` = '$booktitle', `book_status` = 'draft', `series_volume` = '$series', `author` = '$author', `other_author` = '$otherauthor', `copyright` = '$copyright', `category_1` = '$category', `isbn` = '$isbn', `selling_price` = '$price', `royalty_price` = '$authprofit', `description` = '$bookdescp' WHERE `books_id` = '$bookdtta'";
 				$res = query($sql);
 
 				echo 'Loading... Please Wait';
@@ -1179,6 +1173,13 @@ if(isset($_POST['booktitle']) && isset($_POST['bookdescp']) && isset($_POST['ser
 
 				//echo $post_url   = str_replace(' ', '-', $booktitle);
 			} else {
+
+			if(book_exist($booktitle)) {
+
+				echo "This book is already has been published previously.";
+				
+			} else {
+			
 				
 		//insert into book db
 		$sql = "INSERT INTO books(`email_address`, `language`, `book_title`, `series_volume`, `author`, `other_author`, `copyright`, `category_1`, `isbn`, `selling_price`, `royalty_price`, `description`, `book_status`, `date_posted`)";
@@ -1251,6 +1252,10 @@ function book_img($target_file1, $target_file2) {
 		
 	$cod     = $_SESSION['eddbookupl'];
 	$code    = str_replace('-', ' ', $cod);
+
+	//create notifictaion for edited
+	$_SESSION['edbkuplsuccess'] = $code;
+	
 	} else {
 
 	$cod     = $_SESSION['bookupl'];
@@ -1258,8 +1263,8 @@ function book_img($target_file1, $target_file2) {
 
 	}
 
-	$sql 	  = "UPDATE `books` SET `book_file` = '$target_file1', `book_cover` = '$target_file2', `book_status` = 'Show' WHERE `book_title` = '$code'";
-	$res 	  = query($sql);
+	$sql = "UPDATE `books` SET `book_file` = '$target_file1', `book_cover` = '$target_file2', `book_status` = 'Show' WHERE `book_title` = '$code'";
+	$res = query($sql);
 
 	echo 'Loading.. Please wait';
 	echo "<script>shout(); $('#pybst').show();</script>";

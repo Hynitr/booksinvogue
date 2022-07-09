@@ -36,6 +36,21 @@ if(!isset($_GET['book'])) {
             </div>
 
 
+            <div style="display: none" id="edpybst">
+                <div class="bs-toast toast show bg-primary toast-placement-ex m-2" role="alert" aria-live="assertive"
+                    aria-atomic="true" data-delay="20">
+                    <div class="toast-header">
+                        <i class="bx bx-check me-2"></i>
+                        <div class="me-auto fw-semibold">Book Edited Successfully</div>
+                        <small>Just now</small>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body"><?php echo $_SESSION['edbkuplsuccess'] ?> was edited successfully
+                    </div>
+                </div>
+            </div>
+
+
 
             <?php
             include("components/sidebar.php");            
@@ -525,6 +540,12 @@ if(!isset($_GET['book'])) {
     </script>
 
     <?php 
+     if(isset($_SESSION['edbkuplsuccess'])) {
+
+        echo "<script>$('#edpybst').show(); shout();</script>";
+
+        unset($_SESSION['edbkuplsuccess']);
+    }
     if(isset($_SESSION['eddbookupl'])) {
 
         echo "<script>book()</script>";          
