@@ -251,6 +251,7 @@ user_details();
                                             <div class="row">
                                                 <div class="col-lg-3 col-sm-12">
                                                     <canvas id="pdfViewer"></canvas>
+                                                    <div id="pload"></div>
                                                 </div>
                                                 <div class="col-lg-9 mb-lg-5 mt-lg-5 col-sm-12">
                                                     <input class="form-control" type="file" id="bkfile" />
@@ -339,14 +340,14 @@ user_details();
     <script src="../assets/js/ui-toasts.js"></script>
     <!-- Place this tag in your head or just before your close body tag. -->
     <script src="../node_modules/canvas-confetti/dist/confetti.browser.js"></script>
-    <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
+    <script src="../build/pdf.js"></script>
 
     <script>
     //preview pdf
     // Loaded via <script> tag, create shortcut to access PDF.js exports.
     var pdfjsLib = window['pdfjs-dist/build/pdf'];
     // The workerSrc property shall be specified.
-    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://mozilla.github.io/pdf.js/build/pdf.worker.js';
+    pdfjsLib.GlobalWorkerOptions.workerSrc = '../build/pdf.worker.js';
 
     $("#bkfile").on("change", function(e) {
         var file = e.target.files[0]
@@ -361,21 +362,40 @@ user_details();
                 loadingTask.promise.then(function(pdf) {
                     //console.log('PDF loaded');
 
+                    $("#pload").html(
+                        '<img style="width: 100px; height: 100px" src="../assets/img/loading.gif">'
+                    );
+
                     // Fetch the first page
                     var pageNumber = 1;
                     pdf.getPage(pageNumber).then(function(page) {
                         //console.log('Page loaded');
+                        $("#pload").html(
+                            '<img style="width: 100px; height: 100px" src="../assets/img/loading.gif">'
+                        );
 
-                        var scale = 1;
+                        /*var scale = 1.5;
                         var viewport = page.getViewport({
                             scale: scale
+                        });*/
+
+                        var desiredWidth = 200;
+                        var viewport = page.getViewport({
+                            scale: 1,
                         });
+                        var scale = desiredWidth / viewport.width;
+                        var scaledViewport = page.getViewport({
+                            scale: scale,
+                        });
+
 
                         // Prepare canvas using PDF page dimensions
                         var canvas = $("#pdfViewer")[0];
                         var context = canvas.getContext('2d');
-                        canvas.height = "50px";
-                        canvas.width = "50px";
+                        canvas.width = Math.floor(viewport.width * scale);
+                        canvas.height = Math.floor(viewport.height * scale);
+                        //canvas.height = viewport.height;
+                        //canvas.width = viewport.width;
 
                         // Render PDF page into canvas context
                         var renderContext = {
@@ -385,11 +405,12 @@ user_details();
                         var renderTask = page.render(renderContext);
                         renderTask.promise.then(function() {
                             //console.log('Page rendered');
+                            $("#pload").html('');
                         });
                     });
                 }, function(reason) {
                     // PDF loading error
-                    //console.error(reason);
+                    alert(reason);
                 });
             };
             fileReader.readAsArrayBuffer(file);
