@@ -121,6 +121,52 @@ $(document).ready(function () {
   });
 
 
+  //edit book
+  $("#edbkupld").click(function () {
+    var edbooktitle = $("#edbooktitle").val();
+    var edbookdescp = $("#edbookdescp").val();
+    var edseries    = $("#edseries").val();
+    var edauthor    = $("#edauthor").val();
+    var edotherauthor = $("#edotherauthor").val();
+    var edcopyright = $("#edcopyright").val();
+    var category = $("#category").val();
+    var edisbn = $("#edisbn").val();
+    var price = $("#price").val();
+    var authprofit = $("#authprofit").val();
+    var bivprofit = $("#bivprofit").val();
+    var lang = $("#lang").val();
+    var bookdtta = $("#bookdtta").val();
+
+    if(edbooktitle == null || edbooktitle == '') {
+
+      $("#msg").html('Please type in your book title');
+    } else {
+
+      if(edbookdescp == null || edbookdescp == '') {
+
+        $("#msg").html('A description for your book is needed');
+      } else {
+
+        if(price == null || price == '') {
+
+          $("#msg").html('Please type in the book price');
+        } else {
+
+          $.ajax({
+            type: "post",
+            url: "../functions/init.php",
+            data: {edbooktitle: edbooktitle, edbookdescp: edbookdescp, edseries: edseries, edauthor: edauthor, edotherauthor: edotherauthor, edcopyright: edcopyright, category: category, edisbn: edisbn, price: price, authprofit: authprofit, bivprofit: bivprofit, lang: lang, bookdtta: bookdtta},
+            success: function (data) {
+              $("#msg").html(data);
+            },
+          });
+
+        }
+      }
+    }
+  });
+
+
   //publish book file
   $("#publ").click(function () {
 

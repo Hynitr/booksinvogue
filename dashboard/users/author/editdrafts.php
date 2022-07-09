@@ -61,18 +61,17 @@ if(!isset($_GET['book'])) {
                     <div class="container-xxl flex-grow-1 container-p-y">
 
                         <div class="row">
-                            <h5 class="card-header">Make changes to - <b><?php echo $data ?></b></h5>
                             <div class="col-xl-12 col-12">
                                 <!-- HTML5 Inputs -->
                                 <div class="card mb-4" id="bookdet">
-
+                                    <h5 class="card-header mb-4">Make changes to - <b><?php echo $data ?></b></h5>
                                     <div class="card-body">
                                         <div class="mb-3 row">
                                             <label for="html5-text-input" class="col-md-2 fw-bold">Book
                                                 Title<sup class="text-danger"> *</sup></label>
                                             <div class="col-md-10">
                                                 <input class="form-control" value="<?php echo $data ?>" type="text"
-                                                    id="booktitle" />
+                                                    id="edbooktitle" />
                                                 <p class="mt-2">What name do you want this book to be publicly
                                                     identified with? Type
                                                     it here exactly as it appears on the cover. Start the first letter
@@ -83,7 +82,8 @@ if(!isset($_GET['book'])) {
                                             <label for="html5-text-input" class="col-md-2 fw-bold">Description <sup
                                                     class="text-danger"> *</sup></label>
                                             <div class="col-md-10">
-                                                <textarea class="form-control" id="bookdescp"></textarea>
+                                                <textarea class="form-control"
+                                                    id="edbookdescp"><?php echo $editdraft['description'] ?></textarea>
                                                 <p class="mt-2">Summarized details About The Book as it appears on the
                                                     back cover of the printed book. Write as you want it to appear on
                                                     your book detail’s page</p>
@@ -96,6 +96,7 @@ if(!isset($_GET['book'])) {
                                             <div class="col-md-10">
                                                 <select class="form-select" id="lang"
                                                     aria-label="Default select example">
+                                                    <option id="lang"><?php echo $editdraft['language'] ?></option>
                                                     <option id="lang">English</option>
                                                     <option id="lang">French</option>
                                                     <option id="lang">Yoruba</option>
@@ -106,7 +107,9 @@ if(!isset($_GET['book'])) {
                                         <div class="mb-3 row">
                                             <label for="html5-text-input" class="col-md-2 fw-bold">Series/Volume</label>
                                             <div class="col-md-10">
-                                                <input class="form-control" type="text" id="series" />
+                                                <input class="form-control"
+                                                    value="<?php echo $editdraft['series_volume'] ?>" type="text"
+                                                    id="edseries" />
                                                 <p class="mt-2">If this book is part of a series or volume, please add
                                                     the volume or series number to help your audience locate other books
                                                     in the series</p>
@@ -116,21 +119,26 @@ if(!isset($_GET['book'])) {
                                             <label for="html5-text-input" class="col-md-2 fw-bold">Author<sup
                                                     class="text-danger"> *</sup></label>
                                             <div class="col-md-10">
-                                                <input class="form-control" type="text" id="author" />
+                                                <input class="form-control" value="<?php echo $editdraft['author'] ?>"
+                                                    type="text" id="edauthor" />
                                                 <p class="mt-2">Name of the primary author of the book</p>
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
                                             <label for="html5-text-input" class="col-md-2 fw-bold">Other Author</label>
                                             <div class="col-md-10">
-                                                <input class="form-control" type="text" id="otherauthor" />
+                                                <input class="form-control"
+                                                    value="<?php echo $editdraft['other_author'] ?>" type="text"
+                                                    id="edotherauthor" />
                                                 <p class="mt-2">Name of other secondary authors</p>
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
                                             <label for="html5-text-input" class="col-md-2 fw-bold">Copyright</label>
                                             <div class="col-md-10">
-                                                <input class="form-control" type="text" id="copyright" />
+                                                <input class="form-control"
+                                                    value="<?php echo $editdraft['copyright'] ?>" type="text"
+                                                    id="edcopyright" />
                                                 <p class="mt-2">Author's right is automatically protected. Uploaded
                                                     books can neither be copied nor downloaded</p>
                                             </div>
@@ -142,6 +150,8 @@ if(!isset($_GET['book'])) {
                                             <div class="col-md-10">
                                                 <select class="form-select" id="category"
                                                     aria-label="Default select example">
+                                                    <option id="category"><?php echo $editdraft['category_1'] ?>
+                                                    </option>
                                                     <option id="category">Adventure</option>
                                                     <option id="category">Art</option>
                                                     <option id="category">Bible Study Outline</option>
@@ -193,7 +203,8 @@ if(!isset($_GET['book'])) {
                                         <div class="mb-3 row">
                                             <label for="html5-text-input" class="col-md-2 fw-bold">ISBN</label>
                                             <div class="col-md-10">
-                                                <input class="form-control" type="text" id="isbn" />
+                                                <input class="form-control" value="<?php echo $editdraft['isbn'] ?>"
+                                                    type="text" id="edisbn" />
                                                 <p class="mt-2">If you have an ISBN, type it here. If you don’t, do not
                                                     bother</p>
                                             </div>
@@ -203,28 +214,34 @@ if(!isset($_GET['book'])) {
                                             <label for="html5-text-input" class="col-md-2 fw-bold">Price(₦)<sup
                                                     class="text-danger"> *</sup></label>
                                             <div class="col-md-3">
-                                                <input class="form-control" type="text" id="price" />
+                                                <input class="form-control" type="text"
+                                                    value="<?php echo $editdraft['selling_price'] ?>" id="price" />
                                                 <p class="mt-2">How much do you want to sell your book on this platform?
                                                 </p>
                                             </div>
                                             <div class="col-md-3">
-                                                <input class="form-control" type="text" value="70" id="authprofit"
+                                                <input class="form-control" type="text"
+                                                    value="<?php echo $editdraft['royalty_price'] ?>" id="authprofit"
                                                     disabled />
                                                 <p class="mt-2">You will be credited 70% on every book purchased
                                                 </p>
                                             </div>
                                             <div class="col-md-3">
-                                                <input class="form-control" type="text" value="30" id="bivprofit"
-                                                    disabled />
+                                                <input class="form-control" type="text"
+                                                    value="<?php echo $editdraft['selling_price'] - $editdraft['royalty_price'] ?>"
+                                                    id="bivprofit" disabled />
                                                 <p class="mt-2">We will charge 30% service fee on
                                                     every book purchased
                                                 </p>
+
+                                                <input class="form-control" type="text"
+                                                    value="<?php echo $editdraft['books_id'] ?>" id="bookdtta" hidden />
                                             </div>
                                         </div>
                                         <p class="fw-bold text-danger" id="msg"></p>
 
                                         <div class="align-right">
-                                            <button class="btn btn-primary me-1" id="bkupld" type="button">Save draft
+                                            <button class="btn btn-primary me-1" id="edbkupld" type="button">Save
                                                 and Next</button>
                                         </div>
                                     </div>
@@ -232,7 +249,9 @@ if(!isset($_GET['book'])) {
 
                                 <!-- File input -->
                                 <div style="display: none" class="card" id="bokfile" enctype="multipart/form-data">
-                                    <h5 class="card-header">File input</h5>
+                                    <h5 class="card-header mb-4">Make changes to -
+                                        <b><?php echo $_SESSION['edbookupl']; ?></b>
+                                    </h5>
                                     <div class="card-body">
                                         <div class="mb-3">
                                             <label for="formFile" class="form-label fw-bold">Upload Book <sup
@@ -340,17 +359,17 @@ if(!isset($_GET['book'])) {
     </script>
 
     <?php 
-    if(isset($_SESSION['bookupl'])) {
+    if(isset($_SESSION['edbookupl'])) {
 
         echo "<script>book()</script>";          
     } else {
 
         echo "<script>regbook()</script>";
     }
+    
+    if (isset($_SESSION['edbooknew'])) {
 
-    if (isset($_SESSION['booknew'])) {
-
-        $code = $_SESSION['booknew'];
+        $code = $_SESSION['edbooknew'];
 
         echo '
         <script>

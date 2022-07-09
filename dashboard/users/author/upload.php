@@ -221,23 +221,46 @@ user_details();
 
                                 <!-- File input -->
                                 <div style="display: none" class="card" id="bokfile" enctype="multipart/form-data">
-                                    <h5 class="card-header">File input</h5>
+                                    <h5 class="card-header">Upload Book Images</h5>
                                     <div class="card-body">
-                                        <div class="mb-3">
-                                            <label for="formFile" class="form-label fw-bold">Upload Book <sup
-                                                    class="text-danger">*</sup></label>
-                                            <input class="form-control" type="file" id="bkfile" />
-                                            <p class="mt-2">Acceptable formats are ".pdf"</p>
-                                        </div>
+
 
                                         <div class="mb-3">
                                             <label for="formFile" class="form-label fw-bold">Upload Book Cover <sup
                                                     class="text-danger">*</sup></label>
-                                            <input class="form-control" type="file" id="bkcov" />
+
+                                            <div class="row">
+                                                <div class="col-lg-3 col-sm-12">
+                                                    <img style="display: none;" id="previewImg" class="img-fluid"
+                                                        width="150px" src="#" alt="Book Cover">
+                                                </div>
+                                                <div class="col-lg-9 mb-lg-5 mt-lg-5 col-sm-12">
+                                                    <input class="form-control" type="file"
+                                                        onchange="previewFile(this);" id="bkcov" />
+                                                </div>
+                                            </div>
                                             <p class="mt-2">Acceptable formats are jpeg, png, gif, jpg. Whatever size
                                                 you upload, our
                                                 system will convert your uploaded format to acceptable size.</p>
                                         </div>
+
+
+                                        <div class="mb-3">
+                                            <label for="formFile" class="form-label fw-bold">Upload Book <sup
+                                                    class="text-danger">*</sup></label>
+                                            <div class="row">
+                                                <div class="col-lg-3 col-sm-12">
+                                                    <canvas id="pdfViewer"></canvas>
+                                                </div>
+                                                <div class="col-lg-9 mb-lg-5 mt-lg-5 col-sm-12">
+                                                    <input class="form-control" type="file" id="bkfile" />
+                                                </div>
+                                            </div>
+
+
+                                            <p class="mt-2">Acceptable formats are ".pdf"</p>
+                                        </div>
+
 
                                         <p class="fw-bold text-danger" id="fmsg"></p>
 
@@ -314,8 +337,82 @@ user_details();
     <!-- Page JS -->
     <script src="ajax.js"></script>
     <script src="../assets/js/ui-toasts.js"></script>
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script src="../node_modules/canvas-confetti/dist/confetti.browser.js"></script>
+    <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
 
     <script>
+    //preview pdf
+    // Loaded via <script> tag, create shortcut to access PDF.js exports.
+    var pdfjsLib = window['pdfjs-dist/build/pdf'];
+    // The workerSrc property shall be specified.
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://mozilla.github.io/pdf.js/build/pdf.worker.js';
+
+    $("#bkfile").on("change", function(e) {
+        var file = e.target.files[0]
+        if (file.type == "application/pdf") {
+            var fileReader = new FileReader();
+            fileReader.onload = function() {
+                var pdfData = new Uint8Array(this.result);
+                // Using DocumentInitParameters object to load binary data.
+                var loadingTask = pdfjsLib.getDocument({
+                    data: pdfData
+                });
+                loadingTask.promise.then(function(pdf) {
+                    //console.log('PDF loaded');
+
+                    // Fetch the first page
+                    var pageNumber = 1;
+                    pdf.getPage(pageNumber).then(function(page) {
+                        //console.log('Page loaded');
+
+                        var scale = 1;
+                        var viewport = page.getViewport({
+                            scale: scale
+                        });
+
+                        // Prepare canvas using PDF page dimensions
+                        var canvas = $("#pdfViewer")[0];
+                        var context = canvas.getContext('2d');
+                        canvas.height = "50px";
+                        canvas.width = "50px";
+
+                        // Render PDF page into canvas context
+                        var renderContext = {
+                            canvasContext: context,
+                            viewport: viewport
+                        };
+                        var renderTask = page.render(renderContext);
+                        renderTask.promise.then(function() {
+                            //console.log('Page rendered');
+                        });
+                    });
+                }, function(reason) {
+                    // PDF loading error
+                    //console.error(reason);
+                });
+            };
+            fileReader.readAsArrayBuffer(file);
+        }
+    });
+
+    //preview images
+    function previewFile(input) {
+        document.getElementById('previewImg').style.display = 'block';
+
+        var file = $("input[type=file]").get(0).files[0];
+
+        if (file) {
+            var reader = new FileReader();
+
+            reader.onload = function() {
+                $("#previewImg").attr("src", reader.result);
+            }
+
+            reader.readAsDataURL(file);
+        }
+    }
+
     //book file
     function book() {
         document.getElementById('bookdet').style.display = 'none';
@@ -326,32 +423,7 @@ user_details();
         document.getElementById('bookdet').style.display = 'block';
         document.getElementById('bokfile').style.display = 'none';
     }
-    </script>
 
-    <?php 
-    if(isset($_SESSION['bookupl'])) {
-
-        echo "<script>book()</script>";          
-    } else {
-
-        echo "<script>regbook()</script>";
-    }
-
-    if (isset($_SESSION['booknew'])) {
-
-        $code = $_SESSION['booknew'];
-
-        echo '
-        <script>
-        function statemgt() {
-            location.replace("https://bookinvogue.com/'.$code.'");
-        }</script>';
-    }
-    ?>
-
-    <!-- Place this tag in your head or just before your close body tag. -->
-    <script src="../node_modules/canvas-confetti/dist/confetti.browser.js"></script>
-    <script>
     function shout() {
 
         $(document).ready(function() {
@@ -397,6 +469,26 @@ user_details();
     }
     </script>
 
+    <?php 
+    if(isset($_SESSION['bookupl'])) {
+
+        echo "<script>book()</script>";          
+    } else {
+
+        echo "<script>regbook()</script>";
+    }
+
+    if (isset($_SESSION['booknew'])) {
+
+        $code = $_SESSION['booknew'];
+
+        echo '
+        <script>
+        function statemgt() {
+            location.replace("https://bookinvogue.com/'.$code.'");
+        }</script>';
+    }
+    ?>
 
 </body>
 

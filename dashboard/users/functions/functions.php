@@ -1160,6 +1160,51 @@ if(isset($_POST['booktitle']) && isset($_POST['bookdescp']) && isset($_POST['ser
 	}
 }
 
+
+//edit books
+if(isset($_POST['edbooktitle']) && isset($_POST['edbookdescp']) && isset($_POST['edseries']) && isset($_POST['edauthor']) && isset($_POST['edotherauthor']) && isset($_POST['edcopyright']) && isset($_POST['category']) && isset($_POST['edisbn']) && isset($_POST['price']) && isset($_POST['authprofit']) && isset($_POST['bivprofit']) && isset($_POST['lang']) && isset($_POST['bookdtta'])) {
+
+	$booktitle = clean(escape($_POST['edbooktitle']));
+	$bookdescp = clean(escape($_POST['edbookdescp']));
+	$series = clean(escape($_POST['edseries']));
+	$author = clean(escape($_POST['edauthor']));
+	$otherauthor = clean(escape($_POST['edotherauthor']));
+	$copyright = clean(escape($_POST['edcopyright']));
+	$category = clean(escape($_POST['category']));
+	$isbn = clean(escape($_POST['edisbn']));
+	$price = clean(escape($_POST['price']));
+	$authprofit = clean(escape($_POST['authprofit']));
+	$bivprofit = clean(escape($_POST['bivprofit']));
+	$lang = clean(escape($_POST['lang']));
+	$bookdtta = clean(escape($_POST['bookdtta']));
+	$date = date("F d, Y");
+
+	user_details();
+
+	$email = $t_users['email'];
+
+
+	if(book_exist($booktitle)) {
+
+		echo "This book is already has been published previously.";
+		
+	} else {
+
+		//insert into book db
+		$sql = "UPDATE books SET `language` = '$lang', `book_title` = '$booktitle', `series_volume` = '$series', `author` = '$author', `other_author` = '$otherauthor', `copyright` = '$copyright', `category_1` = '$category', `isbn` = '$isbn', `selling_price` = '$price', `royalty_price` = '$authprofit', `description` = '$bookdescp', `book_status` = 'draft' WHERE `books_id` = '$bookdtta'";
+		$res = query($sql);
+
+		//create session to store current book details
+		$_SESSION['edbookupl'] = str_replace(' ', '-', $booktitle);
+
+		$_SESSION['edbooknew'] = str_replace(' ', '-', $booktitle);
+
+		echo '<script>book();</script>';
+
+		//echo $post_url   = str_replace(' ', '-', $booktitle);
+	}
+}
+
 //publush book with book image and book cover
 if (!empty($_FILES["fil"]["name"]) && !empty($_FILES["covfile"]["name"])) {
 	
@@ -1215,16 +1260,15 @@ function book_img($target_file1, $target_file2) {
 //get books details
 function book_details($data) {
 
-	$sql = "SELECT * FROM book WHERE `book_title` = '$book'";
+	$sql = "SELECT * FROM books WHERE `book_title` = '$data'";
 	$res = query($sql);
-	if(row_count($res) == '') {
+	if(row_count($res) == null || row_count($res) == '') {
 
-		return false;
+		redirect('./mybooks');
 		
 	} else {
 
-		$row = mysqli_fetch_array($res);
-		return true;
+		$GLOBALS['editdraft'] = mysqli_fetch_array($res);
 	}
 }
 

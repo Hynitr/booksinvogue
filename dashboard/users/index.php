@@ -402,6 +402,7 @@ input[type=number] {
           
             <script>
             $('#pybstdd').show();
+            shout();
             </script>
             ";
         
