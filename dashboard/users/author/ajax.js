@@ -98,10 +98,17 @@ $(document).ready(function () {
         $("#msg").html('A description for your book is needed');
       } else {
 
+        if(author == null || author == '') {
+
+          $("#msg").html('Please type in an author for your book');
+        } else {
+
         if(price == null || price == '') {
 
           $("#msg").html('Please type in the book price');
         } else {
+          
+          $("#msg").html('Loading... Please wait');
 
           $.ajax({
             type: "post",
@@ -116,7 +123,7 @@ $(document).ready(function () {
       }
     }
     
-    
+  }
 
   });
 
