@@ -207,13 +207,15 @@ if(isset($_SESSION['eddbookupl'])) {
                                                                     btn-primary me-1">
                                                                     <i class="bx bx-edit text-white"></i>
                                                                 </a>
-                                                                <a href="./delete?book=<?php echo $redbb ?>"
-                                                                    class="btn btn-primary me-1">
+                                                                <a class="btn trash btn-primary me-1"
+                                                                    onclick="trash();">
                                                                     <i class="bx bx-trash text-white"></i>
                                                                 </a>
                                                                 <a class="btn btn-primary me-1">
                                                                     <i class="bx bx-share-alt text-white"></i>
                                                                 </a>
+                                                            <p style="display: none" class="trash">
+                                                                <?php echo $rws['books_id'] ?></p>
                                                             </p>
 
                                                         </span>
@@ -284,6 +286,13 @@ if(isset($_SESSION['eddbookupl'])) {
     <!-- Place this tag in your head or just before your close body tag. -->
     <script src="../node_modules/canvas-confetti/dist/confetti.browser.js"></script>
     <script>
+    function trash() {
+
+        var id = $(".trash").text();
+        //var quantity = $(this).find(".trash").text();
+        alert(id);
+    }
+
     function shout() {
 
         $(document).ready(function() {
