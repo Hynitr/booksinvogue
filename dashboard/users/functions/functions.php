@@ -1117,7 +1117,7 @@ if(isset($_POST['bank']) && isset($_POST['acctn']) && isset($_POST['actnm'])){
 }
 
 //uplaod book and softcopies
-if(isset($_POST['booktitle']) && isset($_POST['bookdescp']) && isset($_POST['series']) && isset($_POST['author']) && isset($_POST['otherauthor']) && isset($_POST['copyright']) && isset($_POST['category']) && isset($_POST['isbn']) && isset($_POST['price']) && isset($_POST['authprofit']) && isset($_POST['bivprofit']) && isset($_POST['lang']) || isset($_POST['dft']) || isset($_POST['bookdtta'])) {
+if(isset($_POST['booktitle']) && isset($_POST['bookdescp']) && isset($_POST['series']) && isset($_POST['author']) && isset($_POST['otherauthor']) && isset($_POST['copyright']) && isset($_POST['category']) && isset($_POST['isbn']) && isset($_POST['price']) && isset($_POST['authprofit']) && isset($_POST['bivprofit']) && isset($_POST['lang']) || isset($_POST['dft']) || isset($_POST['bookdtta']) || isset($_POST['imgnxtxt'])) {
 
 	$booktitle = clean(escape($_POST['booktitle']));
 	$bookdescp = clean(escape($_POST['bookdescp']));
@@ -1145,22 +1145,41 @@ if(isset($_POST['booktitle']) && isset($_POST['bookdescp']) && isset($_POST['ser
 		
 	} else {
 
-		if(isset($_POST['bookdtta']) && isset($_POST['bookdtta']) != null && isset($_POST['bookdtta']) != '') {
+
+		//save to edited book to draft
+		if(isset($_POST['dft']) && isset($_POST['dft']) != null && isset($_POST['dft']) != '' && isset($_POST['dft']) == 'editdraft' && isset($_POST['bookdtta']) && isset($_POST['bookdtta']) != null && isset($_POST['bookdtta']) != '') {
 
 			$bookdtta = clean(escape($_POST['bookdtta']));
 	
 			//update the uploaded book in the db
-			$sql = "UPDATE books SET `language` = '$lang', `book_title` = '$booktitle', `series_volume` = '$series', `author` = '$author', `other_author` = '$otherauthor', `copyright` = '$copyright', `category_1` = '$category', `isbn` = '$isbn', `selling_price` = '$price', `royalty_price` = '$authprofit', `description` = '$bookdescp', `book_status` = 'Show' WHERE `books_id` = '$bookdtta'";
+			$sql = "UPDATE books SET `language` = '$lang', `book_title` = '$booktitle', `series_volume` = '$series', `author` = '$author', `other_author` = '$otherauthor', `copyright` = '$copyright', `category_1` = '$category', `isbn` = '$isbn', `selling_price` = '$price', `royalty_price` = '$authprofit', `description` = '$bookdescp', `book_status` = 'draft' WHERE `books_id` = '$bookdtta'";
 			$res = query($sql);
 
-			//create notifictaion for edited
-			$_SESSION['edbkuplsuccess'] = $booktitle;
-	
 			echo 'Loading... Please Wait';
-			echo '<script>window.location.href ="./mybooks"</script>';
-			
-			} else {
+			echo '<script>window.location.href ="./drafts"</script>';
 
+		} else {
+
+				
+			//save the edited book and move to file upload if neccessary
+			if(isset($_POST['bookdtta']) && isset($_POST['bookdtta']) != null && isset($_POST['bookdtta']) != '' && isset($_POST['imgnxtxt']) && isset($_POST['imgnxtxt']) == 'image are choosy') {
+
+				//update the uploaded book in the db
+				$sql = "UPDATE books SET `language` = '$lang', `book_title` = '$booktitle', `series_volume` = '$series', `author` = '$author', `other_author` = '$otherauthor', `copyright` = '$copyright', `category_1` = '$category', `isbn` = '$isbn', `selling_price` = '$price', `royalty_price` = '$authprofit', `description` = '$bookdescp', `book_status` = 'draft' WHERE `books_id` = '$bookdtta'";
+				$res = query($sql);
+
+				echo 'Loading... Please Wait';
+
+				//create session to store current book details
+				$_SESSION['eddbookupl'] = str_replace(' ', '-', $booktitle);
+
+				$_SESSION['eddbooknew'] = str_replace(' ', '-', $booktitle);
+
+				echo '<script>book();</script>';
+
+				//echo $post_url   = str_replace(' ', '-', $booktitle);
+			} else {
+				
 		//insert into book db
 		$sql = "INSERT INTO books(`email_address`, `language`, `book_title`, `series_volume`, `author`, `other_author`, `copyright`, `category_1`, `isbn`, `selling_price`, `royalty_price`, `description`, `book_status`, `date_posted`)";
 		$sql.="VALUES('$email', '$lang', '$booktitle', '$series', '$author', '$otherauthor', '$copyright', '$category', '$isbn', '$price', '$authprofit', '$bookdescp', 'draft', '$date')";
@@ -1168,10 +1187,10 @@ if(isset($_POST['booktitle']) && isset($_POST['bookdescp']) && isset($_POST['ser
 
 
 		//if save to draft button is used, redirect to draft page
-		if(isset($_POST['dft']) && isset($_POST) == 'draft') {
+		if(isset($_POST['dft']) && isset($_POST['dft']) == 'draft' && isset($_POST['dft']) != null && isset($_POST['dft']) != '') {
 
-		echo 'Loading... Please Wait';
-		echo '<script>window.location.href ="./drafts"</script>';
+			echo 'Loading... Please Wait';
+			echo '<script>window.location.href ="./drafts"</script>';
 			
 		} else {
 
@@ -1184,6 +1203,7 @@ if(isset($_POST['booktitle']) && isset($_POST['bookdescp']) && isset($_POST['ser
 
 		//echo $post_url   = str_replace(' ', '-', $booktitle);
 		}
+	}
 	}
 	}
 }

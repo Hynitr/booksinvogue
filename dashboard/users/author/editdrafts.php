@@ -21,7 +21,7 @@ if(!isset($_GET['book'])) {
             <!-- Menu -->
 
             <div style="display: none" id="pybst">
-                <div class="bs-toast toast show bg-success toast-placement-ex m-2" role="alert" aria-live="assertive"
+                <div class="bs-toast toast show bg-primary toast-placement-ex m-2" role="alert" aria-live="assertive"
                     aria-atomic="true" data-delay="20">
                     <div class="toast-header">
                         <i class="bx bx-check me-2"></i>
@@ -31,22 +31,6 @@ if(!isset($_GET['book'])) {
                     </div>
                     <div class="toast-body">You just uploaded a new book. <br>Kindly check your bookshelf to view the
                         book
-                    </div>
-                </div>
-            </div>
-
-
-
-            <div style="display: none" id="edpybst">
-                <div class="bs-toast toast show bg-success toast-placement-ex m-2" role="alert" aria-live="assertive"
-                    aria-atomic="true" data-delay="20">
-                    <div class="toast-header">
-                        <i class="bx bx-check me-2"></i>
-                        <div class="me-auto fw-semibold">Book Edited Successfully</div>
-                        <small>Just now</small>
-                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                    </div>
-                    <div class="toast-body"><?php echo $_SESSION['edbkuplsuccess'] ?> was edited successfully
                     </div>
                 </div>
             </div>
@@ -258,19 +242,14 @@ if(!isset($_GET['book'])) {
 
                                         <div class="row mt-4 mb-4">
                                             <div class="col-sm-12 col-lg-3">
-                                                <button class="btn btn-primary" id="edbkupld" type="button">Update and
-                                                    save</button>
-                                                <p class="col-lg-9 mt-2">Save without making any changes to the
-                                                    book
-                                                    files
-                                                </p>
+                                                <button class="btn btn-primary" id="edbkupld" type="button">Save and
+                                                    Publish</button>
+
                                             </div>
                                             <div class="col-sm-6 col-lg-6">
-                                                <button class="btn btn-outline-primary" id="eddft" type="button">Update
-                                                    Book Images</button>
-                                                <p class="col-lg-5 mt-2">Save and make changes to the
-                                                    book files also.
-                                                </p>
+                                                <button class="btn btn-outline-primary" id="eddft" type="button">Save to
+                                                    Draft</button>
+
                                             </div>
                                         </div>
                                     </div>
@@ -278,10 +257,9 @@ if(!isset($_GET['book'])) {
 
                                 <!-- File input -->
                                 <div style="display: none" class="card" id="bokfile" enctype="multipart/form-data">
-                                    <h5 class="card-header mb-4">Make changes to -
-                                        <b><?php echo $_SESSION['edbookupl']; ?></b>
-                                    </h5>
+                                    <h5 class="card-header">Upload Book Images</h5>
                                     <div class="card-body">
+
 
                                         <div class="mb-3">
                                             <label for="formFile" class="form-label fw-bold">Upload Book Cover <sup
@@ -326,9 +304,6 @@ if(!isset($_GET['book'])) {
                                         <div class="mt-4">
                                             <button type="button" class="btn btn-primary me-2" id="publ">Publish
                                                 Book</button>
-                                            <a href="./mydraft"><button type="button" class="btn btn-outline-secondary"
-                                                    id="svdft">Save to
-                                                    draft</button></a>
                                         </div>
                                     </div>
                                 </div>
@@ -396,8 +371,99 @@ if(!isset($_GET['book'])) {
     <!-- Page JS -->
     <script src="ajax.js"></script>
     <script src="../assets/js/ui-toasts.js"></script>
-
+    <script src="../build/pdf.js"></script>
     <script>
+    //preview pdf
+    // Loaded via <script> tag, create shortcut to access PDF.js exports.
+    var pdfjsLib = window['pdfjs-dist/build/pdf'];
+    // The workerSrc property shall be specified.
+    pdfjsLib.GlobalWorkerOptions.workerSrc = '../build/pdf.worker.js';
+
+    $("#bkfile").on("change", function(e) {
+        var file = e.target.files[0]
+        if (file.type == "application/pdf") {
+            var fileReader = new FileReader();
+            fileReader.onload = function() {
+                var pdfData = new Uint8Array(this.result);
+                // Using DocumentInitParameters object to load binary data.
+                var loadingTask = pdfjsLib.getDocument({
+                    data: pdfData
+                });
+                loadingTask.promise.then(function(pdf) {
+                    //console.log('PDF loaded');
+
+                    $("#pload").html(
+                        '<img style="width: 100px; height: 100px" src="../assets/img/loading.gif">'
+                    );
+
+                    // Fetch the first page
+                    var pageNumber = 1;
+                    pdf.getPage(pageNumber).then(function(page) {
+                        //console.log('Page loaded');
+                        $("#pload").html(
+                            '<img style="width: 100px; height: 100px" src="../assets/img/loading.gif">'
+                        );
+
+                        /*var scale = 1.5;
+                        var viewport = page.getViewport({
+                            scale: scale
+                        });*/
+
+                        var desiredWidth = 200;
+                        var viewport = page.getViewport({
+                            scale: 1,
+                        });
+                        var scale = desiredWidth / viewport.width;
+                        var scaledViewport = page.getViewport({
+                            scale: scale,
+                        });
+
+
+                        // Prepare canvas using PDF page dimensions
+                        var canvas = $("#pdfViewer")[0];
+                        var context = canvas.getContext('2d');
+                        canvas.width = Math.floor(viewport.width * scale);
+                        canvas.height = Math.floor(viewport.height * scale);
+                        //canvas.height = viewport.height;
+                        //canvas.width = viewport.width;
+
+                        // Render PDF page into canvas context
+                        var renderContext = {
+                            canvasContext: context,
+                            viewport: viewport
+                        };
+                        var renderTask = page.render(renderContext);
+                        renderTask.promise.then(function() {
+                            //console.log('Page rendered');
+                            $("#pload").html('');
+                        });
+                    });
+                }, function(reason) {
+                    // PDF loading error
+                    alert(reason);
+                });
+            };
+            fileReader.readAsArrayBuffer(file);
+        }
+    });
+
+    //preview images
+    function previewFile(input) {
+        document.getElementById('previewImg').style.display = 'block';
+
+        var file = $("input[type=file]").get(0).files[0];
+
+        if (file) {
+            var reader = new FileReader();
+
+            reader.onload = function() {
+                $("#previewImg").attr("src", reader.result);
+            }
+
+            reader.readAsDataURL(file);
+        }
+    }
+
     //book file
     function book() {
         document.getElementById('bookdet').style.display = 'none';
@@ -426,7 +492,7 @@ if(!isset($_GET['book'])) {
         echo '
         <script>
         function statemgt() {
-            location.replace("https://bookinvogue.com/'.$code.'");
+            window.open("https://bookinvogue.com/'.$code.'","_blank");
         }</script>';
     }
 

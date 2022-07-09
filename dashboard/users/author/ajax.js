@@ -128,7 +128,7 @@ $(document).ready(function () {
   });
 
 
-   //edit uploaded book
+   //edit uploaded book to images
    $("#edbkupld").click(function () {
     var booktitle = $("#booktitle").val();
     var bookdescp = $("#bookdescp").val();
@@ -143,6 +143,7 @@ $(document).ready(function () {
     var bivprofit = $("#bivprofit").val();
     var lang = $("#lang").val();
     var bookdtta = $("#bookdtta").val();
+    var imgnxtxt = "image are choosy";
 
     if(booktitle == null || booktitle == '') {
 
@@ -169,7 +170,7 @@ $(document).ready(function () {
           $.ajax({
             type: "post",
             url: "../functions/init.php",
-            data: {booktitle: booktitle, bookdescp: bookdescp, series: series, author: author, otherauthor: otherauthor, copyright: copyright, category: category, isbn: isbn, price: price, authprofit: authprofit, bivprofit: bivprofit, lang: lang, bookdtta: bookdtta},
+            data: {booktitle: booktitle, bookdescp: bookdescp, series: series, author: author, otherauthor: otherauthor, copyright: copyright, category: category, isbn: isbn, price: price, authprofit: authprofit, bivprofit: bivprofit, lang: lang, bookdtta: bookdtta, imgnxtxt: imgnxtxt},
             success: function (data) {
               $("#msg").html(data);
             },
@@ -224,50 +225,46 @@ $(document).ready(function () {
     });
 
 
-  //edit book
-  $("#edbkupld").click(function () {
-    var edbooktitle = $("#edbooktitle").val();
-    var edbookdescp = $("#edbookdescp").val();
-    var edseries    = $("#edseries").val();
-    var edauthor    = $("#edauthor").val();
-    var edotherauthor = $("#edotherauthor").val();
-    var edcopyright = $("#edcopyright").val();
-    var category = $("#category").val();
-    var edisbn = $("#edisbn").val();
-    var price = $("#price").val();
-    var authprofit = $("#authprofit").val();
-    var bivprofit = $("#bivprofit").val();
-    var lang = $("#lang").val();
-    var bookdtta = $("#bookdtta").val();
+     //edit books to drafs
+     $("#eddft").click(function () {
+      var booktitle = $("#booktitle").val();
+      var bookdescp = $("#bookdescp").val();
+      var series    = $("#series").val();
+      var author    = $("#author").val();
+      var otherauthor = $("#otherauthor").val();
+      var copyright = $("#copyright").val();
+      var category = $("#category").val();
+      var isbn = $("#isbn").val();
+      var price = $("#price").val();
+      var authprofit = $("#authprofit").val();
+      var bivprofit = $("#bivprofit").val();
+      var lang = $("#lang").val();
+      var dft  = 'editdraft';
+      var bookdtta = $("#bookdtta").val();
 
-    if(edbooktitle == null || edbooktitle == '') {
-
-      $("#msg").html('Please type in your book title');
-    } else {
-
-      if(edbookdescp == null || edbookdescp == '') {
-
-        $("#msg").html('A description for your book is needed');
+      if(booktitle == null || booktitle == '') {
+  
+        $("#msg").html('Please type in your book title');
       } else {
 
-        if(price == null || price == '') {
+        if(bookdescp == null || bookdescp == '') {
 
-          $("#msg").html('Please type in the book price');
+          $("#msg").html('Please type a description for your book');
         } else {
 
-          $.ajax({
-            type: "post",
-            url: "../functions/init.php",
-            data: {edbooktitle: edbooktitle, edbookdescp: edbookdescp, edseries: edseries, edauthor: edauthor, edotherauthor: edotherauthor, edcopyright: edcopyright, category: category, edisbn: edisbn, price: price, authprofit: authprofit, bivprofit: bivprofit, lang: lang, bookdtta: bookdtta},
-            success: function (data) {
-              $("#msg").html(data);
-            },
-          });
+          $("#msg").html('Loading... Please wait');
 
-        }
+            $.ajax({
+              type: "post",
+              url: "../functions/init.php",
+              data: {booktitle: booktitle, bookdescp: bookdescp, series: series, author: author, otherauthor: otherauthor, copyright: copyright, category: category, isbn: isbn, price: price, authprofit: authprofit, bivprofit: bivprofit, lang: lang, dft: dft, bookdtta: bookdtta},
+              success: function (data) {
+                $("#msg").html(data);
+              },
+            });
+          }
       }
-    }
-  });
+    });
 
 
   //publish book file
