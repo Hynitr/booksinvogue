@@ -1157,9 +1157,10 @@ if(isset($_POST['booktitle']) && isset($_POST['bookdescp']) && isset($_POST['ser
 			//save the edited book and move to file upload if neccessary
 			if(isset($_POST['bookdtta']) && isset($_POST['bookdtta']) != null && isset($_POST['bookdtta']) != '' && isset($_POST['imgnxtxt']) && isset($_POST['imgnxtxt']) == 'image are choosy') {
 
+				$bookdtta = clean(escape($_POST['bookdtta']));
 				
 				//update the uploaded book in the db
-				$sql = "UPDATE books SET `language` = '$lang', `book_title` = '$booktitle', `book_status` = 'draft', `series_volume` = '$series', `author` = '$author', `other_author` = '$otherauthor', `copyright` = '$copyright', `category_1` = '$category', `isbn` = '$isbn', `selling_price` = '$price', `royalty_price` = '$authprofit', `description` = '$bookdescp' WHERE `books_id` = '$bookdtta'";
+				$sql = "UPDATE books SET `language` = '$lang', `book_title` = '$booktitle', `book_status` = 'Show', `series_volume` = '$series', `author` = '$author', `other_author` = '$otherauthor', `copyright` = '$copyright', `category_1` = '$category', `isbn` = '$isbn', `selling_price` = '$price', `royalty_price` = '$authprofit', `description` = '$bookdescp' WHERE `books_id` = '$bookdtta'";
 				$res = query($sql);
 
 				echo 'Loading... Please Wait';
@@ -1169,7 +1170,7 @@ if(isset($_POST['booktitle']) && isset($_POST['bookdescp']) && isset($_POST['ser
 
 				$_SESSION['eddbooknew'] = str_replace(' ', '-', $booktitle);
 
-				//echo '<script>book();</script>';
+				echo '<script>book();</script>';
 
 				//echo $post_url   = str_replace(' ', '-', $booktitle);
 			} else {
