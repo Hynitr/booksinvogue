@@ -253,21 +253,44 @@ if(!isset($_GET['book'])) {
                                         <b><?php echo $_SESSION['edbookupl']; ?></b>
                                     </h5>
                                     <div class="card-body">
-                                        <div class="mb-3">
-                                            <label for="formFile" class="form-label fw-bold">Upload Book <sup
-                                                    class="text-danger">*</sup></label>
-                                            <input class="form-control" type="file" id="bkfile" />
-                                            <p class="mt-2">Acceptable formats are ".pdf"</p>
-                                        </div>
 
                                         <div class="mb-3">
                                             <label for="formFile" class="form-label fw-bold">Upload Book Cover <sup
                                                     class="text-danger">*</sup></label>
-                                            <input class="form-control" type="file" id="bkcov" />
+
+                                            <div class="row">
+                                                <div class="col-lg-3 col-sm-12">
+                                                    <img style="display: none;" id="previewImg" class="img-fluid"
+                                                        width="150px" src="#" alt="Book Cover">
+                                                </div>
+                                                <div class="col-lg-9 mb-lg-5 mt-lg-5 col-sm-12">
+                                                    <input class="form-control" type="file"
+                                                        onchange="previewFile(this);" id="bkcov" />
+                                                </div>
+                                            </div>
                                             <p class="mt-2">Acceptable formats are jpeg, png, gif, jpg. Whatever size
                                                 you upload, our
                                                 system will convert your uploaded format to acceptable size.</p>
                                         </div>
+
+
+                                        <div class="mb-3">
+                                            <label for="formFile" class="form-label fw-bold">Upload Book <sup
+                                                    class="text-danger">*</sup></label>
+                                            <div class="row">
+                                                <div class="col-lg-3 col-sm-12">
+                                                    <canvas id="pdfViewer"></canvas>
+                                                    <div id="pload"></div>
+                                                </div>
+                                                <div class="col-lg-9 mb-lg-5 mt-lg-5 col-sm-12">
+                                                    <input class="form-control" type="file" id="bkfile" />
+                                                </div>
+                                            </div>
+
+
+                                            <p class="mt-2">Acceptable formats are ".pdf"</p>
+                                        </div>
+
 
                                         <p class="fw-bold text-danger" id="fmsg"></p>
 

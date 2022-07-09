@@ -158,7 +158,7 @@ See https://github.com/adobe-type-tools/cmap-resources
                 <div id="secondaryToolbarButtonContainer">
                     <button id="secondaryPresentationMode"
                         class="secondaryToolbarButton presentationMode visibleLargeView"
-                        title="Switch to Presentation Mode" tabindex="51" data-l10n-id="presentation_mode">
+                        title="Switch to Presentation Mode" tabindex="51" data-l10n-id="presentation_mode" hidden>
                         <span data-l10n-id="presentation_mode_label">Presentation Mode</span>
                     </button>
 
@@ -208,50 +208,50 @@ See https://github.com/adobe-type-tools/cmap-resources
                     <div class="horizontalToolbarSeparator"></div>
 
                     <button id="cursorSelectTool" class="secondaryToolbarButton selectTool toggled"
-                        title="Enable Text Selection Tool" tabindex="60" data-l10n-id="cursor_text_select_tool">
+                        title="Enable Text Selection Tool" tabindex="60" data-l10n-id="cursor_text_select_tool" hidden>
                         <span data-l10n-id="cursor_text_select_tool_label">Text Selection Tool</span>
                     </button>
                     <button id="cursorHandTool" class="secondaryToolbarButton handTool" title="Enable Hand Tool"
-                        tabindex="61" data-l10n-id="cursor_hand_tool">
+                        tabindex="61" data-l10n-id="cursor_hand_tool" hidden>
                         <span data-l10n-id="cursor_hand_tool_label">Hand Tool</span>
                     </button>
 
                     <div class="horizontalToolbarSeparator"></div>
 
                     <button id="scrollVertical" class="secondaryToolbarButton scrollModeButtons scrollVertical toggled"
-                        title="Use Vertical Scrolling" tabindex="62" data-l10n-id="scroll_vertical">
+                        title="Use Vertical Scrolling" tabindex="62" data-l10n-id="scroll_vertical" hidden>
                         <span data-l10n-id="scroll_vertical_label">Vertical Scrolling</span>
                     </button>
                     <button id="scrollHorizontal" class="secondaryToolbarButton scrollModeButtons scrollHorizontal"
-                        title="Use Horizontal Scrolling" tabindex="63" data-l10n-id="scroll_horizontal">
+                        title="Use Horizontal Scrolling" tabindex="63" data-l10n-id="scroll_horizontal" hidden>
                         <span data-l10n-id="scroll_horizontal_label">Horizontal Scrolling</span>
                     </button>
                     <button id="scrollWrapped" class="secondaryToolbarButton scrollModeButtons scrollWrapped"
-                        title="Use Wrapped Scrolling" tabindex="64" data-l10n-id="scroll_wrapped">
+                        title="Use Wrapped Scrolling" tabindex="64" data-l10n-id="scroll_wrapped" hidden>
                         <span data-l10n-id="scroll_wrapped_label">Wrapped Scrolling</span>
                     </button>
 
                     <div class="horizontalToolbarSeparator scrollModeButtons"></div>
 
                     <button id="spreadNone" class="secondaryToolbarButton spreadModeButtons spreadNone toggled"
-                        title="Do not join page spreads" tabindex="65" data-l10n-id="spread_none">
+                        title="Do not join page spreads" tabindex="65" data-l10n-id="spread_none" hidden>
                         <span data-l10n-id="spread_none_label">No Spreads</span>
                     </button>
                     <button id="spreadOdd" class="secondaryToolbarButton spreadModeButtons spreadOdd"
                         title="Join page spreads starting with odd-numbered pages" tabindex="66"
-                        data-l10n-id="spread_odd">
+                        data-l10n-id="spread_odd" hidden>
                         <span data-l10n-id="spread_odd_label">Odd Spreads</span>
                     </button>
                     <button id="spreadEven" class="secondaryToolbarButton spreadModeButtons spreadEven"
                         title="Join page spreads starting with even-numbered pages" tabindex="67"
-                        data-l10n-id="spread_even">
+                        data-l10n-id="spread_even" hidden>
                         <span data-l10n-id="spread_even_label">Even Spreads</span>
                     </button>
 
                     <div class="horizontalToolbarSeparator spreadModeButtons"></div>
 
                     <button id="documentProperties" class="secondaryToolbarButton documentProperties"
-                        title="Document Properties…" tabindex="68" data-l10n-id="document_properties">
+                        title="Document Properties…" tabindex="68" data-l10n-id="document_properties" hidden>
                         <span data-l10n-id="document_properties_label">Document Properties…</span>
                     </button>
                 </div>
