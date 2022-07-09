@@ -1169,7 +1169,7 @@ if(isset($_POST['booktitle']) && isset($_POST['bookdescp']) && isset($_POST['ser
 
 				$_SESSION['eddbooknew'] = str_replace(' ', '-', $booktitle);
 
-				echo '<script>book();</script>';
+				//echo '<script>book();</script>';
 
 				//echo $post_url   = str_replace(' ', '-', $booktitle);
 			} else {
