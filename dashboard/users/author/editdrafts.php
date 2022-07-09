@@ -21,7 +21,7 @@ if(!isset($_GET['book'])) {
             <!-- Menu -->
 
             <div style="display: none" id="pybst">
-                <div class="bs-toast toast show bg-primary toast-placement-ex m-2" role="alert" aria-live="assertive"
+                <div class="bs-toast toast show bg-success toast-placement-ex m-2" role="alert" aria-live="assertive"
                     aria-atomic="true" data-delay="20">
                     <div class="toast-header">
                         <i class="bx bx-check me-2"></i>
@@ -31,6 +31,22 @@ if(!isset($_GET['book'])) {
                     </div>
                     <div class="toast-body">You just uploaded a new book. <br>Kindly check your bookshelf to view the
                         book
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div style="display: none" id="edpybst">
+                <div class="bs-toast toast show bg-success toast-placement-ex m-2" role="alert" aria-live="assertive"
+                    aria-atomic="true" data-delay="20">
+                    <div class="toast-header">
+                        <i class="bx bx-check me-2"></i>
+                        <div class="me-auto fw-semibold">Book Edited Successfully</div>
+                        <small>Just now</small>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body"><?php echo $_SESSION['edbkuplsuccess'] ?> was edited successfully
                     </div>
                 </div>
             </div>
@@ -71,7 +87,7 @@ if(!isset($_GET['book'])) {
                                                 Title<sup class="text-danger"> *</sup></label>
                                             <div class="col-md-10">
                                                 <input class="form-control" value="<?php echo $data ?>" type="text"
-                                                    id="edbooktitle" />
+                                                    id="booktitle" />
                                                 <p class="mt-2">What name do you want this book to be publicly
                                                     identified with? Type
                                                     it here exactly as it appears on the cover. Start the first letter
@@ -83,7 +99,7 @@ if(!isset($_GET['book'])) {
                                                     class="text-danger"> *</sup></label>
                                             <div class="col-md-10">
                                                 <textarea class="form-control"
-                                                    id="edbookdescp"><?php echo $editdraft['description'] ?></textarea>
+                                                    id="bookdescp"><?php echo $editdraft['description'] ?></textarea>
                                                 <p class="mt-2">Summarized details About The Book as it appears on the
                                                     back cover of the printed book. Write as you want it to appear on
                                                     your book detail’s page</p>
@@ -109,7 +125,7 @@ if(!isset($_GET['book'])) {
                                             <div class="col-md-10">
                                                 <input class="form-control"
                                                     value="<?php echo $editdraft['series_volume'] ?>" type="text"
-                                                    id="edseries" />
+                                                    id="series" />
                                                 <p class="mt-2">If this book is part of a series or volume, please add
                                                     the volume or series number to help your audience locate other books
                                                     in the series</p>
@@ -120,7 +136,7 @@ if(!isset($_GET['book'])) {
                                                     class="text-danger"> *</sup></label>
                                             <div class="col-md-10">
                                                 <input class="form-control" value="<?php echo $editdraft['author'] ?>"
-                                                    type="text" id="edauthor" />
+                                                    type="text" id="author" />
                                                 <p class="mt-2">Name of the primary author of the book</p>
                                             </div>
                                         </div>
@@ -129,7 +145,7 @@ if(!isset($_GET['book'])) {
                                             <div class="col-md-10">
                                                 <input class="form-control"
                                                     value="<?php echo $editdraft['other_author'] ?>" type="text"
-                                                    id="edotherauthor" />
+                                                    id="otherauthor" />
                                                 <p class="mt-2">Name of other secondary authors</p>
                                             </div>
                                         </div>
@@ -138,7 +154,7 @@ if(!isset($_GET['book'])) {
                                             <div class="col-md-10">
                                                 <input class="form-control"
                                                     value="<?php echo $editdraft['copyright'] ?>" type="text"
-                                                    id="edcopyright" />
+                                                    id="copyright" />
                                                 <p class="mt-2">Author's right is automatically protected. Uploaded
                                                     books can neither be copied nor downloaded</p>
                                             </div>
@@ -204,7 +220,7 @@ if(!isset($_GET['book'])) {
                                             <label for="html5-text-input" class="col-md-2 fw-bold">ISBN</label>
                                             <div class="col-md-10">
                                                 <input class="form-control" value="<?php echo $editdraft['isbn'] ?>"
-                                                    type="text" id="edisbn" />
+                                                    type="text" id="isbn" />
                                                 <p class="mt-2">If you have an ISBN, type it here. If you don’t, do not
                                                     bother</p>
                                             </div>
@@ -240,9 +256,22 @@ if(!isset($_GET['book'])) {
                                         </div>
                                         <p class="fw-bold text-danger" id="msg"></p>
 
-                                        <div class="align-right">
-                                            <button class="btn btn-primary me-1" id="edbkupld" type="button">Save
-                                                and Next</button>
+                                        <div class="row mt-4 mb-4">
+                                            <div class="col-sm-12 col-lg-3">
+                                                <button class="btn btn-primary" id="edbkupld" type="button">Update and
+                                                    save</button>
+                                                <p class="col-lg-9 mt-2">Save without making any changes to the
+                                                    book
+                                                    files
+                                                </p>
+                                            </div>
+                                            <div class="col-sm-6 col-lg-6">
+                                                <button class="btn btn-outline-primary" id="eddft" type="button">Update
+                                                    Book Images</button>
+                                                <p class="col-lg-5 mt-2">Save and make changes to the
+                                                    book files also.
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -382,7 +411,7 @@ if(!isset($_GET['book'])) {
     </script>
 
     <?php 
-    if(isset($_SESSION['edbookupl'])) {
+    if(isset($_SESSION['eddbookupl'])) {
 
         echo "<script>book()</script>";          
     } else {
@@ -390,9 +419,9 @@ if(!isset($_GET['book'])) {
         echo "<script>regbook()</script>";
     }
     
-    if (isset($_SESSION['edbooknew'])) {
+    if (isset($_SESSION['eddbooknew'])) {
 
-        $code = $_SESSION['edbooknew'];
+        $code = $_SESSION['eddbooknew'];
 
         echo '
         <script>
@@ -400,6 +429,9 @@ if(!isset($_GET['book'])) {
             location.replace("https://bookinvogue.com/'.$code.'");
         }</script>';
     }
+
+    //create notification
+    
     ?>
 
     <!-- Place this tag in your head or just before your close body tag. -->

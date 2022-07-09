@@ -127,6 +127,62 @@ $(document).ready(function () {
 
   });
 
+
+   //edit uploaded book
+   $("#edbkupld").click(function () {
+    var booktitle = $("#booktitle").val();
+    var bookdescp = $("#bookdescp").val();
+    var series    = $("#series").val();
+    var author    = $("#author").val();
+    var otherauthor = $("#otherauthor").val();
+    var copyright = $("#copyright").val();
+    var category = $("#category").val();
+    var isbn = $("#isbn").val();
+    var price = $("#price").val();
+    var authprofit = $("#authprofit").val();
+    var bivprofit = $("#bivprofit").val();
+    var lang = $("#lang").val();
+    var bookdtta = $("#bookdtta").val();
+
+    if(booktitle == null || booktitle == '') {
+
+      $("#msg").html('Please type in your book title');
+    } else {
+
+      if(bookdescp == null || bookdescp == '') {
+
+        $("#msg").html('A description for your book is needed');
+      } else {
+
+        if(author == null || author == '') {
+
+          $("#msg").html('Please type in an author for your book');
+        } else {
+
+        if(price == null || price == '') {
+
+          $("#msg").html('Please type in the book price');
+        } else {
+          
+          $("#msg").html('Loading... Please wait');
+
+          $.ajax({
+            type: "post",
+            url: "../functions/init.php",
+            data: {booktitle: booktitle, bookdescp: bookdescp, series: series, author: author, otherauthor: otherauthor, copyright: copyright, category: category, isbn: isbn, price: price, authprofit: authprofit, bivprofit: bivprofit, lang: lang, bookdtta: bookdtta},
+            success: function (data) {
+              $("#msg").html(data);
+            },
+          });
+
+        }
+      }
+    }
+    
+  }
+
+  });
+
     //save book to draft
     $("#dft").click(function () {
       var booktitle = $("#booktitle").val();
