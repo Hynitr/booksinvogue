@@ -63,23 +63,22 @@ $_SESSION['title'] = $row['book_title'];
 
                     <div class="container-xxl flex-grow-1">
                         <div class="row">
-                            <p class="text-dark mt-lg-4" href="#">Currently reading -
-                                <b><?php echo $_SESSION['title'] ?></b>
-                            </p>
-                            <div class="col-lg-12 mb-4 order-0 h-100">
-                                <iframe src="../softbooks/viewer.php"
-                                    style="width: 100%; height: 80vh; z-index: 9999; border: none"></iframe>
-                            </div>
+
 
 
                         </div>
 
                     </div>
+                    <p class="text-dark mt-lg-4 px-sm-4 mb-sm-5" href="#">Currently reading -
+                        <b><?php echo $_SESSION['title'] ?></b>
+                    </p>
 
+                    <div class="col-lg-12 mb-4 order-0 h-100">
+                        <iframe src="../softbooks/viewer.php"
+                            style="width: 100%; height: 80vh; z-index: 9999; border: none"></iframe>
+                    </div>
                 </div>
                 <!-- / Content -->
-
-
 
 
 
