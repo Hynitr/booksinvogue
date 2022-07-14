@@ -145,7 +145,7 @@ user_details();
                                 if(row_count($rbs) == '' || row_count($rbs) == null) {
 
                                     $nkbs = '<a href="./bookdetails?id='.$id.'" class="btn btn-primary me-1" type="button">
-                                    Buy this book
+                                    View More Details
                                     </a>';
                                      
                             } else {

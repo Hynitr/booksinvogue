@@ -1325,3 +1325,20 @@ function book_bought() {
 		$GLOBALS['bookbought'] = $row['bookbought'];
 	}
 }
+
+
+//delete a book
+if(isset($_POST['bkid']) && isset($_POST['authoremail'])) {
+	
+	$bkid = trim($_POST['bkid']);
+	$authoremail = trim($_POST['authoremail']);
+
+	$sql = "DELETE FROM books WHERE `books_id` = '$bkid' AND `email_address` = '$authoremail'";
+	$res = query($sql);
+
+	$_SESSION['bkupdel'] = "Deleted";
+
+	//refresh index page
+	echo 'Loading... Please Wait';
+	echo '<script>window.location.href ="./mybooks"</script>';
+}

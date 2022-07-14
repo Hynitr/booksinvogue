@@ -497,4 +497,24 @@ $(document).ready(function () {
       },
     });
   });
+
+  //delete book
+  $("#bkkdelt").click(function () {
+   
+    var bkid = $("#bkid").text();
+    var authoremail = $("#authoremail").text();
+
+    $("#bkpymsg").html(
+      '<img style="width: 100px; height: 100px" src="../assets/img/loading.gif">'
+    );
+
+    $.ajax({
+      type: "post",
+      url: "../functions/init.php",
+      data: {bkid: bkid, authoremail: authoremail},
+      success: function (data) {
+        $("#bkpymsg").html(data);
+      },
+    });
+  });
 });

@@ -70,6 +70,21 @@ if(isset($_SESSION['eddbookupl'])) {
             </div>
 
 
+            <div style="display: none" id="bkdel">
+                <div class="bs-toast toast show bg-primary toast-placement-ex m-2" role="alert" aria-live="assertive"
+                    aria-atomic="true" data-delay="20">
+                    <div class="toast-header">
+                        <i class="bx bx-check me-2"></i>
+                        <div class="me-auto fw-semibold">Book Deleted Successfully</div>
+                        <small>Just now</small>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                    </div>
+                </div>
+            </div>
+
+
 
             <!-- Menu -->
 
@@ -199,24 +214,15 @@ if(isset($_SESSION['eddbookupl'])) {
 
                                                             <p class="demo-inline-spacing">
 
-                                                                <a href="./read?book=<?php echo $redbb ?>"
-                                                                    class="btn btn-primary me-1" type="button"><i
-                                                                        class="bx bx-share text-white"></i></a>
+                                                                <a href="./details?book=<?php echo $redbb ?>"
+                                                                    class="btn btn-primary me-1" type="button">View
+                                                                    Details</a>
 
-                                                                <a href="./editdrafts?book=<?php echo $redbb ?>" class=" btn
-                                                                    btn-primary me-1">
-                                                                    <i class="bx bx-edit text-white"></i>
-                                                                </a>
-                                                                <a class="btn trash btn-primary me-1"
-                                                                    onclick="trash();">
-                                                                    <i class="bx bx-trash text-white"></i>
-                                                                </a>
                                                                 <a class="btn btn-primary me-1">
                                                                     <i class="bx bx-share-alt text-white"></i>
                                                                 </a>
-                                                            <p style="display: none" class="trash">
-                                                                <?php echo $rws['books_id'] ?></p>
                                                             </p>
+
 
                                                         </span>
                                                     </div>
@@ -289,8 +295,9 @@ if(isset($_SESSION['eddbookupl'])) {
     function trash() {
 
         var id = $(".trash").text();
+        $("#trashdetails").show();
         //var quantity = $(this).find(".trash").text();
-        alert(id);
+        //alert(id);
     }
 
     function shout() {
@@ -344,6 +351,13 @@ if(isset($_SESSION['eddbookupl'])) {
         echo "<script>$('#edpybst').show(); shout();</script>";
 
         unset($_SESSION['edbkuplsuccess']);
+    }
+
+    if(isset($_SESSION['bkupdel'])) {
+
+        echo "<script>$('#bkdel').show();</script>";
+
+        unset($_SESSION['bkupdel']);
     }
         ?>
 </body>

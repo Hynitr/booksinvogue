@@ -77,7 +77,9 @@ if(!isset($_GET['book'])) {
 
                             <?php
 
-                            $sql = "SELECT * FROM `books` WHERE `book_title` = '$data'";
+                            $user =  $t_users['email'];
+
+                            $sql = "SELECT * FROM `books` WHERE `book_title` = '$data' AND `email_address` = '$user'";
                             $res = query($sql);
 
                             $row = mysqli_fetch_array($res);
@@ -96,50 +98,6 @@ if(!isset($_GET['book'])) {
                                 } else {
 
                                     $imager = "../assets/img/cover.jpg";
-                                }
-
-                                $id = $row['books_id'];
-
-
-                                $ssl = "SELECT * FROM boughtbook WHERE `bookid` = '$id' AND `reading` = 'wishlist'";
-                                $rss = query($ssl);
-
-                                if(row_count($rss) == '' || row_count($rss) == null) {
-
-                                    $nks = <<<DELIMITER
-
-                                    <a class="btn btn-primary me-1" id="btwsh" data-bs-toggle="popover"
-                                    data-bs-offset="0,14" data-bs-placement="top"
-                                    data-bs-html="true"
-                                    data-bs-content="<p>We just added this book to your wishlist</p>"
-                                    title="Add to Wishlist">
-
-                                     <i class="bx bx-star text-white"></i>
-
-                                   
-                                     </a>
-
-                                     <input type="text" value='$id' id='srchid' hidden>
-
-                                    DELIMITER;
-
-                                    
-                                    
-                                } else {
-
-                                    $nks = <<<DELIMITER
-
-                                    <a class="btn btn-primary me-1" id="lksd" data-bs-toggle="popover"
-                                    data-bs-offset="0,14" data-bs-placement="top"
-                                    data-bs-html="true"
-                                    data-bs-content="<p>This Book has been added to your wishlist</p>"
-                                    title="Added to wishlist already">
-
-                                    <i class="bx bx-check text-white"></i>
-                                     </a>
-
-                                    DELIMITER;
-                                    
                                 }
 
                         ?>
@@ -174,25 +132,24 @@ if(!isset($_GET['book'])) {
 
                                                             <p class="demo-inline-spacing">
 
-                                                                <a href="./books" class="btn btn-primary me-1">
-                                                                    <i class="bx bx-share text-white"></i>
+                                                                <a href="./read?book=<?php echo $book ?>"
+                                                                    class="btn btn-primary me-1" type="button"><i
+                                                                        class="bx bx-share text-white"></i></a>
+
+                                                                <a href="./editdrafts?book=<?php echo $book ?>"
+                                                                    class=" btn btn-primary me-1">
+                                                                    <i class="bx bx-edit text-white"></i>
                                                                 </a>
-
-
-
-
-                                                                <button class="btn btn-primary text-nowrap" id="clss"
-                                                                    data-bs-toggle="modal" data-bs-target="#modalCenter"
-                                                                    type="button">Buy
-                                                                    this book
-                                                                </button>
-
-                                                                <?php  echo $nks ?>
-
-                                                                <a style="display: none;" class="btn btn-primary me-1"
-                                                                    id="addtwh">
-                                                                    <i class="bx bx-check text-white"></i>
+                                                                <a class="btn trash btn-primary me-1"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#modalCenter">
+                                                                    <i class="bx bx-trash text-white"></i>
                                                                 </a>
+                                                                <a class="btn btn-primary me-1">
+                                                                    <i class="bx bx-share-alt text-white"></i>
+                                                                </a>
+                                                            <p style="display: none" class="trash">
+                                                                <?php echo $rws['books_id'] ?></p>
                                                             </p>
 
                                                         </span>
@@ -206,12 +163,11 @@ if(!isset($_GET['book'])) {
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
                                                                         <h5 class="modal-title" id="modalCenterTitle">
-                                                                            You are about to buy <br />
-                                                                            <b><?php echo ucfirst($row['book_title']) ?></b>
-                                                                            <br />
-                                                                            by
-                                                                            <b><?php echo ucfirst($row['author']) ?></b>
+                                                                            Are you sure you want to delete this book?
+
                                                                         </h5>
+                                                                        <br />
+
 
                                                                         <button type="button" class="btn-close"
                                                                             data-bs-dismiss="modal"
@@ -220,35 +176,18 @@ if(!isset($_GET['book'])) {
                                                                     <div class="modal-body">
                                                                         <div class="row">
                                                                             <div class="col mb-3">
-                                                                                <p>You will be charged
-                                                                                    <b>₦<?php echo number_format($row['selling_price']) ?></b>
-                                                                                    for this book
-                                                                                </p>
-
+                                                                                <p class="text-danger">This action
+                                                                                    cannot
+                                                                                    be reversed once
+                                                                                    done</p>
                                                                             </div>
                                                                         </div>
 
                                                                         <p id="bkpymsg" class="text-danger"></p>
-
-                                                                        <p id="bkamt" hidden>
-                                                                            <?php echo $row['selling_price']; ?></p>
-
                                                                         <p id="bkid" hidden>
                                                                             <?php echo $row['books_id']; ?></p>
                                                                         <p id="authoremail" hidden>
                                                                             <?php echo $row['email_address'] ?></p>
-                                                                        <p id="txt" hidden>
-                                                                            <?php echo md5(rand(0, 9999)); ?></p>
-                                                                        <p id="bkprice" hidden>
-                                                                            <?php echo $row['selling_price'] ?></p>
-                                                                        <p id="rylty" hidden>
-                                                                            <?php echo $row['royalty_price'] ?></p>
-                                                                        <p id="email" hidden>
-                                                                            <?php echo $t_users['email'] ?></p>
-                                                                        <p id="fname" hidden>
-                                                                            <?php echo $t_users['fullname'] ?></p>
-
-
                                                                     </div>
                                                                     <div class="modal-footer">
                                                                         <button type="button"
@@ -256,9 +195,8 @@ if(!isset($_GET['book'])) {
                                                                             data-bs-dismiss="modal">
                                                                             Cancel
                                                                         </button>
-                                                                        <button type="button" id="bkkpaybtn"
-                                                                            class="btn btn-primary">Make
-                                                                            Payment</button>
+                                                                        <button type="button" id="bkkdelt"
+                                                                            class="btn btn-primary">Yes, Delete</button>
                                                                     </div>
                                                                 </div>
                                                             </div>

@@ -505,9 +505,8 @@ include("components/top.php");
                                                     <div class="card-title">
                                                         <h5 class="text-nowrap mb-5">My Royalty</h5>
                                                         <h2 class="mb-4">₦<?php echo number_format($royal) ?></h2>
-                                                        <a href="./royalties" class="btn btn-sm btn-outline-primary">Buy
-                                                            New
-                                                            Book</a>
+                                                        <a href="./transactions"
+                                                            class="btn btn-sm btn-outline-primary">View Details</a>
                                                     </div>
 
                                                 </div>

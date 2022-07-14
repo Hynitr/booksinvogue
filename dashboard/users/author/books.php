@@ -181,9 +181,9 @@ user_details();
                                                                 </a>
 
 
-                                                                <a href="./bookdetails?book=<?php echo $redbb ?>"
-                                                                    class="btn btn-primary me-1" type="button">Buy
-                                                                    this book </a>
+                                                                <a href="./bookdetails?book=<?php echo clean(escape($redbb)) ?>"
+                                                                    class="btn btn-primary me-1" type="button">View More
+                                                                    Details</a>
 
                                                                 <a class="btn btn-primary me-1">
                                                                     <i class="bx bx-share-alt text-white"></i>
