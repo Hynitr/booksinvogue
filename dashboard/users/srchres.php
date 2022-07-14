@@ -49,7 +49,7 @@ echo '
    //Fetching result from database.
    while ($row = MySQLi_fetch_array($ExecQuery)) {
 
-        $category = "&nbsp;".$row['category_1']."&nbsp; &nbsp;| &nbsp; &nbsp;".$row['category_2'];
+        $category = "&nbsp;".$row['category_1']."&nbsp; &nbsp;";
 
         $det = strip_tags($row['description']);
         $frv = wordwrap($det, 70, "\n", TRUE); 
@@ -71,6 +71,36 @@ echo '
 
         $id = $row['books_id'];
         $userid = $_SESSION['login'];
+
+        $sel = "SELECT sum(`id`) AS `bookbought` FROM `boughtbook` WHERE `bookid` = '$id'";
+        $rss = query ($sel);
+
+        if(row_count($rss) == '' || row_count($rss) == null) {
+
+            $booktot = 0 ." copy sold";
+            
+        } else {
+    
+            $bow = mysqli_fetch_array($rss);
+
+            if($bow['bookbought'] == 0 || $bow['bookbought'] == null) {
+
+                $booktot = 0 ." copy sold";
+
+            } else {
+
+                if($bow['bookbought'] == 1) {
+
+                    $booktot = 1 ." copy sold";
+                    
+                } else {
+                    $booktot = number_format($bow['bookbought'])." copies sold";
+
+                }
+            }
+            
+        }
+
 
 
         $ssl = "SELECT * FROM boughtbook WHERE `bookid` = '$id' AND `reading` = 'wishlist' AND `userid` = '$userid'";
@@ -158,7 +188,8 @@ echo '
 
                                  <br /><br />
                                  <?php echo $row['language'] ?> &nbsp;|&nbsp;
-                                 <?php echo $category ?>
+                                 <?php echo $category ?> &nbsp;|&nbsp;
+                                 <?php echo $booktot ?>
 
                                  <p class="demo-inline-spacing">
 

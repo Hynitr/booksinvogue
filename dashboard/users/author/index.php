@@ -375,7 +375,7 @@ include("components/top.php");
                                                 </div>
                                                 <span class="fw-semibold d-block mb-1">Total Book(s) Sold</span>
                                                 <h3 class="card-title mb-3">
-                                                    <?php echo number_format($totbook) ?></h3>
+                                                    <?php echo $totbook ?></h3>
                                                 <a href="./mybooks" class="btn btn-sm btn-outline-primary">View
                                                     Details</a>
                                             </div>

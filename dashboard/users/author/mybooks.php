@@ -167,7 +167,7 @@ if(isset($_SESSION['eddbookupl'])) {
 
                                 $det = strip_tags($rws['description']);
                                 $frv = wordwrap($det, 70, "\n", TRUE); 
-                                $y = substr($frv, 0, 120).'... <a href="./read?book='.$redbb.'">Read More</a>';
+                                $y = substr($frv, 0, 120).'... <a href="./details?book='.$redbb.'">Read More</a>';
 
                                 $descrp = ucfirst($y);
                                 
@@ -210,7 +210,8 @@ if(isset($_SESSION['eddbookupl'])) {
 
                                                             <br /><br />
                                                             <?php echo $rws['language'] ?> &nbsp;|&nbsp;
-                                                            <?php echo $category ?>
+                                                            <?php echo $category ?> &nbsp;|&nbsp;
+                                                            <?php echo $bookbought ?>
 
                                                             <p class="demo-inline-spacing">
 
