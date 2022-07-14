@@ -144,7 +144,7 @@ user_details();
                                                 </div>
 
                                             </div>
-                                            <div class="mt-2">
+                                            <div class="mt-2" hidden>
                                                 <button type="submit" class="btn btn-primary me-2">Save changes</button>
                                                 <button type="reset" class="btn btn-outline-secondary">Cancel</button>
                                             </div>
@@ -152,7 +152,7 @@ user_details();
                                     </div>
                                     <!-- /Account -->
                                 </div>
-                                <div class="card">
+                                <div class="card" hidden>
                                     <h5 class="card-header">Delete Account</h5>
                                     <div class="card-body">
                                         <div class="mb-3 col-12 mb-0">
