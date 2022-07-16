@@ -105,7 +105,8 @@ user_details();
                                             <label for="html5-text-input" class="col-md-2 fw-bold">Author<sup
                                                     class="text-danger"> *</sup></label>
                                             <div class="col-md-10">
-                                                <input class="form-control" type="text" id="author" />
+                                                <input class="form-control" type="text" id="author"
+                                                    value="<?php echo $t_users['fullname'] ?>" disabled />
                                                 <p class="mt-2">Name of the primary author of the book</p>
                                             </div>
                                         </div>

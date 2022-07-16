@@ -130,47 +130,25 @@ user_details();
                                 }
 
 
-                                $ssl = "SELECT * FROM boughtbook WHERE `bookid` = '$id' AND `reading` = 'wishlist'";
-                                $rss = query($ssl);
+                                $userid = $_SESSION['login'];
 
-                                if(row_count($rss) == '' || row_count($rss) == null) {
+                                $sbl = "SELECT * FROM boughtbook WHERE `bookid` = '$id' AND `reading` = 'Yes' AND `userid` = '$userid'";
+                                $rbs = query($sbl);
 
-                                    $nks = <<<DELIMITER
+                                if(row_count($rbs) == '' || row_count($rbs) == null) {
 
-                                    <a class="btn btn-primary me-1" id="btwsh" data-bs-toggle="popover"
-                                    data-bs-offset="0,14" data-bs-placement="top"
-                                    data-bs-html="true"
-                                    data-bs-content="<p>We just added this book to your wishlist</p>"
-                                    title="Add to Wishlist">
+                                    $nkbs = '<a href="./bookdetails?book='.$redbb.'" class="btn btn-primary me-1" type="button">
+                                    Buy This Book
+                                    </a>';
+                                     
+                            } else {
 
-                                     <i class="bx bx-star text-white"></i>
+                                $nkbs = '<a href="./read?book='.$redbb.'" class="btn btn-primary me-1" type="button">
+                                Read this book
+                                </a>';
 
-                                   
-                                     </a>
-
-                                     <input type="text" value='$id' class='srchid' hidden>
-
-                                    DELIMITER;
-
-                                    
-                                    
-                                } else {
-
-                                    $nks = <<<DELIMITER
-
-                                    <a class="btn btn-primary me-1" id="lksd" data-bs-toggle="popover"
-                                    data-bs-offset="0,14" data-bs-placement="top"
-                                    data-bs-html="true"
-                                    data-bs-content="<p>This Book has been added to your wishlist</p>"
-                                    title="Added to wishlist already">
-
-                                    <i class="bx bx-check text-white"></i>
-                                     </a>
-
-                                    DELIMITER;
-                                    
                                 }
-
+                               
                         ?>
 
                             <div class="container-xxl flex-grow-1 container-p-y">
@@ -204,21 +182,14 @@ user_details();
 
                                                             <p class="demo-inline-spacing">
 
-                                                                <?php  echo $nks ?>
-
-                                                                <a style="display: none;" class="btn btn-primary me-1"
-                                                                    id="addtwh">
-                                                                    <i class="bx bx-check text-white"></i>
-                                                                </a>
+                                                                <?php echo $nkbs ?>
 
 
                                                                 <a href="./bookdetails?book=<?php echo clean(escape($redbb)) ?>"
                                                                     class="btn btn-primary me-1" type="button">View More
                                                                     Details</a>
 
-                                                                <a class="btn btn-primary me-1">
-                                                                    <i class="bx bx-share-alt text-white"></i>
-                                                                </a>
+
                                                             </p>
 
                                                         </span>

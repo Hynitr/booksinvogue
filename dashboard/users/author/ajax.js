@@ -518,4 +518,22 @@ $(document).ready(function () {
       },
     });
   });
+
+  //upgrade account
+  $("#upgrd").click(function () {
+    $("#note").html(
+      '<img style="width: 100px; height: 100px" src="assets/img/loading.gif">'
+    );
+
+    var upgrade = 'publisher';
+
+    $.ajax({
+      type: "post",
+      url: "functions/init.php",
+      data: { upgrade: upgrade },
+      success: function (data) {
+        $("#note").html(data);
+      },
+    });
+  });
 });

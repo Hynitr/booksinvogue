@@ -6,7 +6,7 @@ if (isset($_POST['searchword'])) {
 //Search box value assigning to $Name variable.
    $Name = $_POST['searchword'];
 //Search query.
-   $Query = "SELECT * FROM books WHERE book_title LIKE '%$Name%'";
+   $Query = "SELECT * FROM books WHERE book_title LIKE '%$Name%' OR `author` LIKE '%$Name%' OR `other_author` LIKE '%$Name%'";
 //Query execution
    $ExecQuery = query($Query);
 //Creating unordered list to display result.

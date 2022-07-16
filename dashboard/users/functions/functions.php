@@ -1427,14 +1427,30 @@ if(isset($_POST['bkid']) && isset($_POST['authoremail']) && isset($_POST['bkdel'
 }
 
 
-//upgrade user to author
-if(isset($_POST['upgrade']) && $_POST['upgrade'] == 'author') {
+//upgrading accounts
+if(isset($_POST['upgrade'])) {
 
 	$data = $_SESSION['login'];
+
+	if(isset($_POST['upgrade']) == 'author') {
 
 	$sql = "UPDATE users SET `role` = 'author' WHERE `usname` = '$data'";
 	$res = query($sql);
 
 	//redirect to author page
 	echo '<script>window.location.href ="author/./"</script>';
+
+	} else {
+
+
+		if(isset($_POST['upgrade']) == 'publisher') {
+
+			$sql = "UPDATE users SET `role` = 'publisher' WHERE `usname` = '$data'";
+			$res = query($sql);
+
+			//redirect to author page
+			echo '<script>window.location.href ="publisher/./"</script>';
+			
+		}
+	}
 }

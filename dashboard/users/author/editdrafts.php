@@ -135,7 +135,7 @@ if(!isset($_GET['book'])) {
                                                     class="text-danger"> *</sup></label>
                                             <div class="col-md-10">
                                                 <input class="form-control" value="<?php echo $editdraft['author'] ?>"
-                                                    type="text" id="author" />
+                                                    type="text" id="author" disabled />
                                                 <p class="mt-2">Name of the primary author of the book</p>
                                             </div>
                                         </div>
