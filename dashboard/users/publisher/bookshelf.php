@@ -35,6 +35,19 @@ user_details();
         <div class="layout-container">
 
 
+            <div style="display: none" id="pybst">
+                <div class="bs-toast toast show bg-primary toast-placement-ex m-2" role="alert" aria-live="assertive"
+                    aria-atomic="true" data-delay="20">
+                    <div class="toast-header">
+                        <i class="bx bx-bell me-2"></i>
+                        <div class="me-auto fw-semibold">You've got a new book</div>
+                        <small>Just now</small>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">A new book has just been added to your bookshelf
+                    </div>
+                </div>
+            </div>
             <!-- Menu -->
 
             <?php
@@ -69,7 +82,7 @@ user_details();
 
                             $user =  $_SESSION['login'];
 
-                                $ssl = "SELECT * FROM boughtbook WHERE `userid` = '$user' AND `reading` = 'Yes'";
+                                $ssl = "SELECT * FROM boughtbook WHERE `userid` = '$user' AND `reading` = 'Yes' ORDER BY `sn` desc";
                                 $rss = query($ssl);
 
                                 if(row_count($rss) == '' || row_count($rss) == null) {
@@ -79,12 +92,12 @@ user_details();
                                 <!--Under Maintenance -->
                                 <div class="container-xxl container-p-y text-center">
                                   <div class="misc-wrapper">
-                                    <h2 class="mb-2 mx-2">Uh Oh 😢 </h2>
-                                    <p class="mb-4 mx-2">You've not added any book to your bookshelf yet. </p>
+                                    <h2 class="mx-2">Uh Oh 😢 </h2>
+                                    <p class=mx-2">You've not added any book to your bookshelf yet. </p>
                                     <a href="./books" class="btn btn-primary">Get some book(s) to your bookshelf</a>
-                                    <div class="mt-4">
+                                    <div class="">
                                       <img
-                                        src="assets/img/illustrations/girl-doing-yoga-light.png"
+                                      src="../assets/img/search.gif"
                                         alt="girl-doing-yoga-light"
                                         width="500"
                                         class="img-fluid"
@@ -113,24 +126,59 @@ user_details();
 
                                 $row = mysqli_fetch_array($res);
 
-                                $category = "&nbsp;".$row['category_1']."&nbsp; &nbsp;| &nbsp; &nbsp;".$row['category_2'];
+                                $category = "&nbsp;".$row['category_1'];
+
+                                $book = $row['book_title'];
+
+                                $redbb = str_replace(' ', '-', $book);
 
                                 $det = strip_tags($row['description']);
                                 $frv = wordwrap($det, 70, "\n", TRUE); 
-                                $y = substr($frv, 0, 120).'... <a href="./read?id='.$row['books_id'].'">Read More</a>';
+                                $y = substr($frv, 0, 120).'... <a href="./read?book='.$redbb.'">Read More</a>';
 
                                 $descrp = ucfirst($y);
                                 
 
-                                $image = "assets/bookscover/".$row['book_cover'];
+                                $image = "../assets/bookscover/".$row['book_cover'];
 
                                 if(file_exists($image)){
 
-                                    $imager = "assets/bookscover/".$row['book_cover'];
+                                    $imager = "../assets/bookscover/".$row['book_cover'];
                                     
                                 } else {
 
-                                    $imager = "assets/img/cover.jpg";
+                                    $imager = "../assets/img/cover.jpg";
+                                }
+
+                                $id = $row['books_id'];
+
+                                $sel = "SELECT sum(`id`) AS `bookbought` FROM `boughtbook` WHERE `bookid` = '$id'";
+                                $rfs = query ($sel);
+
+                                if(row_count($rfs) == '' || row_count($rfs) == null) {
+
+                                    $booktot = 0 ." copy sold";
+                                    
+                                } else {
+                            
+                                    $bow = mysqli_fetch_array($rfs);
+
+                                    if($bow['bookbought'] == 0 || $bow['bookbought'] == null) {
+
+                                        $booktot = 0 ." copy sold";
+
+                                    } else {
+
+                                        if($bow['bookbought'] == 1) {
+
+                                            $booktot = 1 ." copy sold";
+                                            
+                                        } else {
+                                            $booktot = number_format($bow['bookbought'])." copies sold";
+
+                                        }
+                                    }
+                                    
                                 }
 
                         ?>
@@ -160,11 +208,12 @@ user_details();
 
                                                             <br /><br />
                                                             <?php echo $row['language'] ?> &nbsp;|&nbsp;
-                                                            <?php echo $category ?>
+                                                            <?php echo $category ?> &nbsp;|&nbsp;
+                                                            <?php echo $booktot ?>
 
                                                             <p class="demo-inline-spacing">
 
-                                                                <a href="./read?id=<?php echo $row['books_id'] ?>"
+                                                                <a href="./read?book=<?php echo $redbb ?>"
                                                                     class="btn btn-primary me-1" type="button">Start
                                                                     Reading </a>
 
@@ -219,25 +268,41 @@ user_details();
 
 
     <!-- Core JS -->
-    <!-- build:js assets/vendor/js/core.js -->
-    <script src="assets/vendor/libs/jquery/jquery.js"></script>
-    <script src="assets/vendor/libs/popper/popper.js"></script>
-    <script src="assets/vendor/js/bootstrap.js"></script>
-    <script src="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <!-- build:js ../assets/vendor/js/core.js -->
+    <script src="../assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="../assets/vendor/libs/popper/popper.js"></script>
+    <script src="../assets/vendor/js/bootstrap.js"></script>
+    <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 
-    <script src="assets/vendor/js/menu.js"></script>
+    <script src="../assets/vendor/js/menu.js"></script>
     <!-- endbuild -->
 
     <!-- Vendors JS -->
-    <script src="assets/vendor/libs/apex-charts/apexcharts.js"></script>
+    <script src="../assets/vendor/libs/apex-charts/apexcharts.js"></script>
 
     <!-- Main JS -->
-    <script src="assets/js/main.js"></script>
+    <script src="../assets/js/main.js"></script>
 
     <!-- Page JS -->
-    <script src="assets/js/dashboards-analytics.js"></script>
+    <script src="../assets/js/dashboards-analytics.js"></script>
 
     <script src="ajax.js"></script>
+    <?php
+    if(isset($_SESSION['bookmsg'])) {
+        
+        if(isset($_SESSION['bookmsg']) == 'Your Wallet has been funded successfully') {
+        
+        echo "
+        
+        <script>
+        $('#pybst').show();
+        </script>
+        ";
+        } 
+
+        unset($_SESSION['bookmsg']);
+    }
+    ?>
 </body>
 
 </html>

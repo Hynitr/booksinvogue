@@ -73,70 +73,82 @@ user_details();
 
                             while($row = mysqli_fetch_array($res)) {
 
-                                $category = "&nbsp;".$row['category_1']."&nbsp; &nbsp;| &nbsp; &nbsp;".$row['category_2'];
+                                $category = "&nbsp;".$row['category_1'];
+
+                                $book = $row['book_title'];
+
+                                $redbb = str_replace(' ', '-', $book);
 
                                 $det = strip_tags($row['description']);
                                 $frv = wordwrap($det, 70, "\n", TRUE); 
-                                $y = substr($frv, 0, 120).'... <a href="./bookdetails?id='.$row['books_id'].'">Read More</a>';
+                                $y = substr($frv, 0, 120).'... <a href="./bookdetails?read='.$redbb.'">Read More</a>';
 
                                 $descrp = ucfirst($y);
                                 
 
-                                $image = "assets/bookscover/".$row['book_cover'];
+                                $image = "../assets/bookscover/".$row['book_cover'];
 
                                 if(file_exists($image)){
 
-                                    $imager = "assets/bookscover/".$row['book_cover'];
+                                    $imager = "../assets/bookscover/".$row['book_cover'];
                                     
                                 } else {
 
-                                    $imager = "assets/img/cover.jpg";
+                                    $imager = "../assets/img/cover.jpg";
                                 }
 
                                 $id = $row['books_id'];
 
 
-                                $ssl = "SELECT * FROM boughtbook WHERE `bookid` = '$id' AND `reading` = 'wishlist'";
-                                $rss = query($ssl);
+                                $sel = "SELECT sum(`id`) AS `bookbought` FROM `boughtbook` WHERE `bookid` = '$id'";
+                                $rss = query ($sel);
 
                                 if(row_count($rss) == '' || row_count($rss) == null) {
 
-                                    $nks = <<<DELIMITER
-
-                                    <a class="btn btn-primary me-1" id="btwsh" data-bs-toggle="popover"
-                                    data-bs-offset="0,14" data-bs-placement="top"
-                                    data-bs-html="true"
-                                    data-bs-content="<p>We just added this book to your wishlist</p>"
-                                    title="Add to Wishlist">
-
-                                     <i class="bx bx-star text-white"></i>
-
-                                   
-                                     </a>
-
-                                     <input type="text" value='$id' class='srchid' hidden>
-
-                                    DELIMITER;
-
-                                    
+                                    $booktot = 0 ." copy sold";
                                     
                                 } else {
+                            
+                                    $bow = mysqli_fetch_array($rss);
 
-                                    $nks = <<<DELIMITER
+                                    if($bow['bookbought'] == 0 || $bow['bookbought'] == null) {
 
-                                    <a class="btn btn-primary me-1" id="lksd" data-bs-toggle="popover"
-                                    data-bs-offset="0,14" data-bs-placement="top"
-                                    data-bs-html="true"
-                                    data-bs-content="<p>This Book has been added to your wishlist</p>"
-                                    title="Added to wishlist already">
+                                        $booktot = 0 ." copy sold";
 
-                                    <i class="bx bx-check text-white"></i>
-                                     </a>
+                                    } else {
 
-                                    DELIMITER;
+                                        if($bow['bookbought'] == 1) {
+
+                                            $booktot = 1 ." copy sold";
+                                            
+                                        } else {
+                                            $booktot = number_format($bow['bookbought'])." copies sold";
+
+                                        }
+                                    }
                                     
                                 }
 
+
+                                $userid = $_SESSION['login'];
+
+                                $sbl = "SELECT * FROM boughtbook WHERE `bookid` = '$id' AND `reading` = 'Yes' AND `userid` = '$userid'";
+                                $rbs = query($sbl);
+
+                                if(row_count($rbs) == '' || row_count($rbs) == null) {
+
+                                    $nkbs = '<a href="./bookdetails?book='.$redbb.'" class="btn btn-primary me-1" type="button">
+                                    Buy This Book
+                                    </a>';
+                                     
+                            } else {
+
+                                $nkbs = '<a href="./read?book='.$redbb.'" class="btn btn-primary me-1" type="button">
+                                Read this book
+                                </a>';
+
+                                }
+                               
                         ?>
 
                             <div class="container-xxl flex-grow-1 container-p-y">
@@ -165,25 +177,19 @@ user_details();
 
                                                             <br /><br />
                                                             <?php echo $row['language'] ?> &nbsp;|&nbsp;
-                                                            <?php echo $category ?>
+                                                            <?php echo $category ?> &nbsp;|&nbsp;
+                                                            <?php echo $booktot ?>
 
                                                             <p class="demo-inline-spacing">
 
-                                                                <?php  echo $nks ?>
-
-                                                                <a style="display: none;" class="btn btn-primary me-1"
-                                                                    id="addtwh">
-                                                                    <i class="bx bx-check text-white"></i>
-                                                                </a>
+                                                                <?php echo $nkbs ?>
 
 
-                                                                <a href="./bookdetails?id=<?php echo $row['books_id'] ?>"
-                                                                    class="btn btn-primary me-1" type="button">Buy
-                                                                    this book </a>
+                                                                <a href="./bookdetails?book=<?php echo clean(escape($redbb)) ?>"
+                                                                    class="btn btn-primary me-1" type="button">View More
+                                                                    Details</a>
 
-                                                                <a class="btn btn-primary me-1">
-                                                                    <i class="bx bx-share-alt text-white"></i>
-                                                                </a>
+
                                                             </p>
 
                                                         </span>
@@ -245,23 +251,23 @@ user_details();
 
 
     <!-- Core JS -->
-    <!-- build:js assets/vendor/js/core.js -->
-    <script src="assets/vendor/libs/jquery/jquery.js"></script>
-    <script src="assets/vendor/libs/popper/popper.js"></script>
-    <script src="assets/vendor/js/bootstrap.js"></script>
-    <script src="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <!-- build:js ../assets/vendor/js/core.js -->
+    <script src="../assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="../assets/vendor/libs/popper/popper.js"></script>
+    <script src="../assets/vendor/js/bootstrap.js"></script>
+    <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 
-    <script src="assets/vendor/js/menu.js"></script>
+    <script src="../assets/vendor/js/menu.js"></script>
     <!-- endbuild -->
 
     <!-- Vendors JS -->
-    <script src="assets/vendor/libs/apex-charts/apexcharts.js"></script>
+    <script src="../assets/vendor/libs/apex-charts/apexcharts.js"></script>
 
     <!-- Main JS -->
-    <script src="assets/js/main.js"></script>
+    <script src="../assets/js/main.js"></script>
 
     <!-- Page JS -->
-    <script src="assets/js/ui-popover.js"></script>
+    <script src="../assets/js/ui-popover.js"></script>
 
     <script src="ajax.js"></script>
 </body>

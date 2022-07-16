@@ -1,5 +1,5 @@
 <?php
-include("components/top.php");
+include("../components/top.php");
 user_details();
 
 if(isset($_POST['searchword'])) {

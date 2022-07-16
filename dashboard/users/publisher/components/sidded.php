@@ -29,6 +29,36 @@
                 <span class="menu-header-text">Books Corner</span>
             </li>
 
+
+            <li class="menu-item">
+                <a href="./upload" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-upload"></i>
+                    <div data-i18n="book">Upload a book</div>
+                </a>
+            </li>
+
+            <li class="menu-item">
+                <a href="#" class="menu-link" data-bs-toggle="modal" data-bs-target="#modalupgrade">
+                    <i class="menu-icon tf-icons bx bx-user"></i>
+                    <div data-i18n="Authentications">Publish for other authors</div>
+                </a>
+
+            </li>
+
+            <li class="menu-item">
+                <a href="./mybooks" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-library"></i>
+                    <div data-i18n="book">My Published book(s)</div>
+                </a>
+            </li>
+
+            <li class="menu-item">
+                <a href="./drafts" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-edit"></i>
+                    <div data-i18n="book">My Drafts</div>
+                </a>
+            </li>
+
             <li class="menu-item">
                 <a href="./bookshelf" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-collection"></i>
@@ -51,13 +81,22 @@
 
             </li>
 
+
             <!-- Components -->
-            <li class="menu-header small text-uppercase"><span class="menu-header-text">Transactions</span></li>
+            <li class="menu-header small text-uppercase"><span class="menu-header-text">Advert & Transactions</span>
+            </li>
             <!-- Cards -->
             <li class="menu-item">
-                <a href="./transactions" class="menu-link">
+                <a href="#" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-dollar"></i>
-                    <div data-i18n="Basic">My Transactions</div>
+                    <div data-i18n="Basic">Advert Center</div>
+                </a>
+            </li>
+
+            <li class="menu-item">
+                <a href="./transactions" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-credit-card"></i>
+                    <div data-i18n="Basic">Royalties & Earning(s)</div>
                 </a>
             </li>
 
@@ -66,17 +105,11 @@
                     Settings</span></li>
             <!-- Forms -->
             <li class="menu-item">
-                <a href="#" class="menu-link">
+                <a href="./profile" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-detail"></i>
                     <div data-i18n="Form Elements">My Profile</div>
                 </a>
 
-            </li>
-            <li class="menu-item">
-                <a href="javascript:void(0);" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-envelope"></i>
-                    <div data-i18n="Form Layouts">My Inbox</div>
-                </a>
             </li>
             <!-- Tables -->
             <li class="menu-item">
@@ -87,7 +120,7 @@
             </li>
 
             <li class="menu-item">
-                <a href="./logout" class="menu-link">
+                <a href=".././logout" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-lock"></i>
                     <div data-i18n="Tables">Logout</div>
                 </a>
@@ -97,3 +130,31 @@
     </div>
 
 </aside>
+
+<!-- Modal -->
+<div class="modal fade" id="modalupgrade" data-bs-backdrop="static" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalCenterTitle">Publish for other authors</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <p>You are about to upgrade your account and become an author. </p>
+                    <p>You previous transaction history, wallet balance and reading history will remain same </p>
+                    <p>With an author account, you can upload you own books and earn royalties</p>
+                    <p id="note" class="fw-bold text-danger">Will you love to proceed?</p>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                    Cancel
+                </button>
+                <button type="button" id="upgrd" class="btn btn-primary">Continue</button>
+            </div>
+        </div>
+    </div>
+</div>

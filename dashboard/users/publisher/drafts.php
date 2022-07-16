@@ -1,6 +1,27 @@
 <?php
 include("components/top.php");
 user_details();
+
+
+if(isset($_SESSION['eddbooknew'])) {
+
+    unset($_SESSION['eddbooknew']);
+}
+
+if(isset($_SESSION['bookupl'])) {
+
+    unset($_SESSION['bookupl']);
+}
+
+if(isset($_SESSION['booknew'])) {
+
+    unset($_SESSION['booknew']);
+}
+
+if(isset($_SESSION['eddbookupl'])) {
+
+    unset($_SESSION['eddbookupl']);
+}
 ?>
 
 
@@ -38,8 +59,9 @@ user_details();
             <!-- Menu -->
 
             <?php
-            include("components/sidded.php");            
+            include("components/sidebar.php");            
             ?>
+
 
             <!-- / Menu -->
 
@@ -67,9 +89,9 @@ user_details();
 
                             <?php
 
-                            $user =  $_SESSION['login'];
+                            $user =  $t_users['email'];
 
-                                $ssl = "SELECT * FROM boughtbook WHERE `userid` = '$user' AND `reading` = 'wishlist' ORDER BY `sn` desc";
+                                $ssl = "SELECT * FROM books WHERE `email_address` = '$user' AND `book_status` = 'draft' ORDER BY `books_id` desc";
                                 $rss = query($ssl);
 
                                 if(row_count($rss) == '' || row_count($rss) == null) {
@@ -80,9 +102,9 @@ user_details();
                                 <div class="container-xxl container-p-y text-center">
                                   <div class="misc-wrapper">
                                     <h2 class="mb-2 mx-2">Uh Oh 😢 </h2>
-                                    <p class="mb-4 mx-2">You've not added any book to your wishlist yet. </p>
-                                    <a href="./books" class="btn btn-primary">Get some book(s) to my wishlist</a>
-                                    <div class="mt-4">
+                                    <p class="mb-1 mx-2">You have no draft. </p>
+                                    <a href="./upload" class="btn btn-primary">Upload your first book</a>
+                                    <div class="mt-0">
                                       <img
                                         src="../assets/img/search.gif"
                                         alt="girl-doing-yoga-light"
@@ -106,68 +128,29 @@ user_details();
 
                             while($rws = mysqli_fetch_array($rss)) {
 
-                                $bkid = $rws['bookid'];
 
-                                $sql = "SELECT * FROM books WHERE `books_id` = '$bkid'";
-                                $res = query($sql);
+                                $category = "&nbsp;".$rws['category_1'];
 
-                                $row = mysqli_fetch_array($res);
-
-                                $category = "&nbsp;".$row['category_1'];
-
-                                $book = $row['book_title'];
+                                $book = $rws['book_title'];
 
                                 $redbb = str_replace(' ', '-', $book);
 
-
-                                $det = strip_tags($row['description']);
+                                $det = strip_tags($rws['description']);
                                 $frv = wordwrap($det, 70, "\n", TRUE); 
-                                $y = substr($frv, 0, 120).'... <a href="./bookdetails?book='.$redbb.'">Read More</a>';
+                                $y = substr($frv, 0, 120).'... <a href="./editdrafts?book='.$redbb.'">Read More</a>';
 
                                 $descrp = ucfirst($y);
                                 
 
-                                $image = "../assets/bookscover/".$row['book_cover'];
+                                $image = "../assets/bookscover/".$rws['book_cover'];
 
                                 if(file_exists($image)){
 
-                                    $imager = "../assets/bookscover/".$row['book_cover'];
+                                    $imager = "../assets/bookscover/".$rws['book_cover'];
                                     
                                 } else {
 
                                     $imager = "../assets/img/cover.jpg";
-                                }
-
-                                $id = $row['books_id'];
-
-
-                                $sel = "SELECT sum(`id`) AS `bookbought` FROM `boughtbook` WHERE `bookid` = '$id'";
-                                $rss = query ($sel);
-
-                                if(row_count($rss) == '' || row_count($rss) == null) {
-
-                                    $booktot = 0 ." copy sold";
-                                    
-                                } else {
-                            
-                                    $bow = mysqli_fetch_array($rss);
-
-                                    if($bow['bookbought'] == 0 || $bow['bookbought'] == null) {
-
-                                        $booktot = 0 ." copy sold";
-
-                                    } else {
-
-                                        if($bow['bookbought'] == 1) {
-
-                                            $booktot = 1 ." copy sold";
-                                            
-                                        } else {
-                                            $booktot = number_format($bow['bookbought'])." copies sold";
-
-                                        }
-                                    }
-                                    
                                 }
 
                         ?>
@@ -180,35 +163,30 @@ user_details();
 
                                                 <div class="card-text">
                                                     <div class="d-grid d-sm-flex p-3 ">
-                                                        <img src="<?php echo $imager ?>" alt="collapse-image"
-                                                            height="205"
+                                                        <img src="<?php echo $imager ?>"
+                                                            alt="<?php echo $rws['book_title'] ?>" height="205"
                                                             class="me-4 mb-sm-0 mb-4 text-center justify-content-center" />
 
                                                         <span>
-                                                            <b><?php echo escape($row['book_title']) ?></b>
-                                                            <br />
-                                                            by: <b><small><?php echo $row['author'] ?></small></b>
+                                                            <b><?php echo escape($rws['book_title']) ?></b>
                                                             <br /><br />
                                                             <?php echo $descrp ?>
 
                                                             <br /><br />
 
-                                                            <b>₦<?php echo number_format($row['selling_price']) ?></b>
 
-                                                            <br /><br />
-                                                            <?php echo $row['language'] ?> &nbsp;|&nbsp;
-                                                            <?php echo $category ?> &nbsp;|&nbsp;
-                                                            <?php echo $booktot ?>
 
                                                             <p class="demo-inline-spacing">
 
-                                                                <a href="./bookdetails?book=<?php echo $redbb ?>"
-                                                                    class="btn btn-primary me-1" type="button">Buy
-                                                                    this book </a>
-
-                                                                <a class="btn btn-primary me-1">
-                                                                    <i class="bx bx-share-alt text-white"></i>
+                                                                <a href="./editdrafts?book=<?php echo $redbb ?>" class=" btn
+                                                                    btn-primary me-1">
+                                                                    <i class="bx bx-edit text-white"></i>
                                                                 </a>
+                                                                <a href="./delete?book=<?php echo $redbb ?>"
+                                                                    class="btn btn-primary me-1">
+                                                                    <i class="bx bx-trash text-white"></i>
+                                                                </a>
+
                                                             </p>
 
                                                         </span>

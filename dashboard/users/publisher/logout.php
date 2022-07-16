@@ -18,5 +18,5 @@ if(isset($_SESSION['login'])) {
 session_destroy();
 
 //redirect to login page
-redirect("./signin");
+redirect(".././signin");
 ?>
