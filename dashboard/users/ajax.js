@@ -16,6 +16,8 @@ $(document).ready(function () {
     }
 
   });
+
+
   //signup
   $("#sub").click(function () {
     var fname = $("#fname").val();
@@ -83,6 +85,8 @@ $(document).ready(function () {
     }
   });
 
+
+
   //resend otp
   $("#rotp").click(function () {
     $("#otptitle").html("We've sent you another OTP ✅");
@@ -103,6 +107,7 @@ $(document).ready(function () {
       },
     });
   });
+
 
   //verify otp
   $("#vsub").click(function () {
@@ -165,6 +170,8 @@ $(document).ready(function () {
   }*/
   });
 
+
+
   //signin
   $("#lsub").click(function () {
     var username = $("#luname").val();
@@ -191,6 +198,8 @@ $(document).ready(function () {
     }
   });
 
+
+
   //forgot
   $("#fsub").click(function () {
     var fgeml = $("#femail").val();
@@ -212,6 +221,8 @@ $(document).ready(function () {
       });
     }
   });
+
+
 
   //reset
   $("#updf").click(function () {
@@ -244,6 +255,8 @@ $(document).ready(function () {
     }
   });
 
+
+
   /******** USER PROFILE SECTION */
 
   //getting books details
@@ -259,6 +272,8 @@ $(document).ready(function () {
       },
     });
   });
+
+
 
   //search for books
   $("#searcher").keyup(function () {
@@ -283,6 +298,8 @@ $(document).ready(function () {
     }
   });
 
+
+
   //add to wishlist
   $("#btwsh").click(function () {
     var wishid = $(".srchid").val();
@@ -306,6 +323,8 @@ $(document).ready(function () {
     });
   });
 
+
+
   //added to wishlist
   $("#lksd").click(function () {
     $("#lksd").on("shown.bs.popover", function () {
@@ -315,10 +334,13 @@ $(document).ready(function () {
     });
   });
 
+
   //cancel payment
   $("#cnc").click(function () {
     $("#clss").popover("hide");
   });
+
+
 
   //fund wallet
   $("#paybtn").click(function () {
@@ -366,6 +388,8 @@ $(document).ready(function () {
     }
   });
 
+
+
   //buy book
   $("#bkkpaybtn").click(function () {
     $("#pymsg").html(
@@ -384,6 +408,25 @@ $(document).ready(function () {
       data: { amt: amt, bkid: bkid, authoremail: authoremail, bkprice: bkprice, rylty: rylty },
       success: function (data) {
         $("#bkpymsg").html(data);
+      },
+    });
+  });
+
+
+  //upgrade account
+  $("#upgrd").click(function () {
+    $("#note").html(
+      '<img style="width: 100px; height: 100px" src="assets/img/loading.gif">'
+    );
+
+    var upgrade = 'author';
+
+    $.ajax({
+      type: "post",
+      url: "functions/init.php",
+      data: { upgrade: upgrade },
+      success: function (data) {
+        $("#note").html(data);
       },
     });
   });

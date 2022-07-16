@@ -503,6 +503,7 @@ $(document).ready(function () {
    
     var bkid = $("#bkid").text();
     var authoremail = $("#authoremail").text();
+    var bkdel = 'delete';
 
     $("#bkpymsg").html(
       '<img style="width: 100px; height: 100px" src="../assets/img/loading.gif">'
@@ -511,7 +512,7 @@ $(document).ready(function () {
     $.ajax({
       type: "post",
       url: "../functions/init.php",
-      data: {bkid: bkid, authoremail: authoremail},
+      data: {bkid: bkid, authoremail: authoremail, bkdel: bkdel},
       success: function (data) {
         $("#bkpymsg").html(data);
       },

@@ -273,7 +273,7 @@ function register($fname, $usname, $email, $pword, $ref, $catgy) {
 function mail_mailer($email, $activator, $subj, $msg) {
 
 	$to = $email;
-	$from = "hello@booksinvogue.com.ng";
+	$from = "info@booksinvogue.com";
 
 	$headers = "From: " . $from . "\r\n";
 	$headers .= "Reply-To: ". $from . "\r\n";
@@ -318,6 +318,70 @@ function mail_mailer($email, $activator, $subj, $msg) {
 	$body .= "</section>";
 	$body .= "</body></html>";
 	$send = mail($to, $subject, $body, $headers);
+}
+
+
+//welcome new users
+function welcome_users_biv($email, $usernames) {
+
+
+	$sql = "SELECT * FROM `letter` WHERE `role` = 'user'";
+	$res = query($sql);
+
+	if(row_count($res) == null || row_count($res) == '') {
+
+
+	} else {
+
+		$row = mysqli_fetch_array($res);
+
+	$to = $email;
+	$from = "info@booksinvogue.com";
+
+	$headers = "From: " . $from . "\r\n";
+	$headers .= "Reply-To: ". $from . "\r\n";
+	$headers .= "MIME-Version: 1.0\r\n";
+	$headers .= "Content-Type: text/html; charset=\"iso-8859-1\"\n";
+	$headers .= "X-Priority: 1 (Highest)\n";
+	$headers .= "X-MSMail-Priority: High\n";
+	$headers .= "Importance: High\n";
+
+	$subject = "Hey,". $username.", You are now part of the Books In Vogue Tribe 🎊"; 
+
+	$logo = 'https://booksinvogue.com.ng/assests/logo.png';
+	$url = 'https://booksinvogue.com.ng/';
+
+	$body = "
+	<!DOCTYPE html>
+	<html lang='en'>
+
+	<head>
+	<meta charset='UTF-8'>
+	<title>Booksinvogue</title>
+	</head>
+	<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css'>
+	<body style='text-align: center;'>";
+	$body .= "<section style='margin: 30px; margin-top: 50px ; background: #34459C; color: #fff;'>";
+	$body .= "<img style='margin-top: 35px; width: 460px; height: 105px;' src='{$logo}' alt='Booksinvogue'>";
+	$body .= "<h1 style='margin-top: 45px; color: #fff'>{$subj}</h1>
+	<br />";
+	$body .= "<h3 style='margin-left: 45px; margin-top: 34px; text-align: left; font-size: 27px;'>{$msg}</h3>
+	<br />";
+	$body .= "<h1 style='margin-left: 45px; font-size: 90px; text-align: center;'><b>{$activator}</b></h1>
+	<br />";
+	$body .= "<p style='margin-left: 45px; padding-bottom: 80px; text-align: left;'>Do not bother replying this
+	email. This is a virtual email</p>";
+	$body .= "<p text-align: center;'><a href='https://booksinvogue.com.ng/contact'><img style='width:150px;heght:150px'
+			src='https://booksinvogue.com.ng/assests/footer.png'></a>";
+	$body .= "
+	<h4 style='text-align: center;'>Email.: <span style='color: #fff'>hello@booksinvogue.com</span></h4>";
+	$body .= "<h4 style='text-align: center;'>Call/Chat.: <span style='color: #fff'>+234(0) 809 481 4575</span>
+	</h4>";
+	$body .= "<script src=https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js'></script>";
+	$body .= "</section>";
+	$body .= "</body></html>";
+	$send = mail($to, $subject, $body, $headers);
+	}
 }
 
 
@@ -757,7 +821,7 @@ if(isset($_POST['amt']) && isset($_POST['bkid']) && isset($_POST['authoremail'])
 		
 		//insert into transaction history
         $tsql="INSERT INTO t_his(`t_ref`, `amt`, `datepaid`, `username`, `sn`, `status`, `paynote`)";
-        $tsql.="VALUES('$tref', '$amter', '$date', '$data', '1', 'credit', '$note')";
+        $tsql.="VALUES('$tref', '$amter', '$date', '$data', '1', 'debit', '$note')";
         $tes = query($tsql);
 
 
@@ -1347,7 +1411,7 @@ function book_bought() {
 
 
 //delete a book
-if(isset($_POST['bkid']) && isset($_POST['authoremail'])) {
+if(isset($_POST['bkid']) && isset($_POST['authoremail']) && isset($_POST['bkdel']) && isset($_POST['bkdel']) == 'delete') {
 	
 	$bkid = trim($_POST['bkid']);
 	$authoremail = trim($_POST['authoremail']);
@@ -1360,4 +1424,17 @@ if(isset($_POST['bkid']) && isset($_POST['authoremail'])) {
 	//refresh index page
 	echo 'Loading... Please Wait';
 	echo '<script>window.location.href ="./mybooks"</script>';
+}
+
+
+//upgrade user to author
+if(isset($_POST['upgrade']) && $_POST['upgrade'] == 'author') {
+
+	$data = $_SESSION['login'];
+
+	$sql = "UPDATE users SET `role` = 'author' WHERE `usname` = '$data'";
+	$res = query($sql);
+
+	//redirect to author page
+	echo '<script>window.location.href ="author/./"</script>';
 }

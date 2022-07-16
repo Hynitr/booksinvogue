@@ -248,7 +248,7 @@ input[type=number] {
                                                             <strong><?php echo $rrw['t_ref'] ?></strong>
                                                         </td>
                                                         <td>₦<?php echo number_format($rrw['amt']) ?></td>
-                                                        <td><?php echo $rrw['status'] ?> </td>
+                                                        <td><?php echo ucwords($rrw['status']) ?> </td>
                                                         <td><?php echo $rrw['paynote'] ?>
                                                         </td>
                                                         <td><?php echo date('l, F d, Y', strtotime($rrw['datepaid'])); ?>

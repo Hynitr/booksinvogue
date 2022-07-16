@@ -6,7 +6,7 @@ if (isset($_POST['searchword'])) {
 //Search box value assigning to $Name variable.
    $Name = $_POST['searchword'];
 //Search query.
-   $Query = "SELECT * FROM books WHERE book_title LIKE '%$Name%'";
+   $Query = "SELECT * FROM books WHERE book_title LIKE '%$Name%' OR `author` LIKE '%$Name%' OR `other_author` = '%$Name%'";
 //Query execution
    $ExecQuery = query($Query);
 //Creating unordered list to display result.
@@ -103,46 +103,6 @@ echo '
 
 
 
-        $ssl = "SELECT * FROM boughtbook WHERE `bookid` = '$id' AND `reading` = 'wishlist' AND `userid` = '$userid'";
-        $rss = query($ssl);
-
-        if(row_count($rss) == '' || row_count($rss) == null) {
-
-            $nks = <<<DELIMITER
-
-            <a class="btn btn-primary me-1" id="btwsh" data-bs-toggle="popover"
-            data-bs-offset="0,14" data-bs-placement="top"
-            data-bs-html="true"
-            data-bs-content="<p>We just added this book to your wishlist</p>"
-            title="Add to Wishlist">
-
-             <i class="bx bx-star text-white"></i>
-
-           
-             </a>
-
-             <input type="text" value='$id' id='srchid' hidden>
-
-            DELIMITER;
-
-            
-            
-        } else {
-
-            $nks = <<<DELIMITER
-            <a class="btn btn-primary me-1" id="lksd" data-bs-toggle="popover"
-            data-bs-offset="0,14" data-bs-placement="top"
-            data-bs-html="true"
-            data-bs-content="<p>This Book has been added to your wishlist</p>"
-            title="Added to wishlist already">
-
-            <i class="bx bx-check text-white"></i>
-             </a>
-
-            DELIMITER;
-            
-        }
-
         $sbl = "SELECT * FROM boughtbook WHERE `bookid` = '$id' AND `reading` = 'Yes' AND `userid` = '$userid'";
         $rbs = query($sbl);
 
@@ -193,17 +153,12 @@ echo '
 
                                  <p class="demo-inline-spacing">
 
-                                     <?php  echo $nks ?>
-
-                                     <a style="display: none;" class="btn btn-primary me-1" id="addtwh">
-                                         <i class="bx bx-check text-white"></i>
-                                     </a>
-
 
                                      <?php echo $nkbs ?>
 
-                                     <a class="btn btn-primary me-1">
-                                         <i class="bx bx-share-alt text-white"></i>
+                                     <a href="./bookdetails?id=<?php echo $row['books_id'] ?>"
+                                         class="btn btn-primary me-1">
+                                         View Details
                                      </a>
                                  </p>
 

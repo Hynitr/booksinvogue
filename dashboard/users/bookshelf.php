@@ -251,6 +251,49 @@ user_details();
     <script src="assets/js/dashboards-analytics.js"></script>
 
     <script src="ajax.js"></script>
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script src="node_modules/canvas-confetti/dist/confetti.browser.js"></script>
+    <script>
+    function shout() {
+
+        var count = 1000;
+        var defaults = {
+            origin: {
+                y: 0.7
+            }
+        };
+
+        function fire(particleRatio, opts) {
+            confetti(Object.assign({}, defaults, opts, {
+                particleCount: Math.floor(count * particleRatio)
+            }));
+        }
+
+        fire(0.25, {
+            spread: 126,
+            startVelocity: 95,
+        });
+        fire(0.2, {
+            spread: 360,
+        });
+        fire(0.35, {
+            spread: 360,
+            decay: 0.91,
+            scalar: 0.8
+        });
+        fire(0.1, {
+            spread: 360,
+            startVelocity: 25,
+            decay: 0.92,
+            scalar: 1.2
+        });
+        fire(0.1, {
+            spread: 360,
+            startVelocity: 45,
+        });
+
+    }
+    </script>
     <?php
     if(isset($_SESSION['bookmsg'])) {
         
@@ -259,7 +302,7 @@ user_details();
         echo "
         
         <script>
-        $('#pybst').show();
+        $('#pybst').show(); shout();
         </script>
         ";
         } 
