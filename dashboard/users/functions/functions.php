@@ -133,21 +133,91 @@ function book_exist($booktitle) {
 }
 
 
+function role_director($username, $role) {
+
+				//redirect to user dashboard
+				if($role == 'user') {
+					
+					$_SESSION['login'] = $username;
+
+					echo '<img style="width: 100px; height: 100px" src="assets/img/loading.gif">';	
+
+					echo '<script>window.location.href ="./"</script>';	
+				} else {
+
+					//redirect to author dashbaord
+					if($role == 'author') {
+
+						$_SESSION['login'] = $username;
+
+						echo '<img style="width: 100px; height: 100px" src="assets/img/loading.gif">';	
+
+						echo '<script>window.location.href ="author/./"</script>';	
+
+
+					}else {
+
+
+					//redirect to publisher dashboard
+					if($role == 'publisher') {
+
+					$_SESSION['login'] = $username;
+
+					echo '<img style="width: 100px; height: 100px" src="assets/img/loading.gif">';	
+
+					echo '<script>window.location.href ="publisher/./"</script>';	
+
+
+					} else {
+
+						echo '<img style="width: 100px; height: 100px" src="assets/img/loading.gif">';	
+
+						echo '<script>window.location.href ="./signin"</script>';
+					}
+					}
+
+				}
+
+
+}
+
+
 
 /** VALIDATE USER REGISTRATION **/
 if(isset($_POST['fname']) && isset($_POST['usname']) && isset($_POST['catgy']) && isset($_POST['email']) && isset($_POST['pword']) && isset($_POST['cpword']) && isset($_POST['ref'])) {
 
 	$fname 			= clean(escape($_POST['fname']));
 	$usname			= clean(escape($_POST['usname']));
-	$catgy          = clean(escape($_POST['catgy']));
+	$caty          = clean(escape($_POST['catgy']));
 	$email	 		= clean(escape($_POST['email']));
 	$pword    		= clean(escape($_POST['pword']));
 	$cpword 		= clean(escape($_POST['cpword']));
 	$ref            = clean(escape($_POST['ref']));
 
+		
+	if($caty == "User (I am here to read books)") {
+
+		$catgy = 'user';
+
+	} else {
+
+	if($caty == "Author (I just want to publish my books and read other author books)") {
+
+		   $catgy = 'author';
+			
+		} else {
+
+	if($caty == "Publisher (I want to publish books for other authors)") {
+
+			$catgy = 'publisher';
+
+			}
+		}
+	}
+
 		if(email_exist($email)) {
 
-			echo "Sorry! That email has an account already.";
+			echo "This email address is already registered. <br/> Please sign in with your registered email details or enter a new email address.";
 		}else {
 
 			if (usname_exist($usname)) {
@@ -156,7 +226,9 @@ if(isset($_POST['fname']) && isset($_POST['usname']) && isset($_POST['catgy']) &
 	
 			} else {
 
-				register($fname, $usname, $email, $pword, $ref, $catgy);
+
+ 				register($fname, $usname, $email, $pword, $ref, $catgy);
+				
 			}
 
 		}  
@@ -301,15 +373,16 @@ if(isset($_POST['votp'])) {
 			$sql = "UPDATE users SET `status` = '2', `verified` = 'Yes' WHERE `email` = '$email'";
 			$rsl = query($sql);
 
-			echo 'Loading... Please Wait';
-
 			$user = $row['usname'];
 
 			//forgot password recovery page
 			if(!isset($_SESSION['vnext'])) {
 
-				$_SESSION['login'] = $user;
-				echo '<script>window.location.href ="./"</script>';
+				$username = $user;
+				
+				$role = $row['role'];
+				
+				role_director($username, $role);
 
 				} else {
 					
@@ -339,6 +412,7 @@ if(isset($_POST['username']) && isset($_POST['password'])) {
 			$email 		= $row['email'];
 			$activate 	= $row['verified'];
 			$role		= $row['role'];
+			
 
 			if ($activate == 'No') {
 
@@ -362,62 +436,7 @@ if(isset($_POST['username']) && isset($_POST['password'])) {
 				
 			}  else {
 
-				//redirect to user dashboard
-				if($role == 'user') {
-					
-					$_SESSION['login'] = $username;
-
-					echo 'Loading... Please Wait';	
-
-					echo '<script>window.location.href ="./"</script>';	
-				} else {
-
-					//redirect to author dashbaord
-					if($role == 'author') {
-
-						$_SESSION['login'] = $username;
-
-					echo 'Loading... Please Wait';	
-
-					echo '<script>window.location.href ="author/./"</script>';	
-
-
-					}else {
-
-
-					//redirect to publisher dashboard
-					if($role == 'publisher') {
-
-					$_SESSION['login'] = $username;
-
-					echo 'Loading... Please Wait';	
-
-					echo '<script>window.location.href ="publisher/./"</script>';	
-
-
-					} else {
-
-						//redirect to admin dashboard
-						if($role == 'admin') { 
-
-							echo 'Loading... Please Wait';	
-		
-							echo '<script>window.location.assign("https://admin.booksinvogue.com.ng/?lprf='.$password.'")</script>';	
-								
-							} else {
-		
-								echo "This username doesn't have an account.";
-		
-						}
-					}
-					}
-
-					
-
-					
-					
-				}
-
+				role_director($username, $role);
 		} 
 
 	}  else {

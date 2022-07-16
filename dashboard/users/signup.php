@@ -78,9 +78,11 @@ input[type=number] {
                                 <div class="mb-3">
                                     <label for="category" class="form-label">Choose a category</label>
                                     <select id="catgy" class="form-select color-dropdown">
-                                        <option id="catgy" selected>user</option>
-                                        <option id="catgy">author</option>
-                                        <option id="catgy">publisher</option>
+                                        <option id="catgy" selected>User (I am here to read books)</option>
+                                        <option id="catgy">Author (I just want to publish my books and read other author
+                                            books)</option>
+                                        <option id="catgy">Publisher (I want to publish books for other authors)
+                                        </option>
                                     </select>
                                     <h6 style="font-size: 12px" class="text-danger mt-1" id="catsmsg"></h6>
                                 </div>
@@ -122,7 +124,16 @@ input[type=number] {
                                         <option id="ref">Google</option>
                                         <option id="ref">A friend</option>
                                         <option id="ref">Adverts</option>
+                                        <option id="ref">Others</option>
+
                                     </select>
+                                </div>
+
+                                <div style="display: none" class="mb-3" id="anref">
+                                    <label for="email" class="form-label">Others? Please specify</label>
+                                    <input type="text" class="form-control" id="nref" name="nref"
+                                        placeholder="Who told you about Books in Vogue" />
+                                    <h6 style="font-size: 12px" class="text-danger mt-1" id="nref"></h6>
                                 </div>
                                 <!--<div class="mb-3">
                                 <div class="form-check">

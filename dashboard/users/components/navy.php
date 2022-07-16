@@ -21,7 +21,7 @@
         <ul class="navbar-nav flex-row align-items-center ms-auto">
             <!-- Place this tag where you want the button to render. -->
             <li class="nav-item lh-1 me-3">
-                <a href="./wishlist"><i class="bx bx-cart"></i></a>
+                <a href="#"><?php echo strtoupper($t_users['role']) ?></a>
             </li>
 
             <!-- User -->

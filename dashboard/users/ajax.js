@@ -1,4 +1,21 @@
 $(document).ready(function () {
+
+
+  //refral notice
+  $("#ref").click(function () {
+    
+    var ref = $("#ref").val();
+
+    if(ref == 'Others') {
+
+      $("#anref").show();
+
+    } else {
+
+      $("#anref").hide();
+    }
+
+  });
   //signup
   $("#sub").click(function () {
     var fname = $("#fname").val();
@@ -7,7 +24,17 @@ $(document).ready(function () {
     var email = $("#email").val();
     var pword = $("#pword").val();
     var cpword = $("#cpword").val();
-    var ref = $("#ref").val();
+    var nref = $("#ref").val();
+
+    if(nref == 'Others') {
+
+      var ref = $("#nref").val();
+      
+    } else {
+
+      var ref = $("#ref").val();
+    }
+
 
     if (fname == "" || fname == null) {
       $("#fmsg").html("Kindly input your full name.");
