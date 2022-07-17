@@ -312,16 +312,11 @@ function mail_mailer($email, $activator, $subj, $msg) {
 		<meta name="title" content="Books In Vogue" />
 		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
 	
-		<!-- Icons. Uncomment required icon fonts -->
-		<link rel="stylesheet" href="https://dashboard.booksinvogue.com.ng/assets/vendor/fonts/boxicons.css" />
-	
 		<!-- Favicon -->
 		<link rel="icon" type="image/x-icon" href="https://dashboard.booksinvogue.com.ng/assets/img/logo.png" />
 	
 		<!-- Core CSS -->
-		<link rel="stylesheet" href="https://dashboard.booksinvogue.com.ng/assets/vendor/css/core.css" class="template-customizer-core-css" />
-		<link rel="stylesheet" href="https://dashboard.booksinvogue.com.ng/assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
-		<link rel="stylesheet" href="https://dashboard.booksinvogue.com.ng/assets/css/demo.css" />
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 	</head>
 	<style>
 	body {
@@ -389,10 +384,7 @@ function mail_mailer($email, $activator, $subj, $msg) {
 	
 	
 	</body>
-	<script src="https://dashboard.booksinvogue.com.ng/assets/vendor/libs/jquery/jquery.js"></script>
-	<script src="https://dashboard.booksinvogue.com.ng/assets/vendor/libs/popper/popper.js"></script>
-	<script src="https://dashboard.booksinvogue.com.ng/assets/vendor/js/bootstrap.js"></script>
-	
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script
 	</html>
 	
 	
@@ -430,17 +422,12 @@ function notify_user($username, $email, $msg, $subj) {
 		<meta charset="utf-8" />
 		<meta name="title" content="Books In Vogue" />
 		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
-	
-		<!-- Icons. Uncomment required icon fonts -->
-		<link rel="stylesheet" href="https://dashboard.booksinvogue.com.ng/assets/vendor/fonts/boxicons.css" />
-	
+		
 		<!-- Favicon -->
 		<link rel="icon" type="image/x-icon" href="https://dashboard.booksinvogue.com.ng/assets/img/logo.png" />
 	
 		<!-- Core CSS -->
-		<link rel="stylesheet" href="https://dashboard.booksinvogue.com.ng/assets/vendor/css/core.css" class="template-customizer-core-css" />
-		<link rel="stylesheet" href="https://dashboard.booksinvogue.com.ng/assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
-		<link rel="stylesheet" href="https://dashboard.booksinvogue.com.ng/assets/css/demo.css" />
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 	</head>
 	<style>
 	body {
@@ -508,10 +495,7 @@ function notify_user($username, $email, $msg, $subj) {
 	
 	
 	</body>
-	<script src="https://dashboard.booksinvogue.com.ng/assets/vendor/libs/jquery/jquery.js"></script>
-	<script src="https://dashboard.booksinvogue.com.ng/assets/vendor/libs/popper/popper.js"></script>
-	<script src="https://dashboard.booksinvogue.com.ng/assets/vendor/js/bootstrap.js"></script>
-	
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script
 	</html>
 	
 	
