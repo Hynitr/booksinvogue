@@ -287,7 +287,7 @@ function register($fname, $usname, $email, $pword, $ref, $catgy) {
 function mail_mailer($email, $activator, $subj, $msg) {
 
 	$to = $email;
-	$from = "info@booksinvogue.com";
+	$from = "info@booksinvogue.com.ng";
 
 	$headers = "From: " . $from . "\r\n";
 	$headers .= "Reply-To: ". $from . "\r\n";
@@ -406,7 +406,7 @@ function mail_mailer($email, $activator, $subj, $msg) {
 function notify_user($username, $email, $msg, $subj) {
 
 	$to = $email;
-	$from = "info@booksinvogue.com";
+	$from = "info@booksinvogue.com.ng";
 
 	$headers = "From: " . $from . "\r\n";
 	$headers .= "Reply-To: ". $from . "\r\n";
