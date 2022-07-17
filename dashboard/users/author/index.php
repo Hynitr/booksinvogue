@@ -61,7 +61,7 @@ include("components/top.php");
                         <div class="row">
 
                             <?php
-                            if($t_users['act no'] == null) {
+                            if($t_users['act no'] == null || $t_users['act no'] == 0 || $t_users['act no'] == '') {
 
                                 ?>
 

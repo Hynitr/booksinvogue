@@ -2,7 +2,7 @@ $(document).ready(function () {
 
 
   //refral notice
-  $("#ref").click(function () {
+  $("#ref").change(function () {
     
     var ref = $("#ref").val();
 

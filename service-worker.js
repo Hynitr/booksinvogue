@@ -1,6 +1,7 @@
 var CACHE_NAME = 'pwgen-cache';
 var urlsToCache = [
-    'index.html'
+    'index.html',
+    'dashboard/'
 ];
 console.log('loading sw');
 

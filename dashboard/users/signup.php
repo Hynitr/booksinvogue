@@ -118,7 +118,6 @@ input[type=number] {
                                 <div class="mb-3">
                                     <label for="username" class="form-label">Who told you about us?</label>
                                     <select id="ref" class="form-select color-dropdown">
-                                        <option id="ref"></option>
                                         <option id="ref">instagram</option>
                                         <option id="ref">Facebook</option>
                                         <option id="ref">Google</option>

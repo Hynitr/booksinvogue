@@ -61,7 +61,7 @@ include("components/top.php");
                         <div class="row">
 
                             <?php
-                            if($t_users['act no'] == null) {
+                            if($t_users['agncy'] == null || $t_users['agncy'] == '' || $t_users['act no'] == null || $t_users['act no'] == 0 || $t_users['act no'] == '') {
 
                                 ?>
 
@@ -343,6 +343,45 @@ include("components/top.php");
                                         <input type="text" class="form-control" id="actn" name="actn"
                                             placeholder="Retrieving your account name..." disabled />
                                     </div>
+
+                                    <div class="mb-3">
+                                        <label for="actname" class="form-label">Publisher Name</label>
+                                        <input type="text" class="form-control" id="actn" name="actn"
+                                            placeholder="Retrieving your account name..." />
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="actname" class="form-label">Publisher Bio</label>
+                                        <textarea class="form-control"></textarea>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="mb-3 col-lg-3 col-sm-12">
+                                            <label for="actname" class="form-label">Facebook Username</label>
+                                            <input type="text" class="form-control" id="actn" name="actn"
+                                                placeholder="Retrieving your account name..." />
+                                        </div>
+
+                                        <div class="mb-3 col-lg-3 col-sm-12">
+                                            <label for="actname" class="form-label">Whatsapp Number</label>
+                                            <input type="text" class="form-control" id="actn" name="actn"
+                                                placeholder="Retrieving your account name..." />
+                                        </div>
+
+                                        <div class="mb-3 col-lg-3 col-sm-12">
+                                            <label for="actname" class="form-label">Twitter Username</label>
+                                            <input type="text" class="form-control" id="actn" name="actn"
+                                                placeholder="Retrieving your account name..." />
+                                        </div>
+
+                                        <div class="mb-3 col-lg-3 col-sm-12">
+                                            <label for="actname" class="form-label">Instagram Username</label>
+                                            <input type="text" class="form-control" id="actn" name="actn"
+                                                placeholder="Retrieving your account name..." />
+                                        </div>
+
+                                    </div>
+
 
                                     <h6 style="font-size: 13px" class="text-danger text-center mt-1" id="arpaymsg"></h6>
                                     <button type="button" id="actsub"
