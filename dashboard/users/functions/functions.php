@@ -140,7 +140,7 @@ function role_director($username, $role) {
 					
 					$_SESSION['login'] = $username;
 
-					echo '<img style="width: 100px; height: 100px" src="https://booksinvogue.com.ng/assets/img/loading.gif">';	
+					echo '<img style="width: 100px; height: 100px" src="https://dashboard.booksinvogue.com.ng/assets/img/loading.gif">';	
 
 					echo '<script>window.location.href ="./"</script>';	
 				} else {
@@ -150,7 +150,7 @@ function role_director($username, $role) {
 
 						$_SESSION['login'] = $username;
 
-						echo '<img style="width: 100px; height: 100px" src="https://booksinvogue.com.ng/assets/img/loading.gif">';	
+						echo '<img style="width: 100px; height: 100px" src="https://dashboard.booksinvogue.com.ng/assets/img/loading.gif">';	
 
 						echo '<script>window.location.href ="author/./"</script>';	
 
@@ -163,14 +163,14 @@ function role_director($username, $role) {
 
 					$_SESSION['login'] = $username;
 
-					echo '<img style="width: 100px; height: 100px" src="https://booksinvogue.com.ng/assets/img/loading.gif">';	
+					echo '<img style="width: 100px; height: 100px" src="https://dashboard.booksinvogue.com.ng/assets/img/loading.gif">';	
 
 					echo '<script>window.location.href ="publisher/./"</script>';	
 
 
 					} else {
 
-						echo '<img style="width: 100px; height: 100px" src="https://booksinvogue.com.ng/assets/img/loading.gif">';	
+						echo '<img style="width: 100px; height: 100px" src="https://dashboard.booksinvogue.com.ng/assets/img/loading.gif">';	
 
 						echo '<script>window.location.href ="./signin"</script>';
 					}
@@ -313,15 +313,15 @@ function mail_mailer($email, $activator, $subj, $msg) {
 		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
 	
 		<!-- Icons. Uncomment required icon fonts -->
-		<link rel="stylesheet" href="https://booksinvogue.com.ng/assets/vendor/fonts/boxicons.css" />
+		<link rel="stylesheet" href="https://dashboard.booksinvogue.com.ng/assets/vendor/fonts/boxicons.css" />
 	
 		<!-- Favicon -->
-		<link rel="icon" type="image/x-icon" href="https://booksinvogue.com.ng/assets/img/logo.png" />
+		<link rel="icon" type="image/x-icon" href="https://dashboard.booksinvogue.com.ng/assets/img/logo.png" />
 	
 		<!-- Core CSS -->
-		<link rel="stylesheet" href="https://booksinvogue.com.ng/assets/vendor/css/core.css" class="template-customizer-core-css" />
-		<link rel="stylesheet" href="https://booksinvogue.com.ng/assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
-		<link rel="stylesheet" href="https://booksinvogue.com.ng/assets/css/demo.css" />
+		<link rel="stylesheet" href="https://dashboard.booksinvogue.com.ng/assets/vendor/css/core.css" class="template-customizer-core-css" />
+		<link rel="stylesheet" href="https://dashboard.booksinvogue.com.ng/assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+		<link rel="stylesheet" href="https://dashboard.booksinvogue.com.ng/assets/css/demo.css" />
 	</head>
 	<style>
 	body {
@@ -370,7 +370,7 @@ function mail_mailer($email, $activator, $subj, $msg) {
 	<body>
 	
 		<div class="container justify-content-center text-center mt-5">
-			<img src="https://booksinvogue.com.ng/assets/img/logo.png" class="img-fluid" width="120">
+			<img src="https://dashboard.booksinvogue.com.ng/assets/img/logo.png" class="img-fluid" width="120">
 		</div>
 	
 		<div id="card" class="container card mt-4">
@@ -389,9 +389,9 @@ function mail_mailer($email, $activator, $subj, $msg) {
 	
 	
 	</body>
-	<script src="https://booksinvogue.com.ng/assets/vendor/libs/jquery/jquery.js"></script>
-	<script src="https://booksinvogue.com.ng/assets/vendor/libs/popper/popper.js"></script>
-	<script src="https://booksinvogue.com.ng/assets/vendor/js/bootstrap.js"></script>
+	<script src="https://dashboard.booksinvogue.com.ng/assets/vendor/libs/jquery/jquery.js"></script>
+	<script src="https://dashboard.booksinvogue.com.ng/assets/vendor/libs/popper/popper.js"></script>
+	<script src="https://dashboard.booksinvogue.com.ng/assets/vendor/js/bootstrap.js"></script>
 	
 	</html>
 	
@@ -432,15 +432,15 @@ function notify_user($username, $email, $msg, $subj) {
 		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
 	
 		<!-- Icons. Uncomment required icon fonts -->
-		<link rel="stylesheet" href="https://booksinvogue.com.ng/assets/vendor/fonts/boxicons.css" />
+		<link rel="stylesheet" href="https://dashboard.booksinvogue.com.ng/assets/vendor/fonts/boxicons.css" />
 	
 		<!-- Favicon -->
-		<link rel="icon" type="image/x-icon" href="https://booksinvogue.com.ng/assets/img/logo.png" />
+		<link rel="icon" type="image/x-icon" href="https://dashboard.booksinvogue.com.ng/assets/img/logo.png" />
 	
 		<!-- Core CSS -->
-		<link rel="stylesheet" href="https://booksinvogue.com.ng/assets/vendor/css/core.css" class="template-customizer-core-css" />
-		<link rel="stylesheet" href="https://booksinvogue.com.ng/assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
-		<link rel="stylesheet" href="https://booksinvogue.com.ng/assets/css/demo.css" />
+		<link rel="stylesheet" href="https://dashboard.booksinvogue.com.ng/assets/vendor/css/core.css" class="template-customizer-core-css" />
+		<link rel="stylesheet" href="https://dashboard.booksinvogue.com.ng/assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+		<link rel="stylesheet" href="https://dashboard.booksinvogue.com.ng/assets/css/demo.css" />
 	</head>
 	<style>
 	body {
@@ -489,7 +489,7 @@ function notify_user($username, $email, $msg, $subj) {
 	<body>
 	
 		<div class="container justify-content-center text-center mt-5">
-			<img src="https://booksinvogue.com.ng/assets/img/logo.png" class="img-fluid" width="120">
+			<img src="https://dashboard.booksinvogue.com.ng/assets/img/logo.png" class="img-fluid" width="120">
 		</div>
 	
 		<div id="card" class="container card mt-4">
@@ -508,9 +508,9 @@ function notify_user($username, $email, $msg, $subj) {
 	
 	
 	</body>
-	<script src="https://booksinvogue.com.ng/assets/vendor/libs/jquery/jquery.js"></script>
-	<script src="https://booksinvogue.com.ng/assets/vendor/libs/popper/popper.js"></script>
-	<script src="https://booksinvogue.com.ng/assets/vendor/js/bootstrap.js"></script>
+	<script src="https://dashboard.booksinvogue.com.ng/assets/vendor/libs/jquery/jquery.js"></script>
+	<script src="https://dashboard.booksinvogue.com.ng/assets/vendor/libs/popper/popper.js"></script>
+	<script src="https://dashboard.booksinvogue.com.ng/assets/vendor/js/bootstrap.js"></script>
 	
 	</html>
 	
@@ -796,13 +796,13 @@ function user_details() {
 		//set passport for empty passport
 		if($GLOBALS['t_users']['passport'] == null && $GLOBALS['t_users']['role'] == 'user') {
 			
-			$GLOBALS['passport'] = 'https://booksinvogue.com.ng/assets/img/user.png';
+			$GLOBALS['passport'] = 'https://dashboard.booksinvogue.com.ng/assets/img/user.png';
 
 		} else {
 
 			if($GLOBALS['t_users']['passport'] == null && $GLOBALS['t_users']['role'] == 'author') {
 				
-				$GLOBALS['passport'] = '../https://booksinvogue.com.ng/assets/img/user.png';
+				$GLOBALS['passport'] = '../https://dashboard.booksinvogue.com.ng/assets/img/user.png';
 			} else {
 
 				$GLOBALS['passport'] = $GLOBALS['t_users']['passport'];
@@ -837,15 +837,15 @@ if(isset($_POST['dataid'])) {
 		$price = "₦".number_format($row['selling_price']);
 		$sold = $row['sold'];
 
-		$image = "../https://booksinvogue.com.ng/assets/bookscover/".$row['book_cover'];
+		$image = "../https://dashboard.booksinvogue.com.ng/assets/bookscover/".$row['book_cover'];
 
 		if(file_exists($image)){
 
-			$imager = "https://booksinvogue.com.ng/assets/bookscover/".$row['book_cover'];
+			$imager = "https://dashboard.booksinvogue.com.ng/assets/bookscover/".$row['book_cover'];
 			
 		} else {
 
-			$imager = "https://booksinvogue.com.ng/assets/img/cover.jpg";
+			$imager = "https://dashboard.booksinvogue.com.ng/assets/img/cover.jpg";
 		}
 
 
@@ -1485,7 +1485,7 @@ if(isset($_POST['booktitle']) && isset($_POST['bookdescp']) && isset($_POST['ser
 if (!empty($_FILES["fil"]["name"]) && !empty($_FILES["covfile"]["name"])) {
 	
 	$target_dir1 = "../softbooks/";
-	$target_dir2 = "../https://booksinvogue.com.ng/assets/bookscover/";
+	$target_dir2 = "../https://dashboard.booksinvogue.com.ng/assets/bookscover/";
 
 	$target_file1 =  basename($_FILES["fil"]["name"]);
 	$target_file2 =  basename($_FILES["covfile"]["name"]);
