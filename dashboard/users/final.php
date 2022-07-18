@@ -90,12 +90,11 @@
 
 
     </style>
-    <body style="background-color: #eaebed;  font-family: sans-serif;  font-size: 14px; line-height: 1.4; margin: 0; padding: 0;">
+    <body style="background-color: #eaebed;  font-family: sans-serif;  font-size: 14px; line-height: 1.4; margin-bottom: 2rem !important; padding: 0;">
 
     
     <div style="text-align: center !important; justify-content: center !important; margin-top: 24px !important;">
     <img style="max-width: 100%; height: auto; vertical-align: middle; box-sizing: border-box; width: 120px;" src="https://dashboard.booksinvogue.com.ng/assets/img/logo.png">
-   
     </div>
 
     <div id="card" style="display:inline-block;vertical-align:middle;">
