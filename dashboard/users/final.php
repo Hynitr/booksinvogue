@@ -94,10 +94,8 @@
 
     
     <div style="text-align: center !important; justify-content: center !important; margin-top: 24px !important;">
-    <tr>
     <img style="max-width: 100%; height: auto; vertical-align: middle; box-sizing: border-box; width: 120px;" src="https://dashboard.booksinvogue.com.ng/assets/img/logo.png">
    
-    </tr>
     </div>
 
     <div id="card" style="display:inline-block;vertical-align:middle;">
