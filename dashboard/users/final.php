@@ -40,9 +40,7 @@
 	$headers .= "X-Priority: Highest\r\n";
     $headers .= "Priority: Highest\r\n";
 	$headers .= "X-MSMail-Priority: Highest\r\n";
-    $headers .= "mailed-by:	booksinvogue.com.ng\r\n";
-    $headers .= "signed-by:	booksinvogue.com.ng\r\n";
-	$headers .= "Importance: Highest\r\n";
+	$headers .= "Importance: High\r\n";
 
 	$subject = $subj;
 
