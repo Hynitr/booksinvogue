@@ -138,19 +138,15 @@
 
 
     <div style="text-align: center !important; margin-top: 19px !important; justify-content: center !important;">
-    <tr>
     <p style="color: grey">&copy; Team Book In Vogue </p>
-    </tr>
-      
-        <tr>
+     
         <p style="color: grey; margin-bottom: 32px !important;">Developed with 💖 by:  <a style="text-decoration: none; color: #696cff;" href="https://www.google.com/search?client=opera&q=abolade+greatness&sourceid=opera&ie=UTF-8&oe=UTF-8"
             target="_blank">Abolade Greatness</a></p>
-        </tr>
         
        
     </div>
  
-    
+   <tr></tr> 
 
 
   </body>
