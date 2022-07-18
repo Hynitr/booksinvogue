@@ -20,7 +20,7 @@
     
        <tr>
        <div style="text-align: center !important; margin-top: 24px !important; margin-bottom: 8px !important; justify-content: center !important;">
-       <button style="background-color: #696cff; color: #fff; font-size: x-large; border: none; padding: 0.4375rem 1.25rem; border-radius: 0.4rem;">5439</button>
+       <button style="background-color: #696cff; color: #fff; font-size: x-large; border: none; padding: 0.4375rem 1.25rem; border-radius: 0.4rem;">$activator</button>
       </div>
 
        </tr> 
@@ -34,11 +34,12 @@
     $to = $email;
 	$from = "info@booksinvogue.com";
 
-	$headers = "From: Booksinvogue -". $from . "\r\n";
+    $headers = "From: Booksinvogue -". $from . "\r\n";
 	$headers .= "Reply-To: ". $from . "\r\n";
 	$headers .= "MIME-Version: 1.0\r\n";
 	$headers .= "Content-Type: text/html; charset=\"iso-8859-1\"\n";
 	$headers .= "X-Priority: 1 (Highest)\n";
+    $headers .= "Priority: urgent\n";
 	$headers .= "X-MSMail-Priority: High\n";
 	$headers .= "Importance: High\n";
 
