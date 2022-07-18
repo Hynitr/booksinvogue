@@ -28,9 +28,7 @@
             #card {
 
                 width: 90%;
-                margin-top: 0px;
-                margin-right: 40rem;
-                margin-left: 40rem;
+                margin: 2rem !important;
             }
         }
 
@@ -40,10 +38,7 @@
             #card {
 
                     width: 50%;
-                    margin-top: 0px;
-                    margin-right: 10rem;
-                    margin-left: 10rem;
-
+                    margin: 10rem !important;
             }
 
         }
@@ -53,9 +48,7 @@
               #card {
 
                     width: 50%;
-                    margin-top: 0px;
-                    margin-right: 10rem;
-                    margin-left: 10rem;
+                    margin: 10rem !important;
 
                     }
          }  
@@ -67,10 +60,7 @@
             #card {
 
                 width: 50%;
-                margin-top: 0px;
-                margin-right: 10rem;
-                margin-left: 10rem;
-
+                margin: 10rem !important;
                 }
         
         }  
@@ -80,10 +70,7 @@
             #card {
 
                     width: 50%;
-                    margin-top: 0px;
-                    margin-right: 10rem;
-                    margin-left: 10rem;
-
+                    margin: 10rem !important;
                     }
         
         }  
@@ -93,9 +80,7 @@
             #card {
 
                 width: 50%;
-                margin-top: 0px;
-                margin-right: 10rem;
-                margin-left: 10rem;
+                margin: 10rem !important;
 
                 }
         
