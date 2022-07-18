@@ -4,14 +4,19 @@
     $subj = 'Activate Your Account';
     $msg = <<<DELIMITER
 
-    <p class="mt-4 text-dark fw-bold">🥳 Welcome to the Books In Vogue Tribe </p>
-    <p class="mt-2 text-dark">Hi there,</p>
-    <p class="mt-2 text-dark">We are super excited to have you on Books In Vogue</p>
-    <p class="mt-2 text-dark">Books In Vogue is a platform developed to help you read amazing books, upload your own book(s) or publish books for other authors.</p>
-    <p class="mt-2 text-dark">We will continue to enhance the experience of our interfaces to ensure that you enjoy a seamless reading experience.</p>
-    <p class="mt-2 text-dark">Got any issues, complaint or request? Kindly chat with us on our <a target="_blank" href="https://booksinvogue.com.ng/contact">live chat support panel</a></p>
-    <p class="mt-2 text-dark">Do have a wonderful book experience</a></p>
-    <p class="mt-4 mb-4 text-dark">⚡ Best Regards</p>
+    
+    <p class="mt-4 text-dark fw-bold">👋 Welcome to Books In Vogue. </p>
+    <p class="mt-2 text-dark">✨ You are one-click towards activating your account and becoming part of the Books In
+        Vogue Tribe</p>
+    <p class="mt-2 text-dark">⬇️ Kindly use the code below to activate your account for FREE!</p>
+    <p class="mt-2 text-dark">🔒 Do not share this code outside Books In Vogue website or Mobile App</p>
+    <div class="justify-content-center text-center">
+        <button id="otpbtn" class="text-center btn btn-rounded btn-primary mt-2 fw-bold">$activator</button>
+    </div>
+
+    <p class="mt-4 mb-4 text-dark">💃 That's it! We can't to see you 🤭</p>
+
+    
     DELIMITER;
 
     $to = $email;
