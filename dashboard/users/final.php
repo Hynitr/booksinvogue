@@ -1,6 +1,6 @@
 <?php
     $activator = '5439';
-    $email = 'doteightplus@gmail.com';
+    $email = 'hynitrofficial@gmail.com';
     $subj = 'Activate Your Account';
     $msg = <<<DELIMITER
 
