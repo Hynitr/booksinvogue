@@ -31,7 +31,7 @@
     <img style="max-width: 100%; height: auto; vertical-align: middle; box-sizing: border-box; width: 120px;" src="https://dashboard.booksinvogue.com.ng/assets/img/logo.png">
     </div>
 
-    <div style="padding: clamp(2%, 20%, 5%);; display:inline-block;vertical-align:middle;">
+    <div style="margin-right: 5%; margin-left: 5%;">
     
         <div style="padding-right: 1.105rem; padding-left: 1.105rem; margin-top: 24px !important; background-color: #fff; position: relative; display: flex; flex-direction: column; height: auto; word-wrap: break-word; background-clip: border-box; border: 0 solid #d9dee3; border-radius: 8px;">
        
