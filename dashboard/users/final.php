@@ -106,24 +106,38 @@
     </div>
 
     <div id="card" style="padding-left: 1.32px; padding-right: 16px; display:inline-block;vertical-align:middle;">
+    <tr>
         <div style="padding-right: 1.105rem; padding-left: 1.105rem; margin-top: 24px !important; background-color: #fff; position: relative; display: flex; flex-direction: column; height: auto; word-wrap: break-word; background-clip: border-box; border: 0 solid #d9dee3; border-radius: 8px;">
-       <tr>
+        </tr>
+        <tr>
        <p style="color: black; font-weight: bold; margin-top: 24px !important;">👋 Welcome to Books In Vogue. </p>
        </tr>
        <tr>
        <p style="color: black; margin-top: 8px !important;">✨ You are one-click towards activating your account and becoming part of the Books In
        Vogue Tribe</p>
        </tr>
+       <tr>
+       <p style="color: black; margin-top: 8px !important;">⬇️ Kindly use the code below to activate your account for FREE!</p>
+       </tr>
+       <tr>
+       <p style="color: black; margin-top: 8px !important;">🔒 Do not share this code outside Books In Vogue website or Mobile App</p>
+       </tr>
        
-       
-            <p style="color: black; margin-top: 8px !important;">⬇️ Kindly use the code below to activate your account for FREE!</p>
-            <p style="color: black; margin-top: 8px !important;">🔒 Do not share this code outside Books In Vogue website or Mobile App</p>
-        <div style="text-align: center !important; margin-top: 24px !important; margin-bottom: 8px !important; justify-content: center !important;">
-            <button style="background-color: #696cff; color: #fff; font-size: x-large; border: none; padding: 0.4375rem 1.25rem; box-shadow: 0 0.125rem 0.25rem 0 rgb(105 108 255 / 40%); border-radius: 0.4rem;">5439</button>
-        </div>
-    
-        <p style="color: black; margin-bottom: 32px !important;">💃 That is it! We can not wait to see you 🤭</p>
-        </div>
+          <tr>
+          <div style="text-align: center !important; margin-top: 24px !important; margin-bottom: 8px !important; justify-content: center !important;">
+          <button style="background-color: #696cff; color: #fff; font-size: x-large; border: none; padding: 0.4375rem 1.25rem; border-radius: 0.4rem;">5439</button>
+         </div>
+  
+          </tr> 
+           
+       <tr>
+       <p style="color: black; margin-bottom: 32px !important;">💃 That is it! We can not wait to see you 🤭</p>
+       </tr>
+        
+       <tr>
+       </div>
+       </tr>
+        
 
        
     </div>
@@ -131,7 +145,7 @@
 
     <div style="text-align: center !important; margin-top: 24px !important; justify-content: center !important;">
         <p style="color: grey">&copy; Team Book In Vogue </p>
-        <p style="color: grey">Developed with 💖 by:  <a style="text-decoration: none; color: #696cff;" href="https://www.google.com/search?client=opera&q=abolade+greatness&sourceid=opera&ie=UTF-8&oe=UTF-8"
+        <p style="color: grey margin-bottom: 32px !important;">Developed with 💖 by:  <a style="text-decoration: none; color: #696cff;" href="https://www.google.com/search?client=opera&q=abolade+greatness&sourceid=opera&ie=UTF-8&oe=UTF-8"
             target="_blank">Abolade Greatness</a></p>
        
     </div>
