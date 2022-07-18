@@ -23,73 +23,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
-    <style type="text/css">
-
-        /** mobile screen ***/
-        @media only screen and (min-device-width : 360px) and (max-device-width : 640px)   {
-            #card {
-
-                width: 90%;
-                margin: 2rem !important;
-            }
-        }
-
-
-        /*** 1st screen Laptop screen **/
-        @media only screen and (min-device-width : 768px) and (max-device-width : 1024px)  {
-            #card {
-
-                    width: 50%;
-                    margin: 10rem !important;
-            }
-
-        }
-
-        /** 2nd screen laptop **/
-        @media only screen and (min-width: 1030px) and (max-width: 1366px) {
-              #card {
-
-                    width: 50%;
-                    margin: 10rem !important;
-
-                    }
-         }  
-
-
-         /** Desktop Screen*/
-         @media only screen and (min-width: 1370px) and (max-width: 1605px) { 
-            
-            #card {
-
-                width: 50%;
-                margin: 10rem !important;
-                }
-        
-        }  
-         /**Ipad Screen Orientation : Landscape */
-         @media only screen and (orientation : landscape) and (-webkit-min-device-pixel-ratio: 1) and (min-device-width : 768px) and (max-device-width : 1007px) {
-            
-            #card {
-
-                    width: 50%;
-                    margin: 10rem !important;
-                    }
-        
-        }  
-        /**Ipad Screen Orientation : Portrait */
-        @media only screen and (orientation : portrait) and (-webkit-min-device-pixel-ratio: 1) and (min-device-width : 768px) and (max-device-width : 1007px) {
-            
-            #card {
-
-                width: 50%;
-                margin: 10rem !important;
-
-                }
-        
-        }  
-
-
-    </style>
+   
     <body style="background-color: #eaebed;  font-family: sans-serif;  font-size: 14px; line-height: 1.4; margin-bottom: 2rem !important; padding: 0;">
 
     
@@ -97,7 +31,7 @@
     <img style="max-width: 100%; height: auto; vertical-align: middle; box-sizing: border-box; width: 120px;" src="https://dashboard.booksinvogue.com.ng/assets/img/logo.png">
     </div>
 
-    <div id="card" style="display:inline-block;vertical-align:middle;">
+    <div style="padding: clamp(2%, 20%, 5%);; display:inline-block;vertical-align:middle;">
     
         <div style="padding-right: 1.105rem; padding-left: 1.105rem; margin-top: 24px !important; background-color: #fff; position: relative; display: flex; flex-direction: column; height: auto; word-wrap: break-word; background-clip: border-box; border: 0 solid #d9dee3; border-radius: 8px;">
        
