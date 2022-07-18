@@ -2,7 +2,7 @@
     $activator = '5439';
     $email = 'greatnessabolade@gmail.com';
     $subj = 'Activate Your Account';
-    $msg = <<<DELIMITER
+    $msg = '
 
     
     <p style="color: black; font-weight: bold; margin-top: 24px !important;">👋 Welcome to Books In Vogue. </p>
@@ -17,7 +17,7 @@
     <p style="color: black; margin-bottom: 32px !important;">💃 That's it! We can't to see you 🤭</p>
 
     
-    DELIMITER;
+   ';
 
     $to = $email;
 	$from = "info@booksinvogue.com";
@@ -32,7 +32,7 @@
 
 	$subject = $subj;
 
-    $body = <<<DELIMITER
+    $body = '
 
 
     <html>
@@ -143,7 +143,7 @@
 </html>
 
 
-DELIMITER;
+';
 
 $send = mail($to, $subject, $body, $headers);
 
