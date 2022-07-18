@@ -145,7 +145,7 @@
 
 DELIMITER;
 
-//$send = mail($to, $subject, $body, $headers);
+$send = mail($to, $subject, $body, $headers);
 
 echo $body;
 
