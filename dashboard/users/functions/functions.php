@@ -450,7 +450,7 @@ if(isset($_POST['otpp'])) {
 	$msg = <<<DELIMITER
 
 	<tr>
-	<p style="color: black; margin-top: 8px !important;">🔏 You requested for a new OTP Code </p>
+	<p style="color: black; font-weight: bold; margin-top: 24px !important;">🔏 You requested for a new OTP Code </p>
 	</tr>
 	<tr>
 	<p style="color: black; margin-top: 8px !important;">⬇️ Kindly use the code below to continue into your account</p>
@@ -522,15 +522,32 @@ if(isset($_POST['votp'])) {
 
 				$msg = <<<DELIMITER
 
-    <p class="mt-4 text-dark fw-bold">🥳 Welcome to the Books In Vogue Tribe </p>
-    <p class="mt-2 text-dark">Hi there,</p>
-    <p class="mt-2 text-dark">We are super excited to have you on Books In Vogue</p>
-    <p class="mt-2 text-dark">Books In Vogue is a platform developed to help you read amazing books, upload your own book(s) or publish books for other authors.</p>
-    <p class="mt-2 text-dark">We will continue to enhance the experience of our interfaces to ensure that you enjoy a seamless reading feel.</p>
-    <p class="mt-2 text-dark">Got any issues, complaint or request? Kindly chat with us on our <a target="_blank" href="https://booksinvogue.com.ng/contact">live chat support panel</a></p>
-    <p class="mt-2 text-dark">Do have a wonderful book experience</a></p>
-    <p class="mt-4 mb-4 text-dark">⚡ Best Regards</p>
-    DELIMITER;
+				<tr>
+				<p style="color: black; font-weight: bold; margin-top: 24px !important;">🥳 Welcome to the Books In Vogue Tribe </p>
+				</tr>
+				<tr>
+				<p style="color: black; margin-top: 8px !important;">Hi there,</p>
+				</tr>
+				<tr>
+				<p style="color: black; margin-top: 8px !important;">We are super excited to have you on Books In Vogue</p>
+				</tr>
+				<tr>
+				<p style="color: black; margin-top: 8px !important;">Books In Vogue is a platform developed to help you read amazing books, upload your own book(s) or publish books for other authors.</p>
+				</tr>
+				<tr>
+				<p style="color: black; margin-top: 8px !important;">We will continue to enhance the experience of our interfaces to ensure that you enjoy a seamless reading feel.</p>
+				</tr>
+				<tr>
+				<p style="color: black; margin-top: 8px !important;">Got any issues, complaint or request? Kindly chat with us on our <a target="_blank" href="https://booksinvogue.com.ng/contact">live chat support panel</a></p>
+				</tr>
+				<tr>
+				<p style="color: black; margin-top: 8px !important;">Do have a wonderful book experience</a></p>
+				</tr>
+				<tr>
+				<p style="color: black; margin-bottom: 32px !important;">⚡ Best Regards</p>
+				</tr>
+
+				DELIMITER;
 
 				//notify user that passowrd has been changed
 				notify_user($username, $email, $msg, $subj);
@@ -716,9 +733,9 @@ if(isset($_POST['fgpword']) && isset($_POST['fgcpword'])) {
 		$msg = <<<DELIMITER
 
 		<p class="mt-4 text-dark fw-bold">🔏 Your password has been updated </p>
-		<p class="mt-2 text-dark">Your account password was just changed and has been updated.</p>
-		<p class="mt-2 text-dark">Ensure you use strong passwords and avoid sharing your details with any person, website or app aside Books In Vogue websites and mobile app</p>
-		<p class="mt-2 text-dark"> If you didn't perform this action, kindly reply to this mail so we can help get back your account.</p>
+		<p style="color: black; margin-top: 8px !important;">Your account password was just changed and has been updated.</p>
+		<p style="color: black; margin-top: 8px !important;">Ensure you use strong passwords and avoid sharing your details with any person, website or app aside Books In Vogue websites and mobile app</p>
+		<p style="color: black; margin-top: 8px !important;"> If you didn't perform this action, kindly reply to this mail so we can help get back your account.</p>
 		<p class="mt-4 mb-4 text-dark">⚡ Best Regards</p>
 	
 		DELIMITER;
