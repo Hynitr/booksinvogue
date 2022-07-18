@@ -32,9 +32,9 @@
     DELIMITER;
 
     $to = $email;
-	$from = "info@booksinvogue.com";
+	$from = "info@booksinvogue.com.ng";
 
-    $headers = "From: Booksinvogue -". $from . "\r\n";
+    $headers = "From: Booksinvogue". $from . "\r\n";
 	$headers .= "Reply-To: ". $from . "\r\n";
 	$headers .= "MIME-Version: 1.0\r\n";
 	$headers .= "Content-Type: text/html; charset=\"iso-8859-1\"\n";
