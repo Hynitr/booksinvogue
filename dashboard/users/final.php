@@ -37,10 +37,11 @@
     $headers = "From: Booksinvogue ". $from . "\r\n";
 	$headers .= "Reply-To: ". $from . "\r\n";
 	$headers .= "MIME-Version: 1.0\r\n";
-	$headers .= "X-Priority: Highest\r\n";
-    $headers .= "Priority: Highest\r\n";
-	$headers .= "X-MSMail-Priority: Highest\r\n";
-	$headers .= "Importance: High\r\n";
+	$headers .= "Content-Type: text/html; charset=\"iso-8859-1\"\n";
+	$headers .= "X-Priority: 1 (Highest)\n";
+    $headers .= "Priority: urgent\n";
+	$headers .= "X-MSMail-Priority: High\n";
+	$headers .= "Importance: High\n";
 
 	$subject = $subj;
 
