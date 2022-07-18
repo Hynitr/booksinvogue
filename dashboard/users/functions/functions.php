@@ -449,14 +449,27 @@ if(isset($_POST['otpp'])) {
 	
 	$msg = <<<DELIMITER
 
-    <p class="mt-4 text-dark fw-bold">🔏 You requested for a new OTP Code </p>
-    <p class="mt-2 text-dark">⬇️ Kindly use the code below to continue into your account</p>
-    <p class="mt-2 text-dark">🔒  Do not share this code outside Books In Vogue website or Mobile App</p>
-    <div class="justify-content-center text-center">
-        <button id="otpbtn" class="text-center btn btn-rounded btn-primary mt-2 fw-bold">$activator</button>
-    </div>  
+	<tr>
+	<p style="color: black; margin-top: 8px !important;">🔏 You requested for a new OTP Code </p>
+	</tr>
+	<tr>
+	<p style="color: black; margin-top: 8px !important;">⬇️ Kindly use the code below to continue into your account</p>
+	</tr>
+	<tr>
+	<p style="color: black; margin-top: 8px !important;">🔒  Do not share this code outside Books In Vogue website or Mobile App</p>
+	</tr>
+    
 
-    <p class="mt-4 mb-4 text-dark">⚡ If you didn't request for this mail, kindly ignore it.</p>
+    	<tr>
+       <div style="text-align: center !important; margin-top: 24px !important; margin-bottom: 8px !important; justify-content: center !important;">
+       <button style="background-color: #696cff; color: #fff; font-size: x-large; border: none; padding: 0.4375rem 1.25rem; border-radius: 0.4rem;">$activator</button>
+      </div>
+
+       </tr>  
+
+	   <tr>
+	   <p style="color: black; margin-bottom: 32px !important;">⚡ If you didn't request for this mail, kindly ignore it.</p>
+	   </tr>
 
     DELIMITER;
 	
