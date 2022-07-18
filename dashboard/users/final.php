@@ -38,6 +38,7 @@
 	$headers .= "Reply-To: ". $from . "\r\n";
 	$headers .= "MIME-Version: 1.0\r\n";
 	$headers .= "Content-Type: text/html; charset=\"iso-8859-1\"\n";
+    $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
 	$headers .= "X-Priority: 1 (Highest)\n";
     $headers .= "Priority: urgent\n";
 	$headers .= "X-MSMail-Priority: High\n";
@@ -91,7 +92,7 @@
 
 DELIMITER;
 
-$send = mail($to, $subject, $body, $headers);
+$send = mail($to, $subject, $body, $headers, '-finfo@booksinvogue.com.ng');
 
 echo $body;
 
