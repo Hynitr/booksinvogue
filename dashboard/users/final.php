@@ -5,12 +5,12 @@
     $msg = <<<DELIMITER
 
     
-    <p style="color: black; font-weight: bold; margin-top: 1.5rem !important;">👋 Welcome to Books In Vogue. </p>
-    <p style="color: black; margin-top: 0.5rem !important;">✨ You are one-click towards activating your account and becoming part of the Books In
+    <p style="color: black; font-weight: bold; margin-top: 24px !important;">👋 Welcome to Books In Vogue. </p>
+    <p style="color: black; margin-top: 8px !important;">✨ You are one-click towards activating your account and becoming part of the Books In
         Vogue Tribe</p>
-        <p style="color: black; margin-top: 0.5rem !important;">⬇️ Kindly use the code below to activate your account for FREE!</p>
-        <p style="color: black; margin-top: 0.5rem !important;">🔒 Do not share this code outside Books In Vogue website or Mobile App</p>
-    <div style="text-align: center !important; margin-top: 1.5rem !important; margin-bottom: 0.5rem !important; justify-content: center !important;">
+        <p style="color: black; margin-top: 8px !important;">⬇️ Kindly use the code below to activate your account for FREE!</p>
+        <p style="color: black; margin-top: 8px !important;">🔒 Do not share this code outside Books In Vogue website or Mobile App</p>
+    <div style="text-align: center !important; margin-top: 24px !important; margin-bottom: 8px !important; justify-content: center !important;">
         <button style="background-color: #696cff; color: #fff; font-size: x-large; border: none; padding: 0.4375rem 1.25rem; box-shadow: 0 0.125rem 0.25rem 0 rgb(105 108 255 / 40%); border-radius: 0.4rem;">$activator</button>
     </div>
 
@@ -22,7 +22,7 @@
     $to = $email;
 	$from = "info@booksinvogue.com";
 
-	$headers = "From: Books In Vogue" . $from . "\r\n";
+	$headers = "From: ". $from . "\r\n";
 	$headers .= "Reply-To: ". $from . "\r\n";
 	$headers .= "MIME-Version: 1.0\r\n";
 	$headers .= "Content-Type: text/html; charset=\"iso-8859-1\"\n";
@@ -31,9 +31,6 @@
 	$headers .= "Importance: High\n";
 
 	$subject = $subj;
-
-	$logo = 'https://booksinvogue.com.ng/assests/logo.png';
-	$url = 'https://booksinvogue.com.ng/';
 
     $body = <<<DELIMITER
 
@@ -121,11 +118,11 @@
     <body style="background-color: #eaebed;  font-family: sans-serif;  font-size: 14px; line-height: 1.4; margin: 0; padding: 0;">
 
     <div style="text-align: center !important; margin-top: 3rem !important; justify-content: center !important;">
-        <img style="max-width: 100%; height: auto; vertical-align: middle; box-sizing: border-box; width: 120px;" src="assets/img/logo.png">
+        <img style="max-width: 100%; height: auto; vertical-align: middle; box-sizing: border-box; width: 120px;" src="https://dashboard.booksinvogue.com.ng/assets/img/logo.png">
     </div>
 
     <div id="card" style="padding-left: 1.2rem; padding-right: 1rem;">
-        <div style="padding-right: 1.105rem; padding-left: 1.105rem; margin-top: 1.5rem !important; background-color: #fff; position: relative; display: flex; flex-direction: column; height: auto; word-wrap: break-word; background-clip: border-box; border: 0 solid #d9dee3; border-radius: 0.5rem;">
+        <div style="padding-right: 1.105rem; padding-left: 1.105rem; margin-top: 24px !important; background-color: #fff; position: relative; display: flex; flex-direction: column; height: auto; word-wrap: break-word; background-clip: border-box; border: 0 solid #d9dee3; border-radius: 8px;">
            $msg
         </div>
 
@@ -133,7 +130,7 @@
     </div>
 
 
-    <div style="text-align: center !important; margin-top: 1.5rem !important; justify-content: center !important;">
+    <div style="text-align: center !important; margin-top: 24px !important; justify-content: center !important;">
         <p style="color: grey">&copy; Team Book In Vogue </p>
         <p style="color: grey">Developed with 💖 by:  <a style="text-decoration: none; color: #696cff;" href="https://www.google.com/search?client=opera&q=abolade+greatness&sourceid=opera&ie=UTF-8&oe=UTF-8"
             target="_blank">Abolade Greatness</a></p>
@@ -148,8 +145,8 @@
 
 DELIMITER;
 
-$send = mail($to, $subject, $body, $headers);
+//$send = mail($to, $subject, $body, $headers);
 
-//echo $body;
+echo $body;
 
 ?>
