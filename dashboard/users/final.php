@@ -92,9 +92,12 @@
     </style>
     <body style="background-color: #eaebed;  font-family: sans-serif;  font-size: 14px; line-height: 1.4; margin: 0; padding: 0;">
 
-    <tr></tr>
+    
     <div style="text-align: center !important; justify-content: center !important; margin-top: 24px !important;">
-        <img style="max-width: 100%; height: auto; vertical-align: middle; box-sizing: border-box; width: 120px;" src="https://dashboard.booksinvogue.com.ng/assets/img/logo.png">
+    <tr>
+    <img style="max-width: 100%; height: auto; vertical-align: middle; box-sizing: border-box; width: 120px;" src="https://dashboard.booksinvogue.com.ng/assets/img/logo.png">
+   
+    </tr>
     </div>
 
     <div id="card" style="display:inline-block;vertical-align:middle;">
@@ -135,12 +138,18 @@
 
 
     <div style="text-align: center !important; margin-top: 19px !important; justify-content: center !important;">
-        <p style="color: grey">&copy; Team Book In Vogue </p>
+    <tr>
+    <p style="color: grey">&copy; Team Book In Vogue </p>
+    </tr>
+      
+        <tr>
         <p style="color: grey; margin-bottom: 32px !important;">Developed with 💖 by:  <a style="text-decoration: none; color: #696cff;" href="https://www.google.com/search?client=opera&q=abolade+greatness&sourceid=opera&ie=UTF-8&oe=UTF-8"
             target="_blank">Abolade Greatness</a></p>
+        </tr>
+        
        
     </div>
-    <tr></tr>
+ 
     
 
 
