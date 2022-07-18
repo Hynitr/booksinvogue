@@ -20,8 +20,10 @@
 
 
     <html>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
-    <style>
+    <style type="text/css">
 
         /** mobile screen ***/
         @media only screen and (min-device-width : 360px) and (max-device-width : 640px)   {
@@ -90,6 +92,7 @@
     </style>
     <body style="background-color: #eaebed;  font-family: sans-serif;  font-size: 14px; line-height: 1.4; margin: 0; padding: 0;">
 
+    <tr></tr>
     <div style="text-align: center !important; justify-content: center !important; margin-top: 24px !important;">
         <img style="max-width: 100%; height: auto; vertical-align: middle; box-sizing: border-box; width: 120px;" src="https://dashboard.booksinvogue.com.ng/assets/img/logo.png">
     </div>
@@ -137,6 +140,7 @@
             target="_blank">Abolade Greatness</a></p>
        
     </div>
+    <tr></tr>
     
 
 
