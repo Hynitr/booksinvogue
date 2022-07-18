@@ -565,8 +565,37 @@ if(isset($_POST['username']) && isset($_POST['password'])) {
 				$ups = "UPDATE users SET `status` = '$activator', `verified` = 'No' WHERE `usname` = '$username'";
 				$ues = query($ups);
 
-				$subj = "VERIFY YOUR EMAIL";
-				$msg  = "Hi there! <br /><br />Kindly use the otp below to activate your account;";
+				//redirect to verify function
+				$subj = "Activate Your Account";
+	
+				$msg = <<<DELIMITER
+
+				<tr>
+				<p style="color: black; font-weight: bold; margin-top: 24px !important;">👋 Welcome to Books In Vogue. </p>
+				</tr>
+				<tr>
+				<p style="color: black; margin-top: 8px !important;">✨ You are one-click towards activating your account and becoming part of the Books In
+				Vogue Tribe</p>
+				</tr>
+				<tr>
+				<p style="color: black; margin-top: 8px !important;">⬇️ Kindly use the code below to activate your account for FREE!</p>
+				</tr>
+				<tr>
+				<p style="color: black; margin-top: 8px !important;">🔒 Do not share this code outside Books In Vogue website or Mobile App</p>
+				</tr>
+				
+				<tr>
+				<div style="text-align: center !important; margin-top: 24px !important; margin-bottom: 8px !important; justify-content: center !important;">
+				<button style="background-color: #696cff; color: #fff; font-size: x-large; border: none; padding: 0.4375rem 1.25rem; border-radius: 0.4rem;">$activator</button>
+				</div>
+
+				</tr> 
+					
+				<tr>
+				<p style="color: black; margin-bottom: 32px !important;">💃 That's it! We can't wait to see you 🤭</p>
+				</tr>
+				
+				DELIMITER;
 
 				mail_mailer($email, $activator, $subj, $msg);
 
