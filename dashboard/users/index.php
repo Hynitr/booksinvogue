@@ -1,6 +1,15 @@
 <?php
 include("components/top.php");
-user_details();
+
+if(!isset($_SESSION['login'])) {
+
+   
+
+    } else {
+
+         user_details();
+
+    }
 ?>
 
 <style>
