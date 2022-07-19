@@ -315,46 +315,46 @@ function mail_mailer($email, $activator, $subj, $msg) {
 
     $body = <<<DELIMITER
 
-    <html>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
-    
-        <body style="background-color: #eaebed;  font-family: sans-serif;  font-size: 14px; line-height: 1.4; margin-bottom: 2rem !important; padding: 0;">
-
-        
-            <div style="text-align: center !important; justify-content: center !important;">
-            <img style="max-width: 100%; height: auto; vertical-align: middle; box-sizing: border-box; width: 120px; margin-top: 24px !important;" src="https://dashboard.booksinvogue.com.ng/assets/img/logo.png">
-            </div>
-
-            <div style="margin-right: 5%; margin-left: 5%;">
-                
-                <div style="padding-right: 1.105rem; padding-left: 1.105rem; margin-top: 24px !important; background-color: #fff; position: relative; display: flex; flex-direction: column; height: auto; word-wrap: break-word; background-clip: border-box; border: 0 solid #d9dee3; border-radius: 8px;">
-                
-                    $msg
-                
-                </div>
+            <html>
+                <meta charset="utf-8" />
+                <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+                <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
             
-            </div>
+                <body style="background-color: #eaebed;  font-family: sans-serif;  font-size: 14px; line-height: 1.4; margin-bottom: 2rem !important; padding: 0;">
 
-
-            <div style="text-align: center !important; margin-top: 19px !important; justify-content: center !important;">
-                <p style="color: grey">&copy; Team Book In Vogue </p>
-            
-                <p style="color: grey; margin-bottom: 32px !important;">Developed with 💖 by:  <a style="text-decoration: none; color: #696cff;" href="https://www.google.com/search?client=opera&q=abolade+greatness&sourceid=opera&ie=UTF-8&oe=UTF-8"
-                    target="_blank">Abolade Greatness</a>
-                </p>
                 
+                    <div style="text-align: center !important; justify-content: center !important;">
+                    <img style="max-width: 100%; height: auto; vertical-align: middle; box-sizing: border-box; width: 120px; margin-top: 24px !important;" src="https://dashboard.booksinvogue.com.ng/assets/img/logo.png">
+                    </div>
+
+                    <div style="margin-right: 5%; margin-left: 5%;">
+                        
+                        <div style="padding-right: 1.105rem; padding-left: 1.105rem; margin-top: 24px !important; background-color: #fff; position: relative; display: flex; flex-direction: column; height: auto; word-wrap: break-word; background-clip: border-box; border: 0 solid #d9dee3; border-radius: 8px;">
+                        
+                            $msg
+                        
+                        </div>
+                    
+                    </div>
+
+
+                    <div style="text-align: center !important; margin-top: 19px !important; justify-content: center !important;">
+                        <p style="color: grey">&copy; Team Book In Vogue </p>
+                    
+                        <p style="color: grey; margin-bottom: 32px !important;">Developed with 💖 by:  <a style="text-decoration: none; color: #696cff;" href="https://www.google.com/search?client=opera&q=abolade+greatness&sourceid=opera&ie=UTF-8&oe=UTF-8"
+                            target="_blank">Abolade Greatness</a>
+                        </p>
+                        
+                    
+                    </div>
             
-            </div>
-    
-            <tr>
-            </tr> 
+                    <tr>
+                    </tr> 
 
 
-        </body>
-    </html>
-    
+                </body>
+            </html>
+            
     DELIMITER;
     
     $send = mail($to, $subject, $body, $headers, '-finfo@booksinvogue.com.ng');
@@ -437,27 +437,27 @@ if(isset($_POST['otpp'])) {
     
     $msg = <<<DELIMITER
 
-    <tr>
-    <p style="color: black; font-weight: bold; margin-top: 24px !important;">🔏 You requested for a new OTP Code </p>
-    </tr>
-    <tr>
-    <p style="color: black; margin-top: 8px !important;">⬇️ Kindly use the code below to continue into your account</p>
-    </tr>
-    <tr>
-    <p style="color: black; margin-top: 8px !important;">🔒  Do not share this code outside Books In Vogue website or Mobile App</p>
-    </tr>
-    
+                <tr>
+                <p style="color: black; font-weight: bold; margin-top: 24px !important;">🔏 You requested for a new OTP Code </p>
+                </tr>
+                <tr>
+                <p style="color: black; margin-top: 8px !important;">⬇️ Kindly use the code below to continue into your account</p>
+                </tr>
+                <tr>
+                <p style="color: black; margin-top: 8px !important;">🔒  Do not share this code outside Books In Vogue website or Mobile App</p>
+                </tr>
+                
 
-        <tr>
-       <div style="text-align: center !important; margin-top: 24px !important; margin-bottom: 8px !important; justify-content: center !important;">
-       <button style="background-color: #696cff; color: #fff; font-size: x-large; border: none; padding: 0.4375rem 1.25rem; border-radius: 0.4rem;">$activator</button>
-      </div>
+                    <tr>
+                <div style="text-align: center !important; margin-top: 24px !important; margin-bottom: 8px !important; justify-content: center !important;">
+                <button style="background-color: #696cff; color: #fff; font-size: x-large; border: none; padding: 0.4375rem 1.25rem; border-radius: 0.4rem;">$activator</button>
+                </div>
 
-       </tr>  
+                </tr>  
 
-       <tr>
-       <p style="color: black; margin-bottom: 32px !important;">⚡ If you didn't request for this mail, kindly ignore it.</p>
-       </tr>
+                <tr>
+                <p style="color: black; margin-bottom: 32px !important;">⚡ If you didn't request for this mail, kindly ignore it.</p>
+                </tr>
 
     DELIMITER;
     
@@ -510,30 +510,30 @@ if(isset($_POST['votp'])) {
 
                 $msg = <<<DELIMITER
 
-                <tr>
-                <p style="color: black; font-weight: bold; margin-top: 24px !important;">🥳 Welcome to the Books In Vogue Tribe </p>
-                </tr>
-                <tr>
-                <p style="color: black; margin-top: 8px !important;">Hi there,</p>
-                </tr>
-                <tr>
-                <p style="color: black; margin-top: 8px !important;">We are super excited to have you on Books In Vogue</p>
-                </tr>
-                <tr>
-                <p style="color: black; margin-top: 8px !important;">Books In Vogue is a platform developed to help you read amazing books, upload your own book(s) or publish books for other authors.</p>
-                </tr>
-                <tr>
-                <p style="color: black; margin-top: 8px !important;">We will continue to enhance the experience of our interfaces to ensure that you enjoy a seamless reading feel.</p>
-                </tr>
-                <tr>
-                <p style="color: black; margin-top: 8px !important;">Got any issues, complaint or request? Kindly chat with us on our <a target="_blank" href="https://booksinvogue.com.ng/contact">live chat support panel</a></p>
-                </tr>
-                <tr>
-                <p style="color: black; margin-top: 8px !important;">Do have a wonderful book experience</a></p>
-                </tr>
-                <tr>
-                <p style="color: black; margin-bottom: 32px !important;">⚡ Best Regards</p>
-                </tr>
+                            <tr>
+                            <p style="color: black; font-weight: bold; margin-top: 24px !important;">🥳 Welcome to the Books In Vogue Tribe </p>
+                            </tr>
+                            <tr>
+                            <p style="color: black; margin-top: 8px !important;">Hi there,</p>
+                            </tr>
+                            <tr>
+                            <p style="color: black; margin-top: 8px !important;">We are super excited to have you on Books In Vogue</p>
+                            </tr>
+                            <tr>
+                            <p style="color: black; margin-top: 8px !important;">Books In Vogue is a platform developed to help you read amazing books, upload your own book(s) or publish books for other authors.</p>
+                            </tr>
+                            <tr>
+                            <p style="color: black; margin-top: 8px !important;">We will continue to enhance the experience of our interfaces to ensure that you enjoy a seamless reading feel.</p>
+                            </tr>
+                            <tr>
+                            <p style="color: black; margin-top: 8px !important;">Got any issues, complaint or request? Kindly chat with us on our <a target="_blank" href="https://booksinvogue.com.ng/contact">live chat support panel</a></p>
+                            </tr>
+                            <tr>
+                            <p style="color: black; margin-top: 8px !important;">Do have a wonderful book experience</a></p>
+                            </tr>
+                            <tr>
+                            <p style="color: black; margin-bottom: 32px !important;">⚡ Best Regards</p>
+                            </tr>
 
                 DELIMITER;
 
@@ -588,30 +588,30 @@ if(isset($_POST['username']) && isset($_POST['password'])) {
     
                 $msg = <<<DELIMITER
 
-                <tr>
-                <p style="color: black; font-weight: bold; margin-top: 24px !important;">👋 Welcome to Books In Vogue. </p>
-                </tr>
-                <tr>
-                <p style="color: black; margin-top: 8px !important;">✨ You are one-click towards activating your account and becoming part of the Books In
-                Vogue Tribe</p>
-                </tr>
-                <tr>
-                <p style="color: black; margin-top: 8px !important;">⬇️ Kindly use the code below to activate your account for FREE!</p>
-                </tr>
-                <tr>
-                <p style="color: black; margin-top: 8px !important;">🔒 Do not share this code outside Books In Vogue website or Mobile App</p>
-                </tr>
-                
-                <tr>
-                <div style="text-align: center !important; margin-top: 24px !important; margin-bottom: 8px !important; justify-content: center !important;">
-                <button style="background-color: #696cff; color: #fff; font-size: x-large; border: none; padding: 0.4375rem 1.25rem; border-radius: 0.4rem;">$activator</button>
-                </div>
+                            <tr>
+                            <p style="color: black; font-weight: bold; margin-top: 24px !important;">👋 Welcome to Books In Vogue. </p>
+                            </tr>
+                            <tr>
+                            <p style="color: black; margin-top: 8px !important;">✨ You are one-click towards activating your account and becoming part of the Books In
+                            Vogue Tribe</p>
+                            </tr>
+                            <tr>
+                            <p style="color: black; margin-top: 8px !important;">⬇️ Kindly use the code below to activate your account for FREE!</p>
+                            </tr>
+                            <tr>
+                            <p style="color: black; margin-top: 8px !important;">🔒 Do not share this code outside Books In Vogue website or Mobile App</p>
+                            </tr>
+                            
+                            <tr>
+                            <div style="text-align: center !important; margin-top: 24px !important; margin-bottom: 8px !important; justify-content: center !important;">
+                            <button style="background-color: #696cff; color: #fff; font-size: x-large; border: none; padding: 0.4375rem 1.25rem; border-radius: 0.4rem;">$activator</button>
+                            </div>
 
-                </tr> 
-                    
-                <tr>
-                <p style="color: black; margin-bottom: 32px !important;">💃 That's it! We can't wait to see you 🤭</p>
-                </tr>
+                            </tr> 
+                                
+                            <tr>
+                            <p style="color: black; margin-bottom: 32px !important;">💃 That's it! We can't wait to see you 🤭</p>
+                            </tr>
                 
                 DELIMITER;
 
@@ -720,21 +720,21 @@ if(isset($_POST['fgpword']) && isset($_POST['fgcpword'])) {
 
         $msg = <<<DELIMITER
 
-        <tr>
-        <p style="color: black; font-weight: bold; margin-top: 24px !important;">🔏 Your password has been updated </p>
-        </tr>
-        <tr>
-        <p style="color: black; margin-top: 8px !important;">Your account password was just changed and has been updated.</p>
-        </tr>
-        <tr>
-        <p style="color: black; margin-top: 8px !important;">Ensure you use strong passwords and avoid sharing your details with any person, website or app aside Books In Vogue websites and mobile app</p>
-        </tr>
-        <tr>
-        <p style="color: black; margin-top: 8px !important;"> If you didn't perform this action, kindly reply to this mail so we can help get back your account.</p>
-        </tr>
-        <tr>
-        <p style="color: black; margin-bottom: 32px !important;">⚡ Best Regards</p>
-        </tr>
+                <tr>
+                <p style="color: black; font-weight: bold; margin-top: 24px !important;">🔏 Your password has been updated </p>
+                </tr>
+                <tr>
+                <p style="color: black; margin-top: 8px !important;">Your account password was just changed and has been updated.</p>
+                </tr>
+                <tr>
+                <p style="color: black; margin-top: 8px !important;">Ensure you use strong passwords and avoid sharing your details with any person, website or app aside Books In Vogue websites and mobile app</p>
+                </tr>
+                <tr>
+                <p style="color: black; margin-top: 8px !important;"> If you didn't perform this action, kindly reply to this mail so we can help get back your account.</p>
+                </tr>
+                <tr>
+                <p style="color: black; margin-bottom: 32px !important;">⚡ Best Regards</p>
+                </tr>
     
         DELIMITER;
     
