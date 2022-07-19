@@ -4,31 +4,22 @@
     $subj = 'Activate Your Account';
     $msg = <<<DELIMITER
 
-    <tr>
-    <p style="color: black; font-weight: bold; margin-top: 24px !important;">👋 Welcome to Books In Vogue. </p>
-    </tr>
-    <tr>
-    <p style="color: black; margin-top: 8px !important;">✨ You are one-click towards activating your account and becoming part of the Books In
-    Vogue Tribe</p>
-    </tr>
-    <tr>
-    <p style="color: black; margin-top: 8px !important;">⬇️ Kindly use the code below to activate your account for FREE!</p>
-    </tr>
-    <tr>
-    <p style="color: black; margin-top: 8px !important;">🔒 Do not share this code outside Books In Vogue website or Mobile App</p>
-    </tr>
+                <tr>
+                <p style="color: black; font-weight: bold; margin-top: 24px !important;">🔏 Your password has been updated </p>
+                </tr>
+                <tr>
+                <p style="color: black; margin-top: 8px !important;">Your account password was just changed and has been updated.</p>
+                </tr>
+                <tr>
+                <p style="color: black; margin-top: 8px !important;">Ensure you use strong passwords and avoid sharing your details with any person, website or app aside Books In Vogue websites and mobile app</p>
+                </tr>
+                <tr>
+                <p style="color: black; margin-top: 8px !important;"> If you didn't perform this action, kindly reply to this mail so we can help get back your account.</p>
+                </tr>
+                <tr>
+                <p style="color: black; margin-bottom: 32px !important;">⚡ Best Regards</p>
+                </tr>
     
-       <tr>
-       <div style="text-align: center !important; margin-top: 24px !important; margin-bottom: 8px !important; justify-content: center !important;">
-       <button style="background-color: #696cff; color: #fff; font-size: x-large; border: none; padding: 0.4375rem 1.25rem; border-radius: 0.4rem;">$activator</button>
-      </div>
-
-       </tr> 
-        
-    <tr>
-    <p style="color: black; margin-bottom: 32px !important;">💃 That's it! We can't wait to see you 🤭</p>
-    </tr>
-
     DELIMITER;
 
     $to = $email;
