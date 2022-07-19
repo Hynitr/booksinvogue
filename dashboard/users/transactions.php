@@ -202,7 +202,7 @@ input[type=number] {
 
                                                     <?php 
                                                     
-                                                    $sl = "SELECT * FROM t_his WHERE `username` = '$data' ";
+                                                    $sl = "SELECT * FROM t_his WHERE `username` = '$data' ORDER BY `id` desc";
                                                     $rs = query($sl);
 
                                                     if(row_count($rs) == null) {

@@ -125,8 +125,7 @@ if(row_count($rs) == null) {
                     <table>
                         <tr>
                             <td class="title">
-                                <img src="https://booksinvogue.com.ng/assests/logo.png"
-                                    style="width: 70px; max-width: 300px" />
+                                <img src="assets/img/logo.png" style="width: 70px; max-width: 300px" />
                             </td>
 
                             <td>

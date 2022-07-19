@@ -141,7 +141,7 @@ function role_director($username, $role) {
                     
                     $_SESSION['login'] = $username;
 
-                    echo '<img style="width: 100px; height: 100px" src="https://dashboard.booksinvogue.com.ng/assets/img/loading.gif">';    
+                    echo '<img style="width: 100px; height: 100px" src="assets/img/loading.gif">';    
 
                     echo '<script>window.location.href ="./"</script>'; 
                 } else {
@@ -151,7 +151,7 @@ function role_director($username, $role) {
 
                         $_SESSION['login'] = $username;
 
-                        echo '<img style="width: 100px; height: 100px" src="https://dashboard.booksinvogue.com.ng/assets/img/loading.gif">';    
+                        echo '<img style="width: 100px; height: 100px" src="../assets/img/loading.gif">';    
 
                         echo '<script>window.location.href ="author/./"</script>';  
 
@@ -164,14 +164,14 @@ function role_director($username, $role) {
 
                         $_SESSION['login'] = $username;
 
-                        echo '<img style="width: 100px; height: 100px" src="https://dashboard.booksinvogue.com.ng/assets/img/loading.gif">';    
+                        echo '<img style="width: 100px; height: 100px" src="../assets/img/loading.gif">';    
 
                         echo '<script>window.location.href ="publisher/./"</script>';   
 
 
                         } else {
 
-                            echo '<img style="width: 100px; height: 100px" src="https://dashboard.booksinvogue.com.ng/assets/img/loading.gif">';    
+                            echo '<img style="width: 100px; height: 100px" src="assets/img/loading.gif">';    
 
                             echo '<script>window.location.href ="./signin"</script>';
                         }
@@ -796,13 +796,13 @@ function user_details() {
         //set passport for empty passport
         if($GLOBALS['t_users']['passport'] == null && $GLOBALS['t_users']['role'] == 'user') {
             
-            $GLOBALS['passport'] = 'https://dashboard.booksinvogue.com.ng/assets/img/user.png';
+            $GLOBALS['passport'] = 'assets/img/user.png';
 
         } else {
 
-            if($GLOBALS['t_users']['passport'] == null && $GLOBALS['t_users']['role'] == 'author') {
+            if($GLOBALS['t_users']['passport'] == null && $GLOBALS['t_users']['role'] == 'author' || $GLOBALS['t_users']['role'] == 'publisher') {
                 
-                $GLOBALS['passport'] = 'https://dashboard.booksinvogue.com.ng/assets/img/user.png';
+                $GLOBALS['passport'] = '../assets/img/user.png';
             } else {
 
                 $GLOBALS['passport'] = $GLOBALS['t_users']['passport'];
@@ -1489,7 +1489,7 @@ if(isset($_POST['booktitle']) && isset($_POST['bookdescp']) && isset($_POST['ser
 if (!empty($_FILES["fil"]["name"]) && !empty($_FILES["covfile"]["name"])) {
     
     $target_dir1 = "../softbooks/";
-    $target_dir2 = "../https://dashboard.booksinvogue.com.ng/assets/bookscover/";
+    $target_dir2 = "https://dashboard.booksinvogue.com.ng/assets/bookscover/";
 
     $target_file1 =  basename($_FILES["fil"]["name"]);
     $target_file2 =  basename($_FILES["covfile"]["name"]);

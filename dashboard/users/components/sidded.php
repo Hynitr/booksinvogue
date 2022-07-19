@@ -45,7 +45,7 @@
             </li>
 
             <li class="menu-item">
-                <a href="#" class="menu-link" data-bs-toggle="modal" data-bs-target="#modalCenter">
+                <a href="#" class="menu-link" data-bs-toggle="modal" data-bs-target="#modalupgrade">
                     <i class="menu-icon tf-icons bx bx-user"></i>
                     <div data-i18n="Authentications">Publish your own book</div>
                 </a>

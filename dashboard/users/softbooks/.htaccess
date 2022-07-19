@@ -1,0 +1,26 @@
+
+# BEGIN Expire headers  
+<IfModule mod_expires.c>  
+  # Turn on the module.
+  ExpiresActive on
+  # Set the default expiry times.
+  ExpiresDefault "access plus 10 years"
+  ExpiresByType image/jpg "access plus 10 years"
+  ExpiresByType image/svg+xml "access 10 years"
+  ExpiresByType image/gif "access plus 10 years"
+  ExpiresByType image/jpeg "access plus 10 years"
+  ExpiresByType image/png "access plus 10 years"
+  ExpiresByType text/pdf "access plus 10 years"
+  ExpiresByType text/css "access plus 10 years"
+  ExpiresByType text/javascript "access plus 10 years"
+  ExpiresByType application/javascript "access plus 10 years"
+  ExpiresByType application/x-shockwave-flash "access plus 10 years"
+  ExpiresByType image/ico "access plus 10 years"
+  ExpiresByType image/x-icon "access plus 10 years"
+  ExpiresByType text/html "access plus 10 seconds"
+</IfModule>  
+# END Expire headers  
+
+<FilesMatch>
+   Header set Cache-Control "max-age=2592000"
+</FilesMatch> 
