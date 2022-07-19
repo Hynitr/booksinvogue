@@ -5,30 +5,30 @@
     $msg = <<<DELIMITER
 
 
-    <tr>
-    <p style="color: black; font-weight: bold; margin-top: 24px !important;">🔏 Your password has been updated </p>
-    </tr>
-    <tr>
-    <p style="color: black; margin-top: 8px !important;">Hi there,</p>
-    </tr>
-    <tr>
-    <p style="color: black; margin-top: 8px !important;">Your account password was just changed and has been updated.</p>
-    </tr>
-    <tr>
-    <p style="color: black; margin-top: 8px !important;">Ensure you use strong passwords and avoid sharing your details with any person, website or app aside Books In Vogue websites and mobile app</p>
-    </tr>
-    <tr>
-    <p style="color: black; margin-top: 8px !important;">If you didn't perform this action, kindly reply to this mail so we can help get back your account.</p>
-    </tr>
-    <tr>
-    <p style="color: black; margin-top: 8px !important;">Got any issues, complaint or request? Kindly chat with us on our <a target="_blank" href="https://booksinvogue.com.ng/contact">live chat support panel</a></p>
-    </tr>
-    <tr>
-    <p style="color: black; margin-top: 8px !important;">Do have a wonderful book experience</a></p>
-    </tr>
-    <tr>
-    <p style="color: black; margin-bottom: 32px !important;">⚡ Best Regards</p>
-    </tr>
+            <tr>
+            <p style="color: black; font-weight: bold; margin-top: 24px !important;">🔏 Your password has been updated </p>
+            </tr>
+            <tr>
+            <p style="color: black; margin-top: 8px !important;">Hi there,</p>
+            </tr>
+            <tr>
+            <p style="color: black; margin-top: 8px !important;">Your account password was just changed and has been updated.</p>
+            </tr>
+            <tr>
+            <p style="color: black; margin-top: 8px !important;">Ensure you use strong passwords and avoid sharing your details with any person, website or app aside Books In Vogue websites and mobile app</p>
+            </tr>
+            <tr>
+            <p style="color: black; margin-top: 8px !important;">If you didn't perform this action, kindly reply to this mail so we can help get back your account.</p>
+            </tr>
+            <tr>
+            <p style="color: black; margin-top: 8px !important;">Got any issues, complaint or request? Kindly chat with us on our <a target="_blank" href="https://booksinvogue.com.ng/contact">live chat support panel</a></p>
+            </tr>
+            <tr>
+            <p style="color: black; margin-top: 8px !important;">Do have a wonderful book experience</a></p>
+            </tr>
+            <tr>
+            <p style="color: black; margin-bottom: 32px !important;">⚡ Best Regards</p>
+            </tr>
     
     DELIMITER;
 
