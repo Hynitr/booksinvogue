@@ -56,9 +56,10 @@ function validation_errors($error_message) {
     <div class="col-md-12 alert alert-danger alert-mg-b alert-success-style6 alert-st-bg3 alert-st-bg14">
         <button type="button" class="col-md-12 close sucess-op" data-dismiss="alert" aria-label="Close">
             <span class="icon-sc-cl" aria-hidden="true">&times;</span>
-                                        </button>
-                    <p><strong>$error_message </strong></p>
-                                </div>
+        </button>
+        <p><strong>$error_message </strong></p>
+    </div>
+
     DELIMITER;
 
     return $error_message;     
@@ -155,25 +156,25 @@ function role_director($username, $role) {
                         echo '<script>window.location.href ="author/./"</script>';  
 
 
-                    }else {
-
-
-                    //redirect to publisher dashboard
-                    if($role == 'publisher') {
-
-                    $_SESSION['login'] = $username;
-
-                    echo '<img style="width: 100px; height: 100px" src="https://dashboard.booksinvogue.com.ng/assets/img/loading.gif">';    
-
-                    echo '<script>window.location.href ="publisher/./"</script>';   
-
-
                     } else {
+
+
+                        //redirect to publisher dashboard
+                        if($role == 'publisher') {
+
+                        $_SESSION['login'] = $username;
 
                         echo '<img style="width: 100px; height: 100px" src="https://dashboard.booksinvogue.com.ng/assets/img/loading.gif">';    
 
-                        echo '<script>window.location.href ="./signin"</script>';
-                    }
+                        echo '<script>window.location.href ="publisher/./"</script>';   
+
+
+                        } else {
+
+                            echo '<img style="width: 100px; height: 100px" src="https://dashboard.booksinvogue.com.ng/assets/img/loading.gif">';    
+
+                            echo '<script>window.location.href ="./signin"</script>';
+                        }
                     }
 
                 }
@@ -315,43 +316,43 @@ function mail_mailer($email, $activator, $subj, $msg) {
     $body = <<<DELIMITER
 
     <html>
-		<meta charset="utf-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
-	
-		<body style="background-color: #eaebed;  font-family: sans-serif;  font-size: 14px; line-height: 1.4; margin-bottom: 2rem !important; padding: 0;">
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    
+        <body style="background-color: #eaebed;  font-family: sans-serif;  font-size: 14px; line-height: 1.4; margin-bottom: 2rem !important; padding: 0;">
 
-		
-			<div style="text-align: center !important; justify-content: center !important;">
-			<img style="max-width: 100%; height: auto; vertical-align: middle; box-sizing: border-box; width: 120px; margin-top: 24px !important;" src="https://dashboard.booksinvogue.com.ng/assets/img/logo.png">
-			</div>
+        
+            <div style="text-align: center !important; justify-content: center !important;">
+            <img style="max-width: 100%; height: auto; vertical-align: middle; box-sizing: border-box; width: 120px; margin-top: 24px !important;" src="https://dashboard.booksinvogue.com.ng/assets/img/logo.png">
+            </div>
 
-			<div style="margin-right: 5%; margin-left: 5%;">
-				
-				<div style="padding-right: 1.105rem; padding-left: 1.105rem; margin-top: 24px !important; background-color: #fff; position: relative; display: flex; flex-direction: column; height: auto; word-wrap: break-word; background-clip: border-box; border: 0 solid #d9dee3; border-radius: 8px;">
-				
-					$msg
-				
-				</div>
-			
-			</div>
-
-
-			<div style="text-align: center !important; margin-top: 19px !important; justify-content: center !important;">
-				<p style="color: grey">&copy; Team Book In Vogue </p>
-			
-				<p style="color: grey; margin-bottom: 32px !important;">Developed with 💖 by:  <a style="text-decoration: none; color: #696cff;" href="https://www.google.com/search?client=opera&q=abolade+greatness&sourceid=opera&ie=UTF-8&oe=UTF-8"
-					target="_blank">Abolade Greatness</a>
-				</p>
-				
-			
-			</div>
-	
-			<tr>
-			</tr> 
+            <div style="margin-right: 5%; margin-left: 5%;">
+                
+                <div style="padding-right: 1.105rem; padding-left: 1.105rem; margin-top: 24px !important; background-color: #fff; position: relative; display: flex; flex-direction: column; height: auto; word-wrap: break-word; background-clip: border-box; border: 0 solid #d9dee3; border-radius: 8px;">
+                
+                    $msg
+                
+                </div>
+            
+            </div>
 
 
-		</body>
+            <div style="text-align: center !important; margin-top: 19px !important; justify-content: center !important;">
+                <p style="color: grey">&copy; Team Book In Vogue </p>
+            
+                <p style="color: grey; margin-bottom: 32px !important;">Developed with 💖 by:  <a style="text-decoration: none; color: #696cff;" href="https://www.google.com/search?client=opera&q=abolade+greatness&sourceid=opera&ie=UTF-8&oe=UTF-8"
+                    target="_blank">Abolade Greatness</a>
+                </p>
+                
+            
+            </div>
+    
+            <tr>
+            </tr> 
+
+
+        </body>
     </html>
     
     DELIMITER;
@@ -791,7 +792,7 @@ function user_details() {
 
             if($GLOBALS['t_users']['passport'] == null && $GLOBALS['t_users']['role'] == 'author') {
                 
-                $GLOBALS['passport'] = '../https://dashboard.booksinvogue.com.ng/assets/img/user.png';
+                $GLOBALS['passport'] = 'https://dashboard.booksinvogue.com.ng/assets/img/user.png';
             } else {
 
                 $GLOBALS['passport'] = $GLOBALS['t_users']['passport'];
@@ -800,7 +801,7 @@ function user_details() {
         }
     }
 
-}
+    }
 }
 
 
@@ -1376,6 +1377,8 @@ if(isset($_POST['bank']) && isset($_POST['acctn']) && isset($_POST['actnm'])){
     echo '<script>window.location.href ="./"</script>';
 }
 
+
+
 //uplaod book and softcopies
 if(isset($_POST['booktitle']) && isset($_POST['bookdescp']) && isset($_POST['series']) && isset($_POST['author']) && isset($_POST['otherauthor']) && isset($_POST['copyright']) && isset($_POST['category']) && isset($_POST['isbn']) && isset($_POST['price']) && isset($_POST['authprofit']) && isset($_POST['bivprofit']) && isset($_POST['lang']) || isset($_POST['dft']) || isset($_POST['bookdtta']) || isset($_POST['imgnxtxt'])) {
 
@@ -1470,6 +1473,8 @@ if(isset($_POST['booktitle']) && isset($_POST['bookdescp']) && isset($_POST['ser
     }
 }
 
+
+
 //publush book with book image and book cover
 if (!empty($_FILES["fil"]["name"]) && !empty($_FILES["covfile"]["name"])) {
     
@@ -1505,6 +1510,8 @@ if (!empty($_FILES["fil"]["name"]) && !empty($_FILES["covfile"]["name"])) {
     }           
     }   
 }
+
+
 
 ///sql update books image in db
 function book_img($target_file1, $target_file2) {
@@ -1549,6 +1556,8 @@ function book_details($data) {
     }
 }
 
+
+
 //get total book sold
 function book_sold() {
 
@@ -1566,6 +1575,8 @@ function book_sold() {
         $GLOBALS['royal'] = $row['royalty'];
     }
 }
+
+
 
 //get to tal book bought
 function book_bought() {
