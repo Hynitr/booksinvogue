@@ -302,7 +302,7 @@ $(document).ready(function () {
 
   //add to wishlist
   $("#btwsh").click(function () {
-    var wishid = $(".srchid").val();
+    var wishid = $("#srchid").val();
 
     $("#btwsh").on("shown.bs.popover", function () {
       setTimeout(function () {
