@@ -324,7 +324,7 @@ function mail_mailer($email, $activator, $subj, $msg) {
 
                 
                     <div style="text-align: center !important; justify-content: center !important;">
-                    <img style="max-width: 100%; height: auto; vertical-align: middle; box-sizing: border-box; width: 120px; margin-top: 24px !important;" src="https://dashboard.booksinvogue.com.ng/assets/img/logo.png">
+                        <img style="max-width: 100%; height: auto; vertical-align: middle; box-sizing: border-box; width: 120px; margin-top: 24px important;" src="https://dashboard.booksinvogue.com.ng/assets/img/logo.png"/>
                     </div>
 
                     <div style="margin-right: 5%; margin-left: 5%;">
