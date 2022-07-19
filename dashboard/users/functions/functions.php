@@ -382,46 +382,37 @@ function notify_user($username, $email, $msg, $subj) {
     $body = <<<DELIMITER
 
 
-    <html>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
-   
-    <body style="background-color: #eaebed;  font-family: sans-serif;  font-size: 14px; line-height: 1.4; margin-bottom: 2rem !important; padding: 0;">
+            <html>
+                <meta charset="utf-8" />
+                <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+                <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+               
+                <body style="background-color: #eaebed;  font-family: sans-serif;  font-size: 14px; line-height: 1.4; margin-bottom: 2rem !important; padding: 0;">
 
-    
-    <div style="text-align: center !important; justify-content: center !important;">
-    <img style="max-width: 100%; height: auto; vertical-align: middle; box-sizing: border-box; width: 120px; margin-top: 24px !important;" src="https://dashboard.booksinvogue.com.ng/assets/img/logo.png">
-    </div>
+                
+                    <div style="text-align: center !important; justify-content: center !important;">
+                        <img style="max-width: 100%; height: auto; vertical-align: middle; box-sizing: border-box; width: 120px; margin-top: 24px important;" src="https://dashboard.booksinvogue.com.ng/assets/img/logo.png"/>
+                    </div>
 
-    <div style="margin-right: 5%; margin-left: 5%;">
-        
-        <div style="padding-right: 1.105rem; padding-left: 1.105rem; margin-top: 24px !important; background-color: #fff; position: relative; display: flex; flex-direction: column; height: auto; word-wrap: break-word; background-clip: border-box; border: 0 solid #d9dee3; border-radius: 8px;">
-       
-       $msg
-        
-      
-       </div>
-        
-
-       
-    </div>
+                    <div style="margin-right: 5%; margin-left: 5%;">
+                        <div style="padding-right: 1.105rem; padding-left: 1.105rem; margin-top: 24px !important; background-color: #fff; position: relative; display: flex; flex-direction: column; height: auto; word-wrap: break-word; background-clip: border-box; border: 0 solid #d9dee3; border-radius: 8px;">$msg
+                        </div> 
+                    </div>
 
 
-    <div style="text-align: center !important; margin-top: 19px !important; justify-content: center !important;">
-    <p style="color: grey">&copy; Team Book In Vogue </p>
-     
-        <p style="color: grey; margin-bottom: 32px !important;">Developed with 💖 by:  <a style="text-decoration: none; color: #696cff;" href="https://www.google.com/search?client=opera&q=abolade+greatness&sourceid=opera&ie=UTF-8&oe=UTF-8"
-            target="_blank">Abolade Greatness</a></p>
-        
-       
-    </div>
- 
-   <tr></tr> 
+                    <div style="text-align: center !important; margin-top: 19px !important; justify-content: center !important;">
+                            <p style="color: grey">&copy; Team Book In Vogue </p>
+                     
+                            <p style="color: grey; margin-bottom: 32px !important;">Developed with 💖 by: <a style="text-decoration: none; color: #696cff;" href="https://www.google.com/search?client=opera&q=abolade+greatness&sourceid=opera&ie=UTF-8&oe=UTF-8" target="_blank">Abolade Greatness</a>
+                            </p>
+                    </div>
+             
+                   <tr>
+                   </tr> 
 
 
-  </body>
-    </html>
+                </body>
+             </html>
     
     DELIMITER;
     
@@ -665,27 +656,27 @@ if(isset($_POST['fgeml'])) {
     $subj = "RESET YOUR PASSWORD";
     $msg = <<<DELIMITER
 
-    <tr>
-    <p style="color: black; font-weight: bold; margin-top: 24px !important;">😎 Let's get you back into your account </p>
-    </tr>
-    <tr>
-    <p style="color: black; margin-top: 8px !important;">⬇️ Kindly use the code below to continue into your account</p>
-    </tr>
-    <tr>
-    <p style="color: black; margin-top: 8px !important;">🔒  Do not share this code outside Books In Vogue website or Mobile App</p>
-    </tr>
-   
-    
-    <tr>
-    <div style="text-align: center !important; margin-top: 24px !important; margin-bottom: 8px !important; justify-content: center !important;">
-    <button style="background-color: #696cff; color: #fff; font-size: x-large; border: none; padding: 0.4375rem 1.25rem; border-radius: 0.4rem;">$activator</button>
-   </div>
+            <tr>
+            <p style="color: black; font-weight: bold; margin-top: 24px !important;">😎 Let's get you back into your account </p>
+            </tr>
+            <tr>
+            <p style="color: black; margin-top: 8px !important;">⬇️ Kindly use the code below to continue into your account</p>
+            </tr>
+            <tr>
+            <p style="color: black; margin-top: 8px !important;">🔒  Do not share this code outside Books In Vogue website or Mobile App</p>
+            </tr>
+           
+            
+            <tr>
+            <div style="text-align: center !important; margin-top: 24px !important; margin-bottom: 8px !important; justify-content: center !important;">
+            <button style="background-color: #696cff; color: #fff; font-size: x-large; border: none; padding: 0.4375rem 1.25rem; border-radius: 0.4rem;">$activator</button>
+           </div>
 
-    </tr> 
+            </tr> 
 
-    <tr>
-    <p style="color: black; margin-bottom: 32px !important;">⚡ If you didn't request for this mail, kindly ignore it.</p>
-    </tr>
+            <tr>
+            <p style="color: black; margin-bottom: 32px !important;">⚡ If you didn't request for this mail, kindly ignore it.</p>
+            </tr>
 
     DELIMITER;
 
