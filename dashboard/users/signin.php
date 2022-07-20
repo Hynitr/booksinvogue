@@ -1,5 +1,5 @@
 <?php
-include("components/top.php");
+include("components/head.php");
 ?>
 
 <style>
