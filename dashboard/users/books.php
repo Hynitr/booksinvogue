@@ -94,7 +94,7 @@ user_details();
                                 }
 
                                 $id = $row['books_id'];
-                                $userid = $_SESSION['login'];
+                                $userid = $t_users['usname'];
 
                                 $sel = "SELECT sum(`id`) AS `bookbought` FROM `boughtbook` WHERE `bookid` = '$id'  AND `reading` = 'Yes'";
                                 $rss = query ($sel);
