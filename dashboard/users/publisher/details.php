@@ -165,17 +165,16 @@ if(!isset($_GET['book'])) {
                                                             <p class="demo-inline-spacing">
 
                                                                 <a href="./read?book=<?php echo $book ?>"
-                                                                    class="btn btn-primary me-1" type="button"><i
-                                                                        class="bx bx-share text-white"></i></a>
+                                                                    class="btn btn-primary me-1" type="button">View</a>
 
                                                                 <a href="./editdrafts?book=<?php echo $book ?>"
-                                                                    class=" btn btn-primary me-1">
-                                                                    <i class="bx bx-edit text-white"></i>
+                                                                    class=" btn btn-primary me-1 text-white">
+                                                                    Edit
                                                                 </a>
-                                                                <a class="btn trash btn-primary me-1"
+                                                                <a class="btn trash btn-primary me-1 text-white"
                                                                     data-bs-toggle="modal"
                                                                     data-bs-target="#modalCenter">
-                                                                    <i class="bx bx-trash text-white"></i>
+                                                                    Delete
                                                                 </a>
                                                                 <a class="btn btn-primary me-1">
                                                                     <i class="bx bx-share-alt text-white"></i>
@@ -208,10 +207,16 @@ if(!isset($_GET['book'])) {
                                                                     <div class="modal-body">
                                                                         <div class="row">
                                                                             <div class="col mb-3">
-                                                                                <p class="text-danger">This action
-                                                                                    cannot
-                                                                                    be reversed once
-                                                                                    done</p>
+                                                                                <p class="text-danger">Your book wil be
+                                                                                    deleted but please note that users
+                                                                                    who have previously purchased this
+                                                                                    book will still be able to view it.
+                                                                                </p>
+
+                                                                                <p class="text-danger">It will no longer
+                                                                                    be available for further purchase
+                                                                                    for new users on our platform.
+                                                                                </p>
                                                                             </div>
                                                                         </div>
 

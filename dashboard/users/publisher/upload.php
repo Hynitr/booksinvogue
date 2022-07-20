@@ -242,6 +242,7 @@ user_details();
                                                     <img style="display: none;" id="previewImg" class="img-fluid"
                                                         width="150px" src="#" alt="Book Cover">
                                                 </div>
+
                                                 <div class="col-lg-9 mb-lg-5 mt-lg-5 col-sm-12">
                                                     <input class="form-control" type="file"
                                                         onchange="previewFile(this);" id="bkcov" />
@@ -293,10 +294,9 @@ user_details();
                                 <img src="../assets/img/75_smile.gif" class="img-fluid">
                                 <div class="modal-footer">
                                     <a href="./mybooks"> <button type="button" class="btn btn-outline-secondary">
-                                            Continue
+                                            View Published Book
                                         </button></a>
-                                    <button type="button" class="btn btn-primary" onclick="statemgt();">View
-                                        Book</button>
+
                                 </div>
                         </div>
 
@@ -355,6 +355,10 @@ user_details();
     pdfjsLib.GlobalWorkerOptions.workerSrc = '../build/pdf.worker.js';
 
     $("#bkfile").on("change", function(e) {
+        $("#pload").html(
+            '<img style="width: 100px; height: 100px" src="../assets/img/loading.gif">'
+        );
+
         var file = e.target.files[0]
         if (file.type == "application/pdf") {
             var fileReader = new FileReader();
@@ -424,6 +428,7 @@ user_details();
 
     //preview images
     function previewFile(input) {
+
         document.getElementById('previewImg').style.display = 'block';
 
         var file = $("input[type=file]").get(0).files[0];
@@ -502,19 +507,6 @@ user_details();
     } else {
 
         echo "<script>regbook()</script>";
-    }
-
-    if (isset($_SESSION['booknew'])) {
-
-        $code = $_SESSION['booknew'];
-
-        echo '
-        <script>
-        function statemgt() {
-            window.open("https://bookinvogue.com/'.$code.'","_blank");
-        }</script>';
-
-        //location.replace("https://bookinvogue.com/'.$code.'");
     }
     ?>
 

@@ -38,14 +38,6 @@
             </li>
 
             <li class="menu-item">
-                <a href="#" class="menu-link" data-bs-toggle="modal" data-bs-target="#modalupgrade">
-                    <i class="menu-icon tf-icons bx bx-user"></i>
-                    <div data-i18n="Authentications">Publish for other authors</div>
-                </a>
-
-            </li>
-
-            <li class="menu-item">
                 <a href="./mybooks" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-library"></i>
                     <div data-i18n="book">My Published book(s)</div>
@@ -87,7 +79,7 @@
             </li>
             <!-- Cards -->
             <li class="menu-item">
-                <a href="#" class="menu-link">
+                <a href="./adv" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-dollar"></i>
                     <div data-i18n="Basic">Advert Center</div>
                 </a>
@@ -130,31 +122,3 @@
     </div>
 
 </aside>
-
-<!-- Modal -->
-<div class="modal fade" id="modalupgrade" data-bs-backdrop="static" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalCenterTitle">Publish for other authors</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <p>You are about to upgrade your account and become an author. </p>
-                    <p>You previous transaction history, wallet balance and reading history will remain same </p>
-                    <p>With an author account, you can upload you own books and earn royalties</p>
-                    <p id="note" class="fw-bold text-danger">Will you love to proceed?</p>
-                </div>
-
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                    Cancel
-                </button>
-                <button type="button" id="upgrd" class="btn btn-primary">Continue</button>
-            </div>
-        </div>
-    </div>
-</div>

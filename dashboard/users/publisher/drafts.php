@@ -163,9 +163,6 @@ if(isset($_SESSION['eddbookupl'])) {
 
                                                 <div class="card-text">
                                                     <div class="d-grid d-sm-flex p-3 ">
-                                                        <img src="<?php echo $imager ?>"
-                                                            alt="<?php echo $rws['book_title'] ?>" height="205"
-                                                            class="me-4 mb-sm-0 mb-4 text-center justify-content-center" />
 
                                                         <span>
                                                             <b><?php echo escape($rws['book_title']) ?></b>
@@ -179,12 +176,12 @@ if(isset($_SESSION['eddbookupl'])) {
                                                             <p class="demo-inline-spacing">
 
                                                                 <a href="./editdrafts?book=<?php echo $redbb ?>" class=" btn
-                                                                    btn-primary me-1">
-                                                                    <i class="bx bx-edit text-white"></i>
+                                                                    btn-primary me-1 text-white">
+                                                                    Edit</i>
                                                                 </a>
-                                                                <a href="./delete?book=<?php echo $redbb ?>"
-                                                                    class="btn btn-primary me-1">
-                                                                    <i class="bx bx-trash text-white"></i>
+                                                                <a href="./deletedraft?book=<?php echo $redbb ?>&emal=<?php echo $rws['email_address'] ?>"
+                                                                    class="btn btn-primary me-1 text-white">
+                                                                    Delete
                                                                 </a>
 
                                                             </p>
@@ -223,7 +220,6 @@ if(isset($_SESSION['eddbookupl'])) {
         </div>
         <!-- / Layout page -->
     </div>
-
 
 
 

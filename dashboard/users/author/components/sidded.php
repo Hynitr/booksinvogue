@@ -87,7 +87,7 @@
             </li>
             <!-- Cards -->
             <li class="menu-item">
-                <a href="#" class="menu-link">
+                <a href="./adv" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-dollar"></i>
                     <div data-i18n="Basic">Advert Center</div>
                 </a>

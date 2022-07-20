@@ -6,47 +6,47 @@
     <!-- ===============================================-->
     <!--    Document Title-->
     <!-- ===============================================-->
-    <title>Publisher Corner | Books In Vogue</title>
+    <title>Authors Center | Books In Vogue</title>
 
     <meta charset="utf-8" />
-    <meta name="title" content="Publisher Corner | Books In Vogue" />
+    <meta name="title" content="Authors Center | Books In Vogue" />
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
 
     <!--  Social tags      -->
     <meta name="keywords" content="Books, In vogue, Vogue, PDF, book, soft copies" />
-    <meta name="description" content="Publisher Corner | Books In Vogue" />
+    <meta name="description" content="Authors Center | Books In Vogue" />
 
     <!-- Schema.org markup for Google+ -->
-    <meta itemprop="name" content="Publisher Corner | Books In Vogue" />
-    <meta itemprop="description" content="Publisher Corner | Books In Vogue" />
+    <meta itemprop="name" content="Authors Center | Books In Vogue" />
+    <meta itemprop="description" content="Authors Center | Books In Vogue" />
     <meta itemprop="image" content="https://booksinvogue.com/img/logo.png" />
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="booksinvogue" />
     <meta name="twitter:site" content="@booksinvogue" />
-    <meta name="twitter:title" content="Publisher Corner | Books In Vogue" />
+    <meta name="twitter:title" content="Authors Center | Books In Vogue" />
 
-    <meta name="twitter:description" content="Publisher Corner | Books In Vogue" />
+    <meta name="twitter:description" content="Authors Center | Books In Vogue" />
     <meta name="twitter:creator" content="@booksinvogue" />
     <meta name="twitter:image" content="hhttps://twitter.com/booksinvogue/photo" />
 
     <!-- Open Graph data -->
     <meta property="fb:app_id" content="booksinvogue" />
-    <meta property="og:title" content="Publisher Corner | Books In Vogue" />
+    <meta property="og:title" content="Authors Center | Books In Vogue" />
     <meta property="og:type" content="BookStore" />
     <meta property="og:url" content="https://booksinvogue.com" />
     <meta property="og:image" content="https://booksinvogue.com/img/logo.png" />
-    <meta property="og:description" content="Publisher Corner | Books In Vogue" />
+    <meta property="og:description" content="Authors Center | Books In Vogue" />
     <meta property="og:site_name" content="booksinvogue" />
 
     <!-- OG Meta Tags to improve the way the post looks when you share the page on Facebook, Twitter, LinkedIn -->
-    <meta name="description" content="Publisher Corner | Books In Vogue" />
+    <meta name="description" content="Authors Center | Books In Vogue" />
     <meta name="keywords" content="Books, In vogue, Vogue, PDF, book, soft copies" />
-    <meta property="og:title" content="Publisher Corner | Books In Vogue" />
+    <meta property="og:title" content="Authors Center | Books In Vogue" />
     <meta property="og:image" content="https://booksinvogue.com/img/logo.png" />
     <meta property="og:url" content="https://booksinvogue.com" />
     <meta property="og:site_name" content="booksinvogue" />
-    <meta property="og:description" content="Publisher Corner | Books In Vogue" />
+    <meta property="og:description" content="Authors Center | Books In Vogue" />
     <meta name="theme-color" content="#08989f" />
 
     <!-- Favicon -->
