@@ -348,20 +348,15 @@ if(!isset($_GET['book'])) {
 
                                         <div class="mt-4">
                                             <button type="button" class="btn btn-primary me-2" id="edpubl">Save
-                                                Changes</button>
-                                            <?php
-                                                if($editdraft['book_cover'] != '' && $editdraft['book_file'] != '') {
+                                                new book files</button>
 
-                                                  echo '<a href="./mybooks"><button type="button" class="btn btn-primary me-2" id="edpubl">Skip for now
-                                                  </button></a>';
 
-                                                } else {
 
-                                                    echo '<button type="button" class="btn btn-primary me-2" disabled>Skip for now
-                                                    </button>';
-                                                }
-
-                                                ?>
+                                            <a href="./mybooks"><button type="button" class="btn btn-primary">Keep
+                                                    previous
+                                                    book
+                                                    Files</button>
+                                            </a>
 
                                         </div>
                                     </div>
@@ -380,10 +375,9 @@ if(!isset($_GET['book'])) {
                                 <img src="../assets/img/75_smile.gif" class="img-fluid">
                                 <div class="modal-footer">
                                     <a href="./mybooks"> <button type="button" class="btn btn-outline-secondary">
-                                            Continue
+                                            View Published Book
                                         </button></a>
-                                    <button type="button" class="btn btn-primary" onclick="statemgt();">View
-                                        Book</button>
+
                                 </div>
                         </div>
 
@@ -553,20 +547,7 @@ if(!isset($_GET['book'])) {
 
         echo "<script>regbook()</script>";
     }
-    
-    if (isset($_SESSION['eddbooknew'])) {
 
-        $code = $_SESSION['eddbooknew'];
-
-        echo '
-        <script>
-        function statemgt() {
-            window.open("https://bookinvogue.com/'.$code.'","_blank");
-        }</script>';
-    }
-
-    //create notification
-    
     ?>
 
     <!-- Place this tag in your head or just before your close body tag. -->

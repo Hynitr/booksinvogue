@@ -165,17 +165,16 @@ if(!isset($_GET['book'])) {
                                                             <p class="demo-inline-spacing">
 
                                                                 <a href="./read?book=<?php echo $book ?>"
-                                                                    class="btn btn-primary me-1" type="button"><i
-                                                                        class="bx bx-share text-white"></i></a>
+                                                                    class="btn btn-primary me-1" type="button">View</a>
 
                                                                 <a href="./editdrafts?book=<?php echo $book ?>"
-                                                                    class=" btn btn-primary me-1">
-                                                                    <i class="bx bx-edit text-white"></i>
+                                                                    class=" btn btn-primary me-1 text-white">
+                                                                    Edit
                                                                 </a>
-                                                                <a class="btn trash btn-primary me-1"
+                                                                <a class="btn trash btn-primary me-1 text-white"
                                                                     data-bs-toggle="modal"
                                                                     data-bs-target="#modalCenter">
-                                                                    <i class="bx bx-trash text-white"></i>
+                                                                    Delete
                                                                 </a>
                                                                 <a class="btn btn-primary me-1">
                                                                     <i class="bx bx-share-alt text-white"></i>

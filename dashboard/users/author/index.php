@@ -344,6 +344,40 @@ include("components/top.php");
                                             placeholder="Retrieving your account name..." disabled />
                                     </div>
 
+
+                                    <div class="mb-3">
+                                        <label for="bio" class="form-label">Tell us about yourself</label>
+                                        <textarea id="bio" class="form-control"></textarea>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="mb-3 col-lg-2 col-sm-12">
+                                            <label for="tel" class="form-label">Telephone Number</label>
+                                            <input type="number" class="form-control" id="tel" name="tel" />
+                                        </div>
+
+                                        <div class="mb-3 col-lg-3 col-sm-12">
+                                            <label for="fb" class="form-label">Facebook Username</label>
+                                            <input type="text" class="form-control" id="fb" name="fb" />
+                                        </div>
+
+                                        <div class="mb-3 col-lg-2 col-sm-12">
+                                            <label for="wapn" class="form-label">Whatsapp Number</label>
+                                            <input type="number" class="form-control" id="wapn" name="wapn" />
+                                        </div>
+
+                                        <div class="mb-3 col-lg-3 col-sm-12">
+                                            <label for="twt" class="form-label">Twitter Username</label>
+                                            <input type="text" class="form-control" id="twt" name="twt" />
+                                        </div>
+
+                                        <div class="mb-3 col-lg-2 col-sm-12">
+                                            <label for="ig" class="form-label">Instagram Username</label>
+                                            <input type="text" class="form-control" id="ig" name="ig" />
+                                        </div>
+
+                                    </div>
+
                                     <h6 style="font-size: 13px" class="text-danger text-center mt-1" id="arpaymsg"></h6>
                                     <button type="button" id="actsub"
                                         class="mb-3 btn btn-primary d-grid w-100">Submit</button>

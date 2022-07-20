@@ -100,7 +100,7 @@ user_details();
                                 $id = $row['books_id'];
 
 
-                                $sel = "SELECT sum(`id`) AS `bookbought` FROM `boughtbook` WHERE `bookid` = '$id'";
+                                $sel = "SELECT sum(`id`) AS `bookbought` FROM `boughtbook` WHERE `bookid` = '$id' AND `reading` = 'Yes'";
                                 $rss = query ($sel);
 
                                 if(row_count($rss) == '' || row_count($rss) == null) {

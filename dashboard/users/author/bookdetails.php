@@ -142,6 +142,38 @@ if(!isset($_GET['book'])) {
                                     
                                 }
 
+                                $id = $row['books_id'];
+
+
+                                $sel = "SELECT sum(`id`) AS `bookbought` FROM `boughtbook` WHERE `bookid` = '$id' AND `reading` = 'Yes'";
+                                $rss = query ($sel);
+
+                                if(row_count($rss) == '' || row_count($rss) == null) {
+
+                                    $booktot = 0 ." copy sold";
+                                    
+                                } else {
+                            
+                                    $bow = mysqli_fetch_array($rss);
+
+                                    if($bow['bookbought'] == 0 || $bow['bookbought'] == null) {
+
+                                        $booktot = 0 ." copy sold";
+
+                                    } else {
+
+                                        if($bow['bookbought'] == 1) {
+
+                                            $booktot = 1 ." copy sold";
+                                            
+                                        } else {
+                                            $booktot = number_format($bow['bookbought'])." copies sold";
+
+                                        }
+                                    }
+                                    
+                                }
+
                         ?>
 
                             <div class="container-xxl flex-grow-1 container-p-y">
@@ -170,7 +202,8 @@ if(!isset($_GET['book'])) {
 
                                                             <br /><br />
                                                             <?php echo $row['language'] ?> &nbsp;|&nbsp;
-                                                            <?php echo $category ?>
+                                                            <?php echo $category ?>&nbsp;|&nbsp;
+                                                            <?php echo $booktot ?>
 
                                                             <p class="demo-inline-spacing">
 

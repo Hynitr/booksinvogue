@@ -151,7 +151,7 @@ function role_director($username, $role) {
 
                         $_SESSION['login'] = $username;
 
-                        echo '<img style="width: 100px; height: 100px" src="../assets/img/loading.gif">';    
+                        echo '<img style="width: 100px; height: 100px" src="assets/img/loading.gif">';    
 
                         echo '<script>window.location.href ="author/./"</script>';  
 
@@ -164,7 +164,7 @@ function role_director($username, $role) {
 
                         $_SESSION['login'] = $username;
 
-                        echo '<img style="width: 100px; height: 100px" src="../assets/img/loading.gif">';    
+                        echo '<img style="width: 100px; height: 100px" src="assets/img/loading.gif">';    
 
                         echo '<script>window.location.href ="publisher/./"</script>';   
 
@@ -1371,15 +1371,20 @@ if(isset($_POST['bank']) && isset($_POST['acctn']) && isset($_POST['trd'])) {
 
 
 //save acct details
-if(isset($_POST['bank']) && isset($_POST['acctn']) && isset($_POST['actnm'])){
+if(isset($_POST['bank']) && isset($_POST['acctn']) && isset($_POST['actnm']) && isset($_POST['bio']) && isset($_POST['fb']) && isset($_POST['twt']) && isset($_POST['ig']) && isset($_POST['wapn'])){
 
     $bank  = clean(escape($_POST['bank']));
     $acctn = clean(escape($_POST['acctn']));
     $actnm = clean(escape($_POST['actnm']));
+    $bio   = clean(escape($_POST['bio']));
+    $fb    = clean(escape($_POST['fb']));
+    $ig    = clean(escape($_POST['ig']));
+    $twt   = clean(escape($_POST['twt']));
+    $wapn  = clean(escape($_POST['wapn']));
     $user  = $_SESSION['login'];
 
     //update user acount
-    $sql = "UPDATE users SET `act name` = '$actnm', `act no` = '$acctn', `bnk nme` = '$bank' WHERE `usname` = '$user'";
+    $sql = "UPDATE users SET `act name` = '$actnm', `act no` = '$acctn', `bnk nme` = '$bank', `bio` = '$bio', `facebook` = '$fb', `twitter` = '$twt', `instagram` = '$ig', `whatsapp` = '$wapn' WHERE `usname` = '$user'";
     $res = query($sql);
     
     //refresh index page
@@ -1489,10 +1494,11 @@ if(isset($_POST['booktitle']) && isset($_POST['bookdescp']) && isset($_POST['ser
 if (!empty($_FILES["fil"]["name"]) && !empty($_FILES["covfile"]["name"])) {
     
     $target_dir1 = "../softbooks/";
-    $target_dir2 = "https://dashboard.booksinvogue.com.ng/assets/bookscover/";
+    $target_dir2 = "../assets/bookscover/";
 
     $target_file1 =  basename($_FILES["fil"]["name"]);
     $target_file2 =  basename($_FILES["covfile"]["name"]);
+  
 
     $targetFilePath1 = $target_dir1 . $target_file1;
     $targetFilePath2 = $target_dir2 . $target_file2;
@@ -1518,8 +1524,8 @@ if (!empty($_FILES["fil"]["name"]) && !empty($_FILES["covfile"]["name"])) {
        move_uploaded_file($_FILES["covfile"]["tmp_name"], $targetFilePath2);
        book_img($target_file1, $target_file2);
     }           
-    }   
-}
+    } 
+} 
 
 
 
@@ -1609,10 +1615,12 @@ function book_bought() {
 
 
 //delete a book
-if(isset($_POST['bkid']) && isset($_POST['authoremail']) && isset($_POST['bkdel']) && isset($_POST['bkdel']) == 'delete') {
+if(isset($_POST['bkid']) && isset($_POST['authoremail']) && isset($_POST['bkdel'])) {
     
     $bkid = trim($_POST['bkid']);
     $authoremail = trim($_POST['authoremail']);
+
+    if($_POST['bkdel'] == 'delete') {
 
     $sql = "UPDATE books SET `book_status` = 'deleted' WHERE `books_id` = '$bkid' AND `email_address` = '$authoremail'";
     $res = query($sql);
@@ -1622,6 +1630,25 @@ if(isset($_POST['bkid']) && isset($_POST['authoremail']) && isset($_POST['bkdel'
     //refresh index page
     echo 'Loading... Please Wait';
     echo '<script>window.location.href ="./mybooks"</script>';
+    
+    } else {
+
+        //delete draft permanetely
+        if($_POST['bkdel'] == 'draft') {
+
+            $sql = "DELETE FROM `books` WHERE `books_id` = '$bkid' AND `email_address` = '$authoremail'";
+            $res = query($sql);
+
+            $_SESSION['bkupdel'] = "Deleted";
+
+            //refresh index page
+            echo 'Loading... Please Wait';
+           echo '<script>window.location.href ="./drafts"</script>';
+        }
+    }
+
+
+    
 }
 
 

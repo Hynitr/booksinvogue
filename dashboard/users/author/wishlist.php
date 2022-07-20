@@ -69,7 +69,7 @@ user_details();
 
                             $user =  $_SESSION['login'];
 
-                                $ssl = "SELECT * FROM boughtbook WHERE `userid` = '$user' AND `reading` = 'wishlist' ORDER BY `sn` desc";
+                                $ssl = "SELECT * FROM `boughtbook` WHERE `userid` = '$user' AND `reading` = 'wishlist' ORDER BY `sn` desc";
                                 $rss = query($ssl);
 
                                 if(row_count($rss) == '' || row_count($rss) == null) {
@@ -138,10 +138,8 @@ user_details();
                                     $imager = "../assets/img/cover.jpg";
                                 }
 
-                                $id = $row['books_id'];
-
-
-                                $sel = "SELECT sum(`id`) AS `bookbought` FROM `boughtbook` WHERE `bookid` = '$id'";
+                                
+                                $sel = "SELECT sum(`id`) AS `bookbought` FROM `boughtbook` WHERE `bookid` = '$bkid' AND `reading` = 'Yes'";
                                 $rss = query ($sel);
 
                                 if(row_count($rss) == '' || row_count($rss) == null) {
@@ -221,14 +219,14 @@ user_details();
 
                                 </div>
                             </div>
+
                             <?php
                             }
                             }
                             ?>
 
-
-
                         </div>
+
 
 
                     </div>
