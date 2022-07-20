@@ -1,15 +1,9 @@
 <?php
 include("components/top.php");
 
-if(!isset($_SESSION['login'])) {
+user_details();
 
-   
 
-    } else {
-
-         user_details();
-
-    }
 ?>
 
 <style>
