@@ -42,6 +42,7 @@ $(document).ready(function () {
     var fb = $("#fb").val();
     var tel = $("#tel").val();
 
+
     if (
       actnm == "Retrieving... Please wait" ||
       actnm == "Error Retrieving Your Account Name" ||
@@ -82,6 +83,68 @@ $(document).ready(function () {
       }
     }
 
+  });
+
+
+  //publisher details
+  $("#pblactsub").click(function () {
+    var bank = $("#bank").val();
+    var acctn = $("#acctn").val();
+    var actnm = $("#actn").val();
+    var bio = $("#bio").val();
+    var wapn = $("#wapn").val();
+    var twt = $("#twt").val();
+    var ig = $("#ig").val();
+    var fb = $("#fb").val();
+    var tel = $("#tel").val();
+    var publsh = $("#publsh").val();
+    
+
+    if (
+      actnm == "Retrieving... Please wait" ||
+      actnm == "Error Retrieving Your Account Name" ||
+      actnm == "Retrieving your account name..."
+    ) {
+      $("#actsub").prop("disabled", true);
+    } else {
+      $("#actsub").prop("disabled", false);
+    }
+
+
+    if(bio == '' || bio == null) {
+
+      $("#arpaymsg").html("Please tell us about yourself");
+
+    } else {
+
+      if(tel == '' || tel == null) {
+
+        $("#arpaymsg").html("Please fill in your telephone number");
+
+      } else {
+
+        if(publsh == '' || publsh == null) {
+
+          $("#arpaymsg").html("Please fill in your publishing agency name");
+        } else {
+
+        
+    $("#arpaymsg").html(
+      '<img style="width: 100px; height: 100px" src="../assets/img/loading.gif">'
+    );
+
+    $.ajax({
+      type: "post",
+      url: "../functions/init.php",
+      data: { bank: bank, acctn: acctn, actnm: actnm, bio: bio, wapn: wapn, twt: twt, ig: ig, fb: fb, tel: tel, publsh: publsh },
+      success: function (data) {
+        $("#arpaymsg").html(data);
+      },
+    });
+
+      }
+    }
+  }
   });
 
   //save author acct details

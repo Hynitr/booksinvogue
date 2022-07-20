@@ -1371,7 +1371,7 @@ if(isset($_POST['bank']) && isset($_POST['acctn']) && isset($_POST['trd'])) {
 
 
 //save acct details
-if(isset($_POST['bank']) && isset($_POST['acctn']) && isset($_POST['actnm']) && isset($_POST['bio']) && isset($_POST['fb']) && isset($_POST['twt']) && isset($_POST['ig']) && isset($_POST['wapn'])){
+if(isset($_POST['bank']) && isset($_POST['acctn']) && isset($_POST['actnm']) && isset($_POST['bio']) && isset($_POST['fb']) && isset($_POST['twt']) && isset($_POST['ig']) && isset($_POST['wapn']) || isset($_POST['publsh'])){
 
     $bank  = clean(escape($_POST['bank']));
     $acctn = clean(escape($_POST['acctn']));
@@ -1383,8 +1383,17 @@ if(isset($_POST['bank']) && isset($_POST['acctn']) && isset($_POST['actnm']) && 
     $wapn  = clean(escape($_POST['wapn']));
     $user  = $_SESSION['login'];
 
+    if(isset($_POST['publsh'])) {
+
+        $publsh = clean(escape($_POST['publsh']));
+
+    } else {
+
+        $publsh = '';
+    }
+
     //update user acount
-    $sql = "UPDATE users SET `act name` = '$actnm', `act no` = '$acctn', `bnk nme` = '$bank', `bio` = '$bio', `facebook` = '$fb', `twitter` = '$twt', `instagram` = '$ig', `whatsapp` = '$wapn' WHERE `usname` = '$user'";
+    $sql = "UPDATE users SET `act name` = '$actnm', `act no` = '$acctn', `bnk nme` = '$bank', `bio` = '$bio', `facebook` = '$fb', `twitter` = '$twt', `instagram` = '$ig', `whatsapp` = '$wapn', `agncy` = '$publsh' WHERE `usname` = '$user'";
     $res = query($sql);
     
     //refresh index page

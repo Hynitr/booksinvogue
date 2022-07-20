@@ -346,7 +346,7 @@ include("components/top.php");
 
 
                                     <div class="mb-3">
-                                        <label for="actname" class="form-label">What's your agency/publishing
+                                        <label for="publsh" class="form-label">What's your agency/publishing
                                             name?</label>
                                         <input type="text" class="form-control" id="publsh" name="publsh"
                                             placeholder="e.g SOS Publications" />
@@ -386,7 +386,7 @@ include("components/top.php");
                                     </div>
 
                                     <h6 style="font-size: 13px" class="text-danger text-center mt-1" id="arpaymsg"></h6>
-                                    <button type="button" id="actsub"
+                                    <button type="button" id="pblactsub"
                                         class="mb-3 btn btn-primary d-grid w-100">Submit</button>
 
                                 </form>
