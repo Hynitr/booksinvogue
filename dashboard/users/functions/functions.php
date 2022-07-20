@@ -431,6 +431,77 @@ function notify_user($username, $email, $msg, $subj) {
 }
 
 
+
+//notify author
+function notify_author($auemail, $aumsg, $ausubj) {
+
+    $to = $email;
+    $from = "info@booksinvogue.com.ng";
+
+    $headers = "From: Booksinvogue ". $from . "\r\n";
+    $headers .= "Reply-To: ". $from . "\r\n";
+    $headers .= "MIME-Version: 1.0\r\n";
+    $headers .= "Content-Type: text/html; charset=\"iso-8859-1\"\n";
+    $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
+    $headers .= "X-Priority: 1 (Highest)\n";
+    $headers .= "Priority: urgent\n";
+    $headers .= "X-MSMail-Priority: High\n";
+    $headers .= "Importance: High\n";
+
+    $subject = $subj;
+
+    $body = <<<DELIMITER
+
+
+            <html>
+                <meta charset="utf-8" />
+                <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+                <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+
+                <body style="background-color: #eaebed;  font-family: sans-serif;  font-size: 14px; line-height: 1.4; margin-bottom: 2rem !important; padding: 0;">
+
+
+                <div style="text-align: center !important; justify-content: center !important;">
+                <img style="max-width: 100%; height: auto; vertical-align: middle; box-sizing: border-box; width: 120px; margin-top: 24px !important;" src="https://dashboard.booksinvogue.com.ng/assets/img/logo.png">
+                </div>
+
+                <div style="margin-right: 5%; margin-left: 5%;">
+
+                    <div style="padding-right: 1.105rem; padding-left: 1.105rem; margin-top: 24px !important; background-color: #fff; position: relative; display: flex; flex-direction: column; height: auto; word-wrap: break-word; background-clip: border-box; border: 0 solid #d9dee3; border-radius: 8px;">
+
+                   $msg
+
+
+                   </div>
+
+
+
+                </div>
+
+
+                <div style="text-align: center !important; margin-top: 19px !important; justify-content: center !important;">
+                <p style="color: grey">&copy; Team Book In Vogue </p>
+
+                    <p style="color: grey; margin-bottom: 32px !important;">Developed with 💖 by:  <a style="text-decoration: none; color: #696cff;" href="https://www.google.com/search?client=opera&q=abolade+greatness&sourceid=opera&ie=UTF-8&oe=UTF-8"
+                        target="_blank">Abolade Greatness</a></p>
+
+
+                </div>
+
+               <tr></tr> 
+
+
+              </body>
+            </html>
+    
+    DELIMITER;
+    
+    $send = mail($to, $subject, $body, $headers, '-finfo@booksinvogue.com.ng');
+    
+}
+
+
+
 /** RESEND OTP */
 if(isset($_POST['otpp'])) {
 
@@ -991,6 +1062,8 @@ if(isset($_POST['amt']) && isset($_POST['bkid']) && isset($_POST['authoremail'])
     $bkprice = trim($_POST['bkprice']);
     $rylty = trim($_POST['rylty']);
 
+    $roya = "You just made a royalty earning of ₦".number_format($rylty);
+
     //check if user has eneough money in wallet
     user_details();
 
@@ -1014,10 +1087,76 @@ if(isset($_POST['amt']) && isset($_POST['bkid']) && isset($_POST['authoremail'])
         $tes = query($tsql);
 
 
+        //notify user of the payment made
+        $msg = <<<DELIMITER
+
+                    <tr>
+                    <p style="color: black; font-weight: bold; margin-top: 24px !important;">Your Wallet was just debited! 💵 </p>
+                    </tr>
+                    <tr>
+                    <p style="color: black; margin-top: 8px !important;">Hi there,</p>
+                    </tr>
+                    <tr>
+                    <p style="color: black; margin-top: 8px !important;">$note</p>
+                    </tr>
+                    <tr>
+                    <p style="color: black; margin-top: 8px !important;">Got any issues, complaint or request? Kindly chat with us on our <a target="_blank" href="https://booksinvogue.com.ng/contact">live chat support panel</a></p>
+                    </tr>
+                    <tr>
+                    <p style="color: black; margin-top: 8px !important;">Keep having a wonderful book experience</a></p>
+                    </tr>
+                    <tr>
+                    <p style="color: black; margin-bottom: 32px !important;">⚡ Best Regards</p>
+                    </tr>
+
+        DELIMITER;
+
+
+
+        //notify author of the payment made
+        $aumsg = <<<DELIMITER
+
+                    <tr>
+                    <p style="color: black; font-weight: bold; margin-top: 24px !important;">You just sold a book! 😍🤩</p>
+                    </tr>
+                    <tr>
+                    <p style="color: black; margin-top: 8px !important;">Hi there,</p>
+                    </tr>
+                    <tr>
+                    <p style="color: black; margin-top: 8px !important;">$roya</p>
+                    </tr>
+                    <tr>
+                    <p style="color: black; margin-top: 8px !important;">Kindly login to your account to review your royalty.</p>
+                    </tr>
+                    <p style="color: black; margin-top: 8px !important;">Got any issues, complaint or request? Kindly chat with us on our <a target="_blank" href="https://booksinvogue.com.ng/contact">live chat support panel</a></p>
+                    </tr>
+                    <tr>
+                    <p style="color: black; margin-top: 8px !important;">Keep having a wonderful book experience</a></p>
+                    </tr>
+                    <tr>
+                    <p style="color: black; margin-bottom: 32px !important;">⚡ Best Regards</p>
+                    </tr>
+
+        DELIMITER;
+
+
         //update wallet balance
         $upsl = "UPDATE users SET `wallet` = '$newbal' WHERE `usname` = '$data'";
         $uel = query($upsl);
 
+
+        $subj = "Debit Alert";
+        $ausubj = "Credit Alert";
+
+        $email = $t_users['email'];
+        $auemail = $athmail;
+
+        $username = $data;
+
+        notify_user($username, $email, $msg, $subj);
+
+        //notify notify_author
+        notify_author($auemail, $aumsg, $ausubj);
 
         //add to bookshelf
         $bskl="INSERT INTO boughtbook(`id`, `bbid`, `bookid`, `userid`, `tranid`, `reading`, `authormail`, `price`, `royalty`)";
@@ -1032,6 +1171,7 @@ if(isset($_POST['amt']) && isset($_POST['bkid']) && isset($_POST['authoremail'])
         if(row_count($whls) == null || row_count($whls) == '') {
 
             //do nothing
+    
 
         } else {
 
@@ -1558,6 +1698,38 @@ function book_img($target_file1, $target_file2) {
 
     $sql = "UPDATE `books` SET `book_file` = '$target_file1', `book_cover` = '$target_file2', `book_status` = 'Show' WHERE `book_title` = '$code'";
     $res = query($sql);
+
+
+    //notify user
+    $msg = <<<DELIMITER
+
+            <tr>
+            <p style="color: black; font-weight: bold; margin-top: 24px !important;">Your book has been published! 🤩🤗 </p>
+            </tr>
+            <tr>
+            <p style="color: black; margin-top: 8px !important;">Hi there,</p>
+            </tr>
+            <tr>
+            <p style="color: black; margin-top: 8px !important;">Your book has been successfully published and is not available for purchase and reading</p>
+            </tr>
+            <tr>
+            <p style="color: black; margin-top: 8px !important;">Got any issues, complaint or request? Kindly chat with us on our <a target="_blank" href="https://booksinvogue.com.ng/contact">live chat support panel</a></p>
+            </tr>
+            <tr>
+            <p style="color: black; margin-top: 8px !important;">Keep having a wonderful book experience</a></p>
+            </tr>
+            <tr>
+            <p style="color: black; margin-bottom: 32px !important;">⚡ Best Regards</p>
+            </tr>
+
+    DELIMITER;
+
+
+    $subj = "Your Book is LIVE!";
+    $email = $t_users['email'];
+    $username = $data;
+
+    notify_user($username, $email, $msg, $subj);
 
     echo 'Loading.. Please wait';
     echo "<script>shout(); $('#pybst').show();</script>";
