@@ -396,16 +396,47 @@ input[type=number] {
         echo "
         
         <script>
-        $('#pybst').show();
+        $('#pybst').show(); shout();
         </script>
         ";
+
+        //notify user of the payment made
+        $msg = <<<DELIMITER
+
+                    <tr>
+                    <p style="color: black; font-weight: bold; margin-top: 24px !important;">Credit Alert! 💵🤑💸💰 </p>
+                    </tr>
+                    <tr>
+                    <p style="color: black; margin-top: 8px !important;">Hi there,</p>
+                    </tr>
+                    <tr>
+                    <p style="color: black; margin-top: 8px !important;">$note</p>
+                    </tr>
+                    <tr>
+                    <tr>
+                    <p style="color: black; margin-top: 8px !important;">Got any issues, complaint or request? Kindly chat with us on our <a target="_blank" href="https://booksinvogue.com.ng/contact">live chat support panel</a></p>
+                    </tr>
+                    <tr>
+                    <p style="color: black; margin-top: 8px !important;">Keep having a wonderful book experience</a></p>
+                    </tr>
+                    <tr>
+                    <p style="color: black; margin-bottom: 32px !important;">⚡ Best Regards</p>
+                    </tr>
+    
+        DELIMITER;
+
+        $subj = "Credit Alert";
+
+        $email = $t_users['email'];
+        $username = $t_users['usname'];
+
+        notify_user($username, $email, $msg, $subj);
         } else {
 
             echo  "
           
             <script>
             $('#pybstdd').show();
-            shout();
             </script>
             ";
         
