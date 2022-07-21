@@ -435,7 +435,7 @@ function notify_user($username, $email, $msg, $subj) {
 //notify author
 function notify_author($auemail, $aumsg, $ausubj) {
 
-    $to = $email;
+    $to = $auemail;
     $from = "info@booksinvogue.com.ng";
 
     $headers = "From: Booksinvogue ". $from . "\r\n";
@@ -448,7 +448,7 @@ function notify_author($auemail, $aumsg, $ausubj) {
     $headers .= "X-MSMail-Priority: High\n";
     $headers .= "Importance: High\n";
 
-    $subject = $subj;
+    $subject = $ausubj;
 
     $body = <<<DELIMITER
 
@@ -469,7 +469,7 @@ function notify_author($auemail, $aumsg, $ausubj) {
 
                     <div style="padding-right: 1.105rem; padding-left: 1.105rem; margin-top: 24px !important; background-color: #fff; position: relative; display: flex; flex-direction: column; height: auto; word-wrap: break-word; background-clip: border-box; border: 0 solid #d9dee3; border-radius: 8px;">
 
-                   $msg
+                   $aumsg
 
 
                    </div>
@@ -1699,6 +1699,7 @@ function book_img($target_file1, $target_file2) {
     $sql = "UPDATE `books` SET `book_file` = '$target_file1', `book_cover` = '$target_file2', `book_status` = 'Show' WHERE `book_title` = '$code'";
     $res = query($sql);
 
+    user_details();
 
     //notify user
     $msg = <<<DELIMITER
@@ -1727,7 +1728,7 @@ function book_img($target_file1, $target_file2) {
 
     $subj = "Your Book is LIVE!";
     $email = $t_users['email'];
-    $username = $data;
+    $username = $t_users['usname'];
 
     notify_user($username, $email, $msg, $subj);
 
