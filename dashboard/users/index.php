@@ -410,7 +410,7 @@ input[type=number] {
                     <p style="color: black; margin-top: 8px !important;">Hi there,</p>
                     </tr>
                     <tr>
-                    <p style="color: black; margin-top: 8px !important;">$note</p>
+                    <p style="color: black; margin-top: 8px !important;">Your Wallet has been funded successfully </p>
                     </tr>
                     <tr>
                     <tr>
